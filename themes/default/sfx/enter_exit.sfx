@@ -1,0 +1,20 @@
+[
+  { "New": { "Type":      "sine",
+             "Length":    200000,
+             "Frequency": 500 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay":        0,
+                              "Attack":       0,
+                              "Decay":        10,
+                              "Sustain":      10,
+                              "SustainLevel": 1.0,
+                              "Release":      10000 }
+  },
+  { "SetFrequencySlide": { "Slide": 1.004,
+                           "Delta": 0.0001,
+                           "Limit": 0 }
+  },
+  { "SetLowPassFilter": { "Filter": 0.03 }
+  }
+]
+

@@ -1,0 +1,11 @@
+Uusi pelitila: pyjamabileet
+
+T|ss| pelitilassa pelaaja ohjaa
+juhlijoita luolien l|pi.
+
+Pyjamabiletilan s||nt}muutokset:
+* tytt} kest|| vihollisia enemm|n
+* tietyt ominaisuudet ovat k|ytett|viss|
+* ei lis|tytt}j| 200 pisteen v|lein
+
+Pelitilan voi vaihtaa asetuksista.

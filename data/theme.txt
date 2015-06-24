@@ -1,0 +1,10 @@
+Today is a special day.
+
+It may have an effect
+on the graphics,
+on the sounds, and
+on the game rules.
+
+Special days can be enabled
+(and disabled)
+from the settings.

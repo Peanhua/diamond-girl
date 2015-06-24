@@ -1,0 +1,16 @@
+[
+  { "New": { "Type":      "sine",
+             "Length":    9000,
+             "Frequency": 2000 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay": 0,
+                              "Attack": 0,
+                              "Decay": 4500,
+                              "Sustain": 0,
+                              "SustainLevel": 0.7,
+                              "Release": 900 }
+  },
+  { "SetArpeggio": { "Modifier": 0.8,
+                     "Limit": 1500 }
+  }
+]

@@ -1,0 +1,776 @@
+# Finnish translations for diamond-girl package
+# Suomenkielinen käännös diamond-girl-paketille.
+# Copyright (C) 2015 Joni Yrjänä <joniyrjana@gmail.com>
+# This file is distributed under the same license as the diamond-girl package.
+# Steve Joni Yrjänä <joniyrjana@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: diamond-girl 1.25b\n"
+"Report-Msgid-Bugs-To: joniyrjana@gmail.com\n"
+"POT-Creation-Date: 2015-06-22 09:49+0300\n"
+"PO-Revision-Date: 2015-06-18 19:22+0200\n"
+"Last-Translator: Steve Joni Yrjänä <joniyrjana@gmail.com>\n"
+"Language-Team: Finnish\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.1\n"
+
+#: src/cave_displayname.c:56
+msgid "The Deep Cave"
+msgstr "Syv| luola"
+
+#: src/cave_displayname.c:57
+msgid "The Well"
+msgstr "Kaivo"
+
+#: src/cave_displayname.c:58
+msgid "The Antiquitarian Land"
+msgstr "Antiikkimaa"
+
+#: src/cave_displayname.c:59
+msgid "The Beginners Cave"
+msgstr "Aloittelijan luola"
+
+#: src/draw_legend.c:46
+msgid "You, or Lucy the girl."
+msgstr "Sin|, tai Lucy tytt}."
+
+#: src/draw_legend.c:47
+msgid "A diamond, collect."
+msgstr "Timantti, ker||."
+
+#: src/draw_legend.c:48
+msgid "A boulder."
+msgstr "Kivenlohkare."
+
+#: src/draw_legend.c:49
+msgid "Sand."
+msgstr "Hiekkaa."
+
+#: src/draw_legend.c:50
+msgid "For few seconds, empty space looks like"
+msgstr "Tyhj| alue n|ytt|| t|lt| muutaman"
+
+#: src/draw_legend.c:51
+msgid "  this when you get extra girl."
+msgstr "  sekunnin, kun saat lis|el|m|n."
+
+#: src/draw_legend.c:52
+msgid "A brick wall."
+msgstr "Tiilimuuri."
+
+#: src/draw_legend.c:53
+msgid "A morphing wall, turns diamonds into"
+msgstr "Muodonmuuttajamuuri, muuttaa timantit"
+
+#: src/draw_legend.c:54
+msgid "  boulders and boulders into diamonds."
+msgstr "  kiviksi, ja kivet timanteiksi."
+
+#: src/draw_legend.c:55
+msgid "Unbreakable brick wall."
+msgstr "Hajoamaton tiilimuuri."
+
+#: src/draw_legend.c:56
+msgid "Ameba."
+msgstr "Ameeba."
+
+#: src/draw_legend.c:57
+msgid "Slime."
+msgstr "Lima."
+
+#: src/draw_legend.c:58
+msgid "Exit to the next level."
+msgstr "Poistuminen seuraavaan kentt||n."
+
+#: src/draw_legend.c:59
+msgid "A radioactive bug, avoid."
+msgstr "Radioaktiivinen }t}kk|, v|lt|."
+
+#: src/draw_legend.c:60
+msgid "A radioactive butterfly, avoid."
+msgstr "Radioaktiivinen perhonen, v|lt|."
+
+#: src/editor.c:741
+#, c-format
+msgid "Level[+-]: %-3d"
+msgstr "Kentt|(+-): %-3d"
+
+#: src/editor.c:762
+#, c-format
+msgid "[W]idth: %-3d"
+msgstr "Lev.(W): %-3d"
+
+#: src/editor.c:768
+#, c-format
+msgid "[H]eight: %-3d"
+msgstr "Kork.(H): %-3d"
+
+#: src/editor.c:774
+#, c-format
+msgid "[T]ime: %-4d"
+msgstr "Aika(T): %-4d"
+
+#: src/editor.c:805
+#, c-format
+msgid "GameSp[e]ed: %-2d"
+msgstr "Nopeus(E): %-2d"
+
+#: src/editor.c:811
+#, c-format
+msgid "[A]mebaTime: %-4d"
+msgstr "(A)meeba-aika: %-4d"
+
+#: src/editor.c:817
+#, c-format
+msgid "[D]iamondsNeeded: %-4d"
+msgstr "Tarvit.Timantit(D): %-4d"
+
+#: src/editor.c:823
+#, c-format
+msgid "Diamond[S]core: %-4d"
+msgstr "Tim.pisteet(S): %-4d"
+
+#: src/editor.c:829
+#, c-format
+msgid "TimeS[c]ore: %-4d"
+msgstr "Aikapisteet(C): %-4d"
+
+#: src/editor.c:1009
+msgid "empty"
+msgstr "tyhj|"
+
+#: src/editor.c:1010
+msgid "sand"
+msgstr "hiekka"
+
+#: src/editor.c:1011
+msgid "start location"
+msgstr "aloituskohta"
+
+#: src/editor.c:1012
+msgid "boulder"
+msgstr "kivilohkare"
+
+#: src/editor.c:1013
+msgid "diamond"
+msgstr "timantti"
+
+#: src/editor.c:1014
+msgid "enemy1"
+msgstr "vihollinen1"
+
+#: src/editor.c:1015
+msgid "enemy2"
+msgstr "vihollinen2"
+
+#: src/editor.c:1016
+msgid "exit location"
+msgstr "poistuminen"
+
+#: src/editor.c:1017
+msgid "brick"
+msgstr "tiilimuuri"
+
+#: src/editor.c:1018
+msgid "expanding brick"
+msgstr "laajeneva tiilimuuri"
+
+#: src/editor.c:1019
+msgid "morphing brick"
+msgstr "muodonmuuttajamuuri"
+
+#: src/editor.c:1020
+msgid "unbreakable brick"
+msgstr "hajoamaton tiilimuuri"
+
+#: src/editor.c:1021
+msgid "ameba"
+msgstr "ameeba"
+
+#: src/editor.c:1022
+msgid "slime"
+msgstr "lima"
+
+#: src/editor.c:1027
+#, c-format
+msgid "Selected[,.]: %s"
+msgstr "Aktiivinen(,.): %s"
+
+#: src/editor.c:1046
+#, c-format
+msgid "%sSa[v]e"
+msgstr "%sTallenna(V)"
+
+#: src/editor.c:1227
+msgid "[Q]uit"
+msgstr "Lopeta(Q)"
+
+#: src/editor.c:1228
+msgid "[P]lay"
+msgstr "(P)elaa"
+
+#: src/editor.c:1229
+msgid "[R]evert Map"
+msgstr "Palauta(R)"
+
+#: src/editor.c:1231
+msgid "Intermission:"
+msgstr "V|liaika:"
+
+#: src/editor.c:1278
+#, c-format
+msgid "Cave: '%-.8s'"
+msgstr "Luola: '%-.8s'"
+
+#: src/game.c:145 src/title.c:1028
+#, c-format
+msgid "Level:"
+msgstr "Taso:"
+
+#: src/game.c:146 src/game.c:226 src/title.c:1032
+#: src/widget_new_highscore_einfo.c:150
+#, c-format
+msgid "Girls:"
+msgstr "Tyt}t:"
+
+#: src/game.c:147 src/title.c:1037 src/widget_new_highscore_einfo.c:121
+#: src/widget_new_title_partystatus.c:107
+#, c-format
+msgid "Score:"
+msgstr "Pisteet:"
+
+#: src/game.c:148 src/widget_new_highscore_einfo.c:136
+#: src/widget_new_title_partystatus.c:343
+#, c-format
+msgid "Diamonds:"
+msgstr "Timantit:"
+
+#: src/game.c:149
+#, c-format
+msgid "Time:"
+msgstr "Aika:"
+
+#: src/game.c:221
+msgid "Girl:"
+msgstr "Tytt}:"
+
+#: src/game.c:1270
+msgid "Game mode: Classic"
+msgstr "Pelitila: klassinen"
+
+#: src/game.c:1273
+msgid "Game mode: Adventure"
+msgstr "Pelitila: seikkailu"
+
+#: src/game.c:1276
+msgid "Game mode: Pyjama Party"
+msgstr "Pelitila: pyjamabileet"
+
+#: src/game.c:1292 src/trait_get_name.c:68
+msgid "Iron Girl"
+msgstr "Ter|stytt}"
+
+#: src/game_player_death.c:183
+#, c-format
+msgid ""
+"The girl is dead.\n"
+"Diamond score: %d"
+msgstr ""
+"Tytt} on kuollut.\n"
+"Timanttipisteet: %d"
+
+#: src/game_player_death.c:192
+#, c-format
+msgid ""
+"    Game Over!\n"
+"Diamond score: %d"
+msgstr ""
+"    Peli loppu!\n"
+"Timanttipisteet: %d"
+
+#: src/game_player_death.c:204
+msgid "Ouch!"
+msgstr ""
+
+#: src/game_player_death.c:205
+msgid "Yikes!"
+msgstr ""
+
+#: src/game_player_death.c:206
+msgid "Eww.."
+msgstr ""
+
+#: src/game_player_next_level.c:63
+msgid "Level completed!"
+msgstr "Kentt| l|p|isty!"
+
+#: src/main.c:164
+msgid "_current_locale"
+msgstr "fi"
+
+#: src/playback_check.c:53
+#, c-format
+msgid "Checksum error on map %s:%d."
+msgstr "Virhe kent|n %s:%d tarkistussummassa."
+
+#: src/settings.c:99
+msgid "Keyboard"
+msgstr "N|pp|imist}"
+
+#: src/settings.c:102
+msgid "Mouse"
+msgstr "Hiiri"
+
+#: src/settings.c:109
+#, c-format
+msgid "Joystick#%d:%s"
+msgstr "Peliohjain #%d:%s"
+
+#: src/settings.c:318
+msgid "English"
+msgstr "Englanti"
+
+#: src/settings.c:321
+msgid "Finnish"
+msgstr "Suomi"
+
+#: src/settings.c:329
+msgid "Language"
+msgstr "Kieli"
+
+#: src/settings.c:343
+msgid "Game mode"
+msgstr "Pelitila"
+
+#: src/settings.c:362 src/title.c:1201 src/widget_new_highscore_einfo.c:97
+msgid "Classic"
+msgstr "Klassinen"
+
+#: src/settings.c:363 src/title.c:1202 src/widget_new_highscore_einfo.c:98
+msgid "Adventure"
+msgstr "Seikkailu"
+
+#: src/settings.c:364 src/title.c:1203 src/trait_get_name.c:69
+#: src/widget_new_highscore_einfo.c:99
+msgid "Pyjama Party"
+msgstr "Pyjamabileet"
+
+#: src/settings.c:392
+msgid "Iron Girl mode"
+msgstr "Ter|stytt}tila"
+
+#: src/settings.c:495
+#, c-format
+msgid "axis %d%c"
+msgstr "akseli %d%c"
+
+#: src/settings.c:499
+#, c-format
+msgid "butn %d"
+msgstr "nappi %d"
+
+#: src/settings.c:537
+msgid "(unset)"
+msgstr "(ei m||ritelty)"
+
+#: src/settings.c:701
+msgid "New binding"
+msgstr "Uusi sidos"
+
+#: src/settings.c:714 src/settings.c:733 src/settings.c:752
+msgid "Press any key."
+msgstr "Paina mit| tahansa n|pp|int|."
+
+#: src/settings.c:717 src/settings.c:736 src/settings.c:755
+msgid "Binding to mouse is not supported."
+msgstr "Sidokset hiireen eiv|t ole tuettuja."
+
+#: src/settings.c:723
+#, c-format
+msgid "Move joystick#%d in some direction,"
+msgstr "Valitse peliohjaimella #%d jokin suunta,"
+
+#: src/settings.c:742 src/settings.c:761
+#, c-format
+msgid "Press any button on joystick#%d."
+msgstr "Paina mit| tahansa nappia peliohjaimessa #%d."
+
+#: src/settings.c:851
+#, c-format
+msgid ""
+"Error, the binding you requested is taken.\n"
+"It is being used for: %s"
+msgstr ""
+"Virhe, haluamasi sidos on jo k|yt}ss|.\n"
+"Se on k|yt}ss|: %s"
+
+#: src/settings.c:852 src/widget_new_title_partystatus.c:200
+msgid "Error"
+msgstr "Virhe"
+
+#: src/settings_default.c:74
+#, c-format
+msgid "This is a demo of level %d."
+msgstr "Kent|n %d esittely."
+
+#: src/title.c:411
+#, c-format
+msgid "Brain malfunction!\n"
+msgstr "Aivovamma!\n"
+
+#: src/title.c:749
+msgid "Change game mode"
+msgstr "Vaihda pelitilaa"
+
+#: src/title.c:972
+msgid "The game was saved."
+msgstr "Peli tallennettu."
+
+#: src/title.c:973 src/title.c:1315
+msgid "Play (*)"
+msgstr "Pelaa (*)"
+
+#: src/title.c:977 src/title.c:1317
+msgid "Play"
+msgstr "Pelaa"
+
+#: src/title.c:1020
+msgid "A saved game exists"
+msgstr "Tallennettu peli l}ytyy"
+
+#: src/title.c:1043
+msgid "Continue"
+msgstr "Jatka"
+
+#: src/title.c:1050
+msgid "Start New"
+msgstr "Aloita Uusi"
+
+#: src/title.c:1058
+msgid "Cancel"
+msgstr "Peruuta"
+
+#: src/title.c:1210
+msgid "Game mode:"
+msgstr "Pelitila:"
+
+#: src/title.c:1268
+msgid "Editor N/A"
+msgstr "Editori N/A"
+
+#: src/title.c:1276
+msgid "Editor"
+msgstr "Editori"
+
+#: src/title.c:1281
+#, c-format
+msgid "Cave: %s"
+msgstr "Luola: %s"
+
+#: src/title.c:1383
+#, c-format
+msgid "Level: %d / %d"
+msgstr "Kentt|: %d / %d"
+
+#: src/trait_get_name.c:55
+msgid "Key"
+msgstr "Avain"
+
+#: src/trait_get_name.c:56
+msgid "AdventureMode"
+msgstr "Seikkailutila"
+
+#: src/trait_get_name.c:57
+msgid "Ribbon"
+msgstr "Panta"
+
+#: src/trait_get_name.c:58
+msgid "Greedy"
+msgstr "Ahne"
+
+#: src/trait_get_name.c:59
+msgid "Time Control"
+msgstr "Ajanmuokkaaja"
+
+#: src/trait_get_name.c:60
+msgid "Power Push"
+msgstr "Voimaty}nt}"
+
+#: src/trait_get_name.c:61
+msgid "Diamond Push"
+msgstr "Timanttity}nt}"
+
+#: src/trait_get_name.c:62
+msgid "Recycler"
+msgstr "Kierr|tt|j|"
+
+#: src/trait_get_name.c:63
+msgid "Stars 1"
+msgstr "T|hdet 1"
+
+#: src/trait_get_name.c:64
+msgid "Stars 2"
+msgstr "T|hdet 2"
+
+#: src/trait_get_name.c:65
+msgid "Stars 3"
+msgstr "T|hdet 3"
+
+#: src/trait_get_name.c:66
+msgid "Chaos"
+msgstr "Kaaos"
+
+#: src/trait_get_name.c:67
+msgid "Dynamite"
+msgstr "Dynamiitti"
+
+#: src/widget_new_highscore_einfo.c:80
+msgid "Played on:"
+msgstr "Pelattu:"
+
+#: src/widget_new_highscore_einfo.c:81 src/widget_new_title_partystatus.c:179
+#: src/widget_new_title_partystatus.c:337
+msgid "%Y-%m-%d %H:%M"
+msgstr ""
+
+#: src/widget_new_highscore_einfo.c:87
+msgid "Cave:"
+msgstr "Luola:"
+
+#: src/widget_new_highscore_einfo.c:94
+msgid "Mode:"
+msgstr "Tila:"
+
+#: src/widget_new_highscore_einfo.c:108
+msgid "Filename:"
+msgstr "Tiedosto:"
+
+#: src/widget_new_highscore_einfo.c:112 src/widget_new_highscore_einfo.c:130
+#: src/widget_new_highscore_einfo.c:160 src/widget_new_highscore_einfo.c:169
+msgid "N/A"
+msgstr ""
+
+#: src/widget_new_highscore_einfo.c:126
+msgid "Start level:"
+msgstr "Aloitusk.:"
+
+#: src/widget_new_highscore_einfo.c:141
+msgid "End level:"
+msgstr "Lopetusk.:"
+
+#: src/widget_new_highscore_einfo.c:156
+msgid "Deaths:"
+msgstr "Kuolemat:"
+
+#: src/widget_new_highscore_einfo.c:165
+msgid "Completed:"
+msgstr "Suoritettu:"
+
+#: src/widget_new_highscore_einfo.c:177
+msgid "Diam.score:"
+msgstr "Tim.pisteet:"
+
+#: src/widget_new_highscore_einfo.c:187 src/widget_new_title_partystatus.c:361
+msgid "Traits:"
+msgstr "Ominais.:"
+
+#: src/widget_new_highscore_einfo.c:221
+msgid "Notes:"
+msgstr "Merkinn|t:"
+
+#: src/widget_new_highscore_einfo.c:234
+msgid "Replay"
+msgstr "Uusinta"
+
+#: src/widget_new_highscore_einfo.c:244 src/widget_new_message_window.c:68
+msgid "Close"
+msgstr "Sulje"
+
+#: src/widget_new_osd_volume.c:44
+#, c-format
+msgid "Volume: %d%%"
+msgstr "\\|nenvoimakkuus: %d%%"
+
+#: src/widget_new_title_highscores.c:98
+#, c-format
+msgid "Highscores %d -> %d:"
+msgstr "Enn|tykset %d -> %d:"
+
+#: src/widget_new_title_highscores.c:106
+msgid " Score"
+msgstr "Pisteet"
+
+#: src/widget_new_title_highscores.c:107
+msgid " Level"
+msgstr "Kentt|"
+
+#: src/widget_new_title_highscores.c:108
+msgid " Timestamp"
+msgstr "Aikaleima"
+
+#: src/widget_new_title_highscores.c:201
+msgid " %Y-%m-%d %H:%M"
+msgstr ""
+
+#: src/widget_new_title_partystatus.c:108
+msgid "Caves entered:"
+msgstr "Luolak|ynnit:"
+
+#: src/widget_new_title_partystatus.c:109
+msgid "Levels completed:"
+msgstr "L|p|istyt kent|t:"
+
+#: src/widget_new_title_partystatus.c:110
+msgid "Diamonds collected:"
+msgstr "Ker|tyt timantit:"
+
+#: src/widget_new_title_partystatus.c:112
+msgid "Pyjama party status:"
+msgstr "Pyjamabileiden tila:"
+
+#: src/widget_new_title_partystatus.c:140
+#, c-format
+msgid "Girls: %d"
+msgstr "Tyt}t: %d"
+
+#: src/widget_new_title_partystatus.c:142
+msgid "Cavings:"
+msgstr "Luolak|ynnit:"
+
+#: src/widget_new_title_partystatus.c:146
+msgid "Invite more"
+msgstr "Kutsu lis||"
+
+#: src/widget_new_title_partystatus.c:199
+#, c-format
+msgid ""
+"You have %d girls in the party.\n"
+"That is the maximum number."
+msgstr ""
+"Sinulla on %d tytt}| juhlissa.\n"
+"T|m| on maksimim||r|."
+
+#: src/widget_new_title_partystatus.c:210
+msgid "Invite a girl to the party?"
+msgstr "Kutsu tytt} juhliin?"
+
+#: src/widget_new_title_partystatus.c:215
+#, c-format
+msgid "The maximum size of a party is %d girls."
+msgstr "Maksimim||r| juhlijoita on %d tytt}|."
+
+#: src/widget_new_title_partystatus.c:219
+msgid "The party can only grow."
+msgstr "Juhlat voivat vain kasvaa."
+
+#: src/widget_new_title_partystatus.c:224
+#, c-format
+msgid "Inviting another girl to the party costs %lu."
+msgstr "Seuraavan tyt}n kutsuminen juhliin maksaa %lu."
+
+#: src/widget_new_title_partystatus.c:228
+#, c-format
+msgid "You have %lu."
+msgstr "Sinulla on %lu."
+
+#: src/widget_new_title_partystatus.c:232
+msgid " Cancel "
+msgstr " Peruuta "
+
+#: src/widget_new_title_partystatus.c:238
+msgid " Invite "
+msgstr " Kutsu "
+
+#: src/widget_new_title_partystatus.c:329
+msgid "Name:"
+msgstr "Nimi:"
+
+#: src/widget_new_title_partystatus.c:390 src/widget_new_trait_button.c:237
+msgid "  Close  "
+msgstr "  Sulje  "
+
+#: src/widget_new_trait_button.c:139
+msgid "Trait"
+msgstr "Ominaisuus"
+
+#: src/widget_new_trait_button.c:182
+msgid "You have this trait."
+msgstr "Sinulla on t|m| ominaisuus."
+
+#: src/widget_new_trait_button.c:187
+#, c-format
+msgid " Recycle for %lu "
+msgstr " Kierr|t| hintaan %lu"
+
+#: src/widget_new_trait_button.c:198
+msgid "You don't have this trait."
+msgstr "Sinulla ei ole t|t| ominaisuutta."
+
+#: src/widget_new_trait_button.c:203
+msgid " Buy "
+msgstr " Osta "
+
+#: src/widget_new_trait_button.c:209
+msgid "Cost:"
+msgstr "Hinta:"
+
+#: src/widget_new_trait_button.c:214
+msgid "You have:"
+msgstr "Sinulla on:"
+
+#: src/widget_new_trait_button.c:218
+#, c-format
+msgid " [need %u more]"
+msgstr " (tarvitset %u lis||)"
+
+#: src/widget_new_trait_button.c:227
+#, c-format
+msgid "Level required: %d"
+msgstr "Kentt|vaatimus: %d"
+
+#: src/widget_new_trait_key_button.c:72
+msgid "Unlock level"
+msgstr "Avaa kentt|"
+
+#: src/widget_new_trait_key_button.c:87
+#, c-format
+msgid "Level: %u"
+msgstr "Kentt|: %u"
+
+#: src/widget_new_trait_key_button.c:92
+#, c-format
+msgid "Cost: %lu"
+msgstr "Hinta: %lu"
+
+#: src/widget_new_trait_key_button.c:97
+#, c-format
+msgid "You have: %lu"
+msgstr "Sinulla on: %lu"
+
+#: src/widget_new_trait_key_button.c:106
+msgid " Unlock this level "
+msgstr " Avaa t|m| kentt| "
+
+#: src/widget_new_trait_key_button.c:116
+msgid "You don't have enough to unlock this level."
+msgstr "Sinulla ei ole tarpeeksi avataksesi t|m|n kent|n."
+
+#: src/widget_new_trait_key_button.c:122
+msgid "  Cancel  "
+msgstr " Peruuta "
+
+#: src/widget_new_traits_available_window.c:69
+msgid "New traits available!"
+msgstr "Uusia ominaisuuksia k|ytett|viss|!"
+
+#: src/widget_new_traits_available_window.c:109
+msgid " Close "
+msgstr " Sulje "
+
+#~ msgid "French"
+#~ msgstr "Ranska"

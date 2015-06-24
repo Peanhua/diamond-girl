@@ -1,0 +1,120 @@
+{ "type":     "window",
+  "width":    600,
+  "height":   320,
+  "title":    "SETTINGS",
+  "title-fi": "ASETUKSET",
+  "modal":    true,
+  "children": [
+    { "type":      "grid",
+      "x":         10,
+      "y":         40,
+      "padding-y":  2,
+      "children": [
+        { "type":     "row",
+          "children": [
+            { "type":  "select",
+              "id":    "controllers",
+              "x":     0,
+              "width": 230
+            },
+            { "type":     "text",
+              "x":        290,
+              "title":    "Options:",
+              "title-fi": "Optiot:"
+            }
+          ]
+        },
+        { "type":     "row",
+          "children": [
+            { "type":     "text",
+              "x":        0,
+              "title":    "Up",
+              "title-fi": "Yl}s"
+            },
+            { "type":     "text",
+              "x":        300,
+              "title":    "Sound effects",
+              "title-fi": "\\|niefektit"
+            }
+          ]
+        },
+        { "type":     "row",
+          "children": [
+            { "type":     "text",
+              "x":        0,
+              "title":    "Left",
+              "title-fi": "Vasen"
+            },
+            { "type":     "text",
+              "x":        300,
+              "title":    "Music",
+              "title-fi": "Musiikki"
+            }
+          ]
+        },
+        { "type":     "row",
+          "children": [
+            { "type":     "text",
+              "x":        0,
+              "title":    "Right",
+              "title-fi": "Oikea"
+            },
+            { "type":     "text",
+              "x":        300,
+              "title":    "Volume",
+              "title-fi": "\\|nenvoimak."
+            }
+          ]
+        },
+        { "type":     "row",
+          "children": [
+            { "type":     "text",
+              "x":        0,
+              "title":    "Down",
+              "title-fi": "Alas"
+            },
+            { "type":     "text",
+              "x":        300,
+              "title":    "OpenGL"
+            }
+          ]
+        },
+        { "type":     "row",
+          "children": [
+            { "type":     "text",
+              "x":        0,
+              "title":    "Manipulate",
+              "title-fi": "Manipuloi"
+            },
+            { "type":     "text",
+              "x":        300,
+              "title":    "Full screen",
+              "title-fi": "Kokoruutu"
+            }
+          ]
+        },
+        { "type":     "row",
+          "children": [
+            { "type":     "text",
+              "x":        0,
+              "title":    "Alt.manip",
+              "title-fi": "2.manipul."
+            },
+            { "type":     "text",
+              "x":        300,
+              "title":    "Special days",
+              "title-fi": "Erikoisp|iv|t"
+            }
+          ]
+        }
+      ]
+    },
+    { "type":       "button",
+      "title":      "  Close  ",
+      "title-fi":   "  Sulje  ",
+      "id":         "close",
+      "y":          258,
+      "on-release": "on_window_close_clicked"
+    }
+  ]
+}

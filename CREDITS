@@ -1,0 +1,42 @@
+Diamond Girl
+ Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
+ http://www.netikka.net/joyr/diamond_girl/index.html
+
+Amiga specific changes made with help of Jon, Itix and Piru @ http://saku.isoveli.org/.
+
+Gentoo related changes Vincent Hardy - vincent.hardy.be at gmail.com
+
+Original player graphics by Radomir 'The Sheep' Dopieralski
+  http://atos.wmid.amu.edu.pl/~sheep/projects/graphics/
+  With minor modifications done by Joni Yrjänä.
+
+
+Libraries:
+
+Name          | License              | URL
+--------------+----------------------+-----------------------------------------------
+bzip2         | BSD                  | http://www.bzip.org/
+FLAC          | BSD, GPLv2+, GFDL    | http://www.xiph.org/flac/
+glew          | BSD, MIT             | http://glew.sourceforge.net
+JSON-C        | MIT                  | https://github.com/json-c/json-c/wiki
+libcrypto     | OpenSSL              | http://www.openssl.org/
+libjpeg-turbo | IJG                  | http://sourceforge.net/projects/libjpeg-turbo
+libmikmod     | GPLv2, LGPLv2+       | http://mikmod.sourceforge.net/
+libogg        | BSD                  | http://www.xiph.org/
+libpng        | zlib                 | http://www.libpng.org/pub/png/
+libsndfile    | LGPLv2+, GPLv2+, BSD | http://www.mega-nerd.com/libsndfile/
+libtiff       | libtiff              | http://www.remotesensing.org/libtiff/
+libvorbis     | BSD                  | http://www.xiph.org/
+Lua           | MIT                  | http://www.lua.org/
+mhash         | LGPLv2+              | http://mhash.sourceforge.net/
+mtwist        | LGPL                 | http://www.cs.hmc.edu/~geoff/mtwist.html
+OpenAL Soft   | LGPLv2+              | http://kcat.strangesoft.net/openal.html
+SDL           | LGPLv2+              | http://www.libsdl.org/
+SDL_gfx       | LGPLv2               | http://www.ferzkopp.net/Software/SDL_gfx-2.0/
+SDL_image     | LGPLv2+              | http://www.libsdl.org/projects/SDL_image/
+zlib          | zlib, Boost          | http://www.zlib.net/
+
+Windows binary distribution also includes the following shared libraries:
+* from GCC, libgcc_s_sjlj-1.dll, licensed GPLv3+ and GPLv3+ with exceptions
+  and GPLv2+ with exceptions, http://gcc.gnu.org
+* from mingw, libwinpthread-1.dll, licensed MIT and BSD, http://mingw-w64.org

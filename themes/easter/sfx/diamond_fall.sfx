@@ -1,0 +1,7 @@
+synthNew("sine", 9000, 2000);
+synthSetAmplitudeEnvelope(0,
+                          0,
+                          4500,
+                          0, 0.5,
+                          350);
+synthSetFrequencySlide(1.0001, 0, 0);

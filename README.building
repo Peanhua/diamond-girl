@@ -1,0 +1,25 @@
+Building
+========
+
+Diamond Girl uses autotools.
+
+You can use the following example commands to install under the current
+directory:
+ ./configure --prefix=$(pwd)/inst && make install
+To run the game:
+ ./inst/bin/diamond_girl
+
+
+In addition to the standard configure stuff, the following are specific
+to the Diamond Girl (defaults in UPPER case):
+ --enable-opengl=[YES|no]       Compile in OpenGL support.
+ --enable-nonopengl=[YES|no]    Compile in non-OpenGL support.
+ --without-lua                  Compile without LUA support,
+                                old user settings were saved in LUA format.
+
+
+Optimizing
+==========
+
+Example flags to use for optimized compiling with GCC:
+ -O3 -DNDEBUG -ffast-math -fno-signed-zeros -flto

@@ -1,0 +1,7 @@
+Lis|pelitila, jonka voi laittaa
+p||lle/pois asetuksista.
+
+Ter|stytt}tilan s||nt}muutokset:
++ kaikki pisteet tuplaantuvat
+- vain yksi tytt}
+- ei lis|tytt}j|

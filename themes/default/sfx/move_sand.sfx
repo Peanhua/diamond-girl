@@ -1,0 +1,44 @@
+[ /* Copy of move_empty */
+  { "New": { "Type": "noise",
+             "Length": 0,
+             "Frequency": 0 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay":        0,
+                              "Attack":       0,
+                              "Decay":        50,
+                              "Sustain":      300,
+                              "SustainLevel": 1.0,
+                              "Release":      50 }
+  },
+  { "SetLowPassFilter": { "Filter": 0.03 }
+  },
+
+  { "New": { "Type": "noise",
+             "Length": 0,
+             "Frequency": 0 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay":        5000,
+                              "Attack":       0,
+                              "Decay":        50,
+                              "Sustain":      300,
+                              "SustainLevel": 0.7,
+                              "Release":      50 }
+  },
+  { "SetLowPassFilter": { "Filter": 0.03 }
+  },
+
+  /* move_sand specific starts here: */
+  { "New": { "Type": "noise",
+             "Length": 0,
+             "Frequency": 0 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay":        0,
+                              "Attack":       0,
+                              "Decay":        2000,
+                              "Sustain":      100,
+                              "SustainLevel": 1.0,
+                              "Release":      1000 }
+  },
+  { "SetLowPassFilter": { "Filter": 0.03 }
+  }
+]

@@ -1,0 +1,69 @@
+The .sfx files are Lua files, used to generate sound effects.
+Each sound effect can be built from one or more synthesized sounds,
+which are mixed together.
+
+Functions
+=========
+
+synthNew("WAVEFORM", LENGTH, FREQUENCY);
+
+ Start a new waveform.
+
+ Possible values for WAVEFORM:
+   inverse_sawtooth
+   noise
+   sawtooth
+   sine
+   square
+   triangle
+ LENGTH is the length in samples.
+ FREQUENCY is the frequency in Hz.
+
+ The "noise" waveform does not utilize LENGTH and FREQUENCY.
+
+ If you start more than one waveforms within a single sound effect,
+ all the waveforms are mixed together.
+
+
+
+synthSetAmplitudeEnvelope(DELAY_TIME,
+                          ATTACK_TIME,
+                          DECAY_TIME,
+                          SUSTAIN_TIME, SUSTAIN_LEVEL,
+                          RELEASE_TIME);
+
+ Sets the amplitude envelope (DADSR).
+ TIMEs are in samples.
+ SUSTAIN_LEVEL is a number, usually between 0 (silence) and 1.
+
+
+
+synthSetAmplitudeSustainPunch(PUNCH);
+
+ Sets the sustain punch for amplitude envelope.
+ PUNCH is a number, 1 equals no change, 2 doubles the amplitude, etc.
+
+
+
+synthSetArpeggio(MULTIPLIER, LIMIT);
+
+ Sets the arpeggio.
+ MULTIPLIER is a number used to multiply the current period.
+ LIMIT is the sample number when the arpeggio kicks in.
+
+
+
+synthSetFrequencySlide(SLIDE, DELTA, LIMIT);
+
+ Sets the frequency slide.
+ SLIDE is a multiplier, used to slide the frequency each period.
+ DELTA is added to SLIDE each period.
+ LIMIT the sliding.
+
+
+
+synthSetLowPassFilter(FILTER);
+
+ Sets the low pass filter.
+ FILTER is a number between 0 and 1.
+ Value 0 passes nothing, and value 1 passes everything.

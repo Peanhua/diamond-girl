@@ -1,0 +1,7 @@
+Additional game mode that can be
+toggled on/off in the settings.
+
+Iron girl mode rule changes:
++ all score is doubled
+- only one girl
+- no extra lives

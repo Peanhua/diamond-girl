@@ -1,0 +1,7 @@
+A new game mode: adventure
+
+Adventure mode rule changes:
+* the girl is more resistant to enemies
+* certain traits become available
+
+The game mode can be changed via settings.

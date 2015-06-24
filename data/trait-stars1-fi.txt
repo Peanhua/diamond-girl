@@ -1,0 +1,2 @@
+Aloita peli kent|st|:
+ joka viides + 1.

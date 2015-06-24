@@ -1,0 +1,321 @@
+/*
+  Diamond Girl - Game where player collects diamonds.
+  Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
+  
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License along
+  with this program; if not, write to the Free Software Foundation, Inc.,
+  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+
+  Complete license can be found in the LICENSE file.
+*/
+
+#include "diamond_girl.h"
+#include "td_object.h"
+#include "globals.h"
+#include "gfx.h"
+#include "random.h"
+
+#include <stdbool.h>
+#include <SDL/SDL_framerate.h>
+#include <assert.h>
+#include <SDL/SDL.h>
+
+#ifdef WITH_OPENGL
+static struct td_object * logo;
+
+struct anim
+{
+  struct anim * next;
+  float camera_center_start[3];
+  float camera_center_end[3];
+  float camera_eye_start[3];
+  float camera_eye_end[3];
+  float camera_up_start[3];
+  float camera_up_end[3];
+  float fog_density_start, fog_density_end;
+  unsigned int duration;
+  unsigned int current_frame;
+};
+
+static struct anim anim_end_vanish =
+  {
+    NULL,
+
+    { 0, 0, 0 },
+    { 0, 5, 0 },
+
+    { 0,  -8, 0 },
+    { 0,   2, 0 },
+    
+    { 0, 0, 1 },
+    { 0, 0, 1 },
+
+    0.0f, 0.0f,
+
+    30,
+    0
+  };
+
+static struct anim anim_end =
+  {
+    &anim_end_vanish,
+
+    { 0, 0, 0 },
+    { 0, 0, 0 },
+
+    { 0, -10, 0 },
+    { 0,  -8, 0 },
+    
+    { 0, 0, 1 },
+    { 0, 0, 1 },
+
+    0.0f, 0.0f,
+
+    60 * 3,
+    0
+  };
+
+static struct anim anim_2 =
+  {
+    &anim_end,
+
+    { 10, 0, 0 },
+    {  0, 0, 0 },
+
+    {  3, -0.5, 0 },
+    {  0, -10, 0 },
+
+    {  0,  0, 1 },
+    {  0,  0, 1 },
+
+    0.0f, 0.0f,
+
+    30,
+    0
+  };
+
+static struct anim anim_3 = 
+  {
+    &anim_2,
+    {   6,    0, 0 },
+    {  10,    0, 0 },
+
+    { -12,   -0.5, 0 },
+    {   3,   -0.5, 0 },
+
+    {  0, -1, 0 },
+    {  0,  0, 1 },
+
+    0.0f, 0.0f,
+
+    60 * 5 / 2 / 2,
+    0
+  };
+
+static struct anim anim_4 = 
+  {
+    &anim_3,
+    {   2,    0, 0 },
+    {   6,    0, 0 },
+
+    { -22,   -0.5, 0 },
+    { -12,   -0.5, 0 },
+
+    {  0, -1, 0 },
+    {  0, -1, 0 },
+
+    0.1f, 0.0f,
+
+    60 * 5 / 2 / 2,
+    0
+  };
+
+static struct anim anim_start = 
+  {
+    &anim_4,
+    {  -6,    0, 0 },
+    {   2,    0, 0 },
+
+    { -47,   -0.5, 0 },
+    { -22,   -0.5, 0 },
+
+    {  0, -1, 0 },
+    {  0, -1, 0 },
+
+    0.2f, 0.1f,
+
+    60 * 5 / 2,
+    0
+  };
+
+static void draw_frame(struct anim * anim)
+{
+  if(anim != NULL)
+    {
+      glClear(GL_COLOR_BUFFER_BIT);
+      gfx_3d_depthtest(true);
+
+      glLoadIdentity();
+
+      float perc, dif;
+      float camera_eye[3], camera_center[3], camera_up[3];
+
+      perc = (float) anim->current_frame / (float) anim->duration;
+      for(int i = 0; i < 3; i++)
+        {
+          dif = anim->camera_eye_end[i] - anim->camera_eye_start[i];
+          camera_eye[i] = anim->camera_eye_start[i] + dif * perc;
+
+          dif = anim->camera_center_end[i] - anim->camera_center_start[i];
+          camera_center[i] = anim->camera_center_start[i] + dif * perc;
+
+          dif = anim->camera_up_end[i] - anim->camera_up_start[i];
+          camera_up[i] = anim->camera_up_start[i] + dif * perc;
+        }
+
+      if(anim->fog_density_start > 0.0f || anim->fog_density_end > 0.0f)
+        {
+          float fog_density;
+          
+          dif = anim->fog_density_end - anim->fog_density_start;
+          fog_density = anim->fog_density_start + dif * perc;
+          glFogf(GL_FOG_DENSITY, fog_density);
+          glFogf(GL_FOG_MODE, GL_LINEAR);
+          glFogf(GL_FOG_END, 50.0f);
+
+          glEnable(GL_FOG);
+        }
+
+      gluLookAt(camera_eye[0],    camera_eye[1],    camera_eye[2],
+                camera_center[0], camera_center[1], camera_center[2],
+                camera_up[0],     camera_up[1],     camera_up[2]);
+
+      {
+        GLfloat pos[] = { 0.0f, -20.0f, 0.5f, 1.0f };
+        
+        for(int i = 0; i < 3; i++)
+          pos[i] += (float) get_rand(100) / 50.0f - 0.5f;
+
+        glLightfv(GL_LIGHT0, GL_POSITION, pos);
+      }
+
+      td_object_draw(logo);
+
+      if(anim->fog_density_start > 0.0f || anim->fog_density_end > 0.0f)
+        glDisable(GL_FOG);
+      
+      gfx_flip();
+    }
+}
+
+#endif
+
+
+void intro(void)
+{
+  if(globals.opengl)
+    {
+#ifdef WITH_OPENGL
+      bool done;
+      FPSmanager framerate_manager;
+
+      GFX_GL_ERROR();
+      gfx_3d(true);
+      GFX_GL_ERROR();
+
+      SDL_initFramerate(&framerate_manager);
+      SDL_setFramerate(&framerate_manager, 60);
+
+      logo = td_object_load(get_data_filename("gfx/logo.3ds"), NULL);
+      assert(logo != NULL);
+      GFX_GL_ERROR();
+
+      glLightModeli(GL_LIGHT_MODEL_TWO_SIDE,     GL_FALSE);
+      glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
+
+      glEnable(GL_LIGHT0);
+      glEnable(GL_LIGHTING);
+
+      {
+        GLfloat light_a[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+        GLfloat light_d[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+        GLfloat light_s[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+        
+        glLightfv(GL_LIGHT0, GL_AMBIENT,  light_a);
+        glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_d);
+        glLightfv(GL_LIGHT0, GL_SPECULAR, light_s);
+      }
+
+      {
+        GLfloat specular[] = { 1.0, 1.0, 1.0, 1.0 };
+        GLfloat emission[] = { 0.0, 0.0, 0.0, 1.0 };
+        
+        glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+        glMaterialfv(GL_FRONT, GL_EMISSION, emission);
+        glMaterialf(GL_FRONT, GL_SHININESS, 128);
+        glEnable(GL_COLOR_MATERIAL);
+        glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+      }
+
+      struct anim * anim;
+
+      done = false;
+      if(get_rand(100) < 50)
+        anim = &anim_start;
+      else
+        anim = &anim_end;
+      while(done == false)
+        {
+          draw_frame(anim);
+          SDL_framerateDelay(&framerate_manager);
+
+          {
+            SDL_Event event;
+
+            while(SDL_PollEvent(&event))
+              {
+                switch(event.type)
+                  {
+                  case SDL_QUIT:
+                  case SDL_KEYDOWN:
+                  case SDL_MOUSEBUTTONDOWN:
+                  case SDL_JOYBUTTONDOWN:
+                    done = true;
+                    break;
+                  }
+              }
+          }
+
+          if(anim != NULL)
+            {
+              anim->current_frame++;
+              if(anim->current_frame >= anim->duration)
+                {
+                  anim = anim->next;
+                  if(anim != NULL)
+                    anim->current_frame = 0;
+                  else
+                    done = true;
+                }
+            }
+        }
+
+      gfx_2d();
+
+      logo = td_object_unload(logo);
+
+      glDisable(GL_LIGHTING);
+#endif
+    }
+}

@@ -1,0 +1,13 @@
+Controls:
+
+ F1	- pause and display this help
+ F2	- pause and display legend
+ F10	- toggle windowed/fullscreen
+ ALT+ENTER	- toggle windowed/fullscreen
+ ESC	- suicide
+ PAUSE	- pause game,
+	  press PAUSE again to resume
+ CURSOR keys	- move
+ SHIFT+CURSOR keys	- don't move, manipulate only
+
+If you press ESC after dying, you will return to the main menu.

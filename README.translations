@@ -1,0 +1,76 @@
+Notes for translating Diamond Girl
+==================================
+
+Table of contents:
+1. Characters on screen
+2. Standard 'po' -file translations
+3. Extra text file translations
+4. Code changes
+5. Images
+6. Update autotools
+
+
+
+1. Characters on screen
+-----------------------
+
+If the ASCII character set is not sufficient, create new character map in 'themes/default/gfx/font.xcf', create accompanying mapping file 'themes/default/gfx/font-ll.txt'.
+The default English character set contains the following characters:
+!"#$%&'()*+,-./
+0123456789:;<
+=>?@ABCDEFGHI
+JKLMNOPQRSTUV
+WXYZ[\]^_`abcd
+efghijklmnopq
+rstuvwxyz{|}~
+From those, the following characters are available for changing for localization purposes:
+"$&';[\]^_`{|}~
+And from those: " and \ are troublesome.
+
+You can use the script 'translate.sh' to map/unmap between utf-8 and the characters Diamond Girl uses.
+For the 'translate.sh' script to work, you need to create the sed scripts to map/unmap, name them: 'translate-map-ll.sed' and 'translate-unmap-ll.sed' (replace 'll' with the language).
+
+
+
+2. Standard 'po' -file translations
+-----------------------------------
+
+Add the language to the list of languages into the 'po/LINGUAS' file.
+Run 'msginit --locale=ll_CC' in the 'po/' directory.
+Edit the generated 'll.po' file. The translation for '_current_locale' is special, and must match with the language 'll'. It is used for testing if the currently selected locale is supported.
+Run 'make update-po' in the 'po/' directory.
+
+
+
+3. Extra text file translations
+-------------------------------
+
+Translate all 'data/*.txt' into 'data/*-ll.txt'.
+
+Edit all 'ui/*.json' files to contain the translated "title-ll" values.
+
+Add translation into 'diamond-girl.desktop.template'.
+
+
+
+4. Code changes
+---------------
+
+Add support for the "title-ll" keyword in src/widget_factory.c.
+
+
+
+5. Images
+---------
+
+Create language specific images:
+ themes/default/gfx/intermission.xcf
+
+
+
+6. Update autotools
+-------------------
+
+Add 'Welcome-ll.txt' to 'extradta_DATA' in 'data/Makefile.am'.
+Add 'font-ll.png' and 'intermission-ll.png' to several locations in 'themes/default/gfx/Makefile.am'.
+Add all the translated '.txt' files to 'extradata_DATA' in 'data/Makefile.am'.

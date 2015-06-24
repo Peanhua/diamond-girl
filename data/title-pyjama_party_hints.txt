@@ -1,0 +1,13 @@
+Hints:
+
+You can push boulders left and right,
+if there is an empty space behind them.
+
+Pushing speeds up a bit after first step.
+
+Drop boulders or diamonds on top of
+animals to kill them.
+Watch out for the explosion!
+
+Each butterfly explodes into nine diamonds,
+bugs don't leave anything behind.

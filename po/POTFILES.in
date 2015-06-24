@@ -1,0 +1,21 @@
+# List of source files which contain translatable strings.
+src/cave_displayname.c
+src/draw_legend.c
+src/editor.c
+src/game.c
+src/game_player_death.c
+src/game_player_next_level.c
+src/main.c
+src/playback_check.c
+src/settings.c
+src/settings_default.c
+src/title.c
+src/trait_get_name.c
+src/widget_new_highscore_einfo.c
+src/widget_new_message_window.c
+src/widget_new_osd_volume.c
+src/widget_new_title_highscores.c
+src/widget_new_title_partystatus.c
+src/widget_new_trait_button.c
+src/widget_new_trait_key_button.c
+src/widget_new_traits_available_window.c

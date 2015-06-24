@@ -1,0 +1,17 @@
+[
+  { "New": { "Type":      "triangle",
+             "Length":    20000,
+             "Frequency": 500 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay":        0,
+                              "Attack":       0,
+                              "Decay":        0,
+                              "Sustain":      15000,
+                              "SustainLevel": 1.0,
+                              "Release":      5000 }
+  },
+  { "SetFrequencySlide": { "Slide": 1.1,
+                           "Delta": 0.1,
+                           "Limit": 0 }
+  }
+]

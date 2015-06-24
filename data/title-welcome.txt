@@ -1,0 +1,20 @@
+Welcome to the Diamond Girl.
+
+Collect diamonds to open exit
+to the next level.
+
+Don't touch radioactive animals,
+they will kill you.
+
+Falling boulders and diamonds
+will also kill you.
+
+Controls:
+ * cursor keys to move
+ * shift+cursor keys to manipulate
+   without moving
+ * escape key to quit
+ * F1 for help
+ * F2 for legend
+ * ALT+ENTER toggle windowed/fullscreen
+ * PAUSE to pause

@@ -1,0 +1,21 @@
+Tervetuloa Diamond Girl:iin.
+
+Ker|| timantteja avataksesi reitin
+seuraavaan kentt||n.
+
+Varo koskettamasta radioaktiivisia
+el|imi|, ne ovat kuolettavia.
+
+Tippuvat kivenlohkareet sek|
+timantit tappavat my}s.
+
+Ohjaimet:
+ * kursorin|pp|imet liikuttavat
+ * shift+kursorin|pp|imet manipuloi
+   ilman liikkumista
+ * escape n|pp|in lopettaa
+ * F1 ohje
+ * F2 kuvaselitteet
+ * ALT+ENTER vaihda ikkunoidun ja
+   koko ruudun v|lill|
+ * PAUSE taukotila

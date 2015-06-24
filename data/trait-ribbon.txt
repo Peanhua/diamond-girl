@@ -1,0 +1,4 @@
+Ribbon gives you some extra confidence
+when facing enemies (armour level + 1).
+
+Not applicable in classic game mode.

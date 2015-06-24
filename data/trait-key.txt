@@ -1,0 +1,4 @@
+Allows the levels to be unlocked.
+
+Unlocking a level costs diamond score.
+The cost varies between levels.

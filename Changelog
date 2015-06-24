@@ -1,0 +1,188 @@
+Release 1.25.2 on Mon Jun 22 06:48:53 UTC 2015
+* Language can now be set using the in-game settings dialog and via a commandline argument.
+* Test the random number generator in make check instead in game.
+* Fixed setting locale using settings.json in Windows.
+* Fixed playtesting in the editor to not to remember last playtesting data.
+* Don't show save/continue dialog when player dies while playtesting in the editor.
+* Fixed some memory leaks and other bugs.
+* Eliminated some compiler warnings.
+* Removed empty .png.cnf files.
+* Updated FSF address in license texts.
+* Updated to mtwist-1.5.
+* Removed --enable-compressed-data configure option.
+* Removed the need/use of the program 'oggenc'.
+* The program 'optipng' is now optional and not a requirement.
+* Distribution is now compressed using xz instead of bzip2.
+
+Release 1.25.1 on Fri Jun 12 06:52:16 UTC 2015
+* Fixed Finnish translation.
+
+Release 1.25 on Fri Jun 12 05:55:51 UTC 2015
+* New cave for beginners, named "The Beginners Cave".
+* Localization support. Translated to Finnish (some strings are missing).
+* Using libcrypto (part of OpenSSL), instead of mhash, is now possible.
+* Fixed to draw the bottom row of text characters in OpenGL mode.
+* Windows installer requires admin privilegs in order to be able to install into standard directory. Seems to fix occasional crash upon uninstall.
+* Windows save game files are now stored under "My Documents/Diamond Girl/" instead of the installation directory.
+  There is no automation to copy old save game files from the old location, you need to copy them manually when upgrading from 1.24 or earlier.
+* Fixed Windows installer to setup the start menu link, and display more information in Windows control panel.
+* Added internal self-check for random number generation to verify that the game works correctly in all platforms.
+* Changes and reordering of README etc. files, for example building instructions will no longer be installed.
+* Other small fixes and cleanup.
+
+Release 1.24.1 on Thu Oct 23 08:11:55 UTC 2014
+* Positioned the death message window a bit higher so that the player position is visible below it.
+* Link with math library even if none of the used libraries do it.
+* Some minor optimizations.
+
+Release 1.24 on Mon Oct 13 14:35:32 UTC 2014
+* Added --skip-intro commandline argument.
+* The use of LUA is now optional. Users settings.lua will be converted to settings.json if it exists and Diamond Girl was compiled with LUA.
+* Renamed some "Play" -buttons to "Continue" to better describe what the buttons do.
+* Fixed some glitches in graphics.
+
+Release 1.23 on Sun May 11 07:01:12 UTC 2014
+* Fixed crashing on some systems when extra girl is obtained.
+* Fixed to build with lib3ds v2.0.0 RC1.
+* Fixed to build with newer libpng (1.6.3).
+* When searching for libmikmod, default to pkg-config instead of libmikmod-config.
+* Removed checking for convert (ImageMagick), because it is no longer being used.
+
+Release 1.22 on Mon Sep 30 16:37:23 UTC 2013
+* When the player completes a level or looses a girl, the option to save the game is presented more clearly with separate buttons to play/save/quit.
+* Fixed detecting the JSON-C library correctly using "json-c" instead of just "json".
+* Fixed to not to say "new traits available" when a level giving traits is played through and the player already has those traits available.
+* Fixed saving/loading the game in the pyjama party game mode.
+* Fixed iron girl mode to not to affect saved games.
+* Fixed crash when switching to iron girl mode and having OpenGL enabled.
+* Fixed crashing during start when there is no $HOME/.diamond_girl/settings.lua present.
+* ImageMagick is no longer required for building.
+
+Release 1.21 on Wed Sep 18 12:00:38 UTC 2013
+* The JSON-C library is now required for building: https://github.com/json-c/json-c/wiki
+* Saving/loading game:
+  Saving is done automatically if the player leaves the game having one or more girls left.
+  One save game per cave.
+  If a save game exists, pressing "Play" (previously "New game") will open a requester asking what to do.
+  If the player starts a new game, the previously saved game is lost.
+* Fixed cancelling a new bind in settings with the escape key: the escape key is no longer being bound to the chosen action.
+* Fixed updating the list of bound events in settings, after binding a new event.
+
+Release 1.20 on Sat Aug 31 17:00:30 UTC 2013
+* Fixed loading the title screen scrolling text (Welcome.txt), reported by Vincent Hardy.
+* OpenGL mode works now with lower end cards, tested with Athlon@1GHz/384MB/Voodoo3 16MB.
+
+Release 1.19 on Mon Aug 26 10:22:54 UTC 2013
+* Fixed some gfx errors with ATI RV200 card.
+* Some build system improvements and other small fixes & changes.
+
+Release 1.18 on Wed May  1 19:44:40 UTC 2013
+* User can now adjust the volume with +/- and mute/unmute with F10.
+* Added a game mode switch to the title screen.
+* Show gained diamond score after each map completion and death.
+* A new game mode available through a new trait.
+* Fixed to not use OpenGL extension ARB_texture_non_power_of_two when the support is not present.
+* Some other bugfixes and improvements.
+
+Release 1.17 on Sat Feb 23 12:45:33 UTC 2013
+* Some added content (slime object, new map, new trait).
+* Fixed some bugs.
+
+Release 1.16.2 on Wed Feb 20 15:06:37 UTC 2013
+* Fixed win32 build to include the non-OpenGL mode.
+
+Release 1.16.1 on Tue Feb 19 16:38:27 UTC 2013
+* Fixed text being all white on some systems.
+
+Release 1.16 on Mon Feb 18 07:14:43 UTC 2013
+* Several bug fixes.
+* Some new traits and a level to the "a" cave.
+
+Release 1.15 on Wed Feb 13 16:01:00 UTC 2013
+* Volume setting for sfx and music, adjustable thru in-game settings and settings.lua.
+* Sounds and musics can be toggled independently of each other on/off via settings.lua.
+* The maximum number of channels used by sound effects can be adjusted via settings.lua.
+* Next obtainable trait is shown in title screen.
+* Added bindable "alternate manipulate" command.
+* Several bug fixes.
+* Some textual, visual and aural enhancements.
+* Optionally checksum playback maps, with the help of mhash library: http://mhash.sourceforge.net/
+* The (free)alut library is no longer needed nor used.
+* The sndfile is now required: http://www.mega-nerd.com/libsndfile/
+* Map tilting effect is now relative to the distance from the player girl.
+* Settings user bindings: don't allow multiple bindings of the same key/button/whatever.
+* Commandline option to playback a sound effect.
+* Using mxe.cc a win32 -build can be created.
+* Load xm files directly via the main executable, the supplied xm2wav has been gone away.
+* Terminology change from "map set" to "cave".
+
+Release 1.14 on Fri Apr  6 10:58:57 UTC 2012
+* Added configure option --with-nonopengl=[YES|no]
+* Some optimizations for OpenGL mode.
+* Added easter egg.
+
+Release 1.13 on Wed Mar 21 20:27:41 UTC 2012
+* Game start and pause graphics are now greyscale instead of golden.
+* If OpenGL is not available or it's initialization fails, the game tries to use non-OpenGL mode.
+* In OpenGL mode the smooth object movement is enabled by default now in classic game mode.
+  This can be turned off in $HOME/.diamond_girl/settings.lua.
+
+Release 1.12 on Thu Mar 15 19:22:53 UTC 2012
+* Fixed time control trait from becoming available too early.
+* Fixed crash when viewing trait info when it becomes available after completing a level.
+
+Release 1.11 on Thu Mar 15 18:32:54 UTC 2012
+* Game starting level is now restricted as in the original: starting is possible only every fifth map.
+* Fixed to not to allow pushing boulders out of map borders.
+* Sounds are now positioned.
+* Sound effects are generated with a built-in software synthesizer.
+* Removed --lua-openlibs configure option. The LUA libraries are now always available (required by some sounds).
+
+Release 1.10 on Mon Mar  5 00:20:35 EET 2012
+* Theme directories are now prefixed with the name of the default theme.
+* The theme can now be selected from the settings.
+* X-mas, halloween etc. -themes are no longer "themes", they are now "special days".
+* Added manual page (diamond_girl.6).
+* The map tilting effect can be disabled via $HOME/.diamond_girl/settings.lua.
+* Fixed some graphic errors.
+* Added --playback=NAME command line option to playback a game and then exit.
+* Added eject button into playback controls to exit the playback.
+
+Release 1.9 on Tue Feb 28 16:02:15 UTC 2012
+* Fixed crash during startup on some systems.
+* Themes can be disabled/enabled via $HOME/.diamond_girl/settings.lua, and in-game settings.
+
+Release 1.8 on Sat Feb 25 20:12:36 UTC 2012
+* Fixed saving of playback entry for the very first highscore entry of a map set.
+* Added configWriteSettings(boolean) to allow user to disable the overwriting of settings.lua upon exit.
+* Fixed to not try to use OpenGL ARB_texture_non_power_of_two extension if it's not available.
+* ./configure option --compress-data=[yes|no] to compress some data files (.wav to .ogg).
+* ./configure option --enable-opengl=[yes|no] to enable/disable OpenGL support.
+* ./configure option --with-default-theme=default to set the default theme.
+* Themes for new year and halloween.
+* Unlockable game content.
+* The default classic game mode behaves more closely to the original now: single touch with an enemy results in death.
+* The level selection is saved in settings.
+* A thumbnail of the currently selected level is displayed in the title screen.
+
+Release 1.7 on Mon Jan 30 17:50:43 UTC 2012
+* Diamond Girl uses now the standard autotools system for building.
+
+Release 1.6 on Fri Jan 27 19:09:22 UTC 2012
+* A learning computer controlled player plays occasionally when player idles in title screen.
+* A playback is saved from each game that can be replayed.
+* Display legend in-game via F2.
+* Editor no longer automatically saves, save button was added to save the map.
+* Fixed bug which allowed to obtain the diamond falling above by moving up, player now correctly dies when doing so.
+* Fixed random map#9 from being impossible to win.
+* Fixed random to be the same in all platforms.
+* Fixed timing issue in ameba turning into diamonds/boulders by the pressure.
+* Joystick support.
+* Maps can now be declared as intermissions. Created intermissions for map set "a" maps.
+* Random maps were re-configured, so old highscores are not applicable to the new random maps.
+* Some new maps in map set "a".
+* Special random maps, and a maximum level for the random maps.
+* The girl graphics no longer exposes nudity from enemy touch. Reduced the armour to two levels from three.
+* User can change some settings inside the game. Switching between graphic modes malfunctions at the moment, and the game needs to be restarted after switching graphic mode.
+
+(The rest of the history is not here.)

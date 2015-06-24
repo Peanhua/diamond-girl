@@ -1,0 +1,4 @@
+Mahdollistaa kenttien avaamisen.
+
+Kent|n avaaminen maksaa timanttipisteit|.
+Hinta vaihtelee kent|n mukaan.

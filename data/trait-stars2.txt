@@ -1,0 +1,2 @@
+Start the game at level:
+ every fifth + 2.

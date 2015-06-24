@@ -1,0 +1,14 @@
+Title screen keys:
+* Cursor keys to navigate the menus
+* ENTER to accept
+* ESC to quit
+* PGUP and PGDOWN to scroll high score list
+
+To replay a game from the high score list,
+click the score with the left mouse button.
+
+To scroll the high score list,
+click the right mouse button on top or
+on bottom of the high score list.
+
+The latest high score has blue background.

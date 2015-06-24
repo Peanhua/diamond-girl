@@ -1,0 +1,5 @@
+Title screen keys:
+* Cursor keys to navigate the menus
+* ENTER to accept
+* ESC to quit
+* PGUP and PGDOWN to scroll high score list

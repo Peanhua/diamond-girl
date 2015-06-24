@@ -1,0 +1,5 @@
+Alkun|yt} n|pp|imet:
+* Kursorin|pp|imet navigoi valikoissa
+* ENTER hyv|ksyy
+* ESC lopettaa/sulkee
+* PGUP ja PGSOWN vieritt|v|t enn|tyslistaa

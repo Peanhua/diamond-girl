@@ -1,0 +1,45 @@
+[
+  { "New": { "Type":      "triangle",
+             "Length":    30000,
+             "Frequency": 5500 },
+  },
+  { "SetAmplitudeEnvelope": { "Delay":        0,
+                              "Attack":       0,
+                              "Decay":        0,
+                              "Sustain":      15000,
+                              "SustainLevel": 1.0,
+                              "Release":      5000 }
+  },
+  { "SetFrequencySlide": { "Slide": 1.1,
+                           "Delta": 0.1,
+                           "Limit": 0 }
+  },
+
+  { "New": { "Type":      "noise",
+             "Length":    0,
+             "Frequency": 0 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay":        1000,
+                              "Attack":       0,
+                              "Decay":        0,
+                              "Sustain":      5000,
+                              "SustainLevel": 0.5,
+                              "Release":      15000 }
+  },
+  { "SetLowPassFilter": { "Filter": 0.25 }
+  },
+
+  { "New": { "Type":      "square",
+             "Length":    15000,
+             "Frequency": 100 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay":        15000,
+                              "Attack":       0,
+                              "Decay":        0,
+                              "Sustain":      5000,
+                              "SustainLevel": 0.2,
+                              "Release":      5000 }
+  },
+  { "SetLowPassFilter": { "Filter": 0.0001 }
+  }
+]

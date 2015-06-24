@@ -1,0 +1,14 @@
+Alkun|yt}n n|pp|imet:
+* Kursorin|pp|imet navigoi valikoissa
+* ENTER hyv|ksyy
+* ESC lopettaa/sulkee
+* PGUP ja PGSOWN vieritt|v|t enn|tyslistaa
+
+Voit katsoa pelin uusinnan valitsemalla
+haluamasi pelin enn|tyslistasta.
+
+Enn|tyslistaa voi vieritt|| hiiren oikealla
+napilla. Yl|osassa painettuna yl}sp|in,
+ja alaosassa alasp|in.
+
+Viimeisimm|n enn|tyksen tausta on sininen.

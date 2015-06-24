@@ -1,0 +1,35 @@
+.TH diamond-girl 6 "June 18, 2015" "" ""
+.SH NAME
+diamond-girl
+.SH SYNOPSIS
+diamond-girl [OPTION]...
+.SH DESCRIPTION
+Diamond Girl is a single player puzzle game with a time constraint (pausable).
+
+During a game, the player moves around inside one or more levels. A level is completed by collecting some number of diamonds, and then moving to the exit.
+
+Diamond Girl is licensed under GPL (see the LICENSE file).
+
+Command line options:
+  -h | --help             Print help text and exit.
+  -s | --no-sound         Disable sounds and music. (*)
+  -S | --sound            Enable sounds and music. (*)
+  -j | --no-joysticks     Disable joysticks. (*)
+  -J | --joysticks        Enable joysticks. (*)
+  -f | --fullscreen       Fullscreen mode. (*)
+  -w | --windowed         Windowed mode. (*)
+  -n | --no-opengl        Non-OpenGL mode. (*)
+  --language=NAME         Set the user interface language to NAME. (*)
+                          Possible values for NAME are: en, fi
+  -F | --show-fps         Output FPS every 1000th frame to stdout (console). (*)
+  -N | --no-show-fps      Don't output FPS every 1000th frame to stdout. (*)
+  -c | --capture          Capture each frame into the current directory as a bmp file.
+  --capture-frameskip=N   Capture every Nth frame.
+  -C | --no-swap-control  Disable OpenGL swap control, may allow faster FPS than the refresh rate of the monitor is.
+  --playback=NAME         Playback NAME and then exit. The name can be seen when manually playbacking a game.
+  --play-sfx=NAME         Play sound effect NAME, and then exit.
+  --skip-intro            Skip the intro screen (visible in OpenGL mode only).
+
+Options marked with (*) are saved as your configuration in '$HOME/.diamond_girl/settings.json'.
+.SH "SEE ALSO"
+http://www.netikka.net/joyr/diamond_girl/

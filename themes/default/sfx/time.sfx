@@ -1,0 +1,13 @@
+[
+  { "New": { "Type":      "triangle",
+             "Length":    12000,
+             "Frequency": 1000 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay":        0,
+                              "Attack":       0,
+                              "Decay":        0,
+                              "Sustain":      1000,
+                              "SustainLevel": 0.5,
+                              "Release":      5000 }
+  }
+]

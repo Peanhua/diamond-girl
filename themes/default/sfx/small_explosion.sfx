@@ -1,0 +1,33 @@
+[
+  { "New": { "Type":      "triangle",
+             "Length":    30000,
+             "Frequency": 10000 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay":        0,
+                              "Attack":       0,
+                              "Decay":        0,
+                              "Sustain":      10000,
+                              "SustainLevel": 0.5,
+                              "Release":      1000 }
+  },
+  { "SetFrequencySlide": { "Slide": 1.1,
+                           "Delta": 0.1,
+                           "Limit": 0 }
+  },
+  { "SetLowPassFilter": { "Filter": 0.5 }
+  },
+
+  { "New": { "Type":      "noise",
+             "Length":    0,
+             "Frequency": 0 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay":        1000,
+                              "Attack":       50,
+                              "Decay":        50,
+                              "Sustain":      7500,
+                              "SustainLevel": 0.3,
+                              "Release":      3000 }
+  },
+  { "SetLowPassFilter": { "Filter": 0.01 }
+  }
+]

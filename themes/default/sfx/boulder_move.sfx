@@ -1,0 +1,17 @@
+[
+  { "New": { "Type":      "noise",
+             "Length":    0,
+             "Frequency": 0 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay": 0,
+                              "Attack": 100,
+                              "Decay": 500,
+                              "Sustain": 4000,
+                              "SustainLevel": 1.0,
+                              "Release": 4000 }
+  },
+  { "SetLowPassFilter": { "Filter": 0.01 }
+  },
+  { "SetAmplitudeSustainPunch": { "Punch": 2.0 }
+  }
+]

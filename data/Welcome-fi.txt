@@ -1,0 +1,7 @@
+Tervetuloa Diamond Girl:iin!
+
+(C) 2005-2015 Joni Yrj|n|
+Suomenkielinen k||nn}s: Joni Yrj|n|
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License (GPL).
+Complete license can be found in the LICENSE file.

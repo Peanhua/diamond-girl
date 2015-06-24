@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Diamond Girl
+GenericName=Puzzle game
+Comment=Single player puzzle game with a time constraint
+Name[fi]=Diamond Girl
+GenericName[fi]=Pulmapeli
+Comment[fi]=Pulmapeli aikarajoituksella
+Name[fr]=Diamond Girl
+Comment[fr]=Un jeu de puzzle à joueur unique avec contrainte de temps
+
+Exec=diamond-girl
+Icon=diamond-girl
+Terminal=false
+Type=Application
+StartupNotify=false
+Categories=Game;ArcadeGame;

@@ -1,0 +1,11 @@
+A new game mode: pyjama party
+
+In this game mode player guides a party
+through the caves.
+
+Pyjama party mode rule changes:
+* the girl is more resistant to enemies
+* certain traits become available
+* no extra girls every 200 score
+
+The game mode can be changed via settings.
