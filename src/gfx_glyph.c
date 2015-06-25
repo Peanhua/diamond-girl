@@ -94,6 +94,7 @@ bool gfx_glyph_initialize(void)
   if(rv) rv = gfx_load(MAP_EXTRA_LIFE_ANIM,   "extra_life_anim");
   if(rv) rv = gfx_load(MAP_AMEBA,             "ameba");
   if(rv) rv = gfx_load(MAP_SLIME,             "slime");
+  if(rv) rv = gfx_load(MAP_TREASURE,          "treasure");
 
 #ifdef WITH_OPENGL
   if(rv == true && globals.opengl)
@@ -126,7 +127,8 @@ bool gfx_glyph_initialize(void)
           MAP_BRICK,
           MAP_BRICK_EXPANDING,
           MAP_BRICK_UNBREAKABLE,
-          MAP_BRICK_MORPHER
+          MAP_BRICK_MORPHER,
+          MAP_TREASURE
         };
 
       if(globals.opengl_power_of_two_textures == true)
@@ -325,7 +327,7 @@ void gfx_glyph_render(struct gfxbuf * restrict gfxbuf, int x, int y, enum MAP_GL
 void gfx_glyph_frender_frame(struct gfxbuf * restrict gfxbuf, int x, int y, uint16_t glyph_facing, int frame)
 {
   GLfloat * tcoords;
-  int pos;
+  unsigned int pos;
 
   tcoords = graphic_blocks[glyph_facing & 0xff].offsets[glyph_facing >> 8] + frame * 4;
 
@@ -363,7 +365,7 @@ void gfx_glyph_frender_frame(struct gfxbuf * restrict gfxbuf, int x, int y, uint
 void gfx_glyph_render_frame(struct gfxbuf * restrict gfxbuf, int x, int y, enum MAP_GLYPH glyph, enum MOVE_DIRECTION facing, int frame)
 {
   GLfloat * tcoords;
-  int pos;
+  unsigned int pos;
 
   tcoords = graphic_blocks[glyph].offsets[facing] + frame * 4;
 

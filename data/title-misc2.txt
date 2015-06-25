@@ -1,0 +1,13 @@
+Traits:
+
+Completing certain levels will make
+traits available.
+
+
+Diamond score:
+
+Collecting diamonds and completing levels
+gives you diamond score.
+
+Diamond score can be used to buy traits,
+levels, and others.

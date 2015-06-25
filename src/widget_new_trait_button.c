@@ -55,6 +55,7 @@ static struct
     { TRAIT_DYNAMITE,       "dynamite",       100000, GFX_IMAGE_TRAIT_DYNAMITE,       GFX_IMAGE_TRAIT_DYNAMITE_DISABLED       },
     { TRAIT_IRON_GIRL,      "iron_girl",       20000, GFX_IMAGE_TRAIT_IRON_GIRL,      GFX_IMAGE_TRAIT_IRON_GIRL_DISABLED      },
     { TRAIT_PYJAMA_PARTY,   "pyjama_party",     5000, GFX_IMAGE_TRAIT_PYJAMA_PARTY,   GFX_IMAGE_TRAIT_PYJAMA_PARTY_DISABLED   },
+    { TRAIT_QUESTS,         "quests",           5000, GFX_IMAGE_TRAIT_QUESTS,         GFX_IMAGE_TRAIT_QUESTS_DISABLED         },
     { 0,                    NULL,                  0, GFX_IMAGE_SIZEOF_,              GFX_IMAGE_SIZEOF_                       }
   };
 

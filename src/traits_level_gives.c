@@ -36,8 +36,9 @@ trait_t traits_level_gives(struct cave * cave, int level)
     trait_t trait_given;
   } traits[] =
       {
+        { "/random", 1, TRAIT_QUESTS         },
+        { "/random",  3, TRAIT_ADVENTURE_MODE },
         { "/random",  5, TRAIT_PYJAMA_PARTY   },
-        { "/random", 10, TRAIT_ADVENTURE_MODE },
         { "/random", 15, TRAIT_IRON_GIRL      },
         { "/random", 25, TRAIT_POWER_PUSH     },
         { "/random", 50, TRAIT_GREEDY         },

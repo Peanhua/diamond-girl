@@ -52,6 +52,8 @@ struct girl * girl_load(const char * filename)
           assert(bufsize >= (int) strlen(GIRLFILE_HEADER_V1));
           if(memcmp(buf, GIRLFILE_HEADER_V1, strlen(GIRLFILE_HEADER_V1)) == 0)
             version = 1;
+          else if(memcmp(buf, GIRLFILE_HEADER_V2, strlen(GIRLFILE_HEADER_V2)) == 0)
+            version = 2;
           p += strlen(GIRLFILE_HEADER_V1);
 
           if(version >= 1)
@@ -73,14 +75,38 @@ struct girl * girl_load(const char * filename)
               p += sizeof girl->birth_time;
 
               /* traits */
-              assert(p - buf + sizeof girl->traits <= (size_t) bufsize);
-              memcpy(&girl->traits, p, sizeof girl->traits);
-              p += sizeof girl->traits;
+              if(version == 1)
+                { /* v1 had sizeof trait_t uint16_t */
+                  uint16_t t;
+
+                  assert(p - buf + sizeof t <= (size_t) bufsize);
+                  memcpy(&t, p, sizeof t);
+                  girl->traits = t;
+                  p += sizeof t;
+                }
+              else /* if(version >= 2) */
+                {
+                  assert(p - buf + sizeof girl->traits <= (size_t) bufsize);
+                  memcpy(&girl->traits, p, sizeof girl->traits);
+                  p += sizeof girl->traits;
+                }
 
               /* possible_traits */
-              assert(p - buf + sizeof girl->possible_traits <= (size_t) bufsize);
-              memcpy(&girl->possible_traits, p, sizeof girl->possible_traits);
-              p += sizeof girl->possible_traits;
+              if(version == 1)
+                { /* v1 had sizeof trait_t uint16_t */
+                  uint16_t t;
+
+                  assert(p - buf + sizeof t <= (size_t) bufsize);
+                  memcpy(&t, p, sizeof t);
+                  girl->possible_traits = t;
+                  p += sizeof t;
+                }
+              else /* if(version >= 2) */
+                {
+                  assert(p - buf + sizeof girl->possible_traits <= (size_t) bufsize);
+                  memcpy(&girl->possible_traits, p, sizeof girl->possible_traits);
+                  p += sizeof girl->possible_traits;
+                }                  
 
               /* diamonds */
               assert(p - buf + sizeof girl->diamonds <= (size_t) bufsize);

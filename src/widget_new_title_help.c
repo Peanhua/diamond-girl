@@ -27,38 +27,24 @@
 #include "globals.h"
 #include <assert.h>
 
+static char *  language        = NULL;
 static char ** t_welcome       = NULL;
 static char ** t_title_help    = NULL;
 static char ** t_classic_hints = NULL;
+static char ** t_misc1         = NULL;
+static char ** t_misc2         = NULL;
 static char ** t_pp_help       = NULL;
 static char ** t_pp_hints      = NULL;
 
+static void load_texts(void);
 static void draw(struct widget * this);
 
 struct widget * widget_new_title_help(struct widget * parent, int x, int y, int width, int height)
 {
   struct widget * obj;
 
-  if(t_welcome == NULL)
-    t_welcome = read_localized_text_file(get_data_filename("data/title-welcome"));
-  assert(t_welcome != NULL);
-
-  if(t_title_help == NULL)
-    t_title_help = read_localized_text_file(get_data_filename("data/title-help"));
-  assert(t_title_help != NULL);
-
-  if(t_classic_hints == NULL)
-    t_classic_hints = read_localized_text_file(get_data_filename("data/title-classic_hints"));
-  assert(t_classic_hints != NULL);
-
-  if(t_pp_help == NULL)
-    t_pp_help = read_localized_text_file(get_data_filename("data/title-pyjama_party_help"));
-  assert(t_pp_help != NULL);
-
-  if(t_pp_hints == NULL)
-    t_pp_hints = read_localized_text_file(get_data_filename("data/title-pyjama_party_hints"));
-  assert(t_pp_hints != NULL);
-
+  load_texts();
+  
   obj = widget_new_child(parent, x, y, width, height);
   assert(obj != NULL);
   if(obj != NULL)
@@ -72,8 +58,85 @@ struct widget * widget_new_title_help(struct widget * parent, int x, int y, int 
   return obj;
 }
 
+
+static void load_texts(void)
+{
+  if(language == NULL)
+    {
+      language = strdup(globals.language);
+  
+      assert(t_welcome == NULL);
+      t_welcome = read_localized_text_file(get_data_filename("data/title-welcome"));
+      assert(t_welcome != NULL);
+
+      assert(t_title_help == NULL);
+      t_title_help = read_localized_text_file(get_data_filename("data/title-help"));
+      assert(t_title_help != NULL);
+
+      assert(t_classic_hints == NULL);
+      t_classic_hints = read_localized_text_file(get_data_filename("data/title-classic_hints"));
+      assert(t_classic_hints != NULL);
+
+      assert(t_misc1 == NULL);
+      t_misc1 = read_localized_text_file(get_data_filename("data/title-misc1"));
+      assert(t_misc1 != NULL);
+
+      assert(t_misc2 == NULL);
+      t_misc2 = read_localized_text_file(get_data_filename("data/title-misc2"));
+      assert(t_misc2 != NULL);
+      
+      assert(t_pp_help == NULL);
+      t_pp_help = read_localized_text_file(get_data_filename("data/title-pyjama_party_help"));
+      assert(t_pp_help != NULL);
+
+      assert(t_pp_hints == NULL);
+      t_pp_hints = read_localized_text_file(get_data_filename("data/title-pyjama_party_hints"));
+      assert(t_pp_hints != NULL);
+    }
+}  
+
+
 static void draw(struct widget * this)
 {
+  /* First check if the language has changed, and if so, reload the texts. */
+  if(language == NULL || strcmp(language, globals.language))
+    {
+      free(language);
+      language = NULL;
+
+      char ** texts[] =
+        {
+          t_welcome,
+          t_title_help,
+          t_classic_hints,
+          t_misc1,
+          t_misc2,
+          t_pp_help,
+          t_pp_hints,
+          NULL
+        };
+
+      for(int i = 0; texts[i] != NULL; i++)
+        {
+          for(int j = 0; texts[i][j] != NULL; j++)
+            free(texts[i][j]);
+          free(texts[i]);
+        }
+
+      t_welcome         = 
+        t_title_help    =
+        t_classic_hints =
+        t_misc1         =
+        t_misc2         =
+        t_pp_help       =
+        t_pp_hints      =
+        NULL;
+
+      load_texts();
+    }
+         
+  
+
   /* help/instructions */
 
   int x, y, width, height;
@@ -93,7 +156,15 @@ static void draw(struct widget * this)
       { NULL,            NULL     },
       { t_welcome,       NULL     },
       { t_title_help,    NULL     },
+      { t_misc1,         NULL     },
+      { NULL,            "legend" },
+      { NULL,            NULL     },
       { t_classic_hints, NULL     },
+      { NULL,            "legend" },
+      { NULL,            NULL     },
+      { t_misc2,         NULL     },
+      { NULL,            "legend" },
+      { NULL,            NULL     },
       { NULL,            NULL     },
       { NULL,            NULL     },
       { NULL,            "end"    }
@@ -106,7 +177,15 @@ static void draw(struct widget * this)
       { NULL,            NULL     },
       { t_welcome,       NULL     },
       { t_title_help,    NULL     },
+      { t_misc1,         NULL     },
+      { NULL,            "legend" },
+      { NULL,            NULL     },
       { t_classic_hints, NULL     },
+      { NULL,            "legend" },
+      { NULL,            NULL     },
+      { t_misc2,         NULL     },
+      { NULL,            "legend" },
+      { NULL,            NULL     },
       { NULL,            NULL     },
       { NULL,            NULL     },
       { NULL,            "end"    }
@@ -120,7 +199,14 @@ static void draw(struct widget * this)
       { NULL,            NULL     },
       { t_welcome,       NULL     },
       { t_pp_help,       NULL     },
+      { t_misc1,         NULL     },
+      { NULL,            "legend" },
+      { NULL,            NULL     },
       { t_pp_hints,      NULL     },
+      { NULL,            "legend" },
+      { NULL,            NULL     },
+      { t_misc2,         NULL     },
+      { NULL,            "legend" },
       { NULL,            NULL     },
       { NULL,            NULL     },
       { NULL,            NULL     },

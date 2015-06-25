@@ -34,6 +34,7 @@
 #define FILE_HEADER_V2 "dgh2"
 #define FILE_HEADER_V3 "dgh3"
 #define FILE_HEADER_V4 "dgh4"
+#define FILE_HEADER_V5 "dgh5"
 
 
 static int highscore_add(struct highscorelist * list, time_t timestamp, int score, int diamond_score, uint32_t diamonds_collected, enum GAME_MODE game_mode, char const * const cave, int level, int starting_girls, trait_t traits, bool playback_dirty, int playback_id, struct playback * playback, char * notes);
@@ -128,6 +129,8 @@ void highscores_load(struct highscorelist * list, enum GAME_MODE game_mode, cons
             version = 3;
           else if(memcmp(header, FILE_HEADER_V4, 4) == 0)
             version = 4;
+          else if(memcmp(header, FILE_HEADER_V5, 4) == 0)
+            version = 5;
         }
 
       if(version == 1)
@@ -214,8 +217,21 @@ void highscores_load(struct highscorelist * list, enum GAME_MODE game_mode, cons
                 ok = fread(&tmp.diamond_score, sizeof tmp.diamond_score, 1, fp);
               if(ok)
                 ok = fread(&tmp.starting_girls, sizeof tmp.starting_girls, 1, fp);
+
               if(ok)
-                ok = fread(&tmp.traits, sizeof tmp.traits, 1, fp);
+                {
+                  if(version == 4)
+                    {
+                      uint16_t t;
+
+                      ok = fread(&t, sizeof t, 1, fp);
+                      tmp.traits = t;
+                    }
+                  else /* if(version >= 5) */
+                    {
+                      ok = fread(&tmp.traits, sizeof tmp.traits, 1, fp);
+                    }
+                }
             }
           else
             {
@@ -266,7 +282,7 @@ void highscores_save(struct highscorelist * list, enum GAME_MODE game_mode, cons
           int ok;
           size_t i;
 
-          ok = fwrite(FILE_HEADER_V4, 4, 1, fp);
+          ok = fwrite(FILE_HEADER_V5, 4, 1, fp);
 
           if(ok)
             ok = fwrite(&list->total.caves_entered,      sizeof list->total.caves_entered,      1, fp);

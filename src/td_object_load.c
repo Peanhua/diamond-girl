@@ -35,7 +35,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#ifdef LIB3DS_V1
+#ifdef HAVE_LIB3DS_V1
 # include <lib3ds/file.h>
 # include <lib3ds/material.h>
 # include <lib3ds/matrix.h>
@@ -66,7 +66,7 @@ struct td_object * td_object_load(char const * const filename)
         {
           struct Lib3dsFile * fp;
 
-#ifdef LIB3DS_V1
+#ifdef HAVE_LIB3DS_V1
           fp = lib3ds_file_load(filename);
 #else
           fp = lib3ds_file_open(filename);
@@ -74,7 +74,7 @@ struct td_object * td_object_load(char const * const filename)
           assert(fp != NULL);
           if(fp != NULL)
             {
-#ifdef LIB3DS_V1
+#ifdef HAVE_LIB3DS_V1
               for(struct Lib3dsMesh * mesh = fp->meshes; rv != NULL && mesh != NULL; mesh = mesh->next)
                 {
                   struct td_object_mesh * tdm;
@@ -167,7 +167,7 @@ static void load_face(struct td_object_mesh * tdm, struct Lib3dsFile * fp, struc
   assert(tdm->gfxbuf->vertices + 3 <= tdm->gfxbuf->max_vertices);
 
   /* Vertices */
-#ifdef LIB3DS_V1
+#ifdef HAVE_LIB3DS_V1
   for(int i = 0; i < 3; i++)
     for(int j = 0; j < 3; j++)
       tdm->gfxbuf->vbuf[tdm->gfxbuf->vertices * 3 + i * 3 + j] = mesh->pointL[face->points[i]].pos[j];
@@ -178,7 +178,7 @@ static void load_face(struct td_object_mesh * tdm, struct Lib3dsFile * fp, struc
 #endif
 
   /* Texture coordinates */
-#ifdef LIB3DS_V1
+#ifdef HAVE_LIB3DS_V1
   if(mesh->texels > 0)
     for(int i = 0; i < 3; i++)
       for(int j = 0; j < 2; j++)
@@ -194,7 +194,7 @@ static void load_face(struct td_object_mesh * tdm, struct Lib3dsFile * fp, struc
   struct Lib3dsMaterial * material; // move this to load_mesh() because we're assuming single material per mesh ?
 
   material = NULL;
-#ifdef LIB3DS_V1
+#ifdef HAVE_LIB3DS_V1
   for(Lib3dsMaterial * mat = fp->materials; material == NULL && mat != NULL; mat = mat->next)
     if(!strcmp(face->material, mat->name))
       material = mat;
@@ -242,7 +242,7 @@ static struct td_object_mesh * load_mesh(struct Lib3dsFile * fp, struct Lib3dsMe
       copy_lib3ds_matrix(rv, identity);
   
       unsigned int face_count;
-#ifdef LIB3DS_V1
+#ifdef HAVE_LIB3DS_V1
       face_count = mesh->faces;
 #else
       face_count = fp->meshes[i]->nfaces;
@@ -251,7 +251,7 @@ static struct td_object_mesh * load_mesh(struct Lib3dsFile * fp, struct Lib3dsMe
       bool has_texture;
 
       has_texture = false;
-#ifdef LIB3DS_V1
+#ifdef HAVE_LIB3DS_V1
       if(mesh->texels > 0)
         has_texture = true;
 #else
@@ -272,7 +272,7 @@ static struct td_object_mesh * load_mesh(struct Lib3dsFile * fp, struct Lib3dsMe
               /* Normals */
               if(rv->gfxbuf->options & GFXBUF_NORMALS)
                 {
-#ifdef LIB3DS_V1
+#ifdef HAVE_LIB3DS_V1
                   lib3ds_mesh_calculate_normals(mesh, (Lib3dsVector *) rv->gfxbuf->nbuf);
 #else
                   lib3ds_mesh_calculate_vertex_normals(mesh, (float(*)[3]) rv->gfxbuf->nbuf);
@@ -280,7 +280,7 @@ static struct td_object_mesh * load_mesh(struct Lib3dsFile * fp, struct Lib3dsMe
                 }
                 
               /* Copy faces (vertices, colours, and texture coordinates). */
-#ifdef LIB3DS_V1
+#ifdef HAVE_LIB3DS_V1
               for(unsigned int cur_face = 0; cur_face < mesh->faces; cur_face++)
                 {
                   struct Lib3dsFace * face;

@@ -44,12 +44,13 @@ void widget_draw(struct widget * this)
   {
     uint8_t r, g, b;
   };
-  struct rgb c_window[COLOR_SIZEOF_]    = { { 0x00, 0x10, 0x10 }, { 0x00, 0x40, 0x40 } };
-  struct rgb c_tooltip[COLOR_SIZEOF_]   = { { 0x46, 0x49, 0x08 }, { 0xff, 0xff, 0xff } };
-  struct rgb c_disabled[COLOR_SIZEOF_]  = { { 0x00, 0x10, 0x10 }, { 0x00, 0x20, 0x20 } };
-  struct rgb c_normal[COLOR_SIZEOF_]    = { { 0x00, 0x20, 0x20 }, { 0x00, 0x80, 0x80 } };
-  struct rgb c_selected[COLOR_SIZEOF_]  = { { 0x00, 0x40, 0x40 }, { 0x00, 0xff, 0xff } };
-  struct rgb c_activated[COLOR_SIZEOF_] = { { 0x00, 0x10, 0x10 }, { 0x00, 0x80, 0x80 } };
+  struct rgb c_window[COLOR_SIZEOF_]        = { { 0x00, 0x10, 0x10 }, { 0x00, 0x40, 0x40 } };
+  struct rgb c_tooltip[COLOR_SIZEOF_]       = { { 0x11, 0x7a, 0x8d }, { 0xff, 0xff, 0xff } };
+  struct rgb c_disabled[COLOR_SIZEOF_]      = { { 0x00, 0x10, 0x10 }, { 0x00, 0x20, 0x20 } };
+  struct rgb c_normal[COLOR_SIZEOF_]        = { { 0x00, 0x20, 0x20 }, { 0x00, 0x80, 0x80 } };
+  struct rgb c_selected[COLOR_SIZEOF_]      = { { 0x00, 0x40, 0x40 }, { 0x00, 0xff, 0xff } };
+  struct rgb c_activated[COLOR_SIZEOF_]     = { { 0x00, 0x10, 0x10 }, { 0x00, 0x80, 0x80 } };
+  struct rgb c_slider_handle[COLOR_SIZEOF_] = { { 0x00, 0x40, 0x40 }, { 0x00, 0x40, 0x40 } };
   struct rgb * colours;
   bool enabled;
   
@@ -109,6 +110,10 @@ void widget_draw(struct widget * this)
   else if(type == WT_TOOLTIP)
     {
       colours = c_tooltip;
+    }
+  else if(type == WT_SLIDER_HANDLE)
+    {
+      colours = c_slider_handle;
     }
   else
     {

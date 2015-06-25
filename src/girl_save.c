@@ -37,7 +37,7 @@ bool girl_save(struct girl * girl)
 
   snprintf(filename, sizeof filename, "party/%s", girl->name);
   pos = 0;
-  add(GIRLFILE_HEADER_V1,       strlen(GIRLFILE_HEADER_V1));
+  add(GIRLFILE_HEADER_V2,       strlen(GIRLFILE_HEADER_V2));
   add(girl->name,               strlen(girl->name) + 1);
   add(&girl->birth_time,        sizeof girl->birth_time);
   add(&girl->traits,            sizeof girl->traits);

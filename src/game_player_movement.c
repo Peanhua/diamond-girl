@@ -254,6 +254,10 @@ bool game_player_movement(struct map * map, struct gamedata * gamedata)
               if(map->ameba_blocked_timer > 4)
                 map->ameba_blocked_timer -= 3;
           break;
+        case MAP_TREASURE:
+          printf("TREASURE\n");
+          assert(0);
+          break;
 	}
 
       if(gamedata != NULL)

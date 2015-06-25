@@ -82,8 +82,6 @@ extern float    sfx_get_music_volume(void);
 extern bool     sfx_load(struct sfx * sfx);
 extern bool     sfx_load_xm(struct sfx * sfx);
 extern bool     sfx_load_file(struct sfx * sfx, const char * filename);
-#ifdef WITH_COMPRESSED_DATA
 extern bool     sfx_load_ogg(struct sfx * sfx);
-#endif
 
 #endif

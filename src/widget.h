@@ -62,6 +62,7 @@ enum WIDGET_TYPE
     WT_SELECT,
     WT_TOOLTIP,
     WT_SLIDER,
+    WT_SLIDER_HANDLE,
     WT_LIST,
     WT_GRID,
     WT_GRID_ROW

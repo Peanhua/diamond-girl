@@ -53,19 +53,35 @@ AC_CHECK_PROG([optipng], [optipng], [optipng])
 
 # Checks for libraries.
 AC_CHECK_LIB(m, sinf)
+
 PKG_CHECK_MODULES([sdl],        [sdl])
 PKG_CHECK_MODULES([sdl_image],  [SDL_image], [],
   [ AC_CHECK_LIB([SDL_image], [IMG_Load], [],
     [ AC_MSG_ERROR([unable to find SDL_image library])] )]
 )
+PKG_CHECK_MODULES([sdl_gfx], [SDL_gfx], [],
+  [ AC_SEARCH_LIBS([SDL_framerateDelay], [SDL_gfx], [],
+    [ AC_MSG_ERROR([unable to find SDL_gfx library containing SDL_framerateDelay()]) ],
+    [$sdl_LIBS]
+  )]
+)
+
 PKG_CHECK_MODULES([openal],     [openal])
 PKG_CHECK_MODULES([libpng],     [libpng])
 PKG_CHECK_MODULES([sndfile],    [sndfile])
 PKG_CHECK_MODULES([json],       [json-c >= 0.11], [], [AC_MSG_ERROR(['json-c' not found error])])
+
 PKG_CHECK_MODULES([libmikmod],  [libmikmod], [],
   [ AM_PATH_LIBMIKMOD([], [],
     [ AC_MSG_ERROR([unable to find libmikmod])])]
 )
+AC_MSG_CHECKING([for MikMod_free])
+AC_EGREP_HEADER([MikMod_free], [mikmod.h], [mikmodfree=yes], [mikmodfree=no])
+AS_IF([test x$mikmodfree = "xyes"], [
+  AC_DEFINE([HAVE_MIKMOD_FREE], [1], [Define to 1 if your MikMod library has MikMod_free().])
+])
+AC_MSG_RESULT([${mikmodfree}])
+
 bundled_mtwist=false
 PKG_CHECK_MODULES([mtwist],     [mtwist], [], [bundled_mtwist=true])
 AM_CONDITIONAL([WITH_BUNDLED_MTWIST], [test x$bundled_mtwist = "xtrue"])
@@ -81,21 +97,6 @@ AS_IF([test "x$with_lua" = "xyes"], [
 ])
 
 
-
-
-AC_MSG_CHECKING([for MikMod_free])
-AC_EGREP_HEADER([MikMod_free], [mikmod.h], [mikmodfree=yes], [mikmodfree=no])
-AS_IF([test x$mikmodfree = "xyes"], [
-  AC_DEFINE([HAVE_MIKMOD_FREE], [1], [MikMod_free() available.])
-])
-AC_MSG_RESULT([${mikmodfree}])
-
-PKG_CHECK_MODULES([sdl_gfx], [SDL_gfx], [],
-  [ AC_SEARCH_LIBS([SDL_framerateDelay], [SDL_gfx], [],
-    [ AC_MSG_ERROR([unable to find SDL_gfx library containing SDL_framerateDelay()]) ],
-    [$sdl_LIBS]
-  )]
-)
 
 AC_SEARCH_LIBS([BZ2_bzWriteOpen], [bz2], [],
   [AC_MSG_ERROR([unable to find BZ2_bzWriteOpen() function])]
@@ -119,27 +120,19 @@ PKG_CHECK_MODULES([glew], [glew], [],
   [AC_CHECK_LIB([GLEW], [glewInit], [],
     [AC_MSG_ERROR([unable to find GLEW library])] )]
 )
-AM_PATH_LIB3DS(2.0.0, [lib3ds_version1=false], [
-  AM_PATH_LIB3DS(1, [lib3ds_version1=true], [
+AM_PATH_LIB3DS(2.0.0, [], [
+  AM_PATH_LIB3DS(1, [AC_DEFINE([HAVE_LIB3DS_V1], [1], [Define to 1 if you have lib3ds v1.x.])], [
     AC_MSG_ERROR([unable to find lib3ds])]
   )
 ])
-AM_CONDITIONAL([WITH_LIB3DS_V1], [test x$lib3ds_version1 = "xtrue"])
 fi
 
-# Libraries required for hash checksumming.
-checksumming=true
-checksumming_library_mhash=0
-checksumming_library_crypto=0
-AC_SEARCH_LIBS([mhash_init], [mhash], [checksumming_library_mhash=1], [
-  PKG_CHECK_MODULES([libcrypto], [libcrypto], [checksumming_library_crypto=1], [
-    AC_MSG_WARN([unable to find libmhash or libcrypto, hash checksumming is disabled])
-    checksumming=false
+# Libraries for hash checksumming.
+AC_SEARCH_LIBS([mhash_init], [mhash], [AC_DEFINE([HAVE_LIBMHASH], [1], [Define to 1 if you want to use mhash library for checksumming.])], [
+  PKG_CHECK_MODULES([libcrypto], [libcrypto], [AC_DEFINE([HAVE_LIBCRYPTO], [1], [Define to 1 if you want to use libcrypto for checksumming.])], [
+    AC_MSG_ERROR([Unable to find libmhash or libcrypto.])
   ])
 ])
-AM_CONDITIONAL([WITH_CHECKSUMMING], [test x$checksumming = "xtrue"])
-AC_SUBST([CHECKSUMMING_LIBRARY_MHASH],  $checksumming_library_mhash)
-AC_SUBST([CHECKSUMMING_LIBRARY_CRYPTO], $checksumming_library_crypto)
 
 # Checks for header files.
 AC_CHECK_HEADERS([inttypes.h stdint.h stdlib.h string.h sys/time.h sys/timeb.h unistd.h])

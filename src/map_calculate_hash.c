@@ -23,15 +23,12 @@
 #include "map.h"
 
 #include <assert.h>
-#ifdef WITH_CHECKSUMMING
-# if CHECKSUMMING_LIBRARY_MHASH
-#  include <mhash.h>
-# elif CHECKSUMMING_LIBRARY_CRYPTO
-#  include <openssl/md5.h>
-# endif
+#if HAVE_LIBMHASH
+# include <mhash.h>
+#elif HAVE_LIBCRYPTO
+# include <openssl/md5.h>
 #endif
 
-#ifdef WITH_CHECKSUMMING
 char * map_calculate_hash(struct map * map)
 {
   char * rv;
@@ -45,7 +42,7 @@ char * map_calculate_hash(struct map * map)
   hash      = NULL;
   hash_size = 0;
   
-#if CHECKSUMMING_LIBRARY_MHASH
+#if HAVE_LIBMHASH
   hash_size = mhash_get_block_size(MHASH_MD5);
   hash = malloc(hash_size);
   assert(hash != NULL);
@@ -83,7 +80,7 @@ char * map_calculate_hash(struct map * map)
         }
     }
 
-#elif CHECKSUMMING_LIBRARY_CRYPTO
+#elif HAVE_LIBCRYPTO
   MD5_CTX context;
 
   hash_size = MD5_DIGEST_LENGTH;
@@ -141,11 +138,3 @@ char * map_calculate_hash(struct map * map)
   
   return rv;
 }
-
-#else
-
-char * map_calculate_hash(struct map * map DG_UNUSED)
-{
-  return NULL;
-}
-#endif

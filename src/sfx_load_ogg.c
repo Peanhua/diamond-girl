@@ -20,7 +20,6 @@
   Complete license can be found in the LICENSE file.
 */
 
-#ifdef WITH_COMPRESSED_DATA
 
 #include "diamond_girl.h"
 #include "sfx.h"
@@ -89,5 +88,3 @@ bool sfx_load_ogg(struct sfx * sfx)
   
   return rv;
 }
-
-#endif

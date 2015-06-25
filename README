@@ -183,6 +183,3 @@ Note that boolean and numeric values must be without quotes.
    The exact naming of the locales may vary between systems, but usually
    "en_US" sets English, and "fi_FI" sets Finnish. In *nix systems you can use
    the command 'locale -a' to find out list of available locales.
- 
- "TestsCompleted": boolean
-   If unset or false, performs internal tests during startup.

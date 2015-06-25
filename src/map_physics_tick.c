@@ -117,6 +117,7 @@ static void process_map(struct map * map, struct gamedata * gamedata)
 	    case MAP_PLAYER_ARMOUR0:
 	    case MAP_PLAYER_ARMOUR1:
 	    case MAP_PLAYER_ARMOUR2:
+            case MAP_TREASURE:
 	      break;
 	    case MAP_BRICK_EXPANDING:
 	      if(x > 0 && map->data[x - 1 + y * map->width] == MAP_EMPTY)
@@ -601,7 +602,7 @@ static void explode_at(struct map * map, struct gamedata * gamedata, enum MAP_GL
             map->player_death(gamedata, 1);
         }
       
-      if(map->data[inx + iny * map->width] != MAP_BRICK_UNBREAKABLE)
+      if(map->data[inx + iny * map->width] != MAP_BRICK_UNBREAKABLE && map->data[inx + iny * map->width] != MAP_TREASURE)
         {	    
           map->data[inx + iny * map->width]            = fill;
           map->processed[inx + iny * map->width]       = 1;

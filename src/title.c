@@ -249,7 +249,7 @@ void title(void)
           int timeout;
           int lucy_anim_length;
 
-          timeout = 10 * 12 - 6;
+          timeout = 20 * help_screen_seconds - 6;
           lucy_anim_length = 12;
           now = time(NULL);
           last_user_action = ui_get_last_user_action();
@@ -570,31 +570,38 @@ static void setup_ui(trait_t traits_to_highlight)
     int tx, ty;
     int spacing;
     struct widget * prev;
-    trait_t traits[] =
-      {
-         TRAIT_KEY,
-         TRAIT_ADVENTURE_MODE,
-         TRAIT_RIBBON,
-         TRAIT_GREEDY,
-         TRAIT_TIME_CONTROL,
-         TRAIT_POWER_PUSH,
-         TRAIT_DIAMOND_PUSH,
-         TRAIT_RECYCLER,
-         TRAIT_STARS1,
-         TRAIT_STARS2,
-         TRAIT_STARS3,
-         TRAIT_CHAOS,
-         TRAIT_DYNAMITE,
-         TRAIT_IRON_GIRL,
-         TRAIT_PYJAMA_PARTY,
-
-         TRAIT_SIZEOF_
-      };
+    struct
+    {
+      trait_t trait;
+      bool classic_mode;
+      bool adventure_mode;
+      bool pyjamaparty_mode;
+    } traits[] =
+        {
+          { TRAIT_ADVENTURE_MODE, true,  true,  true  },
+          { TRAIT_PYJAMA_PARTY,   true,  true,  true  },
+          { TRAIT_QUESTS,         false, true,  false },
+          { TRAIT_IRON_GIRL,      false, true,  false },
+          { TRAIT_KEY,            true,  true,  true  },
+          { TRAIT_RIBBON,         false, true,  false },
+          { TRAIT_GREEDY,         false, true,  true  },
+          { TRAIT_TIME_CONTROL,   false, true,  true  },
+          { TRAIT_POWER_PUSH,     false, true,  true  },
+          { TRAIT_DIAMOND_PUSH,   false, true,  true  },
+          { TRAIT_RECYCLER,       true,  true,  true  },
+          { TRAIT_STARS1,         true,  true,  true  },
+          { TRAIT_STARS2,         true,  true,  true  },
+          { TRAIT_STARS3,         true,  true,  true  },
+          { TRAIT_CHAOS,          false, true,  true  },
+          { TRAIT_DYNAMITE,       false, true,  true  },
+          
+          { TRAIT_ALL,            false, false, false }
+        };
     int traitcount;
 
     traitcount = 0;
-    for(int i = 0; traits[i] != TRAIT_SIZEOF_; i++)
-      if(traits_get_available() & traits[i])
+    for(int i = 0; traits[i].trait != TRAIT_ALL; i++)
+      if(traits_get_available() & traits[i].trait)
         traitcount++;
 
     tx = 10;
@@ -614,28 +621,20 @@ static void setup_ui(trait_t traits_to_highlight)
     assert(traitcount <= 18);
 
     prev = NULL;
-    for(int i = 0; traits[i] != TRAIT_SIZEOF_; i++)
-      if(current_cave->game_mode == GAME_MODE_ADVENTURE    ||
-         (current_cave->game_mode == GAME_MODE_PYJAMA_PARTY && traits[i] != TRAIT_IRON_GIRL) ||
-         traits[i]         == TRAIT_KEY              ||
-         traits[i]         == TRAIT_ADVENTURE_MODE   ||
-         (current_cave->game_mode != GAME_MODE_PYJAMA_PARTY && traits[i] == TRAIT_IRON_GIRL) ||
-         traits[i]         == TRAIT_TIME_CONTROL     ||
-         traits[i]         == TRAIT_STARS1           ||
-         traits[i]         == TRAIT_STARS2           ||
-         traits[i]         == TRAIT_STARS3           ||
-         traits[i]         == TRAIT_RECYCLER         ||
-         traits[i]         == TRAIT_PYJAMA_PARTY )
-        if(traits_get_available() & traits[i])
+    for(int i = 0; traits[i].trait != TRAIT_ALL; i++)
+      if((current_cave->game_mode == GAME_MODE_CLASSIC      && traits[i].classic_mode     == true) ||
+         (current_cave->game_mode == GAME_MODE_ADVENTURE    && traits[i].adventure_mode   == true) ||
+         (current_cave->game_mode == GAME_MODE_PYJAMA_PARTY && traits[i].pyjamaparty_mode == true)    )
+        if(traits_get_available() & traits[i].trait)
           {
             struct widget * b;
           
-            b = widget_new_trait_button(root, tx, ty, spacing - 10 + 2, spacing - 10 + 2, traits[i], false, true);
+            b = widget_new_trait_button(root, tx, ty, spacing - 10 + 2, spacing - 10 + 2, traits[i].trait, false, true);
             uiobj_trait_buttons[i] = b;
 
             if(b != NULL)
               {
-                if(traits_to_highlight & traits[i])
+                if(traits_to_highlight & traits[i].trait)
                   twinkle_area(widget_absolute_x(b),
                                widget_absolute_y(b),
                                widget_width(b),

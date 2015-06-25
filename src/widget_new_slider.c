@@ -58,6 +58,7 @@ struct widget * widget_new_slider(struct widget * parent, int x, int y, int widt
         {
           slider->z_ = rv->z_;
           widget_set_flags(slider, WF_DRAW_BORDERS | WF_BACKGROUND);
+          widget_set_ulong(slider, "type", WT_SLIDER_HANDLE);
         }
       widget_set_pointer(rv, "slider_obj", slider);
     }

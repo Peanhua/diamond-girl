@@ -46,6 +46,7 @@ char * trait_get_name(trait_t trait)
         { TRAIT_DYNAMITE,       NULL },
         { TRAIT_IRON_GIRL,      NULL },
         { TRAIT_PYJAMA_PARTY,   NULL },
+        { TRAIT_QUESTS,         NULL },
         { TRAIT_ALL,            NULL }
       };
   static bool initdone = false;
@@ -67,6 +68,7 @@ char * trait_get_name(trait_t trait)
       traits[12].name = gettext("Dynamite");
       traits[13].name = gettext("Iron Girl");
       traits[14].name = gettext("Pyjama Party");
+      traits[15].name = gettext("Quests");
       initdone = true;
     }
   

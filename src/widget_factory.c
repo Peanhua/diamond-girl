@@ -204,6 +204,9 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
     char            title[256];
     char            title_fi[256];
     char            title_fr[256];
+    char            tooltip[256];
+    char            tooltip_fi[256];
+    char            tooltip_fr[256];
     bool            modal;    /* Set the widget to be modal. */
     bool            focus;    /* Set focus to the widget. */
     bool            no_focus; /* Set the widget to be non-focusable. */
@@ -237,6 +240,9 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
   strcpy(this.title,    "");
   strcpy(this.title_fi, "");
   strcpy(this.title_fr, "");
+  strcpy(this.tooltip,    "");
+  strcpy(this.tooltip_fi, "");
+  strcpy(this.tooltip_fr, "");
   this.modal       = false;
   this.focus       = false;
   this.no_focus    = false;
@@ -320,6 +326,9 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
                 { "title",            json_type_string,  this.title,          sizeof this.title,          0  },
                 { "title-fi",         json_type_string,  this.title_fi,       sizeof this.title_fi,       0  },
                 { "title-fr",         json_type_string,  this.title_fr,       sizeof this.title_fr,       0  },
+                { "tooltip",          json_type_string,  this.tooltip,        sizeof this.tooltip,        0  },
+                { "tooltip-fi",       json_type_string,  this.tooltip_fi,     sizeof this.tooltip_fi,     0  },
+                { "tooltip-fr",       json_type_string,  this.tooltip_fr,     sizeof this.tooltip_fr,     0  },
                 { "modal",            json_type_boolean, &this.modal,         1,                          0  },
                 { "focus",            json_type_boolean, &this.focus,         1,                          0  },
                 { "no-focus",         json_type_boolean, &this.no_focus,      1,                          0  },
@@ -487,10 +496,20 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
 
       if(globals.language != NULL)
         { /* Use the localized title if it exists, later only "this.title" is referenced. */
-          if(!strcmp(globals.language, "fi") && strlen(this.title_fi) > 0)
-            strcpy(this.title, this.title_fi);
-          else if(!strcmp(globals.language, "fr") && strlen(this.title_fr) > 0)
-            strcpy(this.title, this.title_fr);
+          if(!strcmp(globals.language, "fi"))
+            {
+              if(strlen(this.title_fi) > 0)
+                strcpy(this.title, this.title_fi);
+              if(strlen(this.tooltip_fi) > 0)
+                strcpy(this.tooltip, this.tooltip_fi);
+            }
+          else if(!strcmp(globals.language, "fr"))
+            {
+              if(strlen(this.title_fr) > 0)
+                strcpy(this.title, this.title_fr);
+              if(strlen(this.tooltip_fr) > 0)
+                strcpy(this.tooltip, this.tooltip_fr);
+            }
         }
       
       set_width  = false;
@@ -666,6 +685,9 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
           else
             ok = false;
         }
+
+      if(ok == true && strlen(this.tooltip) > 0)
+        widget_set_tooltip(this.widget, strdup(this.tooltip));
     }
 
 

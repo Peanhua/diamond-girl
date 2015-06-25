@@ -86,7 +86,9 @@ static struct
     { GFX_IMAGE_TRAIT_IRON_GIRL,               NULL, "gfx/trait_iron_girl",       true,  true,  true, false, false },
     { GFX_IMAGE_TRAIT_IRON_GIRL_DISABLED,      NULL, "gfx/trait_iron_girl",       true,  true,  true,  true, false },
     { GFX_IMAGE_TRAIT_PYJAMA_PARTY,            NULL, "gfx/trait_pyjama_party",    true,  true,  true, false, false },
-    { GFX_IMAGE_TRAIT_PYJAMA_PARTY_DISABLED,   NULL, "gfx/trait_pyjama_party",    true,  true,  true,  true, false }
+    { GFX_IMAGE_TRAIT_PYJAMA_PARTY_DISABLED,   NULL, "gfx/trait_pyjama_party",    true,  true,  true,  true, false },
+    { GFX_IMAGE_TRAIT_QUESTS,                  NULL, "gfx/trait_quests",          true,  true,  true, false, false },
+    { GFX_IMAGE_TRAIT_QUESTS_DISABLED,         NULL, "gfx/trait_quests",          true,  true,  true,  true, false }
   };
 
 bool gfx_image_initialize(void)
@@ -153,30 +155,32 @@ struct image * gfx_image(enum GFX_IMAGE image_id)
 
       images[image_id].image = image;
 
+      if(image != NULL)
+        {
+          if(images[image_id].greyscale == true)
+            image_to_greyscale(image);
+
 #ifdef WITH_OPENGL
-      if(globals.opengl)
-        if(image != NULL)
-          {
-            if(images[image_id].greyscale == true)
-              image_to_greyscale(image);
-
-            if(globals.opengl_power_of_two_textures == true)
-              {
-                int origw, origh, w, h;
-
-                origw = image->width;
-                origh = image->height;
-                w = round_to_power_of_two(origw);
-                h = round_to_power_of_two(origh);
-
-                if(w != origw || h != origh)
-                  image_expand(image, w, h);
-              }
-
-            if(images[image_id].texturize == true)
-              image_to_texture(image, images[image_id].alpha, images[image_id].mipmapping, true);
-          }
+          if(globals.opengl)
+            {
+              if(globals.opengl_power_of_two_textures == true)
+                {
+                  int origw, origh, w, h;
+                  
+                  origw = image->width;
+                  origh = image->height;
+                  w = round_to_power_of_two(origw);
+                  h = round_to_power_of_two(origh);
+                  
+                  if(w != origw || h != origh)
+                    image_expand(image, w, h);
+                }
+              
+              if(images[image_id].texturize == true)
+                image_to_texture(image, images[image_id].alpha, images[image_id].mipmapping, true);
+            }
 #endif
+        }
     }
 
   assert(image != NULL);

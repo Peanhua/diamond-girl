@@ -72,7 +72,8 @@ struct image * map_thumbnail_image(struct map * map)
                 { MAP_BRICK_UNBREAKABLE, { 0x70, 0x70, 0x70 } },
                 { MAP_BRICK_MORPHER,     { 0x80, 0x80, 0x80 } },
                 { MAP_AMEBA,             { 0x00, 0xff, 0x00 } },
-                { MAP_SLIME,             { 0x00, 0x00, 0xff } }
+                { MAP_SLIME,             { 0x00, 0x00, 0xff } },
+                { MAP_TREASURE,          { 0xd5, 0xae, 0x26 } }
               };
 
 #ifndef NDEBUG

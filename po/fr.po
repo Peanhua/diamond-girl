@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: diamond-girl 1.25b4\n"
 "Report-Msgid-Bugs-To: joniyrjana@gmail.com\n"
-"POT-Creation-Date: 2015-06-18 19:21+0300\n"
+"POT-Creation-Date: 2015-06-24 21:05+0300\n"
 "PO-Revision-Date: 2015-06-05 21:54+0200\n"
 "Last-Translator: Steve Joni Yrjänä <vincent.hardy.be@gmail.com>\n"
 "Language-Team: French\n"
@@ -270,7 +270,7 @@ msgstr ""
 msgid "Game mode: Pyjama Party"
 msgstr ""
 
-#: src/game.c:1295 src/trait_get_name.c:68
+#: src/game.c:1295 src/trait_get_name.c:69
 msgid "Iron Girl"
 msgstr ""
 
@@ -354,7 +354,7 @@ msgstr ""
 msgid "Adventure"
 msgstr ""
 
-#: src/settings.c:369 src/title.c:1203 src/trait_get_name.c:69
+#: src/settings.c:369 src/title.c:1203 src/trait_get_name.c:70
 #: src/widget_new_highscore_einfo.c:99
 msgid "Pyjama Party"
 msgstr ""
@@ -474,56 +474,60 @@ msgstr ""
 msgid "Level: %d / %d"
 msgstr ""
 
-#: src/trait_get_name.c:55
+#: src/trait_get_name.c:56
 msgid "Key"
 msgstr ""
 
-#: src/trait_get_name.c:56
+#: src/trait_get_name.c:57
 msgid "AdventureMode"
 msgstr ""
 
-#: src/trait_get_name.c:57
+#: src/trait_get_name.c:58
 msgid "Ribbon"
 msgstr ""
 
-#: src/trait_get_name.c:58
+#: src/trait_get_name.c:59
 msgid "Greedy"
 msgstr ""
 
-#: src/trait_get_name.c:59
+#: src/trait_get_name.c:60
 msgid "Time Control"
 msgstr ""
 
-#: src/trait_get_name.c:60
+#: src/trait_get_name.c:61
 msgid "Power Push"
 msgstr ""
 
-#: src/trait_get_name.c:61
+#: src/trait_get_name.c:62
 msgid "Diamond Push"
 msgstr ""
 
-#: src/trait_get_name.c:62
+#: src/trait_get_name.c:63
 msgid "Recycler"
 msgstr ""
 
-#: src/trait_get_name.c:63
+#: src/trait_get_name.c:64
 msgid "Stars 1"
 msgstr ""
 
-#: src/trait_get_name.c:64
+#: src/trait_get_name.c:65
 msgid "Stars 2"
 msgstr ""
 
-#: src/trait_get_name.c:65
+#: src/trait_get_name.c:66
 msgid "Stars 3"
 msgstr ""
 
-#: src/trait_get_name.c:66
+#: src/trait_get_name.c:67
 msgid "Chaos"
 msgstr ""
 
-#: src/trait_get_name.c:67
+#: src/trait_get_name.c:68
 msgid "Dynamite"
+msgstr ""
+
+#: src/trait_get_name.c:71
+msgid "Quests"
 msgstr ""
 
 #: src/widget_new_highscore_einfo.c:80

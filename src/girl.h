@@ -28,6 +28,7 @@
 #include <time.h>
 
 #define GIRLFILE_HEADER_V1 "dgr1"
+#define GIRLFILE_HEADER_V2 "dgr2"
 
 struct map_object;
 

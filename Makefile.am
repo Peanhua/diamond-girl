@@ -15,6 +15,9 @@ EXTRA_DIST = config.rpath m4/ChangeLog  \
 	$(man_MANS)  \
 	diamond-girl-win32.nsi \
 	README.building README.sfx README.translations \
+	translate.sh \
+	translate-map-fi.sed translate-unmap-fi.sed \
+	translate-map-fr.sed translate-unmap-fr.sed \
 	mtwist-1.5/CHANGELOG \
 	mtwist-1.5/README \
 	mtwist-1.5/mtcctest.cc \

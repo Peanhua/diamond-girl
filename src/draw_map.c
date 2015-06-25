@@ -313,6 +313,8 @@ static void draw_map_non_opengl(struct map * map, int topleft_x, int topleft_y, 
           case MAP_EXIT_LEVEL:
             gfx_draw_glyph(dx, dy, MAP_EXIT_LEVEL, MOVE_NONE);
             break;
+          case MAP_TREASURE:
+            gfx_draw_glyph(dx, dy, MAP_TREASURE, MOVE_NONE);
           case MAP_SIZEOF_:
             break;
           }
@@ -376,7 +378,8 @@ static void draw_map_opengl(struct map * map, enum GAME_MODE game_mode, int topl
                m == MAP_BOULDER || m == MAP_BOULDER_FALLING ||
                m == MAP_DIAMOND || m == MAP_DIAMOND_FALLING ||
                m == MAP_ENEMY1  || m == MAP_ENEMY2  ||
-               m == MAP_SMOKE   || m == MAP_SMOKE1 || m == MAP_SMOKE2)
+               m == MAP_SMOKE   || m == MAP_SMOKE1 || m == MAP_SMOKE2 ||
+               m == MAP_TREASURE)
               {
                 if(map->background_type == 0)
                   gfx_glyph_render(map->drawbuf, x * 24, y * 24, MAP_EMPTY, MOVE_NONE);
@@ -549,6 +552,9 @@ static void draw_map_opengl(struct map * map, enum GAME_MODE game_mode, int topl
               break;
             case MAP_EXIT_LEVEL:
               gfx_glyph_render(map->drawbuf, dx, dy, MAP_EXIT_LEVEL, MOVE_NONE);
+              break;
+            case MAP_TREASURE:
+              gfx_glyph_render(map->drawbuf, dx, dy, MAP_TREASURE, MOVE_NONE);
               break;
             case MAP_SIZEOF_:
               break;

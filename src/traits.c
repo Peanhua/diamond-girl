@@ -34,7 +34,8 @@
 #include <unistd.h>
 
 
-#define FILE_HEADER "dgt2"
+#define FILE_HEADER_V2 "dgt2"
+#define FILE_HEADER_V3 "dgt3"
 
 static trait_t  traits_active;
 static trait_t  traits_available;
@@ -56,8 +57,12 @@ void traits_initialize(void)
 
       version = 1; /* Version 1 did not have any header. */
       if(fread(header, 4, 1, fp) == 1) /* Header will always be 4 characters. */
-        if(memcmp(header, FILE_HEADER, 4) == 0)
-          version = 2;
+        {
+          if(memcmp(header, FILE_HEADER_V2, 4) == 0)
+            version = 2;
+          else if(memcmp(header, FILE_HEADER_V3, 4) == 0)
+            version = 3;
+        }
 
       if(version == 1)
         {
@@ -74,12 +79,19 @@ void traits_initialize(void)
           fread(&tmp, sizeof tmp, 1, fp);
           traits_score = tmp;
         }
-      else /* if(version == 2)*/
+      else if(version == 2)
+        {
+          uint16_t t;
+          
+          fread(&t, sizeof t, 1, fp); traits_active    = t;
+          fread(&t, sizeof t, 1, fp); traits_available = t;
+        }
+      else if(version == 3)
         {
           fread(&traits_active,    sizeof traits_active,    1, fp);
           fread(&traits_available, sizeof traits_available, 1, fp);
-          fread(&traits_score,     sizeof traits_score,     1, fp);
         }
+      fread(&traits_score,     sizeof traits_score,     1, fp);
       fclose(fp);
     }
 }
@@ -93,7 +105,7 @@ void traits_cleanup(void)
   assert(fp != NULL);
   if(fp != NULL)
     {
-      fwrite(FILE_HEADER,       strlen(FILE_HEADER),     1, fp);
+      fwrite(FILE_HEADER_V3,    strlen(FILE_HEADER_V3),  1, fp);
       fwrite(&traits_active,    sizeof traits_active,    1, fp);
       fwrite(&traits_available, sizeof traits_available, 1, fp);
       fwrite(&traits_score,     sizeof traits_score,     1, fp);

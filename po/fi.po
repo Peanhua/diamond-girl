@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: diamond-girl 1.25b\n"
 "Report-Msgid-Bugs-To: joniyrjana@gmail.com\n"
-"POT-Creation-Date: 2015-06-18 19:21+0300\n"
+"POT-Creation-Date: 2015-06-24 21:05+0300\n"
 "PO-Revision-Date: 2015-06-18 19:22+0200\n"
 "Last-Translator: Steve Joni Yrjänä <joniyrjana@gmail.com>\n"
 "Language-Team: Finnish\n"
@@ -271,7 +271,7 @@ msgstr "Pelitila: seikkailu"
 msgid "Game mode: Pyjama Party"
 msgstr "Pelitila: pyjamabileet"
 
-#: src/game.c:1295 src/trait_get_name.c:68
+#: src/game.c:1295 src/trait_get_name.c:69
 msgid "Iron Girl"
 msgstr "Ter|stytt}"
 
@@ -359,7 +359,7 @@ msgstr "Klassinen"
 msgid "Adventure"
 msgstr "Seikkailu"
 
-#: src/settings.c:369 src/title.c:1203 src/trait_get_name.c:69
+#: src/settings.c:369 src/title.c:1203 src/trait_get_name.c:70
 #: src/widget_new_highscore_einfo.c:99
 msgid "Pyjama Party"
 msgstr "Pyjamabileet"
@@ -481,57 +481,61 @@ msgstr "Luola: %s"
 msgid "Level: %d / %d"
 msgstr "Kentt|: %d / %d"
 
-#: src/trait_get_name.c:55
+#: src/trait_get_name.c:56
 msgid "Key"
 msgstr "Avain"
 
-#: src/trait_get_name.c:56
+#: src/trait_get_name.c:57
 msgid "AdventureMode"
 msgstr "Seikkailutila"
 
-#: src/trait_get_name.c:57
+#: src/trait_get_name.c:58
 msgid "Ribbon"
 msgstr "Panta"
 
-#: src/trait_get_name.c:58
+#: src/trait_get_name.c:59
 msgid "Greedy"
 msgstr "Ahne"
 
-#: src/trait_get_name.c:59
+#: src/trait_get_name.c:60
 msgid "Time Control"
 msgstr "Ajanmuokkaaja"
 
-#: src/trait_get_name.c:60
+#: src/trait_get_name.c:61
 msgid "Power Push"
 msgstr "Voimaty}nt}"
 
-#: src/trait_get_name.c:61
+#: src/trait_get_name.c:62
 msgid "Diamond Push"
 msgstr "Timanttity}nt}"
 
-#: src/trait_get_name.c:62
+#: src/trait_get_name.c:63
 msgid "Recycler"
 msgstr "Kierr|tt|j|"
 
-#: src/trait_get_name.c:63
+#: src/trait_get_name.c:64
 msgid "Stars 1"
 msgstr "T|hdet 1"
 
-#: src/trait_get_name.c:64
+#: src/trait_get_name.c:65
 msgid "Stars 2"
 msgstr "T|hdet 2"
 
-#: src/trait_get_name.c:65
+#: src/trait_get_name.c:66
 msgid "Stars 3"
 msgstr "T|hdet 3"
 
-#: src/trait_get_name.c:66
+#: src/trait_get_name.c:67
 msgid "Chaos"
 msgstr "Kaaos"
 
-#: src/trait_get_name.c:67
+#: src/trait_get_name.c:68
 msgid "Dynamite"
 msgstr "Dynamiitti"
+
+#: src/trait_get_name.c:71
+msgid "Quests"
+msgstr ""
 
 #: src/widget_new_highscore_einfo.c:80
 msgid "Played on:"

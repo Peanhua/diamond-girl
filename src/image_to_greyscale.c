@@ -45,4 +45,12 @@ void image_to_greyscale(struct image * image)
         image->data[(x + y * image->width) * 4 + 2] = grey;
         image->data[(x + y * image->width) * 4 + 3] = a;
       }
+
+  if(image->sdl_surface != NULL)
+    {
+      SDL_FreeSurface(image->sdl_surface);
+      image->sdl_surface = NULL;
+
+      image_to_sdl(image);
+    }
 }

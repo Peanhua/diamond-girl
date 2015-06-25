@@ -65,7 +65,7 @@ void title_help_tick(struct widget * map_widget)
           sfx_music_volume(curvol);
         }
     }
-  else
+  else if(help_screen > 8)
     {
       float curvol;
 

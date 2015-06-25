@@ -1,0 +1,10 @@
+You can choose the starting level
+if you have completed the level
+previously.
+
+Only every fifth level can be used
+as a starting level.
+
+
+With certain traits, you can choose
+the starting level more freely.

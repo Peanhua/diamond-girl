@@ -20,12 +20,14 @@
   Complete license can be found in the LICENSE file.
 */
 
-#ifdef WITH_CHECKSUMMING
-# if CHECKSUMMING_LIBRARY_MHASH
-#  include <mhash.h>
-# elif CHECKSUMMING_LIBRARY_CRYPTO
-#  include <openssl/sha.h>
-# endif
+#include "../src/diamond_girl.h"
+
+#if HAVE_LIBMHASH
+# include <mhash.h>
+#elif HAVE_LIBCRYPTO
+# include <openssl/sha.h>
+#else
+# error Neither libmhash nor libcrypto defined to be present.
 #endif
 
 #ifdef WITH_BUNDLED_MTWIST
@@ -35,7 +37,6 @@
 # include <mtwist.h>
 #endif
 
-#include "../src/diamond_girl.h"
 #include "../src/random.h"
 #include "../src/random.c"
 
@@ -60,7 +61,6 @@ static int random_test(void)
 
   rv = TEST_OK;
   
-#ifdef WITH_CHECKSUMMING
   const int nseeds    = 1000;
   const int blocksize = 1000;
   const int nvalues   = 200000 / blocksize;
@@ -72,18 +72,16 @@ static int random_test(void)
   unsigned char * hash_digest;
   int             hash_digest_size;
 
-#if CHECKSUMMING_LIBRARY_MHASH
+#if HAVE_LIBMHASH
   hash_digest_size = mhash_get_block_size(MHASH_SHA1);
-#elif CHECKSUMMING_LIBRARY_CRYPTO
+#elif HAVE_LIBCRYPTO
   hash_digest_size = SHA_DIGEST_LENGTH;
-#else
-# error CHECKSUMMING_LIBRARY_MHASH and CHECKSUMMING_LIBRARY_CRYPTO are both erroneously 0
 #endif
 
   hash_digest = malloc(hash_digest_size);
   if(hash_digest != NULL)
     {
-#if CHECKSUMMING_LIBRARY_MHASH
+#if HAVE_LIBMHASH
       MHASH hash;
 
       hash = mhash_init(MHASH_SHA1);
@@ -126,7 +124,7 @@ static int random_test(void)
           rv = TEST_FAIL_HARD;
         }
 
-#elif CHECKSUMMING_LIBRARY_CRYPTO
+#elif HAVE_LIBCRYPTO
       SHA_CTX context;
 
       if(SHA1_Init(&context))
@@ -198,11 +196,6 @@ static int random_test(void)
           rv = TEST_FAIL;
         }
     }
-
-#else
-  printf("Checksumming is disabled in this build, unable to run tests.\n");
-  rv = TEST_SKIP;
-#endif
 
   return rv;
 }

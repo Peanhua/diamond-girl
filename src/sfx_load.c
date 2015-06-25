@@ -33,10 +33,8 @@ bool sfx_load(struct sfx * sfx)
   rv = false;
   sfx->openal_buffer = AL_NONE;
 
-#ifdef WITH_COMPRESSED_DATA
   if(rv == false)
     rv = sfx_load_ogg(sfx);
-#endif
 
   if(rv == false)
     rv = sfx_load_file(sfx, NULL);

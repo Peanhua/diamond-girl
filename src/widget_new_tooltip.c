@@ -30,7 +30,7 @@ struct widget * widget_new_tooltip(struct widget * parent)
   int x, y, width, height;
   
   width  = font_width(parent->tooltip_.text) + 4;
-  height = font_height();
+  height = font_height() + 4;
 
   x = widget_absolute_x(parent) - width / 2 + widget_width(parent) / 2;
   if(x + width > SCREEN_WIDTH)
@@ -47,7 +47,7 @@ struct widget * widget_new_tooltip(struct widget * parent)
   frame = widget_new_frame(widget_root(), x, y, width, height);
   widget_set_ulong(frame, "type", WT_TOOLTIP);
   widget_delete_flags(frame, WF_DRAW_BORDERS);
-  widget_set_ulong(frame, "alpha", 0xb0);
+  widget_set_ulong(frame, "alpha", 0x80);
   
   widget_new_text(frame, 0, 0, parent->tooltip_.text);
 

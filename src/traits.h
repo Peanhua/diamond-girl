@@ -46,10 +46,11 @@ enum GAME_MODE;
 #define TRAIT_KEY            (1<<12)
 #define TRAIT_IRON_GIRL      (1<<13)
 #define TRAIT_PYJAMA_PARTY   (1<<14)
-#define TRAIT_SIZEOF_        15
+#define TRAIT_QUESTS         (1<<15)
+#define TRAIT_SIZEOF_        16
 #define TRAIT_ALL            0xffff
 
-typedef uint16_t trait_t;
+typedef uint32_t trait_t;
 
 extern void    traits_initialize(void); /* Initialize and load. */
 extern void    traits_cleanup(void);    /* Save and cleanup. */
