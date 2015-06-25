@@ -1,4 +1,4 @@
-  !define APPNAME "Diamond Girl"
+  !define APPNAME "Lucy the Diamond Girl"
   !define COMPANYNAME "Joni Yrjana"
   !define DESCRIPTION "Single player puzzle game with a time constraint"
   !define VERSIONMAJOR x
@@ -14,7 +14,7 @@
   Name "${APPNAME}"
   Icon "diamond-girl.ico"
   OutFile "diamond-girl.exe"
-  InstallDir "$PROGRAMFILES\Diamond Girl"
+  InstallDir "$PROGRAMFILES\Lucy the Diamond Girl"
 
 ; Request application privileges for Windows Vista
   RequestExecutionLevel admin
@@ -49,7 +49,7 @@
 ;--------------------------------
 
 ; The stuff to install
-Section "!Diamond Girl"
+Section "!Lucy the Diamond Girl"
 
   ; Set output path to the installation directory.
   SetOutPath $INSTDIR
@@ -60,7 +60,7 @@ Section "!Diamond Girl"
   WriteRegStr HKLM "Software\Diamond_Girl" "Install_Dir" "$INSTDIR"
   
   ; Write the uninstall keys for Windows
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" "DisplayName" "Diamond Girl"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" "DisplayName" "Lucy the Diamond Girl"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" "UninstallString" '"$INSTDIR\uninstall.exe"'
 
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" "DisplayIcon"   "$INSTDIR\diamond-girl.ico"
@@ -81,7 +81,7 @@ Section "!Diamond Girl"
   ; Start menu integration:
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
-    CreateShortcut "$SMPROGRAMS\$StartMenuFolder\Diamond Girl.lnk" "$INSTDIR\diamond-girl.exe"
+    CreateShortcut "$SMPROGRAMS\$StartMenuFolder\Lucy the Diamond Girl.lnk" "$INSTDIR\diamond-girl.exe"
   !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
 
@@ -93,7 +93,7 @@ SectionEnd
 Section "Uninstall"
 
   !insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuFolder
-  Delete "$SMPROGRAMS\$StartMenuFolder\Diamond Girl.lnk"
+  Delete "$SMPROGRAMS\$StartMenuFolder\Lucy the Diamond Girl.lnk"
   RMDir "$SMPROGRAMS\$StartMenuFolder"
 
   ; Remove registry keys

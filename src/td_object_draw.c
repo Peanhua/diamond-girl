@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -25,82 +25,26 @@
 #include "td_object.h"
 #include "globals.h"
 #include "gfx.h"
+#include "gfxbuf.h"
 #include "image.h"
+#include "stack.h"
 
-#ifdef LIB3DS_V1
-# include <lib3ds/types.h>
-# include <lib3ds/vector.h>
-#else
-# include <lib3ds.h>
-#endif
 
 void td_object_draw(struct td_object * td_object)
 {
-  if(globals.opengl_1_5)
+  //glPushMatrix();
+  for(unsigned int i = 0; i < td_object->meshes->size; i++)
     {
-      glBindBuffer(GL_ARRAY_BUFFER, td_object->vbo_colour);
-      glColorPointer(3, GL_FLOAT, 0, NULL);
-
-      glBindBuffer(GL_ARRAY_BUFFER, td_object->vbo_normal);
-      glNormalPointer(GL_FLOAT, 0, NULL);
-        
-      glBindBuffer(GL_ARRAY_BUFFER, td_object->vbo_vertex);
-      glVertexPointer(3, GL_FLOAT, 0, NULL);
-
-      if(td_object->texture_image != NULL)
-        {
-          glBindBuffer(GL_ARRAY_BUFFER, td_object->vbo_texture_coordinates);
-          glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-        }
+      struct td_object_mesh * mesh;
+      
+      mesh = td_object->meshes->data[i];
+      //glMultMatrixf(mesh->matrix); // Commented out because it looks like exporting from Blender automatically applies location&rotation (perhaps scale as well, did not test it).
+      if(mesh->texture_image != NULL)
+        gfxgl_bind_texture(mesh->texture_image->texture);
+      gfxbuf_draw_init(mesh->gfxbuf);
+      gfxbuf_draw(mesh->gfxbuf);
     }
-  else if(GLEW_ARB_vertex_buffer_object)
-    {
-      glBindBufferARB(GL_ARRAY_BUFFER_ARB, td_object->vbo_colour);
-      glColorPointer(3, GL_FLOAT, 0, NULL);
-
-      glBindBufferARB(GL_ARRAY_BUFFER_ARB, td_object->vbo_normal);
-      glNormalPointer(GL_FLOAT, 0, NULL);
-        
-      glBindBufferARB(GL_ARRAY_BUFFER_ARB, td_object->vbo_vertex);
-      glVertexPointer(3, GL_FLOAT, 0, NULL);
-
-      if(td_object->texture_image != NULL)
-        {
-          glBindBufferARB(GL_ARRAY_BUFFER_ARB, td_object->vbo_texture_coordinates);
-          glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-        }
-    }
-  else
-    {
-      glColorPointer(3, GL_FLOAT,  0, td_object->colours);
-      glNormalPointer(GL_FLOAT,    0, td_object->normals);
-      glVertexPointer(3, GL_FLOAT, 0, td_object->vertices);
-      if(td_object->texture_image != NULL)
-        glTexCoordPointer(2, GL_FLOAT, 0, td_object->texture_coordinates);
-    }
-        
-  glEnableClientState(GL_NORMAL_ARRAY);
-  glEnableClientState(GL_COLOR_ARRAY);
-  if(td_object->texture_image != NULL)
-    {
-      glEnable(GL_TEXTURE_2D);
-      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    }
-  
-  glPushMatrix();
-  glMultMatrixf(td_object->matrix);
-  if(td_object->texture_image != NULL)
-    gfx_bind_texture(td_object->texture_image->texture);
-  glDrawArrays(GL_TRIANGLES, 0, td_object->face_count * 3);
-  glPopMatrix();
-  
-  glDisableClientState(GL_NORMAL_ARRAY);
-  glDisableClientState(GL_COLOR_ARRAY);
-  if(td_object->texture_image != NULL)
-    {
-      glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-      glDisable(GL_TEXTURE_2D);
-    }
+  //glPopMatrix();
 }
 
 #endif

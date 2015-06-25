@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -28,7 +28,7 @@
 ALuint sfx_synth_to_buffer(struct sfx_synth * sfx_synth)
 {
   ALuint rv;
-  uint16_t len;
+  uint32_t len;
   int16_t tmp;
 
   rv = AL_NONE;
@@ -47,7 +47,7 @@ ALuint sfx_synth_to_buffer(struct sfx_synth * sfx_synth)
           sfx_synth_restart(sfx_synth);
 
 #ifndef NDEBUG
-          uint16_t nlen;
+          uint32_t nlen;
 
           nlen =
 #endif

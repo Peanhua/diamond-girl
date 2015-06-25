@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -933,7 +933,7 @@ static void button_glyphs_draw(struct widget * this)
     {
       if(glyphsbuf == NULL)
         {
-          glyphsbuf = gfxbuf_new(GFXBUF_STATIC, GL_QUADS, GFXBUF_TEXTURE);
+          glyphsbuf = gfxbuf_new(GFXBUF_STATIC_2D, GL_QUADS, GFXBUF_TEXTURE);
           assert(glyphsbuf != NULL);
           gfxbuf_resize(glyphsbuf, MAP_SIZEOF_ * 4);
 

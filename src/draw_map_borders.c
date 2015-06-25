@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -150,7 +150,7 @@ void draw_map_borders(struct map * map, enum GAME_MODE game_mode, trait_t active
 static void generate(struct map * map, int width, int height)
 {
   assert(map->borderbuf == NULL);
-  map->borderbuf = gfxbuf_new(GFXBUF_STATIC, GL_QUADS, GFXBUF_TEXTURE);
+  map->borderbuf = gfxbuf_new(GFXBUF_STATIC_2D, GL_QUADS, GFXBUF_TEXTURE);
   assert(map->borderbuf != NULL);
   if(map->borderbuf != NULL)
     {

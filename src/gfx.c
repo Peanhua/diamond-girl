@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -58,10 +58,6 @@ bool gfx_initialize(void)
 
   rv = false;
 
-#ifdef WITH_OPENGL
-  gfx_bind_texture(0);
-#endif
-
   game_screen = NULL;
   wm_icon     = NULL;
 
@@ -102,7 +98,7 @@ bool gfx_initialize(void)
         {
           char title[128];
 
-          snprintf(title, sizeof title, "Diamond Girl v%s", VERSION);
+          snprintf(title, sizeof title, "Lucy the Diamond Girl v%s", VERSION);
           SDL_WM_SetCaption(title, NULL);
 
           struct font * font;
@@ -218,7 +214,7 @@ static bool gfx_initialize_opengl(Uint32 flags)
     {
       GLenum err;
 
-      globals.opengl_max_draw_map_vertices = 0; /* 0 equals to unlimited */
+      globals.opengl_max_draw_vertices = 0; /* 0 equals to unlimited */
       err = glewInit();
       if(err == GLEW_OK)
         {
@@ -230,8 +226,8 @@ static bool gfx_initialize_opengl(Uint32 flags)
           printf(" %-30s: %s\n", "GL_RENDERER", tmp);
           if(!strcmp((const char *) tmp, "Mesa DRI R100 (RV200 5157)  TCL DRI2"))
             {
-              globals.opengl_max_draw_map_vertices = 900;
-              printf(" %-30s  max_draw_map_vertices=%d\n", "", globals.opengl_max_draw_map_vertices);
+              globals.opengl_max_draw_vertices = 900;
+              printf(" %-30s  max_draw_vertices=%d\n", "", globals.opengl_max_draw_vertices);
             }
 
           tmp = glGetString(GL_VERSION);
@@ -249,6 +245,10 @@ static bool gfx_initialize_opengl(Uint32 flags)
 
   if(opengl_ok == true)
     {
+      gfxgl_bind_texture(0);
+      gfxgl_state(0, false);
+      gfxgl_client_state(0, false);
+
       if(GLEW_VERSION_1_4)
         globals.opengl_1_4 = true;
       else
@@ -268,11 +268,11 @@ static bool gfx_initialize_opengl(Uint32 flags)
       GFX_GL_ERROR();
 
       glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-      glDisable(GL_BLEND);
-      glDisable(GL_DITHER);
-      glEnable(GL_CULL_FACE);
+      gfxgl_state(GL_BLEND, false);
+      gfxgl_state(GL_DITHER, false);
+      gfxgl_state(GL_CULL_FACE, true);
       gfx_2d();
-      glEnableClientState(GL_VERTEX_ARRAY);
+      gfxgl_client_state(GL_VERTEX_ARRAY, true);
       GFX_GL_ERROR();
 
       {
@@ -397,7 +397,7 @@ static double opengl_test_blitting(int width, int height, int blitw, int blith, 
   /* Initialize */
   gfx_2d(); /* Disables depth testing as well */
   glColor4f(1.0, 1.0, 1.0, 1.0);
-  glEnable(GL_TEXTURE_2D);
+  gfxgl_state(GL_TEXTURE_2D, true);
   glNormal3f(0.0f, 0.0f, 1.0f);
   
   img = image_new(width, height, false);
@@ -411,7 +411,7 @@ static double opengl_test_blitting(int width, int height, int blitw, int blith, 
   struct gfxbuf * buffer;
   int vpos, tpos;
 
-  buffer = gfxbuf_new(GFXBUF_STATIC, GL_QUADS, GFXBUF_TEXTURE);
+  buffer = gfxbuf_new(GFXBUF_STATIC_2D, GL_QUADS, GFXBUF_TEXTURE);
   gfxbuf_resize(buffer, 4);
   vpos = tpos = 0;
   
@@ -437,7 +437,7 @@ static double opengl_test_blitting(int width, int height, int blitw, int blith, 
 
   gfxbuf_update(buffer, 0, vpos / 2);
 
-  gfx_bind_texture(img->texture);
+  gfxgl_bind_texture(img->texture);
   
   /* Run the test */
   gettimeofday(&t1, NULL);
@@ -446,7 +446,7 @@ static double opengl_test_blitting(int width, int height, int blitw, int blith, 
       gfxbuf_draw(buffer);
     }
       
-  glDisable(GL_TEXTURE_2D);
+  gfxgl_state(GL_TEXTURE_2D, false);
   gfx_flip(); /* Ensure the output is done to the display as well. */
   gettimeofday(&t2, NULL);
   

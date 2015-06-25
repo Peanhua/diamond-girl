@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -42,7 +42,7 @@ struct globals
   int  opengl_max_texture_size;
   bool opengl_1_4;
   bool opengl_1_5;
-  int  opengl_max_draw_map_vertices;
+  unsigned int opengl_max_draw_vertices;
   bool gfx_girl_animation;    /* Whether we can use the extra animation(s) of the girl. */
   bool gfx_diamond_animation; /* Whether we can use the extra animation(s) of the diamond. */
   bool skip_intro;

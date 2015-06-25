@@ -1,11 +1,11 @@
 [Desktop Entry]
-Name=Diamond Girl
+Name=Lucy the Diamond Girl
 GenericName=Puzzle game
 Comment=Single player puzzle game with a time constraint
-Name[fi]=Diamond Girl
+Name[fi]=Lucy the Diamond Girl
 GenericName[fi]=Pulmapeli
 Comment[fi]=Pulmapeli aikarajoituksella
-Name[fr]=Diamond Girl
+Name[fr]=Lucy the Diamond Girl
 Comment[fr]=Un jeu de puzzle à joueur unique avec contrainte de temps
 
 Exec=diamond-girl

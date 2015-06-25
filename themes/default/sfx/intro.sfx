@@ -1,0 +1,48 @@
+[
+  { "New": { "Type":      "square",
+             "Length":    1400000,
+             "Frequency": 50 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay":        0,
+                              "Attack":       70000,
+                              "Decay":        0,
+                              "Sustain":      0,
+                              "SustainLevel": 1.0,
+                              "Release":      1000 }
+  },
+  { "SetFrequencySlide": { "Slide": 1.02,
+                           "Delta": 0.0,
+                           "Limit": 0 }
+  },
+
+  { "New": { "Type":      "square",
+             "Length":    1400000,
+             "Frequency": 50 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay":        0,
+                              "Attack":       70000,
+                              "Decay":        0,
+                              "Sustain":      0,
+                              "SustainLevel": 1.0,
+                              "Release":      1000 }
+  },
+  { "SetFrequencySlide": { "Slide": 0.999,
+                           "Delta": 0.0,
+                           "Limit": 0 }
+  },
+
+/*
+  
+  { "New": { "Type":      "sawtooth",
+             "Length":    1400000,
+             "Frequency": 50 }
+  },
+  { "SetAmplitudeEnvelope": { "Delay":        71000,
+                              "Attack":       0,
+                              "Decay":        0,
+                              "Sustain":      60000,
+                              "SustainLevel": 0.5,
+                              "Release":      40000 }
+  }
+*/
+]

@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -56,7 +56,7 @@ void draw_map(struct map * map, enum GAME_MODE game_mode, trait_t active_traits,
     {
 #ifdef WITH_OPENGL
       glScissor(topleft_x, SCREEN_HEIGHT - topleft_y - height * 24 - 1, width * 24, height * 24);
-      glEnable(GL_SCISSOR_TEST);
+      gfxgl_state(GL_SCISSOR_TEST, true);
 #endif
     }
 #ifdef WITH_NONOPENGL
@@ -145,7 +145,7 @@ void draw_map(struct map * map, enum GAME_MODE game_mode, trait_t active_traits,
   if(globals.opengl)
     {
 #ifdef WITH_OPENGL
-      glDisable(GL_SCISSOR_TEST);
+      gfxgl_state(GL_SCISSOR_TEST, false);
 #endif
     }
 #ifdef WITH_NONOPENGL
@@ -335,7 +335,7 @@ static void draw_map_opengl(struct map * map, enum GAME_MODE game_mode, int topl
 
   if(map->drawbuf == NULL)
     { /* Allocate buffer big enough to hold the largest possible amount of data. */
-      map->drawbuf = gfxbuf_new(GFXBUF_DYNAMIC, GL_QUADS, GFXBUF_TEXTURE);
+      map->drawbuf = gfxbuf_new(GFXBUF_DYNAMIC_2D, GL_QUADS, GFXBUF_TEXTURE);
       if(map->drawbuf != NULL)
         gfxbuf_resize(map->drawbuf, 40 * 40 * 4);
     }
@@ -357,8 +357,8 @@ static void draw_map_opengl(struct map * map, enum GAME_MODE game_mode, int topl
     stop_diamond_blink = false;
 
   gfx_set_current_glyph_set(map->glyph_set);
-  glEnable(GL_TEXTURE_2D);
-  glEnable(GL_BLEND);
+  gfxgl_state(GL_TEXTURE_2D, true);
+  gfxgl_state(GL_BLEND, true);
 
   /* Draw empty space first. */
   if(map->background_type == 0 || map->extra_life_anim > 0)
@@ -383,7 +383,7 @@ static void draw_map_opengl(struct map * map, enum GAME_MODE game_mode, int topl
                 if(map->extra_life_anim > 0)
                   gfx_glyph_render(map->drawbuf, x * 24, y * 24, MAP_EXTRA_LIFE_ANIM, MOVE_NONE);
               }
-            if(globals.opengl_max_draw_map_vertices > 0 && globals.opengl_max_draw_map_vertices < map->drawbuf->vertices)
+            if(globals.opengl_max_draw_vertices > 0 && globals.opengl_max_draw_vertices < map->drawbuf->vertices)
               {
                 gfxbuf_update(map->drawbuf, 0, map->drawbuf->vertices);
                 gfxbuf_draw_at(map->drawbuf, topleft_x + map->map_fine_x, topleft_y + map->map_fine_y);
@@ -554,7 +554,7 @@ static void draw_map_opengl(struct map * map, enum GAME_MODE game_mode, int topl
               break;
             }
 
-        if(globals.opengl_max_draw_map_vertices > 0 && globals.opengl_max_draw_map_vertices < map->drawbuf->vertices)
+        if(globals.opengl_max_draw_vertices > 0 && globals.opengl_max_draw_vertices < map->drawbuf->vertices)
           {
             gfxbuf_update(map->drawbuf, 0, map->drawbuf->vertices);
             gfxbuf_draw_at(map->drawbuf, topleft_x + map->map_fine_x, topleft_y + map->map_fine_y);
@@ -568,9 +568,9 @@ static void draw_map_opengl(struct map * map, enum GAME_MODE game_mode, int topl
       gfxbuf_draw_at(map->drawbuf, topleft_x + map->map_fine_x, topleft_y + map->map_fine_y);
     }
 
-  glDisable(GL_BLEND);
+  gfxgl_state(GL_BLEND, false);
   GFX_GL_ERROR();
-  glDisable(GL_TEXTURE_2D);
+  gfxgl_state(GL_TEXTURE_2D, false);
   GFX_GL_ERROR();
 }
 

@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -43,7 +43,7 @@
 static struct td_object * logo;
 #endif
 /* The stable destination location and stuff for logo. */
-static const float logo_center_pos[3] = {  0.0f, 0.0f, 5.0f };
+static const float logo_center_pos[3] = {  0.0f, 3.0f, 6.6f };
 static const float logo_center_sca[3] = {  1.0f, 1.0f, 1.0f };
 static const float logo_center_rot    = 40.0f;
 #ifdef WITH_OPENGL
@@ -60,6 +60,7 @@ static struct map * map = NULL;
 
 
 #ifdef WITH_OPENGL
+#define LIGHTS 1
 static void logo_phase_rotateX(int flag);
 static void logo_phase_stretch(int flag);
 static void logo_phase_rotateright(int flag);
@@ -112,9 +113,10 @@ void draw_title_logo_initialize(struct map * the_map)
 
       logo_phase_delay = 60;
 
-      logo = td_object_load(get_data_filename("gfx/logo.3ds"), NULL);
+      logo = td_object_load(get_data_filename("gfx/logo.3ds"));
       assert(logo != NULL);
-      
+
+#if LIGHTS
       {
         GLfloat light_a[] = { 0.0f, 0.0f, 0.0f, 1.0f };
         GLfloat light_d[] = { 0.5f, 0.5f, 0.5f, 1.0f };
@@ -137,6 +139,7 @@ void draw_title_logo_initialize(struct map * the_map)
         };
       glLightfv(GL_LIGHT0, GL_POSITION, pos);
 #endif
+#endif
     }
 }
 
@@ -154,11 +157,12 @@ void draw_title_logo(void)
   if(globals.opengl)
     {
 #ifdef WITH_OPENGL
+#if LIGHTS
       {
-        glEnable(GL_LIGHT0);
-        glEnable(GL_LIGHTING);
+        gfxgl_state(GL_LIGHT0, true);
+        gfxgl_state(GL_LIGHTING, true);
       }
-
+#endif
       {
         double camerac[3] = { 0, 0, 0 };
         double camerae[3] = { 0, -10, 0 };
@@ -173,7 +177,7 @@ void draw_title_logo(void)
         glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
         glMaterialfv(GL_FRONT, GL_EMISSION, emission);
         glMaterialf(GL_FRONT, GL_SHININESS, 128);
-        glEnable(GL_COLOR_MATERIAL);
+        gfxgl_state(GL_COLOR_MATERIAL, true);
         glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
       }
 
@@ -225,9 +229,11 @@ void draw_title_logo(void)
           }
       }
 
-      glDisable(GL_COLOR_MATERIAL);
-      glDisable(GL_LIGHTING);
-      glDisable(GL_LIGHT0);
+      gfxgl_state(GL_COLOR_MATERIAL, false);
+#if LIGHTS
+      gfxgl_state(GL_LIGHTING, false);
+      gfxgl_state(GL_LIGHT0, false);
+#endif
 #endif
     }
   else
@@ -304,7 +310,7 @@ static void logo_phase_stretch(int flag)
           r = 3 + get_rand(7);
           for(int i = 0; i < r; i++)
             if(map != NULL)
-              add_diamond(3 + get_rand(map->width - 6), 2);
+              add_diamond(5 + get_rand(map->width - 10), 2);
           logo_phase_function = NULL;
         }
     }
@@ -322,15 +328,15 @@ static void logo_phase_rotateright(int flag)
     { /* Step - rotate out to the right and then back in from the left */
       progress += 0.01f;
       if(progress <= 0.5f)
-        logo_pos[0] = logo_center_pos[0] + progress * 30.0f;
+        logo_pos[0] = logo_center_pos[0] + progress * 40.0f;
       else
-        logo_pos[0] = logo_center_pos[0] - (1.0f - progress) * 30.0f;
+        logo_pos[0] = logo_center_pos[0] - (1.0f - progress) * 40.0f;
                           
       /* Done */
       if(progress >= 1.0f)
         {
           if(map != NULL)
-            add_diamond(map->width - 3, 2);
+            add_diamond(map->width - 5, 2);
           logo_phase_function = NULL;
         }
     }
@@ -366,7 +372,7 @@ static void logo_phase_rotaterightstretch(int flag)
           r = 2 + get_rand(3);
           for(int i = 0; i < r; i++)
             if(map != NULL)
-              add_diamond(map->width - 12 + get_rand(9), 2);
+              add_diamond(map->width - 16 + get_rand(5), 2);
 
           logo_phase_function = NULL;
         }
@@ -388,7 +394,7 @@ static void logo_phase_vibrate(int flag)
       for(int i = 0; i < 3; i++)
         logo_pos[i] = logo_center_pos[i] + ((double) get_rand(100) - 50.0f) / 1000.0f;
       if(map != NULL)
-        add_diamond(3 + get_rand(map->width - 6), 2);
+        add_diamond(5 + get_rand(map->width - 10), 2);
 
       /* Done */
       if(countdown == 0)
@@ -414,7 +420,7 @@ static void logo_phase_minimizeY(int flag)
           logo_sca[2] = 0.3f;
           if(get_rand(100) < 30)
             if(map != NULL)
-              add_diamond(3 + get_rand(map->width - 6), 2);
+              add_diamond(5 + get_rand(map->width - 10), 2);
         }
 
       /* Done */

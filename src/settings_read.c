@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -252,20 +252,29 @@ static bool cb_cave_selection(struct json_object * value, void * value_ptr DG_UN
 {
   bool rv;
   char ** cave_names;
+  const char * name;
 
   assert(value != NULL);
 
   rv = false;
+  name = json_object_get_string(value);
   cave_names = get_cave_names(true);
   assert(cave_names != NULL);
   for(int i = 0; rv == false && cave_names[i] != NULL; i++)
-    if(!strcmp(cave_names[i], json_object_get_string(value)))
+    if(!strcmp(cave_names[i], name))
       {
         set_cave_selection(cave_names[i]);
         rv = true;
       }
 
   cave_names = free_cave_names(cave_names);
+
+  if(rv == false)
+    {
+      fprintf(stderr, "Warning, ignoring CaveSelection '%s' because it does not exist.\n", name);
+      rv = true; /* This is not a fatal error. */
+    }
+  
 
   return rv;
 }

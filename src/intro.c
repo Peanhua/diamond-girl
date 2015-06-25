@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -25,6 +25,7 @@
 #include "globals.h"
 #include "gfx.h"
 #include "random.h"
+#include "sfx.h"
 
 #include <stdbool.h>
 #include <SDL/SDL_framerate.h>
@@ -32,6 +33,7 @@
 #include <SDL/SDL.h>
 
 #ifdef WITH_OPENGL
+#define LIGHTS 1
 static struct td_object * logo;
 
 struct anim
@@ -44,6 +46,7 @@ struct anim
   float camera_up_start[3];
   float camera_up_end[3];
   float fog_density_start, fog_density_end;
+  enum SFX sfx;
   unsigned int duration;
   unsigned int current_frame;
 };
@@ -55,7 +58,7 @@ static struct anim anim_end_vanish =
     { 0, 0, 0 },
     { 0, 5, 0 },
 
-    { 0,  -8, 0 },
+    { 0,  -6, 0 },
     { 0,   2, 0 },
     
     { 0, 0, 1 },
@@ -63,25 +66,67 @@ static struct anim anim_end_vanish =
 
     0.0f, 0.0f,
 
-    30,
+    SFX_SIZEOF_,
+    40,
     0
   };
 
-static struct anim anim_end =
+static struct anim anim_end3 =
   {
     &anim_end_vanish,
 
     { 0, 0, 0 },
     { 0, 0, 0 },
 
-    { 0, -10, 0 },
-    { 0,  -8, 0 },
+    { 0, -8, 0 },
+    { 0, -6, 0 },
     
     { 0, 0, 1 },
     { 0, 0, 1 },
 
     0.0f, 0.0f,
 
+    SFX_SIZEOF_,
+    30,
+    0
+  };
+
+static struct anim anim_end2 =
+  {
+    &anim_end3,
+
+    { 0, 0, 0 },
+    { 0, 0, 0 },
+
+    { 0, -9, 0 },
+    { 0, -8, 0 },
+    
+    { 0, 0, 1 },
+    { 0, 0, 1 },
+
+    0.0f, 0.0f,
+
+    SFX_INTRO,
+    30,
+    0
+  };
+
+static struct anim anim_end =
+  {
+    &anim_end2,
+
+    { 0, 0, 0 },
+    { 0, 0, 0 },
+
+    { 0, -11, 0 },
+    { 0,  -9, 0 },
+    
+    { 0, 0, 1 },
+    { 0, 0, 1 },
+
+    0.0f, 0.0f,
+
+    SFX_SIZEOF_,
     60 * 3,
     0
   };
@@ -94,13 +139,14 @@ static struct anim anim_2 =
     {  0, 0, 0 },
 
     {  3, -0.5, 0 },
-    {  0, -10, 0 },
+    {  0, -11, 0 },
 
     {  0,  0, 1 },
     {  0,  0, 1 },
 
     0.0f, 0.0f,
 
+    SFX_SIZEOF_,
     30,
     0
   };
@@ -119,6 +165,7 @@ static struct anim anim_3 =
 
     0.0f, 0.0f,
 
+    SFX_SIZEOF_,
     60 * 5 / 2 / 2,
     0
   };
@@ -137,6 +184,7 @@ static struct anim anim_4 =
 
     0.1f, 0.0f,
 
+    SFX_SIZEOF_,
     60 * 5 / 2 / 2,
     0
   };
@@ -155,6 +203,7 @@ static struct anim anim_start =
 
     0.2f, 0.1f,
 
+    SFX_SIZEOF_,
     60 * 5 / 2,
     0
   };
@@ -194,26 +243,27 @@ static void draw_frame(struct anim * anim)
           glFogf(GL_FOG_MODE, GL_LINEAR);
           glFogf(GL_FOG_END, 50.0f);
 
-          glEnable(GL_FOG);
+          gfxgl_state(GL_FOG, true);
         }
 
       gluLookAt(camera_eye[0],    camera_eye[1],    camera_eye[2],
                 camera_center[0], camera_center[1], camera_center[2],
                 camera_up[0],     camera_up[1],     camera_up[2]);
 
+#if LIGHTS
       {
-        GLfloat pos[] = { 0.0f, -20.0f, 0.5f, 1.0f };
+        GLfloat pos[] = { 10.0f, -20.0f, 0.5f, 1.0f };
         
         for(int i = 0; i < 3; i++)
           pos[i] += (float) get_rand(100) / 50.0f - 0.5f;
 
         glLightfv(GL_LIGHT0, GL_POSITION, pos);
       }
-
+#endif
       td_object_draw(logo);
 
       if(anim->fog_density_start > 0.0f || anim->fog_density_end > 0.0f)
-        glDisable(GL_FOG);
+        gfxgl_state(GL_FOG, false);
       
       gfx_flip();
     }
@@ -230,6 +280,8 @@ void intro(void)
       bool done;
       FPSmanager framerate_manager;
 
+      sfx_set_listener_position(0, 0);
+      
       GFX_GL_ERROR();
       gfx_3d(true);
       GFX_GL_ERROR();
@@ -237,15 +289,16 @@ void intro(void)
       SDL_initFramerate(&framerate_manager);
       SDL_setFramerate(&framerate_manager, 60);
 
-      logo = td_object_load(get_data_filename("gfx/logo.3ds"), NULL);
+      logo = td_object_load(get_data_filename("gfx/logo.3ds"));
       assert(logo != NULL);
       GFX_GL_ERROR();
 
+#if LIGHTS
       glLightModeli(GL_LIGHT_MODEL_TWO_SIDE,     GL_FALSE);
       glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
 
-      glEnable(GL_LIGHT0);
-      glEnable(GL_LIGHTING);
+      gfxgl_state(GL_LIGHT0, true);
+      gfxgl_state(GL_LIGHTING, true);
 
       {
         GLfloat light_a[] = { 0.0f, 0.0f, 0.0f, 1.0f };
@@ -256,7 +309,8 @@ void intro(void)
         glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_d);
         glLightfv(GL_LIGHT0, GL_SPECULAR, light_s);
       }
-
+#endif
+      
       {
         GLfloat specular[] = { 1.0, 1.0, 1.0, 1.0 };
         GLfloat emission[] = { 0.0, 0.0, 0.0, 1.0 };
@@ -264,7 +318,7 @@ void intro(void)
         glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
         glMaterialfv(GL_FRONT, GL_EMISSION, emission);
         glMaterialf(GL_FRONT, GL_SHININESS, 128);
-        glEnable(GL_COLOR_MATERIAL);
+        gfxgl_state(GL_COLOR_MATERIAL, true);
         glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
       }
 
@@ -275,6 +329,10 @@ void intro(void)
         anim = &anim_start;
       else
         anim = &anim_end;
+
+      if(anim->sfx != SFX_SIZEOF_)
+        sfx_emit(anim->sfx, 0, 0);
+      
       while(done == false)
         {
           draw_frame(anim);
@@ -304,7 +362,11 @@ void intro(void)
                 {
                   anim = anim->next;
                   if(anim != NULL)
-                    anim->current_frame = 0;
+                    {
+                      if(anim->sfx != SFX_SIZEOF_)
+                        sfx_emit(anim->sfx, 0, 0);
+                      anim->current_frame = 0;
+                    }
                   else
                     done = true;
                 }
@@ -315,7 +377,9 @@ void intro(void)
 
       logo = td_object_unload(logo);
 
-      glDisable(GL_LIGHTING);
+#if LIGHTS
+      gfxgl_state(GL_LIGHTING, false);
+#endif
 #endif
     }
 }

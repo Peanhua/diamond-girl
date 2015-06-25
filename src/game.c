@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -247,7 +247,7 @@ struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool 
   scorebuf = NULL;
   if(globals.opengl)
     {
-      scorebuf = gfxbuf_new(GFXBUF_DYNAMIC, GL_QUADS, GFXBUF_TEXTURE | GFXBUF_BLENDING);
+      scorebuf = gfxbuf_new(GFXBUF_DYNAMIC_2D, GL_QUADS, GFXBUF_TEXTURE | GFXBUF_BLENDING);
       assert(scorebuf != NULL);
       gfxbuf_resize(scorebuf, 256 * 4);
     }
@@ -600,7 +600,7 @@ static void on_ui_draw(bool pressed, SDL_Event * event DG_UNUSED)
 
               gfx_colour_white();
               font = font_get();
-              gfx_bind_texture(font->image->texture);
+              gfxgl_bind_texture(font->image->texture);
               gfxbuf_draw_init(scorebuf);
               gfxbuf_draw(scorebuf);
 #endif
@@ -944,7 +944,10 @@ static void init_map(void)
         gamedata->ai->cave_restart(gamedata->ai);
       
       gamedata->current_level = 1;
+
       game_speed_modifier--;
+      if(game_speed_modifier < -99)
+        game_speed_modifier = -99;
       
       gamedata->map = map_get(gamedata->cave->name, gamedata->current_level);
       assert(gamedata->map != NULL);

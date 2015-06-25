@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -61,7 +61,7 @@ void map_save(struct map * map)
       end                           = 'E';
       
 
-      fprintf(fp, "# Diamond Girl map v1.0\n");
+      fprintf(fp, "# Lucy the Diamond Girl map v1.0\n");
       fprintf(fp, "IS_INTERMISSION=%d\n", (int) (map->is_intermission == true ? 1 : 0));
       fprintf(fp, "TIME=%d\n",            (int) map->time);
       fprintf(fp, "GAME_SPEED=%d\n",      (int) map->game_speed);

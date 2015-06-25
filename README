@@ -1,7 +1,7 @@
-Diamond Girl
-============
+Lucy the Diamond Girl
+=====================
 
-Diamond Girl is a single player puzzle game with a time constraint.
+Lucy the Diamond Girl is a single player puzzle game with a time constraint.
 
 During a game, the player moves around inside one or more levels. A level is
 completed by collecting some number of diamonds, and then moving to the exit.
@@ -42,7 +42,7 @@ Other saved data are present in the same directory.
 2.1. Manually editing the configuration file 
 --------------------------------------------
 
-Diamond Girl writes its settings during exit, without preserving comments or layout of the original.
+Lucy the Diamond Girl writes its settings during exit, without preserving comments or layout of the original.
 
 Use
  "WriteSettings": false

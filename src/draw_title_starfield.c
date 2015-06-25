@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -22,9 +22,11 @@
 
 #include "title.h"
 #include "gfx.h"
+#include "gfxbuf.h"
 #include "globals.h"
 #include "random.h"
 
+#include <assert.h>
 #include <stdbool.h>
 
 
@@ -33,16 +35,15 @@
 #define STARS (STAR_INITIAL_Y + 1) * STARS_PER_PIXEL
 
 #ifdef WITH_OPENGL
-static float   fade_in;
-static GLfloat stars[STARS * 2*3];
-static GLuint  vbo;
+static float           fade_in;
+static struct gfxbuf * buffer = NULL;
 
 
 static void new_star(int ind, float y)
 {
-  stars[ind * 2*3 + 0] =    stars[ind * 2*3 + 3] = ((float) get_rand(1000) / 1000.0f - 0.5f) * 3.0f;
-  stars[ind * 2*3 + 1] = y; stars[ind * 2*3 + 4] = y - 0.1f;
-  stars[ind * 2*3 + 2] =    stars[ind * 2*3 + 5] = ((float) get_rand(1000) / 1000.0f - 0.5f) * 3.0f;
+  buffer->vbuf[ind * 2*3 + 0] =    buffer->vbuf[ind * 2*3 + 3] = ((float) get_rand(1000) / 1000.0f - 0.5f) * 3.0f;
+  buffer->vbuf[ind * 2*3 + 1] = y; buffer->vbuf[ind * 2*3 + 4] = y - 0.1f;
+  buffer->vbuf[ind * 2*3 + 2] =    buffer->vbuf[ind * 2*3 + 5] = ((float) get_rand(1000) / 1000.0f - 0.5f) * 3.0f;
 }
 #endif
 
@@ -53,25 +54,20 @@ void draw_title_starfield_initialize(void)
     {
       float y;
 
+      if(buffer != NULL)
+        gfxbuf_free(buffer);
+      
+      buffer = gfxbuf_new(GFXBUF_STREAM_3D, GL_LINES, 0);
+      assert(buffer != NULL);
+
+      gfxbuf_resize(buffer, STARS * 2);
+      
       y = STAR_INITIAL_Y;
       for(int i = 0; i < STARS; i++, y += 1.0f / (float) STARS_PER_PIXEL)
         new_star(i, y);
+      buffer->vertices = STARS * 2;
 
       fade_in = 0.0f;
-
-      vbo = 0;
-      if(globals.opengl_1_5)
-        {
-          glGenBuffers(1, &vbo);
-          glBindBuffer(GL_ARRAY_BUFFER, vbo);
-          glBufferData(GL_ARRAY_BUFFER, sizeof stars, stars, GL_STREAM_DRAW);
-        }
-      else if(GLEW_ARB_vertex_buffer_object)
-        {
-          glGenBuffersARB(1, &vbo);
-          glBindBufferARB(GL_ARRAY_BUFFER_ARB, vbo);
-          glBufferDataARB(GL_ARRAY_BUFFER_ARB, sizeof stars, stars, GL_STREAM_DRAW_ARB);
-        }
     }
 #endif
 }
@@ -101,30 +97,14 @@ void draw_title_starfield(void)
 
       for(int i = 0; i < STARS; i++)
         {
-          stars[i * 2*3 + 1] -= 0.1f;
-          stars[i * 2*3 + 4] -= 0.1f;
-          if(stars[i * 2*3 + 1] < -1.0f)
+          buffer->vbuf[i * 2*3 + 1] -= 0.1f;
+          buffer->vbuf[i * 2*3 + 4] -= 0.1f;
+          if(buffer->vbuf[i * 2*3 + 1] < -1.0f)
             new_star(i, STAR_INITIAL_Y);
         }
 
-      if(globals.opengl_1_5)
-        {
-          glBindBuffer(GL_ARRAY_BUFFER, vbo);
-          glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof stars, stars);
-          glVertexPointer(3, GL_FLOAT, 0, NULL);
-        }
-      else if(GLEW_ARB_vertex_buffer_object)
-        {
-          glBindBufferARB(GL_ARRAY_BUFFER_ARB, vbo);
-          glBufferSubDataARB(GL_ARRAY_BUFFER_ARB, 0, sizeof stars, stars);
-          glVertexPointer(3, GL_FLOAT, 0, NULL);
-        }
-      else
-        {
-          glVertexPointer(3, GL_FLOAT, 0, stars);
-        }
-
-      glDrawArrays(GL_LINES, 0, STARS * 2);
+      gfxbuf_update(buffer, 0, buffer->vertices);
+      gfxbuf_draw(buffer);
 
       glPopMatrix();
 #endif

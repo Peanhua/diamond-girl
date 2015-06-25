@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -321,7 +321,12 @@ void settings(void (*settings_changed_cb)(bool gfx_restart, bool sfx_restart, bo
       o = widget_new_select_option("fi_FI", gettext("Finnish"));
       stack_push(languages, o);
 
-      if(!strcmp(globals.language, "fi"))
+      o = widget_new_select_option("fr_BE", gettext("French"));
+      stack_push(languages, o);
+
+      if(!strcmp(globals.language, "fr"))
+        ind = 2;
+      else if(!strcmp(globals.language, "fi"))
         ind = 1;
       else
         ind = 0;

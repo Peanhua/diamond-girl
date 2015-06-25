@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -31,18 +31,26 @@
 
 enum GFXBUF_TYPE
   {
-    GFXBUF_DYNAMIC,
-    GFXBUF_STATIC
+    GFXBUF_STREAM_2D,
+    GFXBUF_STREAM_3D,
+    GFXBUF_DYNAMIC_2D,
+    GFXBUF_DYNAMIC_3D,
+    GFXBUF_STATIC_2D,
+    GFXBUF_STATIC_3D
   };
 
-#define GFXBUF_TEXTURE  (1<<0)
+#define GFXBUF_BLENDING (1<<0)
 #define GFXBUF_COLOUR   (1<<1)
-#define GFXBUF_BLENDING (1<<2)
+#define GFXBUF_NORMALS  (1<<2)
+#define GFXBUF_TEXTURE  (1<<3)
 
 struct gfxbuf
 {
   GLuint    vertex_vbo;
   GLfloat * vbuf;
+
+  GLuint    normal_vbo;
+  GLfloat * nbuf;
 
   GLuint    texture_vbo;
   GLfloat * tbuf;
@@ -50,10 +58,11 @@ struct gfxbuf
   GLuint    colour_vbo;
   GLubyte * cbuf;
 
-  int vertices;
-  int max_vertices;
+  unsigned int vertices;
+  unsigned int max_vertices;
 
   enum GFXBUF_TYPE type; /* dynamic or static */
+  unsigned int     ncoords; /* The number of vertex coordinates (2 or 3). */
   GLenum           primitive_type;
   uint8_t          options;
 
@@ -65,8 +74,8 @@ struct gfxbuf
 extern struct gfxbuf * gfxbuf_new(enum GFXBUF_TYPE type, GLenum primitive_type, uint8_t options);
 extern struct gfxbuf * gfxbuf_free(struct gfxbuf * buffer);
 
-extern bool gfxbuf_resize(struct gfxbuf * buffer, int max_vertices);
-extern void gfxbuf_update(struct gfxbuf * buffer, int start, int count); /* Does also gfxbuf_draw_init(). */
+extern bool gfxbuf_resize(struct gfxbuf * buffer, unsigned int max_vertices);
+extern void gfxbuf_update(struct gfxbuf * buffer, unsigned int start, unsigned int count); /* Does also gfxbuf_draw_init(). */
 extern void gfxbuf_draw_init(struct gfxbuf * buffer);                    /* Set vertex etc. pointers. */
 extern void gfxbuf_draw(struct gfxbuf * buffer);                         /* Does not set: colour, texture */
 extern void gfxbuf_draw_at(struct gfxbuf * buffer, float x, float y);    /* Does not set: colour, texture */
@@ -74,6 +83,7 @@ extern void gfxbuf_draw_at(struct gfxbuf * buffer, float x, float y);    /* Does
 extern void gfxbuf_load(struct gfxbuf * buffer);
 extern void gfxbuf_unload(struct gfxbuf * buffer);
 
+extern bool gfxbuf_merge(struct gfxbuf * destination, struct gfxbuf * source); /* Return true if successful. */
 
 #endif
 

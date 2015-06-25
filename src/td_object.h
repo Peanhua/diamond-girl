@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -27,25 +27,27 @@
 
 #include <GL/glew.h>
 
-/* There is support only for a single texture per object */
-struct td_object
+struct gfxbuf;
+struct stack;
+
+/* There is support only for a single texture per mesh */
+struct td_object_mesh
 {
-  GLuint       vbo_vertex;
-  GLuint       vbo_normal;
-  GLuint       vbo_colour;
-  GLuint       vbo_texture_coordinates;
-  GLfloat      matrix[4 * 4];
-  unsigned int face_count;
-
-  GLfloat * vertices;
-  GLfloat * normals;
-  GLfloat * colours;
-  GLfloat * texture_coordinates;
-
-  struct image * texture_image;
+  GLfloat         matrix[4 * 4];
+  struct gfxbuf * gfxbuf;
+  struct image *  texture_image;
 };
 
-extern struct td_object * td_object_load(char const * const filename, char const * const meshname);
+struct td_object
+{
+#ifndef NDEBUG
+  char *         filename;
+#endif
+  struct stack * meshes;
+};
+
+
+extern struct td_object * td_object_load(char const * const filename);
 extern struct td_object * td_object_unload(struct td_object * td_object);
 extern void               td_object_draw(struct td_object * td_object);
 

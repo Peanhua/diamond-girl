@@ -1,4 +1,4 @@
-AC_INIT([Diamond Girl], [1.25.2], [joniyrjana@gmail.com], [diamond-girl], [http://www.netikka.net/joyr/diamond_girl/])
+AC_INIT([Lucy the Diamond Girl], [1.26b], [joniyrjana@gmail.com], [diamond-girl], [http://www.netikka.net/joyr/diamond_girl/])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror dist-xz subdir-objects])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AC_CONFIG_SRCDIR([src/main.c])
@@ -71,23 +71,23 @@ PKG_CHECK_MODULES([mtwist],     [mtwist], [], [bundled_mtwist=true])
 AM_CONDITIONAL([WITH_BUNDLED_MTWIST], [test x$bundled_mtwist = "xtrue"])
 
 
-# Optional support for old (1.23 and earlier) LUA settings file, defaults to true.
-AC_ARG_WITH([lua],
-            [AS_HELP_STRING([--without-lua], [disable support for LUA (pre 1.24 settings file)])],
-            [],
-            [with_lua=yes])
+# Optional support for old (1.23 and earlier) LUA settings file, defaults to false.
+AC_ARG_WITH([lua], [AS_HELP_STRING([--with-lua], [Build with LUA, to support for old (1.23 and earlier) user settings file.])])
 
-if test "x$with_lua" = "xyes" ; then
-  PKG_CHECK_MODULES([lua], [lua], [AC_DEFINE([HAVE_LUA], [1], [Use LUA])],
-                                  [ PKG_CHECK_MODULES([lua], [lua5.1], [AC_DEFINE([HAVE_LUA], [1], [Use LUA])]) ] )
-fi
+AS_IF([test "x$with_lua" = "xyes"], [
+  PKG_CHECK_MODULES([lua], [lua], [AC_DEFINE([HAVE_LUA], [1], [Use LUA])], 
+    [PKG_CHECK_MODULES([lua], [lua5.1], [AC_DEFINE([HAVE_LUA], [1], [Use LUA])])]
+  )
+])
 
 
 
 
 AC_MSG_CHECKING([for MikMod_free])
-AC_EGREP_HEADER([MikMod_free], [mikmod.h], [mikmodfree=true], [mikmodfree=false])
-AM_CONDITIONAL([WITH_MIKMODFREE], [test x$mikmodfree = "xtrue"])
+AC_EGREP_HEADER([MikMod_free], [mikmod.h], [mikmodfree=yes], [mikmodfree=no])
+AS_IF([test x$mikmodfree = "xyes"], [
+  AC_DEFINE([HAVE_MIKMOD_FREE], [1], [MikMod_free() available.])
+])
 AC_MSG_RESULT([${mikmodfree}])
 
 PKG_CHECK_MODULES([sdl_gfx], [SDL_gfx], [],

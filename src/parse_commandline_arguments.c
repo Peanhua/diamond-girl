@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -67,6 +67,7 @@ bool parse_commandline_arguments(int argc, char * argv[])
             {
               { "en", "en_US" },
               { "fi", "fi_FI" },
+              { "fr", "fr_BE" },
               { NULL, NULL    }
             };
 
@@ -128,8 +129,8 @@ bool parse_commandline_arguments(int argc, char * argv[])
 
   if(print_usage == true)
     {
-      printf("Diamond Girl v%s\n", VERSION);
-      printf("Usage: %s [OPTION]...\n", argc > 0 ? argv[0] : "Diamond Girl");
+      printf("Lucy the Diamond Girl v%s\n", VERSION);
+      printf("Usage: %s [OPTION]...\n", argc > 0 ? argv[0] : "Lucy the Diamond Girl");
       printf("  -h | --help             Print this help text and exit.\n");
       printf("  -s | --no-sound         Disable sounds and music. (*)\n");
       printf("  -S | --sound            Enable sounds and music. (*)\n");
@@ -144,7 +145,7 @@ bool parse_commandline_arguments(int argc, char * argv[])
       printf("  -n | --no-opengl        Non-OpenGL mode. (*)\n");
 #endif
       printf("  --language=NAME         Set the user interface language to NAME. (*)\n");
-      printf("                          Possible values for NAME are: en, fi\n");
+      printf("                          Possible values for NAME are: en, fi, fr\n");
       printf("  -F | --show-fps         Output FPS every 1000th frame to stdout (console). (*)\n");
       printf("  -N | --no-show-fps      Don't output FPS every 1000th frame to stdout. (*)\n");
       printf("  -c | --capture          Capture each frame into the current directory as a bmp file.\n");

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: diamond-girl 1.25b\n"
 "Report-Msgid-Bugs-To: joniyrjana@gmail.com\n"
-"POT-Creation-Date: 2015-06-22 09:49+0300\n"
+"POT-Creation-Date: 2015-06-18 19:21+0300\n"
 "PO-Revision-Date: 2015-06-18 19:22+0200\n"
 "Last-Translator: Steve Joni Yrjänä <joniyrjana@gmail.com>\n"
 "Language-Team: Finnish\n"
@@ -259,19 +259,19 @@ msgstr "Aika:"
 msgid "Girl:"
 msgstr "Tytt}:"
 
-#: src/game.c:1270
+#: src/game.c:1273
 msgid "Game mode: Classic"
 msgstr "Pelitila: klassinen"
 
-#: src/game.c:1273
+#: src/game.c:1276
 msgid "Game mode: Adventure"
 msgstr "Pelitila: seikkailu"
 
-#: src/game.c:1276
+#: src/game.c:1279
 msgid "Game mode: Pyjama Party"
 msgstr "Pelitila: pyjamabileet"
 
-#: src/game.c:1292 src/trait_get_name.c:68
+#: src/game.c:1295 src/trait_get_name.c:68
 msgid "Iron Girl"
 msgstr "Ter|stytt}"
 
@@ -339,68 +339,72 @@ msgstr "Englanti"
 msgid "Finnish"
 msgstr "Suomi"
 
-#: src/settings.c:329
+#: src/settings.c:324
+msgid "French"
+msgstr "Ranska"
+
+#: src/settings.c:334
 msgid "Language"
 msgstr "Kieli"
 
-#: src/settings.c:343
+#: src/settings.c:348
 msgid "Game mode"
 msgstr "Pelitila"
 
-#: src/settings.c:362 src/title.c:1201 src/widget_new_highscore_einfo.c:97
+#: src/settings.c:367 src/title.c:1201 src/widget_new_highscore_einfo.c:97
 msgid "Classic"
 msgstr "Klassinen"
 
-#: src/settings.c:363 src/title.c:1202 src/widget_new_highscore_einfo.c:98
+#: src/settings.c:368 src/title.c:1202 src/widget_new_highscore_einfo.c:98
 msgid "Adventure"
 msgstr "Seikkailu"
 
-#: src/settings.c:364 src/title.c:1203 src/trait_get_name.c:69
+#: src/settings.c:369 src/title.c:1203 src/trait_get_name.c:69
 #: src/widget_new_highscore_einfo.c:99
 msgid "Pyjama Party"
 msgstr "Pyjamabileet"
 
-#: src/settings.c:392
+#: src/settings.c:397
 msgid "Iron Girl mode"
 msgstr "Ter|stytt}tila"
 
-#: src/settings.c:495
+#: src/settings.c:500
 #, c-format
 msgid "axis %d%c"
 msgstr "akseli %d%c"
 
-#: src/settings.c:499
+#: src/settings.c:504
 #, c-format
 msgid "butn %d"
 msgstr "nappi %d"
 
-#: src/settings.c:537
+#: src/settings.c:542
 msgid "(unset)"
 msgstr "(ei m||ritelty)"
 
-#: src/settings.c:701
+#: src/settings.c:706
 msgid "New binding"
 msgstr "Uusi sidos"
 
-#: src/settings.c:714 src/settings.c:733 src/settings.c:752
+#: src/settings.c:719 src/settings.c:738 src/settings.c:757
 msgid "Press any key."
 msgstr "Paina mit| tahansa n|pp|int|."
 
-#: src/settings.c:717 src/settings.c:736 src/settings.c:755
+#: src/settings.c:722 src/settings.c:741 src/settings.c:760
 msgid "Binding to mouse is not supported."
 msgstr "Sidokset hiireen eiv|t ole tuettuja."
 
-#: src/settings.c:723
+#: src/settings.c:728
 #, c-format
 msgid "Move joystick#%d in some direction,"
 msgstr "Valitse peliohjaimella #%d jokin suunta,"
 
-#: src/settings.c:742 src/settings.c:761
+#: src/settings.c:747 src/settings.c:766
 #, c-format
 msgid "Press any button on joystick#%d."
 msgstr "Paina mit| tahansa nappia peliohjaimessa #%d."
 
-#: src/settings.c:851
+#: src/settings.c:856
 #, c-format
 msgid ""
 "Error, the binding you requested is taken.\n"
@@ -409,7 +413,7 @@ msgstr ""
 "Virhe, haluamasi sidos on jo k|yt}ss|.\n"
 "Se on k|yt}ss|: %s"
 
-#: src/settings.c:852 src/widget_new_title_partystatus.c:200
+#: src/settings.c:857 src/widget_new_title_partystatus.c:200
 msgid "Error"
 msgstr "Virhe"
 
@@ -771,6 +775,3 @@ msgstr "Uusia ominaisuuksia k|ytett|viss|!"
 #: src/widget_new_traits_available_window.c:109
 msgid " Close "
 msgstr " Sulje "
-
-#~ msgid "French"
-#~ msgstr "Ranska"

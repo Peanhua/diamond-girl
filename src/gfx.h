@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -61,7 +61,9 @@ extern void           gfx_draw_hline(int x, int y, int width, uint8_t red, uint8
 extern void           gfx_draw_vline(int x, int y, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 
 #ifdef WITH_OPENGL
-extern void gfx_bind_texture(GLuint texture_id);
+extern void gfxgl_bind_texture(GLuint texture_id);        // glBindTexture()
+extern void gfxgl_client_state(GLenum cap, bool enabled); // glEnableClientState() / glDisableClientState()
+extern void gfxgl_state(GLenum cap, bool enabled);        // glEnable() / glDisable()
 extern void gfx_colour_clear(void);
 extern void gfx_colour_white(void);
 extern void gfx_colour(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);

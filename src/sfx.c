@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -125,7 +125,8 @@ void sfx_initialize(void)
                             { SFX_EXPLOSION,       "explosion"       },
                             { SFX_SMALL_EXPLOSION, "small_explosion" },
                             { SFX_TIME,            "time"            },
-                            { SFX_ENTER_EXIT,      "enter_exit"      }
+                            { SFX_ENTER_EXIT,      "enter_exit"      },
+                            { SFX_INTRO,           "intro"           }
                           };
 
                       for(unsigned int i = 0; i < SFX_SIZEOF_; i++)

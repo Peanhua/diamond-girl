@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -32,6 +32,7 @@ struct stack
   stack_compare_func compare_function;
   void **            data;
   unsigned int       size;
+  unsigned int       allocated_size;
 };
 
 

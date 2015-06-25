@@ -1,7 +1,7 @@
 Building
 ========
 
-Diamond Girl uses autotools.
+Lucy the Diamond Girl uses autotools.
 
 You can use the following example commands to install under the current
 directory:
@@ -11,7 +11,7 @@ To run the game:
 
 
 In addition to the standard configure stuff, the following are specific
-to the Diamond Girl (defaults in UPPER case):
+to the Lucy the Diamond Girl (defaults in UPPER case):
  --enable-opengl=[YES|no]       Compile in OpenGL support.
  --enable-nonopengl=[YES|no]    Compile in non-OpenGL support.
  --without-lua                  Compile without LUA support,

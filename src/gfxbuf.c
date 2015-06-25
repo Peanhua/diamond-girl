@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -40,12 +40,18 @@ struct gfxbuf * gfxbuf_new(enum GFXBUF_TYPE type, GLenum primitive_type, uint8_t
     {
       rv->vertex_vbo     = 0;
       rv->vbuf           = NULL;
+      rv->normal_vbo     = 0;
+      rv->nbuf           = NULL;
       rv->texture_vbo    = 0;
       rv->tbuf           = NULL;
       rv->colour_vbo     = 0;
       rv->cbuf           = NULL;
 
       rv->type           = type;
+      if(type == GFXBUF_STREAM_2D || type == GFXBUF_DYNAMIC_2D || type == GFXBUF_STATIC_2D)
+        rv->ncoords      = 2;
+      else /* if(type == GFXBUF_STREAM_3D ||type == GFXBUF_DYNAMIC_3D || type == GFXBUF_STATIC_3D) */
+        rv->ncoords      = 3;
       rv->primitive_type = primitive_type;
       rv->options        = options;
       rv->vertices       = 0;
@@ -72,6 +78,7 @@ struct gfxbuf * gfxbuf_free(struct gfxbuf * buffer)
 
       gfxbuf_unload(buffer);
       free(buffer->vbuf);
+      free(buffer->nbuf);
       free(buffer->tbuf);
       free(buffer->cbuf);
 #ifndef NDEBUG
@@ -90,6 +97,9 @@ void gfxbuf_unload(struct gfxbuf * buffer)
     {
       if(glIsBuffer(buffer->vertex_vbo))
         glDeleteBuffers(1, &buffer->vertex_vbo);
+      if(buffer->options & GFXBUF_NORMALS)
+        if(glIsBuffer(buffer->normal_vbo))
+          glDeleteBuffers(1, &buffer->normal_vbo);
       if(buffer->options & GFXBUF_TEXTURE)
         if(glIsBuffer(buffer->texture_vbo))
           glDeleteBuffers(1, &buffer->texture_vbo);
@@ -101,6 +111,9 @@ void gfxbuf_unload(struct gfxbuf * buffer)
     {
       if(glIsBufferARB(buffer->vertex_vbo))
         glDeleteBuffersARB(1, &buffer->vertex_vbo);
+      if(buffer->options & GFXBUF_NORMALS)
+        if(glIsBufferARB(buffer->normal_vbo))
+          glDeleteBuffersARB(1, &buffer->normal_vbo);
       if(buffer->options & GFXBUF_TEXTURE)
         if(glIsBufferARB(buffer->texture_vbo))
           glDeleteBuffersARB(1, &buffer->texture_vbo);
@@ -109,6 +122,7 @@ void gfxbuf_unload(struct gfxbuf * buffer)
           glDeleteBuffersARB(1, &buffer->colour_vbo);
     }
   buffer->vertex_vbo  = 0;
+  buffer->normal_vbo  = 0;
   buffer->texture_vbo = 0;
   buffer->colour_vbo  = 0;
 }
@@ -120,6 +134,9 @@ void gfxbuf_load(struct gfxbuf * buffer)
     {
       if(buffer->vertex_vbo == 0)
         glGenBuffers(1, &buffer->vertex_vbo);
+      if(buffer->options & GFXBUF_NORMALS)
+        if(buffer->normal_vbo == 0)
+          glGenBuffers(1, &buffer->normal_vbo);
       if(buffer->options & GFXBUF_TEXTURE)
         if(buffer->texture_vbo == 0)
           glGenBuffers(1, &buffer->texture_vbo);
@@ -131,6 +148,9 @@ void gfxbuf_load(struct gfxbuf * buffer)
     {
       if(buffer->vertex_vbo == 0)
         glGenBuffersARB(1, &buffer->vertex_vbo);
+      if(buffer->options & GFXBUF_NORMALS)
+        if(buffer->normal_vbo == 0)
+          glGenBuffersARB(1, &buffer->normal_vbo);
       if(buffer->options & GFXBUF_TEXTURE)
         if(buffer->texture_vbo == 0)
           glGenBuffersARB(1, &buffer->texture_vbo);
@@ -151,13 +171,21 @@ void gfxbuf_load(struct gfxbuf * buffer)
         {
           GLenum dynsta;
               
-          if(buffer->type == GFXBUF_STATIC)
+          if(buffer->type == GFXBUF_STATIC_2D || buffer->type == GFXBUF_STATIC_3D)
             dynsta = GL_STATIC_DRAW;
-          else /* if(buffer->type == GFXBUF_DYNAMIC) */
+          else if(buffer->type == GFXBUF_STREAM_2D || buffer->type == GFXBUF_STREAM_3D)
+            dynsta = GL_STREAM_DRAW;
+          else /* if(buffer->type == GFXBUF_DYNAMIC_2D || buffer->type == GFXBUF_DYNAMIC_3D) */
             dynsta = GL_DYNAMIC_DRAW;
 
           glBindBuffer(GL_ARRAY_BUFFER, buffer->vertex_vbo);
-          glBufferData(GL_ARRAY_BUFFER, bufsize * 2, buffer->vbuf, dynsta);
+          glBufferData(GL_ARRAY_BUFFER, bufsize * buffer->ncoords, buffer->vbuf, dynsta);
+
+          if(buffer->options & GFXBUF_NORMALS)
+            {
+              glBindBuffer(GL_ARRAY_BUFFER, buffer->normal_vbo);
+              glBufferData(GL_ARRAY_BUFFER, bufsize * 3, buffer->nbuf, dynsta);
+            }
 
           if(buffer->options & GFXBUF_TEXTURE)
             {
@@ -175,13 +203,21 @@ void gfxbuf_load(struct gfxbuf * buffer)
         {
           GLenum dynsta;
               
-          if(buffer->type == GFXBUF_STATIC)
+          if(buffer->type == GFXBUF_STATIC_2D || buffer->type == GFXBUF_STATIC_3D)
             dynsta = GL_STATIC_DRAW_ARB;
-          else /* if(buffer->type == GFXBUF_DYNAMIC) */
+          else if(buffer->type == GFXBUF_STREAM_2D || buffer->type == GFXBUF_STREAM_3D)
+            dynsta = GL_STREAM_DRAW_ARB;
+          else /* if(buffer->type == GFXBUF_DYNAMIC_2D || buffer->type == GFXBUF_DYNAMIC_3D) */
             dynsta = GL_DYNAMIC_DRAW_ARB;
 
           glBindBufferARB(GL_ARRAY_BUFFER_ARB, buffer->vertex_vbo);
-          glBufferDataARB(GL_ARRAY_BUFFER_ARB, bufsize * 2, buffer->vbuf, dynsta);
+          glBufferDataARB(GL_ARRAY_BUFFER_ARB, bufsize * buffer->ncoords, buffer->vbuf, dynsta);
+
+          if(buffer->options & GFXBUF_NORMALS)
+            {
+              glBindBufferARB(GL_ARRAY_BUFFER_ARB, buffer->normal_vbo);
+              glBufferDataARB(GL_ARRAY_BUFFER_ARB, bufsize * 3, buffer->nbuf, dynsta);
+            }
 
           if(buffer->options & GFXBUF_TEXTURE)
             {
@@ -199,7 +235,7 @@ void gfxbuf_load(struct gfxbuf * buffer)
 }
 
 
-bool gfxbuf_resize(struct gfxbuf * buffer, int max_vertices)
+bool gfxbuf_resize(struct gfxbuf * buffer, unsigned int max_vertices)
 {
   bool rv;
 
@@ -209,13 +245,23 @@ bool gfxbuf_resize(struct gfxbuf * buffer, int max_vertices)
     {
       void * tmp;
 
-      tmp = realloc(buffer->vbuf, sizeof(GLfloat) * max_vertices * 2);
+      tmp = realloc(buffer->vbuf, sizeof(GLfloat) * max_vertices * buffer->ncoords);
       assert(tmp != NULL);
       if(tmp != NULL)
         buffer->vbuf = tmp;
       else
         rv = false;
 
+      if(buffer->options & GFXBUF_NORMALS)
+        {
+          tmp = realloc(buffer->nbuf, sizeof(GLfloat) * max_vertices * 3);
+          assert(tmp != NULL);
+          if(tmp != NULL)
+            buffer->nbuf = tmp;
+          else
+            rv = false;
+        }
+      
       if(buffer->options & GFXBUF_TEXTURE)
         {
           tmp = realloc(buffer->tbuf, sizeof(GLfloat) * max_vertices * 2);
@@ -249,10 +295,10 @@ bool gfxbuf_resize(struct gfxbuf * buffer, int max_vertices)
 }
 
 
-void gfxbuf_update(struct gfxbuf * buffer, int start, int count)
+void gfxbuf_update(struct gfxbuf * buffer, unsigned int start, unsigned int count)
 {
-  int startpos, ub_startpos;
-  int size, ub_size;
+  unsigned int startpos, ub_startpos;
+  unsigned int size, ub_size;
 
   startpos = start * sizeof(GLfloat);
   ub_startpos = start * sizeof(GLubyte);
@@ -267,8 +313,15 @@ void gfxbuf_update(struct gfxbuf * buffer, int start, int count)
       if(globals.opengl_1_5)
         {
           glBindBuffer(GL_ARRAY_BUFFER, buffer->vertex_vbo);
-          glBufferSubData(GL_ARRAY_BUFFER, startpos * 2, size * 2, buffer->vbuf);
-          glVertexPointer(2, GL_FLOAT, 0, NULL);
+          glBufferSubData(GL_ARRAY_BUFFER, startpos * buffer->ncoords, size * buffer->ncoords, buffer->vbuf);
+          glVertexPointer(buffer->ncoords, GL_FLOAT, 0, NULL);
+
+          if(buffer->options & GFXBUF_NORMALS)
+            {
+              glBindBuffer(GL_ARRAY_BUFFER, buffer->normal_vbo);
+              glBufferSubData(GL_ARRAY_BUFFER, startpos * 3, size * 3, buffer->nbuf);
+              glNormalPointer(GL_FLOAT, 0, NULL);
+            }
 
           if(buffer->options & GFXBUF_TEXTURE)
             {
@@ -287,8 +340,15 @@ void gfxbuf_update(struct gfxbuf * buffer, int start, int count)
       else if(GLEW_ARB_vertex_buffer_object)
         {
           glBindBufferARB(GL_ARRAY_BUFFER_ARB, buffer->vertex_vbo);
-          glBufferSubDataARB(GL_ARRAY_BUFFER_ARB, startpos * 2, size * 2, buffer->vbuf);
-          glVertexPointer(2, GL_FLOAT, 0, NULL);
+          glBufferSubDataARB(GL_ARRAY_BUFFER_ARB, startpos * buffer->ncoords, size * buffer->ncoords, buffer->vbuf);
+          glVertexPointer(buffer->ncoords, GL_FLOAT, 0, NULL);
+
+          if(buffer->options & GFXBUF_NORMALS)
+            {
+              glBindBufferARB(GL_ARRAY_BUFFER_ARB, buffer->normal_vbo);
+              glBufferSubDataARB(GL_ARRAY_BUFFER_ARB, startpos * 3, size * 3, buffer->nbuf);
+              glNormalPointer(GL_FLOAT, 0, NULL);
+            }
 
           if(buffer->options & GFXBUF_TEXTURE)
             {
@@ -306,7 +366,9 @@ void gfxbuf_update(struct gfxbuf * buffer, int start, int count)
         }
       else
         {
-          glVertexPointer(2, GL_FLOAT, 0, buffer->vbuf);
+          glVertexPointer(buffer->ncoords, GL_FLOAT, 0, buffer->vbuf);
+          if(buffer->options & GFXBUF_NORMALS)
+            glNormalPointer(GL_FLOAT, 0, buffer->nbuf);
           if(buffer->options & GFXBUF_TEXTURE)
             glTexCoordPointer(2, GL_FLOAT, 0, buffer->tbuf);
           if(buffer->options & GFXBUF_COLOUR)
@@ -325,7 +387,13 @@ void gfxbuf_draw_init(struct gfxbuf * buffer)
   if(globals.opengl_1_5)
     {
       glBindBuffer(GL_ARRAY_BUFFER, buffer->vertex_vbo);
-      glVertexPointer(2, GL_FLOAT, 0, NULL);
+      glVertexPointer(buffer->ncoords, GL_FLOAT, 0, NULL);
+
+      if(buffer->options & GFXBUF_NORMALS)
+        {
+          glBindBuffer(GL_ARRAY_BUFFER, buffer->normal_vbo);
+          glNormalPointer(GL_FLOAT, 0, NULL);
+        }
 
       if(buffer->options & GFXBUF_TEXTURE)
         {
@@ -342,7 +410,13 @@ void gfxbuf_draw_init(struct gfxbuf * buffer)
   else if(GLEW_ARB_vertex_buffer_object)
     {
       glBindBufferARB(GL_ARRAY_BUFFER_ARB, buffer->vertex_vbo);
-      glVertexPointer(2, GL_FLOAT, 0, NULL);
+      glVertexPointer(buffer->ncoords, GL_FLOAT, 0, NULL);
+
+      if(buffer->options & GFXBUF_NORMALS)
+        {
+          glBindBufferARB(GL_ARRAY_BUFFER_ARB, buffer->normal_vbo);
+          glNormalPointer(GL_FLOAT, 0, NULL);
+        }
 
       if(buffer->options & GFXBUF_TEXTURE)
         {
@@ -358,7 +432,9 @@ void gfxbuf_draw_init(struct gfxbuf * buffer)
     }
   else
     {
-      glVertexPointer(2, GL_FLOAT, 0, buffer->vbuf);
+      glVertexPointer(buffer->ncoords, GL_FLOAT, 0, buffer->vbuf);
+      if(buffer->options & GFXBUF_NORMALS)
+        glNormalPointer(GL_FLOAT, 0, buffer->nbuf);
       if(buffer->options & GFXBUF_TEXTURE)
         glTexCoordPointer(2, GL_FLOAT, 0, buffer->tbuf);
       if(buffer->options & GFXBUF_COLOUR)
@@ -370,28 +446,24 @@ void gfxbuf_draw_init(struct gfxbuf * buffer)
 void gfxbuf_draw(struct gfxbuf * buffer)
 {
   if(buffer->options & GFXBUF_BLENDING)
-    glEnable(GL_BLEND);
+    gfxgl_state(GL_BLEND, true);
+
+  gfxgl_client_state(GL_NORMAL_ARRAY, (buffer->options & GFXBUF_NORMALS) ? true : false);
+
   if(buffer->options & GFXBUF_TEXTURE)
-    {
-      glEnable(GL_TEXTURE_2D);
-      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    }
-  if(buffer->options & GFXBUF_COLOUR)
-    glEnableClientState(GL_COLOR_ARRAY);
-  GFX_GL_ERROR();
+    gfxgl_state(GL_TEXTURE_2D, true);
+  gfxgl_client_state(GL_TEXTURE_COORD_ARRAY, (buffer->options & GFXBUF_TEXTURE) ? true : false);
+
+  gfxgl_client_state(GL_COLOR_ARRAY, (buffer->options & GFXBUF_COLOUR) ? true : false);
 
   glDrawArrays(buffer->primitive_type, 0, buffer->vertices);
   GFX_GL_ERROR();
 
   if(buffer->options & GFXBUF_BLENDING)
-    glDisable(GL_BLEND);
+    gfxgl_state(GL_BLEND, false);
+
   if(buffer->options & GFXBUF_TEXTURE)
-    {
-      glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-      glDisable(GL_TEXTURE_2D);
-    }
-  if(buffer->options & GFXBUF_COLOUR)
-    glDisableClientState(GL_COLOR_ARRAY);
+    gfxgl_state(GL_TEXTURE_2D, false);
 }
 
 

@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -24,51 +24,38 @@
 #ifdef WITH_OPENGL
 
 #include "td_object.h"
+#include "gfxbuf.h"
 #include "globals.h"
 #include "image.h"
+#include "stack.h"
 
+#include <assert.h>
 #include <stdlib.h>
-
 
 struct td_object * td_object_unload(struct td_object * td_object)
 {
-  if(globals.opengl_1_5)
+  assert(td_object != NULL);
+
+  for(unsigned int i = 0; i < td_object->meshes->size; i++)
     {
-      if(glIsBuffer(td_object->vbo_vertex))
-        glDeleteBuffers(1, &td_object->vbo_vertex);
+      struct td_object_mesh * mesh;
       
-      if(glIsBuffer(td_object->vbo_normal))
-        glDeleteBuffers(1, &td_object->vbo_normal);
-      
-      if(glIsBuffer(td_object->vbo_normal))
-        glDeleteBuffers(1, &td_object->vbo_colour);
-
-      if(glIsBuffer(td_object->vbo_texture_coordinates))
-        glDeleteBuffers(1, &td_object->vbo_texture_coordinates);
-    }
-  else if(GLEW_ARB_vertex_buffer_object)
-    {
-      if(glIsBufferARB(td_object->vbo_vertex))
-        glDeleteBuffersARB(1, &td_object->vbo_vertex);
-      
-      if(glIsBufferARB(td_object->vbo_normal))
-        glDeleteBuffersARB(1, &td_object->vbo_normal);
-      
-      if(glIsBufferARB(td_object->vbo_normal))
-        glDeleteBuffersARB(1, &td_object->vbo_colour);
-
-      if(glIsBufferARB(td_object->vbo_texture_coordinates))
-        glDeleteBuffersARB(1, &td_object->vbo_texture_coordinates);
-    }
-
-  free(td_object->vertices);
-  free(td_object->normals);
-  free(td_object->colours);
-  free(td_object->texture_coordinates);
+      mesh = td_object->meshes->data[i];
   
-  if(td_object->texture_image != NULL)
-    td_object->texture_image = image_free(td_object->texture_image);
+      if(mesh->gfxbuf != NULL)
+        mesh->gfxbuf = gfxbuf_free(mesh->gfxbuf);
+  
+      if(mesh->texture_image != NULL)
+        mesh->texture_image = image_free(mesh->texture_image);
+    }
 
+  td_object->meshes = stack_free(td_object->meshes);
+  
+#ifndef NDEBUG
+  free(td_object->filename);
+  td_object->filename = NULL;
+#endif
+  
   free(td_object);
   td_object = NULL;
 

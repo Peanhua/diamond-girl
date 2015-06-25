@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -45,7 +45,7 @@ void texture_setup_from_image(struct image * image, bool generate_alpha, bool us
   assert(image->width <= globals.opengl_max_texture_size);
   assert(image->height <= globals.opengl_max_texture_size);
 
-  gfx_bind_texture(image->texture);
+  gfxgl_bind_texture(image->texture);
   if(generate_alpha)
     {
       if(globals.opengl_compressed_textures == true && GLEW_ARB_texture_compression)

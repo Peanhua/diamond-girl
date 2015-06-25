@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -65,7 +65,7 @@ struct widget * widget_new_title_credits(struct widget * parent, int x, int y, i
         {
           struct gfxbuf * buf;
 
-          buf = gfxbuf_new(GFXBUF_STATIC, GL_QUADS, GFXBUF_COLOUR | GFXBUF_BLENDING);
+          buf = gfxbuf_new(GFXBUF_STATIC_2D, GL_QUADS, GFXBUF_COLOUR | GFXBUF_BLENDING);
           assert(buf != NULL);
           gfxbuf_resize(buf, 4 * 2);
 
@@ -190,7 +190,7 @@ static char * read_credits(char const * const filename)
   char * credits;
   char * tmp;
   int    credits_length;
-  char * default_credits = "Diamond Girl (C) 2005-2015 Joni Yrjana";
+  char * default_credits = "Lucy the Diamond Girl (C) 2005-2015 Joni Yrjana";
   char fn[strlen(filename) + (globals.language != NULL ? strlen(globals.language) : 0) + strlen("-.txt") + 1];
   bool readok;
   
@@ -294,14 +294,14 @@ static void draw(struct widget * this)
           assert(buffer != NULL);
 
           glScissor(left_x, SCREEN_HEIGHT - y - font_height(), widget_width(this), font_height());
-          glEnable(GL_SCISSOR_TEST);
+          gfxgl_state(GL_SCISSOR_TEST, true);
 
           font_write(x, y, buf);
 
           gfxbuf_draw_init(buffer);
           gfxbuf_draw_at(buffer, left_x, y);
 
-          glDisable(GL_SCISSOR_TEST);
+          gfxgl_state(GL_SCISSOR_TEST, false);
 #endif
         }
       else

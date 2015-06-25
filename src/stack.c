@@ -1,5 +1,5 @@
 /*
-  Diamond Girl - Game where player collects diamonds.
+  Lucy the Diamond Girl - Game where player collects diamonds.
   Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
@@ -39,6 +39,7 @@ struct stack * stack_new(void)
       stack->compare_function = NULL;
       stack->data             = NULL;
       stack->size             = 0;
+      stack->allocated_size   = 0;
     }
   else
     fprintf(stderr, "%s:%s(): Failed to allocate memory: %s\n", __FILE__, __FUNCTION__, strerror(errno));
@@ -100,19 +101,33 @@ void stack_push(struct stack * stack, void * item)
   void * tmp;
 
   assert(stack != NULL);
-  
-  tmp = realloc(stack->data, sizeof(void **) * (stack->size + 1));
-  assert(tmp != NULL);
-  if(tmp != NULL)
+
+  if(stack->size >= stack->allocated_size)
     {
-      stack->data = tmp;
+      unsigned int more;
+      
+      if(stack->allocated_size > 0)
+        more = stack->allocated_size;
+      else
+        more = 1;
+
+      tmp = realloc(stack->data, sizeof(void **) * (stack->allocated_size + more));
+      assert(tmp != NULL);
+      if(tmp != NULL)
+        {
+          stack->allocated_size += more;
+          stack->data = tmp;
+        }
+      else
+        fprintf(stderr, "%s:%s(): Failed to allocate memory: %s\n", __FILE__, __FUNCTION__, strerror(errno));
+    }
+
+  if(stack->size < stack->allocated_size)
+    {
       stack->data[stack->size] = item;
       stack->size++;
-
       stack_sort(stack, NULL);
-    }
-  else
-    fprintf(stderr, "%s:%s(): Failed to allocate memory: %s\n", __FILE__, __FUNCTION__, strerror(errno));
+    }      
 }
 
 

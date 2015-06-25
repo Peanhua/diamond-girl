@@ -1,4 +1,4 @@
-Notes for translating Diamond Girl
+Notes for translating Lucy the Diamond Girl
 ==================================
 
 Table of contents:
@@ -27,7 +27,7 @@ From those, the following characters are available for changing for localization
 "$&';[\]^_`{|}~
 And from those: " and \ are troublesome.
 
-You can use the script 'translate.sh' to map/unmap between utf-8 and the characters Diamond Girl uses.
+You can use the script 'translate.sh' to map/unmap between utf-8 and the characters Lucy the Diamond Girl uses.
 For the 'translate.sh' script to work, you need to create the sed scripts to map/unmap, name them: 'translate-map-ll.sed' and 'translate-unmap-ll.sed' (replace 'll' with the language).
 
 
