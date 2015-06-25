@@ -140,7 +140,6 @@ struct map * map_random(int level)
               map->diamonds_needed = diamonds / 2 + level * 2;
               if(map->diamonds_needed > diamonds)
                 map->diamonds_needed = diamonds;
-              map->diamonds_needed = 1;
 
               map->start_x = 0;
               map->start_y = 0;
