@@ -30,17 +30,20 @@ enum EVENT_TYPE
     EVENT_TYPE_TRAIT_ACTIVATED,
     EVENT_TYPE_TRAIT_DEACTIVATED,
 
+    EVENT_TYPE_QUEST_STATE_CHANGED,
+
     EVENT_TYPE_SIZEOF_
   };
 
-typedef void (* event_callback_func_t)(int64_t value);
+typedef void (* event_callback_func_t)(void * user_data, int64_t value);
 
 extern void events_initialize(void);
 extern void events_cleanup(void);
 
-extern void event_register(enum EVENT_TYPE event_type, event_callback_func_t callback);
-extern void event_unregister(enum EVENT_TYPE event_type, event_callback_func_t callback);
+extern void event_register(enum EVENT_TYPE event_type, event_callback_func_t callback, void * user_data);
+extern void event_unregister(enum EVENT_TYPE event_type, event_callback_func_t callback, void * user_data);
+extern void event_unregister_all(enum EVENT_TYPE event_type, void * user_data);
 
-extern void event_trigger(enum EVENT_TYPE event_type, int value);
+extern void event_trigger(enum EVENT_TYPE event_type, int64_t value);
 
 #endif

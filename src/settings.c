@@ -113,7 +113,7 @@ void settings(void (*settings_changed_cb)(bool gfx_restart, bool sfx_restart, bo
 
       widget_set_select_options(obj_controllers, controllers);
       
-      widget_set_pointer(obj_controllers, "on_select", on_select_controller);
+      widget_set_pointer(obj_controllers, "on_select", 'P', on_select_controller);
     }
 
   x = 10;
@@ -529,12 +529,6 @@ static void on_select_controller(struct widget * this)
 
   for(int i = 0; i < ACTION_SIZEOF_; i++)
     {
-      struct stack * old;
-
-      old = widget_get_pointer(obj_controls[i], "options");
-      if(old != NULL)
-        stack_free(old);
-
       if(options[i]->size == 0)
         {
           struct ui_widget_select_option * o;
@@ -543,7 +537,7 @@ static void on_select_controller(struct widget * this)
           stack_push(options[i], o);
         }
 
-      widget_set_pointer(obj_controls[i], "options",        options[i]);
+      widget_set_select_options(obj_controls[i], options[i]);
       widget_set_ulong(obj_controls[i],   "selected_index", 0);
       widget_set_string(obj_controls[i],  "text", "%s",     ((struct ui_widget_select_option *) options[i]->data[0])->text);
     }
@@ -552,16 +546,17 @@ static void on_select_controller(struct widget * this)
 
 static void on_window_unload(struct widget * this DG_UNUSED)
 {
-  int new_sfx, new_music, new_fullscreen, new_opengl, new_specialdays, old_specialdays;
+  int new_sfx, new_music, new_specialdays, old_specialdays;
+  bool new_fullscreen, new_opengl;
   enum GAME_MODE new_game_mode;
 
-  new_sfx         = widget_get_long(obj_sfx,            "checked");
-  new_music       = widget_get_long(obj_music,          "checked");
-  globals.volume  = widget_get_long(obj_volume,         "value");
-  new_fullscreen  = widget_get_long(obj_fullscreen,     "checked");
-  new_opengl      = widget_get_long(obj_opengl,         "checked");
-  new_specialdays = widget_get_ulong(obj_special_days,  "checked");
-  old_specialdays = widget_get_ulong(obj_special_days,  "initial_state_checked");
+  new_sfx         = widget_get_long(obj_sfx,          "checked");
+  new_music       = widget_get_long(obj_music,        "checked");
+  globals.volume  = widget_get_long(obj_volume,       "value");
+  new_fullscreen  = widget_get_long(obj_fullscreen,   "checked") ? true : false;
+  new_opengl      = widget_get_long(obj_opengl,       "checked") ? true : false;
+  new_specialdays = widget_get_long(obj_special_days, "checked");
+  old_specialdays = widget_get_long(obj_special_days, "initial_state_checked");
 
   new_game_mode = globals.title_game_mode;
   if(obj_game_mode != NULL)
@@ -623,7 +618,7 @@ static void on_window_unload(struct widget * this DG_UNUSED)
   { /* Language */
     struct stack * options;
 
-    options = widget_get_pointer(obj_language, "options");
+    options = widget_get_select_options(obj_language);
     assert(options != NULL);
     if(options != NULL)
       {
@@ -832,7 +827,7 @@ static void on_binding_execute(bool pressed, SDL_Event * event)
               bindings = ui_get_bindings(widget_get_ulong(obj_controllers, "selected_index"));
               on_select_controller(obj_controllers);
 
-              options = widget_get_pointer(obj_controls[binding_target], "options");
+              options = widget_get_select_options(obj_controls[binding_target]);
               new_ind = -1;
               for(unsigned int i = 0; new_ind == -1 && i < options->size; i++)
                 {
@@ -854,7 +849,7 @@ static void on_binding_execute(bool pressed, SDL_Event * event)
               char buf[1024];
 
               snprintf(buf, sizeof buf, gettext("Error, the binding you requested is taken.\nIt is being used for: %s"), ui_command_name(binding->command));
-              widget_new_message_window(gettext("Error"), buf);
+              widget_new_message_window(gettext("Error"), NULL, buf);
             }
         }
 }
@@ -879,7 +874,7 @@ static void on_delete_binding(struct widget * this, enum WIDGET_BUTTON button)
 
       control = widget_get_ulong(this, "control");
 
-      options = widget_get_pointer(obj_controls[control], "options");
+      options = widget_get_select_options(obj_controls[control]);
       selected_index = widget_get_ulong(obj_controls[control], "selected_index");
       assert(selected_index >= 0);
       assert(selected_index < (int) options->size);

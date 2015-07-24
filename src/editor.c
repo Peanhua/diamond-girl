@@ -28,6 +28,7 @@
 #include "gfx.h"
 #include "gfxbuf.h"
 #include "gfx_glyph.h"
+#include "gfx_material.h"
 #include "globals.h"
 #include "game.h"
 #include "map.h"
@@ -45,6 +46,7 @@
 enum UIOBJ
   {
     UIOBJ_NONE,
+    UIOBJ_CAVE,
     UIOBJ_WIDTH,
     UIOBJ_HEIGHT,
     UIOBJ_TIME,
@@ -95,7 +97,7 @@ static void change_map_height(int height_change);
 static void map_update(void);
 static void revert_map(void);
 static void play_test(void);
-static bool setup_ui(char const * const cave);
+static bool setup_ui(void);
 
 
 static void button_change_activate(struct widget * this, enum WIDGET_BUTTON button);
@@ -112,6 +114,7 @@ static void button_map_on_mouse_move(struct widget * this, int x, int y);
 static void button_map_activate(struct widget * this, enum WIDGET_BUTTON button, int x, int y);
 static void button_map_release(struct widget * this, enum WIDGET_BUTTON button);
 static void button_is_intermission_release(struct widget * this, enum WIDGET_BUTTON button);
+static void button_cave_release(struct widget * this, enum WIDGET_BUTTON button);
 
 
 static void button_level_draw(struct widget * this);
@@ -129,6 +132,8 @@ void map_editor(struct cave * cave, int level)
 {
   FPSmanager framerate_manager;
 
+  ui_state_push();
+  
   globals.ai_hilite_current_target = true;
 
   glyphs_count = 0;
@@ -137,7 +142,7 @@ void map_editor(struct cave * cave, int level)
 
   gfx_frame0();
 
-  if(setup_ui(cave->name))
+  if(setup_ui())
     {
       int k_leftright, k_updown;
       int cursor_move_delay;
@@ -310,11 +315,12 @@ void map_editor(struct cave * cave, int level)
                         }
                       break;
                     case SDLK_v:
-                      if(map_is_dirty)
-                        {
-                          map_save(map);
-                          map_is_dirty = 0;
-                        }
+                      if(globals.read_only == false)
+                        if(map_is_dirty)
+                          {
+                            map_save(map);
+                            map_is_dirty = 0;
+                          }
                       break;
                     case SDLK_p:
                       play_test();
@@ -470,7 +476,8 @@ void map_editor(struct cave * cave, int level)
     }
 
   widget_delete(widget_root());
-
+  ui_state_pop();
+  
   globals.ai_hilite_current_target = false;
 }
 
@@ -696,6 +703,8 @@ static void init_map(const char * cave, int level)
   if(cave == NULL)
     cave = oldmap->cave_name;
 
+  widget_set_string(uiobj[UIOBJ_CAVE], "text", gettext("Cave: '%-.8s'"), cave);
+  
   map = map_load(cave, level);
   if(map != NULL)
     {
@@ -720,8 +729,8 @@ static void init_map(const char * cave, int level)
 
   map_is_dirty = 0;
 
-  widget_set_pointer(uiobj_map, "map", map);
-  widget_set_ulong(uiobj[UIOBJ_IS_INTERMISSION], "checked", map->is_intermission);
+  widget_set_map_pointer(uiobj_map, "map", map);
+  widget_set_long(uiobj[UIOBJ_IS_INTERMISSION], "checked", map->is_intermission);
 
   if(oldmap != NULL)
     oldmap = map_free(oldmap);
@@ -936,6 +945,7 @@ static void button_glyphs_draw(struct widget * this)
           glyphsbuf = gfxbuf_new(GFXBUF_STATIC_2D, GL_QUADS, GFXBUF_TEXTURE);
           assert(glyphsbuf != NULL);
           gfxbuf_resize(glyphsbuf, MAP_SIZEOF_ * 4);
+          glyphsbuf->material = gfx_material_default();
 
           glyphsbuf->vertices = 0;
           for(int i = 0; glyphs[i] != MAP_SIZEOF_; i++)
@@ -992,7 +1002,6 @@ static void button_glyphs_draw(struct widget * this)
 #ifdef WITH_OPENGL
   if(globals.opengl)
     {
-      gfx_colour_white();
       gfx_set_current_glyph_set(0);
 
       gfxbuf_draw_init(glyphsbuf);
@@ -1054,11 +1063,12 @@ static void button_revert_activate(struct widget * this DG_UNUSED, enum WIDGET_B
 
 static void button_save_activate(struct widget * this DG_UNUSED, enum WIDGET_BUTTON button DG_UNUSED)
 {
-  if(map != NULL)
-    {
-      map_save(map);
-      map_is_dirty = 0;
-    }
+  if(globals.read_only == false)
+    if(map != NULL)
+      {
+        map_save(map);
+        map_is_dirty = 0;
+      }
 }
 
 static void button_map_on_mouse_move(struct widget * this, int x, int y)
@@ -1121,7 +1131,7 @@ static void button_is_intermission_release(struct widget * this, enum WIDGET_BUT
 {
   if(button == WIDGET_BUTTON_LEFT)
     {
-      map->is_intermission = widget_get_ulong(this, "checked");
+      map->is_intermission = widget_get_long(this, "checked");
       map_is_dirty = 1;
     }
 }
@@ -1175,7 +1185,7 @@ static void play_test(void)
 
       clear_area(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
       cave = cave_get(globals.title_game_mode, map->cave_name);
-      gr = game(cave, map->level, false, true, NULL);
+      gr = game(cave, map->level, false, true, NULL, NULL);
       if(gr != NULL)
         gr = gamedata_free(gr);
       sfx_stop();
@@ -1187,7 +1197,7 @@ static void play_test(void)
 }
 
 
-static bool setup_ui(char const * const cave)
+static bool setup_ui(void)
 {
   bool rv;
 
@@ -1214,7 +1224,7 @@ static bool setup_ui(char const * const cave)
             char * text;
           } default_buttons[] =
               {
-                { UIOBJ_NONE,              0, 0, NULL,                       NULL,                   NULL,                  ""                       },
+                { UIOBJ_CAVE,              0, 0, NULL,                       NULL,                   button_cave_release,   ""                       },
                 { UIOBJ_NONE,            150, 0, button_level_draw,          button_level_activate,  NULL,                  ""                       },
                 { UIOBJ_WIDTH,           285, 0, button_width_draw,          button_change_activate, button_change_release, ""                       },
                 { UIOBJ_HEIGHT,          405, 0, button_height_draw,         button_change_activate, button_change_release, ""                       },
@@ -1248,7 +1258,7 @@ static bool setup_ui(char const * const cave)
 
                 if(default_buttons[i].id == UIOBJ_IS_INTERMISSION)
                   obj = widget_new_checkbox(root, default_buttons[i].x, default_buttons[i].y * button_height, map != NULL ? map->is_intermission : false);
-                else if(i == 0 || i == 14)
+                else if(i == 14)
                   obj = widget_new_text(root, default_buttons[i].x, default_buttons[i].y * button_height, default_buttons[i].text);
                 else
                   obj = widget_new_button(root, default_buttons[i].x, default_buttons[i].y * button_height, default_buttons[i].text);
@@ -1275,7 +1285,6 @@ static bool setup_ui(char const * const cave)
                   widget_set_on_release(obj, default_buttons[i].on_release);
                 
                 if(i == 0)
-                  widget_set_string(obj, "text", gettext("Cave: '%-.8s'"), cave);
 
                 widget_delete_flags(obj, WF_ALIGN_CENTER);
 
@@ -1317,3 +1326,46 @@ static bool setup_ui(char const * const cave)
   return rv;
 }
 
+
+static void button_cave_release(struct widget * this, enum WIDGET_BUTTON button)
+{
+  if(this != NULL)
+    {
+      int direction;
+      
+      if(button == WIDGET_BUTTON_LEFT)
+        direction = -1;
+      else
+        direction = 1;
+
+
+      char ** caves;
+
+      caves = get_cave_names(true);
+      if(caves != NULL)
+        {
+          int pos;
+
+          pos = -1;
+          for(int i = 0; pos == -1 && caves[i] != NULL; i++)
+            if(!strcmp(caves[i], map->cave_name))
+              pos = i;
+
+          int newpos;
+
+          newpos = -1;
+          for(int i = 1; newpos == -1 && pos + i * direction >= 0 && caves[pos + i * direction] != NULL; i += direction)
+            {
+              struct cave * cave;
+
+              cave = cave_get(GAME_MODE_CLASSIC, caves[pos + i * direction]);
+              if(cave->editable == true)
+                newpos = pos + i * direction;
+            }
+          
+          if(newpos >= 0)
+            init_map(caves[newpos], 1);
+        }
+      free_cave_names(caves);
+    }
+}

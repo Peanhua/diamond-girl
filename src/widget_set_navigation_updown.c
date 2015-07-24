@@ -26,31 +26,6 @@
 
 void widget_set_navigation_updown(struct widget * up, struct widget * down)
 {
-  enum WIDGET_TYPE type_up;
-
-  assert(up != NULL);
-  assert(down != NULL);
-  assert(up != down);
-
-  assert(up->navigation_down_ == NULL);
-  assert(down->navigation_up_ == NULL);
-
-  type_up = widget_get_ulong(up, "type");
-
-  if(type_up == WT_TITLE_HIGHSCORES)
-    {
-      int amount;
-      
-      amount = widget_get_ulong(up, "amount");
-      assert(amount > 0);
-      assert(amount <= up->children_count_);
-      assert(up->children_[amount - 1] != NULL);
-      up = up->children_[amount - 1];
-    }
-  
-  up->navigation_down_ = down;
-  down->navigation_up_ = up;
-
-  stack_push(up->widgets_linking_to_this, down);
-  stack_push(down->widgets_linking_to_this, up);
+  widget_set_navigation_down(up, down);
+  widget_set_navigation_up(down, up);
 }

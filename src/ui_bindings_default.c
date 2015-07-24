@@ -359,4 +359,19 @@ void ui_bindings_default(bool editable_bindings)
       b = ui_bind(UIC_MUTE, &e);
       b->editable = false;
     }
+
+  if(editable_bindings == true)
+    {
+      e.type = SDL_KEYDOWN;
+      e.key.keysym.sym = SDLK_F11;
+      e.key.keysym.mod = KMOD_NONE;
+      b = ui_bind(UIC_RECORDING_START, &e);
+      b->editable = true;
+
+      e.type = SDL_KEYDOWN;
+      e.key.keysym.sym = SDLK_F12;
+      e.key.keysym.mod = KMOD_NONE;
+      b = ui_bind(UIC_RECORDING_STOP, &e);
+      b->editable = true;
+    }
 }

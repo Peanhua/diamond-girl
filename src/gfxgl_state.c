@@ -23,6 +23,8 @@
 #ifdef WITH_OPENGL
 
 #include "gfx.h"
+#include "gfx_shaders.h"
+#include "globals.h"
 #include <assert.h>
 
 static bool states[11];
@@ -31,12 +33,12 @@ void gfxgl_state(GLenum cap, bool enabled)
 {
   assert(cap == 0                 ||
          cap == GL_BLEND          ||
-         cap == GL_COLOR_MATERIAL ||
          cap == GL_CULL_FACE      ||
          cap == GL_DEPTH_TEST     ||
          cap == GL_DITHER         ||
          cap == GL_FOG            ||
          cap == GL_LIGHT0         ||
+         cap == GL_LIGHT1         ||
          cap == GL_LIGHTING       ||
          cap == GL_SCISSOR_TEST   ||
          cap == GL_TEXTURE_2D);
@@ -46,24 +48,24 @@ void gfxgl_state(GLenum cap, bool enabled)
   switch(cap)
     {
     case GL_BLEND:          i =  1; break;
-    case GL_COLOR_MATERIAL: i =  2; break;
-    case GL_CULL_FACE:      i =  3; break;
-    case GL_DEPTH_TEST:     i =  4; break;
-    case GL_DITHER:         i =  5; break;
-    case GL_FOG:            i =  6; break;
-    case GL_LIGHT0:         i =  7; break;
+    case GL_CULL_FACE:      i =  2; break;
+    case GL_DEPTH_TEST:     i =  3; break;
+    case GL_DITHER:         i =  4; break;
+    case GL_FOG:            i =  5; break;
+    case GL_LIGHT0:         i =  6; break;
+    case GL_LIGHT1:         i =  7; break;
     case GL_LIGHTING:       i =  8; break;
     case GL_SCISSOR_TEST:   i =  9; break;
     case GL_TEXTURE_2D:     i = 10; break;
 
     case 0: /* Initialization */
       gfxgl_state(GL_BLEND,          enabled);
-      gfxgl_state(GL_COLOR_MATERIAL, enabled);
       gfxgl_state(GL_CULL_FACE,      enabled);
       gfxgl_state(GL_DEPTH_TEST,     enabled);
       gfxgl_state(GL_DITHER,         enabled);
       gfxgl_state(GL_FOG,            enabled);
       gfxgl_state(GL_LIGHT0,         enabled);
+      gfxgl_state(GL_LIGHT1,         enabled);
       gfxgl_state(GL_LIGHTING,       enabled);
       gfxgl_state(GL_SCISSOR_TEST,   enabled);
       gfxgl_state(GL_TEXTURE_2D,     enabled);
@@ -77,19 +79,41 @@ void gfxgl_state(GLenum cap, bool enabled)
     }
 
   if(i > 0)
-    {
-      if(states[i] != enabled)
-        {
-          states[i] = enabled;
-
-          if(enabled)
-            glEnable(cap);
-          else
-            glDisable(cap);
-
-          GFX_GL_ERROR();
-        }
-    }
+    if(states[i] != enabled)
+      {
+        states[i] = enabled;
+        
+        if(globals.opengl_shaders == 0)
+          {
+            if(enabled)
+              glEnable(cap);
+            else
+              glDisable(cap);
+          }
+        else
+          {
+            switch(cap)
+              {
+              case GL_FOG:
+              case GL_LIGHT0:
+              case GL_LIGHT1:
+              case GL_LIGHTING:
+                assert(0);
+                break;
+              case GL_TEXTURE_2D:
+                gfx_shaders_set_texture(enabled);
+                break;
+              default:
+                if(enabled)
+                  glEnable(cap);
+                else
+                  glDisable(cap);
+                break;
+              }
+          }
+        
+        GFX_GL_ERROR();
+      }
 }
 
 #endif

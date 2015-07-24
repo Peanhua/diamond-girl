@@ -43,8 +43,11 @@ static void on_window_exit(bool pressed, SDL_Event * event);
 struct widget * widget_new_highscore_einfo(struct widget * parent, struct highscore_entry * entry)
 {
   int x[2], y;
-  
-  window = widget_new_window(parent, 400, 280, NULL);
+
+  if(font_width(gettext("Filename:")) > 100)
+    window = widget_new_window(parent, 460, 280, NULL);
+  else
+    window = widget_new_window(parent, 400, 280, NULL);
   assert(window != NULL);
 
   x[0] = 10;
@@ -60,7 +63,9 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
   char tbuf[64];
   int col, labelwidth;
 
-  labelwidth = 110;
+  labelwidth = font_width(gettext("Filename:")) + 10;
+  if(labelwidth < 110)
+    labelwidth = 110;
 
   deaths           = 0;
   diamonds         = entry->diamonds_collected;
@@ -117,10 +122,18 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
 
   y += font_height() / 2;
 
+  int bottomlabelwidths[2];
+
+  bottomlabelwidths[0] = 110;
+  
+  bottomlabelwidths[1] = font_width(gettext("Start level:")) + 10;
+  if(bottomlabelwidths[1] < 110)
+    bottomlabelwidths[1] = 110;
+  
   col = 0;
   widget_new_text(window, x[col], y, gettext("Score:"));
   snprintf(tbuf, sizeof tbuf, "%6d", entry->score);
-  widget_new_text(window, x[col] + labelwidth, y, tbuf);
+  widget_new_text(window, x[col] + bottomlabelwidths[col], y, tbuf);
 
   col = 1;
   widget_new_text(window, x[col], y, gettext("Start level:"));
@@ -128,19 +141,19 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
     snprintf(tbuf, sizeof tbuf, "%2d", start_level);
   else
     snprintf(tbuf, sizeof tbuf, "%2s", gettext("N/A"));
-  widget_new_text(window, x[col] + labelwidth, y, tbuf);
+  widget_new_text(window, x[col] + bottomlabelwidths[col], y, tbuf);
 
   y += font_height();
 
   col = 0;
   widget_new_text(window, x[col], y, gettext("Diamonds:"));
   snprintf(tbuf, sizeof tbuf, "%6d", diamonds); /* For pre-v3 highscorelists this shows 0 because there's no data. */
-  widget_new_text(window, x[col] + labelwidth, y, tbuf);
+  widget_new_text(window, x[col] + bottomlabelwidths[col], y, tbuf);
 
   col = 1;
   widget_new_text(window, x[col], y, gettext("End level:"));
   snprintf(tbuf, sizeof tbuf, "%2d", entry->level); 
-  widget_new_text(window, x[col] + labelwidth, y, tbuf);
+  widget_new_text(window, x[col] + bottomlabelwidths[col], y, tbuf);
 
   y += font_height();
 
@@ -149,7 +162,7 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
     {
       widget_new_text(window, x[col], y, gettext("Girls:"));
       snprintf(tbuf, sizeof tbuf, "%6d", entry->starting_girls);
-      widget_new_text(window, x[col] + labelwidth, y, tbuf);
+      widget_new_text(window, x[col] + bottomlabelwidths[col], y, tbuf);
     }
   else
     {
@@ -158,7 +171,7 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
         snprintf(tbuf, sizeof tbuf, "%6d", deaths);
       else
         snprintf(tbuf, sizeof tbuf, "%6s", gettext("N/A"));
-      widget_new_text(window, x[col] + labelwidth, y, tbuf);
+      widget_new_text(window, x[col] + bottomlabelwidths[col], y, tbuf);
     }
 
   col = 1;
@@ -167,7 +180,7 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
     snprintf(tbuf, sizeof tbuf, "%2d", levels_completed);
   else
     snprintf(tbuf, sizeof tbuf, "%2s", gettext("N/A"));
-  widget_new_text(window, x[col] + labelwidth, y, tbuf);
+  widget_new_text(window, x[col] + bottomlabelwidths[col], y, tbuf);
 
   y += font_height();
 
@@ -176,7 +189,7 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
       col = 0;
       widget_new_text(window, x[col], y, gettext("Diam.score:"));
       snprintf(tbuf, sizeof tbuf, "%6d", entry->diamond_score);
-      widget_new_text(window, x[col] + labelwidth, y, tbuf);
+      widget_new_text(window, x[col] + bottomlabelwidths[col], y, tbuf);
 
       y += font_height();
     }
@@ -192,24 +205,29 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
       xpos = 0;
       size = 24;
       padding = 2;
-      for(trait_t trait = 0; trait < TRAIT_SIZEOF_; trait++)
-        if(entry->traits & (1 << trait))
-          {
-            struct widget * obj;
-            char * name;
+      for(int i = 0; i < TRAIT_SIZEOF_; i++)
+        {
+          trait_t trait;
 
-            obj = widget_new_trait_button(window, x[col] + labelwidth + xpos * (size + padding), y, size, size, (1<<trait), true, false);
-            name = trait_get_name(1<<trait);
-            if(name != NULL)
-              widget_set_tooltip(obj, name);
+          trait = traits_sorted[i];
+          if(entry->traits & trait)
+            {
+              struct widget * obj;
+              char * name;
 
-            xpos++;
-            if(xpos >= (250 / (size + padding)))
-              {
-                xpos = 0;
-                y += size + padding;
-              }
-          }
+              obj = widget_new_trait_button(window, x[col] + bottomlabelwidths[col] + xpos * (size + padding), y, size, size, trait, true, false);
+              name = trait_get_name(trait);
+              if(name != NULL)
+                widget_set_tooltip(obj, name);
+
+              xpos++;
+              if(xpos >= (250 / (size + padding)))
+                {
+                  xpos = 0;
+                  y += size + padding;
+                }
+            }
+        }
       
       if(xpos > 0)
         y += size + padding;
@@ -235,7 +253,7 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
       widget_set_width(breplay, 100);
       widget_set_x(breplay, (widget_width(window) - widget_width(breplay)) / 2);
       widget_set_on_release(breplay, on_replay_clicked);
-      widget_set_pointer(breplay, "highscore_entry", entry);
+      widget_set_pointer(breplay, "highscore_entry", 'P', entry);
       if(playback == NULL)
         widget_set_enabled(breplay, false);
       y += widget_height(breplay) + 4;
@@ -249,7 +267,7 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
     widget_set_navigation_updown(breplay, bclose);
   y += widget_height(bclose);
   
-  widget_set_pointer(window, "previously_selected_object", widget_focus());
+  widget_set_widget_pointer(window, "previously_selected_object", widget_focus());
   widget_set_focus(bclose);
 
   widget_set_height(window, y + 10);
@@ -278,7 +296,7 @@ static void on_window_exit(bool pressed, SDL_Event * event DG_UNUSED)
     {
       struct widget * w;
 
-      w = widget_get_pointer(window, "previously_selected_object");
+      w = widget_get_widget_pointer(window, "previously_selected_object");
 
       widget_delete(window);
 
@@ -300,7 +318,7 @@ static void on_replay_clicked(struct widget * this, enum WIDGET_BUTTON button DG
   struct highscore_entry * entry;
   struct playback * playback;
 
-  entry = widget_get_pointer(this, "highscore_entry");
+  entry = widget_get_pointer(this, "highscore_entry", 'P');
   assert(entry != NULL);
 
   playback = highscore_playback(entry, globals.title_game_mode);
@@ -332,7 +350,7 @@ static void on_replay_clicked(struct widget * this, enum WIDGET_BUTTON button DG
         }
       else
         {
-          widget_new_message_window("ERROR", pberr);
+          widget_new_message_window("ERROR", NULL, pberr);
           free(pberr);
         }
     }

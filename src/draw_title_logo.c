@@ -39,44 +39,48 @@
 #include <GL/glu.h>
 #endif
 
+
+static struct map * map = NULL;
+
 #ifdef WITH_OPENGL
 static struct td_object * logo;
-#endif
+
 /* The stable destination location and stuff for logo. */
 static const float logo_center_pos[3] = {  0.0f, 3.0f, 6.6f };
 static const float logo_center_sca[3] = {  1.0f, 1.0f, 1.0f };
 static const float logo_center_rot    = 40.0f;
-#ifdef WITH_OPENGL
+static const float light_center_pos[3] = { 0, 4, -12 };
 /* The current state of logo. */
-static float logo_pos[3] = {  0.0f, 0.0f, 5.0f };
-static float logo_sca[3] = {  1.0f, 1.0f, 1.0f };
-static float logo_rot    = 40.0f;
-/* The function to call for initialization (flag=0), and for each step (flag=1). */
-static void (*logo_phase_function)(int flag) = NULL;
+static float logo_pos[3];
+static float logo_sca[3];
+static float logo_rot;
+static float light_offset[3];
+static float light_pos[3];
+static float light_brightness = 1.0f;
+/* The function to call for initialization (initialization=true), and for each step (initialization=false). */
+static void (*logo_phase_function)(bool initialization) = NULL;
 static int   logo_phase_delay = 60;
-#endif
-
-static struct map * map = NULL;
 
 
-#ifdef WITH_OPENGL
-#define LIGHTS 1
-static void logo_phase_rotateX(int flag);
-static void logo_phase_stretch(int flag);
-static void logo_phase_rotateright(int flag);
-static void logo_phase_rotaterightstretch(int flag);
-static void logo_phase_vibrate(int flag);
-static void logo_phase_minimizeY(int flag);
+static void logo_phase_rotateX(bool initialization);
+static void logo_phase_stretch(bool initialization);
+static void logo_phase_rotateright(bool initialization);
+static void logo_phase_rotaterightstretch(bool initialization);
+static void logo_phase_vibrate(bool initialization);
+static void logo_phase_minimizeHeight(bool initialization);
 
-static void logo_phase_from_intro(int flag);
-static void logo_phase_zoom(int flag);
-static void logo_phase_rollzoom(int flag);
-static void logo_phase_slowroll(int flag);
-static void logo_phase_topdown(int flag);
+static void logo_phase_from_intro(bool initialization);
+static void logo_phase_zoom(bool initialization);
+static void logo_phase_rollzoom(bool initialization);
+static void logo_phase_slowroll(bool initialization);
+static void logo_phase_topdown(bool initialization);
+
+static void logolight_phase_left2right(bool initialization);
+static void logolight_phase_strobo(bool initialization);
 
 static void add_diamond(int x, int y);
 
-static int very_first_time = 1;
+static bool very_first_time = true;
 #endif
 
 
@@ -87,7 +91,7 @@ void draw_title_logo_initialize(struct map * the_map)
   if(globals.opengl)
     {
 #ifdef WITH_OPENGL
-      void (*funcs[4])(int) =
+      void (*funcs[4])(bool) =
         {
           logo_phase_zoom,
           logo_phase_rollzoom,
@@ -96,49 +100,29 @@ void draw_title_logo_initialize(struct map * the_map)
         };
 
       for(int i = 0; i < 3; i++)
-        logo_pos[i] = logo_center_pos[i];
+        {
+          logo_pos[i] = logo_center_pos[i];
+          logo_sca[i] = logo_center_sca[i];
+          light_offset[i] = 0.0f;
+          light_pos[i] = light_center_pos[i];
+        }
+      light_offset[0] = (float) get_rand(13) - 6.0f;
       logo_rot = logo_center_rot;
-      for(int i = 0; i < 3; i++)
-        logo_sca[i] = logo_center_sca[i];
 
-      if(very_first_time)
+      if(very_first_time == true)
         {
           logo_phase_function = logo_phase_from_intro;
-          very_first_time = 0;
+          very_first_time = false;
         }
       else
         logo_phase_function = funcs[get_rand(4)];
 
-      logo_phase_function(0);
+      logo_phase_function(true);
 
       logo_phase_delay = 60;
 
-      logo = td_object_load(get_data_filename("gfx/logo.3ds"));
+      logo = td_object_load(get_data_filename("gfx/logo.obj"), NULL, NULL);
       assert(logo != NULL);
-
-#if LIGHTS
-      {
-        GLfloat light_a[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-        GLfloat light_d[] = { 0.5f, 0.5f, 0.5f, 1.0f };
-        GLfloat light_s[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-        
-        glLightfv(GL_LIGHT0, GL_AMBIENT,  light_a);
-        glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_d);
-        glLightfv(GL_LIGHT0, GL_SPECULAR, light_s);
-      }
-
-      glLightModeli(GL_LIGHT_MODEL_TWO_SIDE,     GL_FALSE);
-      glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
-
-      GLfloat pos[] =
-        {
-          logo_center_pos[0] + get_rand(12) - 6,
-          logo_center_pos[1],
-          logo_center_pos[2] - 10.0f,
-          1.0f
-        };
-      glLightfv(GL_LIGHT0, GL_POSITION, pos);
-#endif
 #endif
     }
 }
@@ -157,13 +141,20 @@ void draw_title_logo(void)
   if(globals.opengl)
     {
 #ifdef WITH_OPENGL
-#if LIGHTS
       {
-        gfxgl_state(GL_LIGHT0, true);
-        gfxgl_state(GL_LIGHTING, true);
-      }
-#endif
-      {
+        GLfloat light_a[] = { light_brightness * 0.1f,  light_brightness * 0.1f,  light_brightness * 0.1f,  1.0f };
+        GLfloat light_d[] = { light_brightness * 0.85f, light_brightness * 0.85f, light_brightness * 0.85f, 1.0f };
+        GLfloat light_s[] = { light_brightness * 1.0f,  light_brightness * 1.0f,  light_brightness * 1.0f,  1.0f };
+        GLfloat pos[] =
+          {
+            logo_center_pos[0] + light_pos[0] + light_offset[0],
+            logo_center_pos[1] + light_pos[1] + light_offset[1],
+            logo_center_pos[2] + light_pos[2] + light_offset[2],
+            1.0f
+          };
+
+        gfxgl_light(light_a, light_d, light_s, pos);
+
         double camerac[3] = { 0, 0, 0 };
         double camerae[3] = { 0, -10, 0 };
 
@@ -171,22 +162,11 @@ void draw_title_logo(void)
       }
 
       {
-        GLfloat specular[] = { 1.0, 1.0, 1.0, 1.0 };
-        GLfloat emission[] = { 0.0, 0.0, 0.0, 1.0 };
-        
-        glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
-        glMaterialfv(GL_FRONT, GL_EMISSION, emission);
-        glMaterialf(GL_FRONT, GL_SHININESS, 128);
-        gfxgl_state(GL_COLOR_MATERIAL, true);
-        glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-      }
-
-      {
         glPushMatrix();
 
         glTranslatef(logo_pos[0], logo_pos[1], logo_pos[2]);
-        glRotatef(logo_rot - 20, 1.0, 0.0, 0.0);
-        glScalef(logo_sca[0] * 1.0f, logo_sca[1] * 1.0f, logo_sca[2] * 0.3f);
+        glRotatef(logo_rot + 70, 1.0, 0.0, 0.0);
+        glScalef(logo_sca[0] * 1.0f, logo_sca[1] * 0.3f, logo_sca[2] * 1.0f);
 
         td_object_draw(logo);
             
@@ -197,23 +177,25 @@ void draw_title_logo(void)
             logo_phase_delay--;
             if(logo_phase_delay == 0)
               {
-                void (*funcs[6])(int) =
+                void (*funcs[8])(bool) =
                   {
                     logo_phase_rotateX,
                     logo_phase_stretch,
                     logo_phase_rotateright,
                     logo_phase_rotaterightstretch,
                     logo_phase_vibrate,
-                    logo_phase_minimizeY
+                    logo_phase_minimizeHeight,
+                    logolight_phase_left2right,
+                    logolight_phase_strobo
                   };
                     
-                logo_phase_function = funcs[get_rand(6)];
-                logo_phase_function(0);
+                logo_phase_function = funcs[get_rand(8)];
+                logo_phase_function(true);
               }
           }
         else
           { /* Active, do a logo step. */
-            logo_phase_function(1);
+            logo_phase_function(false);
 
             if(logo_phase_function == NULL)
               { /* The steps are done, cleanup. */
@@ -229,11 +211,7 @@ void draw_title_logo(void)
           }
       }
 
-      gfxgl_state(GL_COLOR_MATERIAL, false);
-#if LIGHTS
-      gfxgl_state(GL_LIGHTING, false);
-      gfxgl_state(GL_LIGHT0, false);
-#endif
+      gfxgl_light_off();
 #endif
     }
   else
@@ -270,11 +248,11 @@ void draw_title_logo(void)
 
 #ifdef WITH_OPENGL
 
-static void logo_phase_rotateX(int flag)
+static void logo_phase_rotateX(bool initialization)
 {
   static float progress;
 
-  if(flag == 0)
+  if(initialization == true)
     { /* Initialization */
       progress = 0.0;
     }
@@ -289,11 +267,11 @@ static void logo_phase_rotateX(int flag)
     }
 }
 
-static void logo_phase_stretch(int flag)
+static void logo_phase_stretch(bool initialization)
 {
   static float progress;
 
-  if(flag == 0)
+  if(initialization == true)
     { /* Initialization */
       progress = 0.0;
     }
@@ -316,11 +294,11 @@ static void logo_phase_stretch(int flag)
     }
 }
 
-static void logo_phase_rotateright(int flag)
+static void logo_phase_rotateright(bool initialization)
 {
   static float progress;
 
-  if(flag == 0)
+  if(initialization == true)
     { /* Initialization */
       progress = 0.0;
     }
@@ -342,11 +320,11 @@ static void logo_phase_rotateright(int flag)
     }
 }
 
-static void logo_phase_rotaterightstretch(int flag)
+static void logo_phase_rotaterightstretch(bool initialization)
 {
   static float progress;
 
-  if(flag == 0)
+  if(initialization == true)
     { /* Initialization */
       progress = 0.0;
     }
@@ -379,11 +357,11 @@ static void logo_phase_rotaterightstretch(int flag)
     }
 }
 
-static void logo_phase_vibrate(int flag)
+static void logo_phase_vibrate(bool initialization)
 {
   static float countdown;
 
-  if(flag == 0)
+  if(initialization == true)
     { /* Initialization */
       countdown = 20 + get_rand(40);
     }
@@ -402,11 +380,11 @@ static void logo_phase_vibrate(int flag)
     }
 }
 
-static void logo_phase_minimizeY(int flag)
+static void logo_phase_minimizeHeight(bool initialization)
 {
   static float progress;
 
-  if(flag == 0)
+  if(initialization == true)
     { /* Initialization */
       progress = 0.0f;
     }
@@ -414,10 +392,10 @@ static void logo_phase_minimizeY(int flag)
     { /* Step - scale in Y axis to almost disappear */
       progress += 0.01f;
 
-      logo_sca[2] = logo_center_sca[2] * (1.0f - (progress * 4));
-      if(logo_sca[2] < 0.3f)
+      logo_sca[1] = logo_center_sca[1] * (1.0f - (progress * 4));
+      if(logo_sca[1] < 0.3f)
         {
-          logo_sca[2] = 0.3f;
+          logo_sca[1] = 0.3f;
           if(get_rand(100) < 30)
             if(map != NULL)
               add_diamond(5 + get_rand(map->width - 10), 2);
@@ -431,11 +409,11 @@ static void logo_phase_minimizeY(int flag)
 
 
 
-static void logo_phase_from_intro(int flag)
+static void logo_phase_from_intro(bool initialization)
 {
   static float progress;
 
-  if(flag == 0)
+  if(initialization == true)
     { /* Initialization */
       progress = 0.0f;
     }
@@ -455,9 +433,9 @@ static void logo_phase_from_intro(int flag)
 }
 
 
-static void logo_phase_zoom(int flag)
+static void logo_phase_zoom(bool initialization)
 {
-  if(flag == 0)
+  if(initialization == true)
     { /* Initialization */
       logo_pos[1] = 100;
     }
@@ -474,13 +452,13 @@ static void logo_phase_zoom(int flag)
     }
 }
 
-static void logo_phase_rollzoom(int flag)
+static void logo_phase_rollzoom(bool initialization)
 {
   static float startpos;
 
-  if(flag == 0)
+  if(initialization == true)
     { /* Initialization */
-      logo_phase_zoom(flag);
+      logo_phase_zoom(initialization);
 
       startpos = logo_pos[1];
       logo_rot = logo_center_rot;
@@ -489,7 +467,7 @@ static void logo_phase_rollzoom(int flag)
     { /* Step - rotate N times around X axis, and zoom */
       float current;
 
-      logo_phase_zoom(flag); /* Includes End */
+      logo_phase_zoom(initialization); /* Includes End */
 
       current = fabs(logo_center_pos[1] - logo_pos[1]) / fabs(logo_center_pos[1] - startpos);
       current = current * 360.0f * 3.0f; /* 3.0f = N */
@@ -498,9 +476,9 @@ static void logo_phase_rollzoom(int flag)
 }
 
 
-static void logo_phase_slowroll(int flag)
+static void logo_phase_slowroll(bool initialization)
 {
-  if(flag == 0)
+  if(initialization == true)
     { /* Initialization */
       logo_rot = 0.0f;
     }
@@ -515,9 +493,9 @@ static void logo_phase_slowroll(int flag)
 }
 
 
-static void logo_phase_topdown(int flag)
+static void logo_phase_topdown(bool initialization)
 {
-  if(flag == 0)
+  if(initialization == true)
     { /* Initialization */
       logo_pos[2] = 5.95f;
     }
@@ -532,6 +510,72 @@ static void logo_phase_topdown(int flag)
 }
 
 
+static void logolight_phase_left2right(bool initialization)
+{
+  static bool warpdone;
+
+  if(initialization == true)
+    {
+      warpdone = false;
+    }
+  else
+    { /* Step - move the light from left to right. */
+      light_pos[0] += 1.0f;
+      if(light_pos[0] > 10.0f)
+        {
+          light_pos[0] = -10.0f;
+          warpdone = true;
+        }
+
+      /* Done */
+      if(warpdone == true)
+        {
+          float start_x;
+
+          start_x = light_center_pos[0] + light_offset[0];
+          if(light_pos[0] > start_x)
+            {
+              light_pos[0] = start_x;
+              logo_phase_function = NULL;
+            }
+        }
+    }
+}
+
+
+static void logolight_phase_strobo(bool initialization)
+{
+  static float phase;
+  
+  if(initialization == true)
+    {
+      phase = 0.0f;
+    }
+  else
+    {
+      /* Step - vary light brightness */
+      phase += 0.25f;
+      light_brightness = 1.0f - sinf(phase) * 0.75f;
+      assert(light_brightness >= 0.0f);
+      
+      /* Done */
+      if(phase >= M_PI)
+        {
+          if(get_rand(100) < 90)
+            { /* Restart this strobo effect. */
+              logo_phase_function(true);
+            }
+          else
+            { /* The end. */
+              light_brightness = 1.0f; // Make sure no errors creep in.
+              logo_phase_function = NULL;
+            }
+        }
+    }
+}
+
+
+
 static void add_diamond(int x, int y)
 {
   int pos;
@@ -539,6 +583,8 @@ static void add_diamond(int x, int y)
   pos = x + y * map->width;
   map->data[pos] = MAP_DIAMOND;
 }
+
+
 
 
 #endif

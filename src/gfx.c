@@ -27,6 +27,8 @@
 #include "gfxbuf.h"
 #include "gfx_image.h"
 #include "gfx_glyph.h"
+#include "gfx_material.h"
+#include "gfx_shaders.h"
 #include "globals.h"
 #include "gc.h"
 #include "stack.h"
@@ -81,12 +83,12 @@ bool gfx_initialize(void)
       if(globals.opengl)
         if(gfx_initialize_opengl(flags) == false)
           {
-            globals.opengl = 0;
+            globals.opengl = false;
             fprintf(stderr, "OpenGL initialization failed, falling back to non-opengl mode.\n");
           }
       GFX_GL_ERROR();
 #else
-      globals.opengl = 0;
+      globals.opengl = false;
 #endif
 
 #ifdef WITH_NONOPENGL
@@ -177,6 +179,8 @@ void gfx_cleanup(void)
 #ifdef WITH_OPENGL
   if(globals.opengl)
     {
+      gfx_shaders_cleanup();
+      
       struct stack * s;
 
       s = gc_get_stack(GCT_GFXBUF);
@@ -248,6 +252,7 @@ static bool gfx_initialize_opengl(Uint32 flags)
       gfxgl_bind_texture(0);
       gfxgl_state(0, false);
       gfxgl_client_state(0, false);
+      gfx_material_use_initialize();
 
       if(GLEW_VERSION_1_4)
         globals.opengl_1_4 = true;
@@ -267,8 +272,30 @@ static bool gfx_initialize_opengl(Uint32 flags)
       printf(" %-30s: %s\n", "ARB_vertex_buffer_object", GLEW_ARB_vertex_buffer_object ? "yes" : "no");
       GFX_GL_ERROR();
 
+      printf(" %-30s: ", "Shader support");
+      if(GLEW_VERSION_2_0)
+        {
+          printf("OpenGL2.0+");
+          globals.opengl_shaders = 2;
+        }
+      else if(GLEW_ARB_vertex_shader && GLEW_ARB_fragment_shader)
+        {
+          printf("ARB extension");
+          globals.opengl_shaders = 1;
+        }
+      else
+        printf("no");
+     if(globals.opengl_disable_shaders == true)
+       {
+         printf(" (disabled)");
+         globals.opengl_shaders = 0;
+       }
+      printf("\n");
+
+      gfx_shaders_initialize();
+      
+      
       glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-      gfxgl_state(GL_BLEND, false);
       gfxgl_state(GL_DITHER, false);
       gfxgl_state(GL_CULL_FACE, true);
       gfx_2d();
@@ -379,10 +406,12 @@ static bool gfx_initialize_opengl(Uint32 flags)
       glShadeModel(GL_SMOOTH);
       glClear(GL_DEPTH_BUFFER_BIT);
       GFX_GL_ERROR();
+
+      glLightModeli(GL_LIGHT_MODEL_TWO_SIDE,     GL_FALSE);
+      glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
+      GFX_GL_ERROR();
     }
   GFX_GL_ERROR();
-
-  gfx_colour_clear();
 
   return opengl_ok;
 }
@@ -468,4 +497,28 @@ static double opengl_test_blitting(int width, int height, int blitw, int blith, 
 SDL_Surface * gfx_game_screen(void)
 {
   return game_screen;
+}
+
+
+void max_image_size(double * image_width, double max_width, double * image_height, double max_height)
+{
+  double w, iw, h, ih;
+
+  assert(image_width != NULL);
+  assert(image_height != NULL);
+  iw = w = *image_width;
+  ih = h = *image_height;
+  if(iw > max_width)
+    {
+      iw = max_width;
+      ih = h * max_width / w;
+    }
+  if(ih > max_height)
+    {
+      ih = max_height;
+      iw = w * max_height / h;
+    }
+
+  *image_width = iw;
+  *image_height = ih;
 }

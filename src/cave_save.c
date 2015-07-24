@@ -24,6 +24,7 @@
 #include "diamond_girl.h"
 #include "map.h"
 #include "playback.h"
+#include "treasureinfo.h"
 #include <assert.h>
 #include <errno.h>
 #include <stdio.h>
@@ -67,7 +68,7 @@ bool cave_save(struct cave * cave)
 
       pos = buffer;
 
-      memcpy(pos, DIAMOND_GIRL_CAVEFILE_V3, 4);
+      memcpy(pos, DIAMOND_GIRL_CAVEFILE_V4, 4);
       pos += 4;
 
       memcpy(pos, &cave->max_starting_level, sizeof cave->max_starting_level);
@@ -115,7 +116,46 @@ bool cave_save(struct cave * cave)
           fprintf(stderr, "Warning! Failed to write to '%s': %s\n", get_save_filename(fn), strerror(errno));
           success = false;
         }          
-        
+
+
+      if(cave->savegame.exists)
+        if(success == true)
+          { /* Save the treasure. */
+            uint16_t len;
+            char * treasuredata;
+          
+            if(cave->savegame.treasure != NULL)
+              {
+                assert(cave->game_mode == GAME_MODE_ADVENTURE);
+                treasuredata = treasureinfo_save(cave->savegame.treasure);
+              }
+            else
+              treasuredata = NULL;
+          
+            if(treasuredata != NULL)
+              len = strlen(treasuredata);
+            else
+              len = 0;
+
+            if(fwrite(&len, sizeof len, 1, fp) == 1)
+              {
+                if(len > 0)
+                  if(fwrite(treasuredata, len, 1, fp) != 1)
+                    {
+                      fprintf(stderr, "Warning! Failed to write to '%s': %s\n", get_save_filename(fn), strerror(errno));
+                      success = false;
+                    }
+              }
+            else
+              {
+                fprintf(stderr, "Warning! Failed to write to '%s': %s\n", get_save_filename(fn), strerror(errno));
+                success = false;
+              }
+
+            free(treasuredata);
+          }
+              
+      
       if(fclose(fp) != 0)
         {
           fprintf(stderr, "Warning! Failed to write to '%s': %s\n", get_save_filename(fn), strerror(errno));

@@ -24,6 +24,7 @@
 #include "widget.h"
 #include "stack.h"
 #include "gfx.h"
+#include <assert.h>
 
 static void on_item_release(struct widget * this, enum WIDGET_BUTTON button);
 static void on_item_focus(struct widget * this);
@@ -62,6 +63,11 @@ struct widget * widget_new_list(struct widget * parent, int x, int y, int width,
   rv = widget_new_child(parent, x, y, width, height);
   widget_set_ulong(rv, "type", WT_LIST);
 
+  struct stack * itemobjs;
+
+  itemobjs = stack_new();
+  widget_set_pointer(rv, "items", 'P', itemobjs);
+
   struct widget * container, * frame;
 
   container = widget_new_child(rv, 0, 0, width - scrollbar_width, height);
@@ -81,11 +87,12 @@ struct widget * widget_new_list(struct widget * parent, int x, int y, int width,
         struct widget * obj;
 
         obj = widget_new_button(frame, 0, y, items->data[i]);
-        widget_delete_flags(obj, WF_DRAW_BORDERS);
+        stack_push(itemobjs, obj);
+        widget_delete_flags(obj, WF_DRAW_BORDERS | WF_ALIGN_CENTER);
         widget_set_ulong(obj, "alpha", 0x80);
         widget_set_width(obj, widget_width(frame));
         widget_set_ulong(obj, "value", i);
-        widget_set_pointer(obj, "list_object", rv);
+        widget_set_widget_pointer(obj, "list_object", rv);
         widget_set_on_release(obj, on_item_release);
         widget_set_on_focus(obj, on_item_focus);
         y += widget_height(obj);
@@ -95,7 +102,7 @@ struct widget * widget_new_list(struct widget * parent, int x, int y, int width,
         prev = obj;
       }
   widget_set_height(frame, y);
-  widget_set_pointer(rv, "focus_down_object", prev);
+  widget_set_widget_pointer(rv, "focus_down_object", prev);
 
   if(scrollbar_width > 0)
     {
@@ -118,9 +125,9 @@ struct widget * widget_new_list(struct widget * parent, int x, int y, int width,
         bheight = height - 2;
       widget_set_height(scrollbar_button, bheight);
       widget_set_on_activate_at(scrollbar_button, on_scrollbar_button_clicked);
-      widget_set_pointer(scrollbar_button, "frame", frame);
-      widget_set_pointer(scrollbar, "scrollbar_button", scrollbar_button);
-      widget_set_pointer(rv, "scrollbar_button", scrollbar_button);
+      widget_set_widget_pointer(scrollbar_button, "frame", frame);
+      widget_set_widget_pointer(scrollbar, "scrollbar_button", scrollbar_button);
+      widget_set_widget_pointer(rv, "scrollbar_button", scrollbar_button);
     }
 
   return rv;
@@ -130,43 +137,55 @@ struct widget * widget_new_list(struct widget * parent, int x, int y, int width,
 static void on_item_release(struct widget * this, enum WIDGET_BUTTON button)
 {
   struct widget * list_object;
-  ui_func_on_activate_t func;
 
-  list_object = widget_get_pointer(this, "list_object");
-  widget_set_ulong(list_object, "selected_index", widget_get_ulong(this, "value"));
-  func = widget_on_release(list_object);
-  if(func != NULL)
-    func(list_object, button);
+  list_object = widget_get_widget_pointer(this, "list_object");
+  if(list_object != NULL)
+    {
+      ui_func_on_activate_t func;
+      unsigned int selected_index;
+
+      selected_index = widget_get_ulong(this, "value");
+      widget_list_set(list_object, selected_index);
+      widget_set_ulong(list_object, "selected_index", selected_index);
+
+      func = widget_on_release(list_object);
+      if(func != NULL)
+        func(list_object, button);
+    }
 }
 
 static void on_item_focus(struct widget * this)
 {
   struct widget * list_object;
-  struct widget * scrollbar_button;
 
-  list_object = widget_get_pointer(this, "list_object");
-  scrollbar_button = widget_get_pointer(list_object, "scrollbar_button");
-  if(scrollbar_button != NULL)
+  list_object = widget_get_widget_pointer(this, "list_object");
+  if(list_object != NULL)
     {
-      int y, ay, list_y;
-      int h, list_h;
-      struct widget * scrollbar, * frame;
+      struct widget * scrollbar_button;
+      
+      scrollbar_button = widget_get_widget_pointer(list_object, "scrollbar_button");
+      if(scrollbar_button != NULL)
+        {
+          int y, ay, list_y;
+          int h, list_h;
+          struct widget * scrollbar, * frame;
 
-      scrollbar = widget_parent(scrollbar_button);
-      frame = widget_get_pointer(scrollbar_button, "frame");
+          scrollbar = widget_parent(scrollbar_button);
+          frame = widget_get_widget_pointer(scrollbar_button, "frame");
 
-      list_y = widget_absolute_y(list_object);
-      list_h = widget_height(list_object);
-      y = widget_y(this);
-      ay = widget_absolute_y(this);
-      h = widget_height(this);
-      if(ay < list_y)
-        { /* This is above the top, scroll so that this is the top-most. */
-          scroll_to(scrollbar_button, y * widget_height(scrollbar) / widget_height(frame));
-        }
-      else if(ay + h > list_y + list_h)
-        { /* This is below the bottom, scroll so that this is the bottom-most. */
-          scroll_to(scrollbar_button, (y - list_h + h) * widget_height(scrollbar) / (widget_height(frame) - h));
+          list_y = widget_absolute_y(list_object);
+          list_h = widget_height(list_object);
+          y = widget_y(this);
+          ay = widget_absolute_y(this);
+          h = widget_height(this);
+          if(ay < list_y)
+            { /* This is above the top, scroll so that this is the top-most. */
+              scroll_to(scrollbar_button, y * widget_height(scrollbar) / widget_height(frame));
+            }
+          else if(ay + h > list_y + list_h)
+            { /* This is below the bottom, scroll so that this is the bottom-most. */
+              scroll_to(scrollbar_button, (y - list_h + h) * widget_height(scrollbar) / (widget_height(frame) - h));
+            }
         }
     }
 }
@@ -192,11 +211,15 @@ static void scroll_to(struct widget * scrollbar_button, int y)
   if(maxy > 0)
     {
       struct widget * frame;
-      int framey;
 
-      frame = widget_get_pointer(scrollbar_button, "frame");
-      framey = -(y * (widget_height(frame) - widget_height(scrollbar)) / maxy);
-      widget_set_y(frame, framey);
+      frame = widget_get_widget_pointer(scrollbar_button, "frame");
+      if(frame != NULL)
+        {
+          int framey;
+
+          framey = -(y * (widget_height(frame) - widget_height(scrollbar)) / maxy);
+          widget_set_y(frame, framey);
+        }
     }
 }
 
@@ -204,17 +227,21 @@ static void scroll_to(struct widget * scrollbar_button, int y)
 static void on_scrollbar_clicked(struct widget * this, enum WIDGET_BUTTON button DG_UNUSED, int x DG_UNUSED, int y)
 {
   struct widget * scrollbar_button;
-  int sby, h;
 
-  scrollbar_button = widget_get_pointer(this, "scrollbar_button");
-  sby = widget_y(scrollbar_button);
-  h = widget_height(scrollbar_button);
-  if(y < sby)
-    sby -= h;
-  else
-    sby += h;
+  scrollbar_button = widget_get_widget_pointer(this, "scrollbar_button");
+  if(scrollbar_button != NULL)
+    {
+      int sby, h;
+      
+      sby = widget_y(scrollbar_button);
+      h = widget_height(scrollbar_button);
+      if(y < sby)
+        sby -= h;
+      else
+        sby += h;
 
-  scroll_to(scrollbar_button, sby);
+      scroll_to(scrollbar_button, sby);
+    }
 }
 
 
@@ -224,7 +251,7 @@ static void on_scrollbar_button_clicked(struct widget * this, enum WIDGET_BUTTON
 
   tmp = widget_new_child(widget_root(), 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
   tmp->z_ = this->z_ + 1;
-  widget_set_pointer(tmp, "scrollbar_button", this);
+  widget_set_widget_pointer(tmp, "scrollbar_button", this);
   widget_set_long(tmp, "click_offset_y", y);
   widget_set_enabled(tmp, true);
   widget_set_on_release(tmp, on_scrollbar_button_release);
@@ -240,14 +267,47 @@ static void on_scrollbar_button_release(struct widget * this, enum WIDGET_BUTTON
 
 static void on_scrollbar_button_move(struct widget * this, int x DG_UNUSED, int y)
 {
-  struct widget * scrollbar;
   struct widget * scrollbar_button;
 
-  scrollbar_button = widget_get_pointer(this, "scrollbar_button");
-  scrollbar = widget_parent(scrollbar_button);
+  scrollbar_button = widget_get_widget_pointer(this, "scrollbar_button");
+  if(scrollbar_button != NULL)
+    {
+      struct widget * scrollbar;
+      
+      scrollbar = widget_parent(scrollbar_button);
 
-  y -= widget_get_long(this, "click_offset_y");
-  y -= widget_absolute_y(scrollbar);
+      y -= widget_get_long(this, "click_offset_y");
+      y -= widget_absolute_y(scrollbar);
+      
+      scroll_to(scrollbar_button, y);
+    }
+}
 
-  scroll_to(scrollbar_button, y);
+void widget_list_set(struct widget * list, unsigned int active)
+{
+  struct stack * itemobjs;
+
+  assert(list != NULL);
+  itemobjs = widget_get_pointer(list, "items", 'P');
+  assert(itemobjs != NULL);
+  assert((active == 0 && itemobjs->size == 0) || active < itemobjs->size);
+  if(active < itemobjs->size)
+    {
+      for(unsigned int i = 0; i < itemobjs->size; i++)
+        widget_delete_flags(itemobjs->data[i], WF_ACTIVE);
+
+      widget_add_flags(itemobjs->data[active], WF_ACTIVE);
+    }
+}
+
+
+void widget_list_set_item_navigation_right(struct widget * list, struct widget * right)
+{
+  struct stack * itemobjs;
+
+  assert(list != NULL);
+  itemobjs = widget_get_pointer(list, "items", 'P');
+  assert(itemobjs != NULL);
+  for(unsigned int i = 0; i < itemobjs->size; i++)
+    widget_set_navigation_right(itemobjs->data[i], right);
 }

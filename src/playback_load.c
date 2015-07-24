@@ -20,9 +20,11 @@
   Complete license can be found in the LICENSE file.
 */
 
+#include "diamond_girl.h"
 #include "playback.h"
 #include "traits.h"
-#include "diamond_girl.h"
+#include "treasure.h"
+#include "treasureinfo.h"
 #include <assert.h>
 
 struct playback * playback_load(char const * const filename)
@@ -32,10 +34,13 @@ struct playback * playback_load(char const * const filename)
   struct playback * rv, * current;
   char * inbuf;
   int    inbuf_pos;
+  int    version; // 1 for 1.0 and 1.1 */
 
   rv = current = playback_new();
   assert(current != NULL);
 
+  version = 1;
+  
   /* These were the values for game_mode and traits, before they were saved in playbacks of releases 1.7 and earlier. */
   current->game_mode = GAME_MODE_ADVENTURE;
   current->traits    = TRAIT_ADVENTURE_MODE | TRAIT_RIBBON;
@@ -84,14 +89,26 @@ struct playback * playback_load(char const * const filename)
                     "-debug"
 #endif
                     ;
-                  char * header = "DIAMOND GIRL PLAYBACK " PLAYBACK_FILE_VERSION
+                  char * header_1_1 = "DIAMOND GIRL PLAYBACK 1.1"
 #ifdef DEBUG_PLAYBACK
                     "-debug"
 #endif
                     ;
-                        
-                  if(!strcmp(buf, header) || !strcmp(buf, header_1_0))
-                    mode = MODE_DATA;
+                  char * header2 = "DIAMOND GIRL PLAYBACK 2"
+#ifdef DEBUG_PLAYBACK
+                    "-debug"
+#endif
+                    ;
+
+                  if(!strcmp(buf, header2))
+                    {
+                      version = 2;
+                      mode = MODE_DATA;
+                    }
+                  else if(!strcmp(buf, header_1_1) || !strcmp(buf, header_1_0))
+                    {
+                      mode = MODE_DATA;
+                    }
                   else
                     {
                       fprintf(stderr, "%s('%s'): Illegal header: %s\n", __FUNCTION__, filename, buf);
@@ -170,6 +187,12 @@ struct playback * playback_load(char const * const filename)
                           step->direction       = strtol(val, &p, 0);                     val = p;
                           step->manipulate      = strtol(val, &p, 0) == 1 ? true : false; val = p;
                           step->commit_suicide  = strtol(val, &p, 0) == 1 ? true : false; val = p;
+                        }
+                      else if(!strcmp(var, "TREASURE"))
+                        {
+                          assert(version >= 2);
+                          if(version >= 2)
+                            current->treasure = treasureinfo_load(val);
                         }
                     }
                   else

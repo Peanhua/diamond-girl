@@ -47,6 +47,7 @@ void title_game(struct cave * cave, struct playback * playback, char * playback_
       trait_t  saved_traits_active;
       trait_t  saved_traits_available;
       uint64_t saved_traits_score;
+      struct treasureinfo * treasure;
 
       saved_traits_active    = traits_get_active();
       saved_traits_available = traits_get_available();
@@ -54,6 +55,7 @@ void title_game(struct cave * cave, struct playback * playback, char * playback_
 
       starting_level = 1;
       tmp_cave = *cave;
+      treasure = NULL;
 
       pberr = NULL;
       if(playback != NULL)
@@ -70,6 +72,7 @@ void title_game(struct cave * cave, struct playback * playback, char * playback_
 
               starting_level = playback->level;
               traits_set(playback->traits, playback->traits, 0);
+              treasure = playback->treasure;
 
               ai->use_planning = false;
             }
@@ -87,7 +90,7 @@ void title_game(struct cave * cave, struct playback * playback, char * playback_
           struct gamedata * gr;
 
           ui_state_push();
-          gr = game(&tmp_cave, starting_level, false, false, ai);
+          gr = game(&tmp_cave, starting_level, false, false, ai, treasure);
           gr = gamedata_free(gr);
           ui_state_pop();
         }

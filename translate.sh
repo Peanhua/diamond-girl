@@ -35,33 +35,25 @@ fi
 
 SEDFILE=translate-${COMMAND}-${LANGUAGE}.sed
 
-# PO files, create and use a temporary sed script based on the SEDFILE
-TMPSEDFILE=translate.sed
-if [ -f ${TMPSEDFILE} ]; then
-    echo "Error! Temporary file '${TMPSEDFILE}' already exists, not going to overwrite."
-    exit 1
+# PO file
+FILE=po/${LANGUAGE}.po
+TMPFILE=${FILE}.tmp
+if [ -f ${FILE} ]; then
+    echo "Translate: ${FILE}"
+    msgfilter --keep-header --input=${FILE} --output-file=${TMPFILE} sed --file=${SEDFILE}  &&  mv ${TMPFILE} ${FILE}  ||  exit 1
 fi
-echo '/^msgstr "/ {' >  ${TMPSEDFILE}
-cat ${SEDFILE}       >> ${TMPSEDFILE}
-echo '}'             >> ${TMPSEDFILE}
-for FILE in po/${LANGUAGE}.po ; do
-    if [ -f ${FILE} ]; then
-        echo ${FILE}
-        sed --in-place --file=${TMPSEDFILE} ${FILE} || exit 1
-    fi
-done
-rm ${TMPSEDFILE}
 
 
 # Other files
 for FILE in data/*-${LANGUAGE}.txt ; do
     if [ -f ${FILE} ]; then
-           echo ${FILE}
-           sed --in-place --file=${SEDFILE} > ${FILE} || exit 1
-       fi
+        echo "Translate: ${FILE}"
+        sed --in-place --file=${SEDFILE} ${FILE} || exit 1
+    fi
 done
 
 
 if [ ${COMMAND} == "map" ]; then
+    echo "Executing 'make -C po update-po':"
     make -j1 -C po update-po
 fi

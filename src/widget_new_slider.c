@@ -60,7 +60,7 @@ struct widget * widget_new_slider(struct widget * parent, int x, int y, int widt
           widget_set_flags(slider, WF_DRAW_BORDERS | WF_BACKGROUND);
           widget_set_ulong(slider, "type", WT_SLIDER_HANDLE);
         }
-      widget_set_pointer(rv, "slider_obj", slider);
+      widget_set_widget_pointer(rv, "slider_obj", slider);
     }
 
   return rv;
@@ -72,8 +72,7 @@ void widget_slider_set(struct widget * widget, int value)
 
   struct widget * slider;
 
-  slider = widget_get_pointer(widget, "slider_obj");
-  assert(slider != NULL);
+  slider = widget_get_widget_pointer(widget, "slider_obj");
   if(slider != NULL)
     widget_set_x(slider, calc_position(widget));
 }

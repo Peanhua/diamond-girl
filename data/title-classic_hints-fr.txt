@@ -1,0 +1,17 @@
+Indications :
+
+Vous pouvez pousser les rochers { gauche et
+{ droite s'il y a un espace vide derri~re.
+
+La pouss}e augmente l}g~rement apr~s
+la 1~re }tape. 
+
+Jetez des roches ou des diamants
+sur les animaux pour les tuer.
+M}fiez-vous de l'explosion!
+
+Chaque papillon explose en neuf diamants,
+les insectes ne laissent rien derri~re eux.
+
+Vous recevez une fille suppl}mentaire tous
+les 200 points.

@@ -20,6 +20,8 @@
   Complete license can be found in the LICENSE file.
 */
 
+#ifdef WITH_OPENGL
+
 #include "image.h"
 #include <assert.h>
 #include <errno.h>
@@ -39,6 +41,8 @@ int main(void)
       printf("packed %dx%d at %d,%d\n", (int) tmp->w, (int) tmp->h, (int) tmp->x, (int) tmp->y);
 
   } while(tmp != NULL);
+
+  return 0;
 }
 */
 
@@ -125,3 +129,5 @@ struct imagepacknode * image_pack(struct imagepacknode * node, struct image * im
 
   return rv;
 }
+
+#endif

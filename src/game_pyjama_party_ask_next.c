@@ -64,8 +64,8 @@ void game_pyjama_party_ask_next(struct gamedata * gamedata)
             gamedata->ai = ai_free(gamedata->ai);
 
           window = widget_factory(wfd, NULL, "game_pyjama_party_ask_next");
-          widget_center_on_parent(window);
-          widget_set_pointer(window, "gamedata", gamedata);
+          widget_center(window);
+          widget_set_gamedata_pointer(window, "gamedata", gamedata);
           
           obj = widget_find(window, "gppan_yes");
           widget_set_ulong(obj, "party", PARTYCONTROLLER_PLAYER);
@@ -100,7 +100,7 @@ static void gppan_on_exit(bool pressed, SDL_Event * event DG_UNUSED)
     {
       struct gamedata * gamedata;
 
-      gamedata = widget_get_pointer(window, "gamedata");
+      gamedata = widget_get_gamedata_pointer(window, "gamedata");
       ui_pop_handlers();
       gamedata->quit = true;
       window = widget_delete(window);
@@ -114,7 +114,7 @@ static void gppan_on_button_clicked(struct widget * this, enum WIDGET_BUTTON but
 
   assert(window != NULL);
   control = widget_get_ulong(this, "party");
-  gamedata = widget_get_pointer(window, "gamedata");
+  gamedata = widget_get_gamedata_pointer(window, "gamedata");
 
   ui_pop_handlers();
   window = widget_delete(window);
@@ -128,7 +128,7 @@ static void gppan_on_save_clicked(struct widget * this DG_UNUSED, enum WIDGET_BU
   assert(window != NULL);
   struct gamedata * gamedata;
 
-  gamedata = widget_get_pointer(window, "gamedata");
+  gamedata = widget_get_gamedata_pointer(window, "gamedata");
   ui_pop_handlers();
   gamedata->quit = true;
   window = widget_delete(window);
@@ -139,7 +139,7 @@ static void gppan_on_quit_clicked(struct widget * this DG_UNUSED, enum WIDGET_BU
   assert(window != NULL);
   struct gamedata * gamedata;
 
-  gamedata = widget_get_pointer(window, "gamedata");
+  gamedata = widget_get_gamedata_pointer(window, "gamedata");
   ui_pop_handlers();
   gamedata->girls = 0;
   gamedata->quit = true;
@@ -168,8 +168,8 @@ static void pyjama_party_next(struct gamedata * gamedata)
       game_set_pyjama_party_control(PARTYCONTROLLER_PLAYER);
 
       window = widget_factory(wfd, NULL, "game_pyjama_party_level_completed");
-      widget_center_on_parent(window);
-      widget_set_pointer(window, "gamedata", gamedata);
+      widget_center(window);
+      widget_set_gamedata_pointer(window, "gamedata", gamedata);
 
       ui_push_handlers();
       ui_set_navigation_handlers();
@@ -186,7 +186,7 @@ static void ppn_on_exit(bool pressed, SDL_Event * event DG_UNUSED)
     {
       struct gamedata * gamedata;
 
-      gamedata = widget_get_pointer(window, "gamedata");
+      gamedata = widget_get_gamedata_pointer(window, "gamedata");
       ui_pop_handlers();
       gamedata->current_level++;
       gamedata->quit = true;
@@ -199,7 +199,7 @@ static void ppn_on_play_clicked(struct widget * this DG_UNUSED, enum WIDGET_BUTT
   assert(window != NULL);
   struct gamedata * gamedata;
 
-  gamedata = widget_get_pointer(window, "gamedata");
+  gamedata = widget_get_gamedata_pointer(window, "gamedata");
   ui_pop_handlers();
   gamedata->current_level++;
   gamedata->init_map();
@@ -211,7 +211,7 @@ static void ppn_on_save_clicked(struct widget * this DG_UNUSED, enum WIDGET_BUTT
   assert(window != NULL);
   struct gamedata * gamedata;
 
-  gamedata = widget_get_pointer(window, "gamedata");
+  gamedata = widget_get_gamedata_pointer(window, "gamedata");
   ui_pop_handlers();
   gamedata->current_level++;
   gamedata->quit = true;
@@ -223,7 +223,7 @@ static void ppn_on_quit_clicked(struct widget * this DG_UNUSED, enum WIDGET_BUTT
   assert(window != NULL);
   struct gamedata * gamedata;
 
-  gamedata = widget_get_pointer(window, "gamedata");
+  gamedata = widget_get_gamedata_pointer(window, "gamedata");
   ui_pop_handlers();
   gamedata->girls = 0;
   gamedata->quit = true;

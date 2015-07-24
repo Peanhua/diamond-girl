@@ -20,12 +20,13 @@
   Complete license can be found in the LICENSE file.
 */
 
-#include "ui.h"
-#include "widget.h"
+#include "event.h"
+#include "gc.h"
 #include "gfx_image.h"
 #include "image.h"
 #include "stack.h"
-#include "gc.h"
+#include "ui.h"
+#include "widget.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -162,9 +163,10 @@ struct widget * widget_new_root(int x, int y, int width, int height)
 
 struct widget * widget_delete(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
+
+  /* Remove event callbacks using this as user_data. */
+  event_unregister_all(EVENT_TYPE_SIZEOF_, object);
 
   /* Remove object from its parent. */
   if(object->parent_ != NULL)
@@ -209,7 +211,7 @@ struct widget * widget_delete(struct widget * object)
     {
       struct image * img;
 
-      img = widget_get_pointer(object, "raw_image");
+      img = widget_get_image_pointer(object, "raw_image");
       if(img != NULL)
         image_free(img);
     }
@@ -253,23 +255,7 @@ struct widget * widget_delete(struct widget * object)
     object->widgets_linking_to_this = stack_free(object->widgets_linking_to_this);
   }
 
-#ifndef NDEBUG
-  gc_free(GCT_WIDGET, object);
-#endif
-
-#if !defined(UI_DEBUG)
-  for(int j = 0; j < object->user_data_size_; j++)
-    {
-      free(object->user_data_names_[j]);
-      free(object->user_data_[j]);
-    }
-  free(object->user_data_names_);
-  free(object->user_data_);
-
-  free(object);
-#else
-  object->deleted_ = 1;
-#endif
+  object->deleted_ = true;
 
   return NULL;
 }
@@ -290,33 +276,28 @@ struct widget * widget_focus(void)
 
 enum WIDGET_STATE widget_state(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
+
   return object->state_;
 }
 
 int widget_x(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
+
   return object->x_;
 }
 
 int widget_y(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
+
   return object->y_;
 }
 
 int widget_absolute_x(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   int x;
   
   x = object->x_;
@@ -328,9 +309,7 @@ int widget_absolute_x(struct widget * object)
 
 int widget_absolute_y(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   int y;
   
   y = object->y_;
@@ -342,25 +321,19 @@ int widget_absolute_y(struct widget * object)
 
 int widget_width(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   return object->width_;
 }
 
 int widget_height(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   return object->height_;
 }
 
 enum GFX_IMAGE widget_get_image(struct widget * object, const char * name)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   enum GFX_IMAGE rv;
 
   rv = GFX_IMAGE_SIZEOF_;
@@ -374,99 +347,82 @@ enum GFX_IMAGE widget_get_image(struct widget * object, const char * name)
 
 ui_func_on_draw_t widget_on_draw(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   return object->on_draw_;
 }
 
 ui_func_on_focus_t widget_on_focus(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   return object->on_focus_;
 }
 
 ui_func_on_activate_t widget_on_activate(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   return object->on_activate_;
 }
 
 ui_func_on_activate_at_t widget_on_activate_at(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   return object->on_activate_at_;
 }
 
 ui_func_on_activate_t widget_on_release(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   return object->on_release_;
 }
 
 ui_func_on_mouse_move_t widget_on_mouse_move(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   return object->on_mouse_move_;
 }
 
 ui_func_on_unload_t widget_on_unload(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   return object->on_unload_;
 }
 
 struct widget * widget_parent(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   return object->parent_;
 }
 
 /* setters */
 void widget_set_focus(struct widget * object)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL);
 
-  if(current.focused != NULL && current.focused != object)
+  if(object->deleted_ == false)
     {
-      if(current.focused->tooltip_.widget != NULL && (widget_flags(current.focused->tooltip_.widget) & WF_HIDDEN) == 0)
-        widget_add_flags(current.focused->tooltip_.widget, WF_HIDDEN);
+      if(current.focused != NULL && current.focused != object)
+        {
+          if(current.focused->tooltip_.widget != NULL && (widget_flags(current.focused->tooltip_.widget) & WF_HIDDEN) == 0)
+            widget_add_flags(current.focused->tooltip_.widget, WF_HIDDEN);
 
-      if(current.focused->state_ == WIDGET_STATE_FOCUSED || current.focused->state_ == WIDGET_STATE_ACTIVATED)
-        current.focused->state_ = WIDGET_STATE_NORMAL;
-    }
+          if(current.focused->state_ == WIDGET_STATE_FOCUSED || current.focused->state_ == WIDGET_STATE_ACTIVATED)
+            current.focused->state_ = WIDGET_STATE_NORMAL;
+        }
 
-  current.focused = object;
+      current.focused = object;
   
-  if(current.focused != NULL)
-    {
-      current.focused->state_ = WIDGET_STATE_FOCUSED;
-      if(current.focused->on_focus_ != NULL)
-        current.focused->on_focus_(current.focused);
+      if(current.focused != NULL)
+        {
+          current.focused->state_ = WIDGET_STATE_FOCUSED;
+          if(current.focused->on_focus_ != NULL)
+            current.focused->on_focus_(current.focused);
+        }
     }
 }
 
 void widget_set_activated(struct widget * widget)
 {
-#if defined(UI_DEBUG)
-  assert(widget != NULL && widget->deleted_ == 0);
-#endif
+  assert(widget != NULL && widget->deleted_ == false);
   if(current.focused == widget && widget->state_ == WIDGET_STATE_FOCUSED)
     widget->state_ = WIDGET_STATE_ACTIVATED;
 }
@@ -474,9 +430,7 @@ void widget_set_activated(struct widget * widget)
 int widget_set_x(struct widget * object, int x)
 {
   assert(object != NULL);
-#if defined(UI_DEBUG)
-  assert(object->deleted_ == 0);
-#endif
+  assert(object->deleted_ == false);
 
   object->x_ = x;
 
@@ -486,20 +440,52 @@ int widget_set_x(struct widget * object, int x)
 int widget_set_y(struct widget * object, int y)
 {
   assert(object != NULL);
-#if defined(UI_DEBUG)
-  assert(object->deleted_ == 0);
-#endif
+  assert(object->deleted_ == false);
 
   object->y_ = y;
 
   return widget_y(object);
 }
 
+int widget_set_z(struct widget * object, int z)
+{
+  assert(object != NULL);
+  assert(object->deleted_ == false);
+
+  int change;
+
+  change = z - object->z_;
+  object->z_ = z;
+
+  for(int i = 0; i < object->children_count_; i++)
+    if(object->children_[i] != NULL)
+      widget_set_z(object->children_[i], object->children_[i]->z_ + change);
+  
+  return object->z_;
+}
+
+
 int widget_set_width(struct widget * object, int width)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
+
+  enum WIDGET_TYPE type;
+
+  type = widget_get_ulong(object, "type");
+  if(type == WT_WINDOW)
+    {
+      struct widget * closebutton;
+
+      closebutton = widget_get_widget_pointer(object, "closebutton");
+      if(closebutton != NULL)
+        {
+          int wchange;
+
+          wchange = width - widget_width(object);
+          widget_set_x(closebutton, widget_x(closebutton) + wchange);
+        }
+    }
+  
   object->width_ = width;
 
   return widget_width(object);
@@ -507,23 +493,37 @@ int widget_set_width(struct widget * object, int width)
 
 int widget_set_height(struct widget * object, int height)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   object->height_ = height;
 
   return widget_height(object);
 }
 
+void widget_to_image_size(struct widget * widget, struct image * image)
+{
+  assert(widget != NULL && widget->deleted_ == false);
+  if(image != NULL)
+    {
+      int w, h;
+
+      w = image->width;
+      h = image->height;
+      if(widget->flags_ & WF_DRAW_BORDERS)
+        {
+          w += 2;
+          h += 2;
+        }
+      widget_set_width(widget, w);
+      widget_set_height(widget, h);
+    }
+}  
 
 
 
 
 ui_func_on_draw_t widget_set_on_draw(struct widget * object, ui_func_on_draw_t on_draw)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   object->on_draw_ = on_draw;
 
   return widget_on_draw(object);
@@ -531,9 +531,7 @@ ui_func_on_draw_t widget_set_on_draw(struct widget * object, ui_func_on_draw_t o
 
 ui_func_on_focus_t widget_set_on_focus(struct widget * object, ui_func_on_focus_t on_focus)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   object->on_focus_ = on_focus;
 
   return widget_on_focus(object);
@@ -541,9 +539,7 @@ ui_func_on_focus_t widget_set_on_focus(struct widget * object, ui_func_on_focus_
 
 ui_func_on_activate_t widget_set_on_activate(struct widget * object, ui_func_on_activate_t activate_function)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   object->on_activate_ = activate_function;
 
   widget_add_flags(object, WF_FOCUSABLE);
@@ -553,18 +549,14 @@ ui_func_on_activate_t widget_set_on_activate(struct widget * object, ui_func_on_
 
 ui_func_on_activate_at_t widget_set_on_activate_at(struct widget * object, ui_func_on_activate_at_t on_activate_at)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   object->on_activate_at_ = on_activate_at;
   return widget_on_activate_at(object);
 }
 
 ui_func_on_activate_t widget_set_on_release(struct widget * object, ui_func_on_activate_t on_release)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   object->on_release_ = on_release;
 
   widget_add_flags(object, WF_FOCUSABLE);
@@ -574,18 +566,14 @@ ui_func_on_activate_t widget_set_on_release(struct widget * object, ui_func_on_a
 
 ui_func_on_mouse_move_t widget_set_on_mouse_move(struct widget * object, ui_func_on_mouse_move_t on_mouse_move)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   object->on_mouse_move_ = on_mouse_move;
   return widget_on_mouse_move(object);
 }
 
 ui_func_on_unload_t widget_set_on_unload(struct widget * object, ui_func_on_unload_t on_unload)
 {
-#if defined(UI_DEBUG)
-  assert(object != NULL && object->deleted_ == 0);
-#endif
+  assert(object != NULL && object->deleted_ == false);
   object->on_unload_ = on_unload;
   return widget_on_unload(object);
 }
@@ -595,9 +583,7 @@ ui_func_on_unload_t widget_set_on_unload(struct widget * object, ui_func_on_unlo
 
 void widget_set_modal(struct widget * widget)
 {
-#if defined(UI_DEBUG)
-  assert(widget == NULL || widget->deleted_ == 0);
-#endif
+  assert(widget == NULL || widget->deleted_ == false);
   
   if(widget == NULL)
     {
@@ -605,6 +591,8 @@ void widget_set_modal(struct widget * widget)
     }
   else
     {
+      assert(current.modal_object != widget); // todo: Should also check through current.previous_modal_objects
+      
       if(current.modal_object != NULL)
         stack_push(current.previous_modal_objects, current.modal_object);
       current.modal_object = widget;

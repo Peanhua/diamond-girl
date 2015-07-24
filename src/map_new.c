@@ -20,10 +20,11 @@
   Complete license can be found in the LICENSE file.
 */
 
-#include "map.h"
+#include "gfxbuf.h"
+#include "gfx_material.h"
 #include "girl.h"
+#include "map.h"
 #include "random.h"
-
 #include <assert.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -113,7 +114,12 @@ struct map * map_new(int width, int height)
       map->borders      = false;
 
 #ifdef WITH_OPENGL
-      map->drawbuf      = NULL;
+      map->drawbuf = gfxbuf_new(GFXBUF_DYNAMIC_2D, GL_QUADS, GFXBUF_BLENDING | GFXBUF_TEXTURE);
+      if(map->drawbuf != NULL)
+        {
+          gfxbuf_resize(map->drawbuf, 40 * 40 * 4);
+          map->drawbuf->material = gfx_material_new();
+        }
       map->borderbuf    = NULL;
 #endif
 
@@ -144,9 +150,7 @@ struct map * map_new(int width, int height)
       map->map_y           = 0;
       map->map_fine_y      = 0;
       
-      map->in_editor      = false;
-      for(int i = 0; i < 4; i++)
-        map->display_colour[i] = 0xff;
+      map->in_editor       = false;
       map->fast_forwarding = false;
 
       map->player_movement   = NULL;
@@ -155,12 +159,22 @@ struct map * map_new(int width, int height)
       map->toggle_pause      = NULL;
 
       map->girl = girl_new();
-      if(map->girl == NULL)
+
+      if(map->data              == NULL ||
+         map->processed         == NULL ||
+         map->move_directions   == NULL ||
+#ifdef WITH_OPENGL
+         map->drawbuf           == NULL ||
+         map->drawbuf->material == NULL ||
+#endif
+         map->girl              == NULL)
         {
           free(map);
           map = NULL;
         }
     }
+
+  assert(map != NULL);
 
   return map;
 }

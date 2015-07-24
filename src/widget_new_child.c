@@ -22,52 +22,18 @@
 
 #include "widget.h"
 #include <assert.h>
-#include <errno.h>
 
 struct widget * widget_new_child(struct widget * parent, int x, int y, int width, int height)
 {
-#if defined(UI_DEBUG)
-  assert(parent != NULL && parent->deleted_ == 0);
-#endif
+  assert(parent != NULL && parent->deleted_ == false);
   struct widget * obj;
 
   assert(parent != NULL);
 
   obj = widget_new(x, y, width, height);
   if(obj != NULL)
-    {
-      int ind;
-
-      ind = -1;
-      for(int i = 0; ind == -1 && i < parent->children_count_; i++)
-        if(parent->children_[i] == NULL)
-          ind = i;
-      if(ind == -1)
-        {
-          struct widget ** tmp;
-
-          tmp = realloc(parent->children_, sizeof(struct widget *) * (parent->children_count_ + 1));
-          assert(tmp != NULL);
-          if(tmp != NULL)
-            {
-              ind = parent->children_count_;
-
-              parent->children_        = tmp;
-              parent->children_count_ += 1;
-            }
-          else
-            fprintf(stderr, "%s(): Failed to allocate memory: %s\n", __FUNCTION__, strerror(errno));
-        }
-      assert(ind >= 0);
-      if(ind != -1)
-        {
-          parent->children_[ind] = obj;
-          obj->parent_ = parent;
-          obj->z_ = parent->z_;
-        }
-      else
-        obj = widget_delete(obj);
-    }
+    if(widget_reparent(obj, parent) == NULL)
+      obj = widget_delete(obj);
 
   return obj;
 }

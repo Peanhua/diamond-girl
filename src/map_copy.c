@@ -20,6 +20,7 @@
   Complete license can be found in the LICENSE file.
 */
 
+#include "gfx_material.h"
 #include "map.h"
 #include "random.h"
 #include <assert.h>
@@ -81,9 +82,6 @@ struct map * map_copy(struct map * dst, struct map * src)
   dst->player_death        = src->player_death;
   dst->player_next_level   = src->player_next_level;
   dst->toggle_pause        = src->toggle_pause;
-
-  for(int i = 0; i < 4; i++)
-    dst->display_colour[i] = src->display_colour[i];
 
   for(int y = 0; y < src->height; y++)
     for(int x = 0; x < src->width; x++)

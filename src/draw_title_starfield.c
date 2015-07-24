@@ -23,6 +23,7 @@
 #include "title.h"
 #include "gfx.h"
 #include "gfxbuf.h"
+#include "gfx_material.h"
 #include "globals.h"
 #include "random.h"
 
@@ -61,6 +62,7 @@ void draw_title_starfield_initialize(void)
       assert(buffer != NULL);
 
       gfxbuf_resize(buffer, STARS * 2);
+      buffer->material = gfx_material_new();
       
       y = STAR_INITIAL_Y;
       for(int i = 0; i < STARS; i++, y += 1.0f / (float) STARS_PER_PIXEL)
@@ -92,8 +94,7 @@ void draw_title_starfield(void)
                 camera_center[0], camera_center[1], camera_center[2],
                 camera_up[0],     camera_up[1],     camera_up[2]);
 
-      gfx_colour(255.0f * 0.25 * fade_in, 255.0f * 0.5f * fade_in, 255.0f * 0.5f * fade_in, 0xff);
-
+      gfx_material_change4f(buffer->material, GFX_MATERIAL_COLOUR, 0.25 * fade_in, 0.50 * fade_in, 0.50 * fade_in, 1.0f);
 
       for(int i = 0; i < STARS; i++)
         {

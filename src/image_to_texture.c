@@ -22,11 +22,11 @@
 
 #ifdef WITH_OPENGL
 
+#include "gfx_material.h"
+#include "gfxbuf.h"
+#include "globals.h"
 #include "image.h"
 #include "texture.h"
-#include "globals.h"
-#include "gfxbuf.h"
-
 #include <assert.h>
 
 void image_to_texture(struct image * image, bool generate_alpha, bool use_mipmapping, bool linear)
@@ -37,18 +37,32 @@ void image_to_texture(struct image * image, bool generate_alpha, bool use_mipmap
 
   texture_setup_from_image(image, generate_alpha, use_mipmapping, linear);
 
+  image_setup_buffer(image, generate_alpha);
+}
+
+bool image_setup_buffer(struct image * image, bool alpha)
+{
+  bool success;
+
+  success = false;
   if(image->buffer == NULL)
     {
       uint8_t bufopts;
 
       bufopts = GFXBUF_TEXTURE;
-      if(generate_alpha == true)
+      if(alpha == true)
         bufopts |= GFXBUF_BLENDING;
       image->buffer = gfxbuf_new(GFXBUF_STATIC_2D, GL_QUADS, bufopts);
       assert(image->buffer != NULL);
       if(image->buffer != NULL)
-        gfxbuf_resize(image->buffer, 4);
+        {
+          gfxbuf_resize(image->buffer, 4);
+          image->buffer->material = gfx_material_default();
+          success = true;
+        }
     }
+
+  return success;
 }
 
 #endif

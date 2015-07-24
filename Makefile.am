@@ -18,6 +18,7 @@ EXTRA_DIST = config.rpath m4/ChangeLog  \
 	translate.sh \
 	translate-map-fi.sed translate-unmap-fi.sed \
 	translate-map-fr.sed translate-unmap-fr.sed \
+	blender-py/export.py blender-py/extract_materials.py blender-py/render.py blender-py/treasure-images.py blender-py/treasure-models.py \
 	mtwist-1.5/CHANGELOG \
 	mtwist-1.5/README \
 	mtwist-1.5/mtcctest.cc \
@@ -29,7 +30,8 @@ EXTRA_DIST = config.rpath m4/ChangeLog  \
 	mtwist-1.5/randistrs.c \
 	mtwist-1.5/randistrs.h \
 	mtwist-1.5/rdcctest.cc \
-	mtwist-1.5/rdtest.c
+	mtwist-1.5/rdtest.c \
+	pcg/pcg32.c
 
 ACLOCAL_AMFLAGS = -I m4
 

@@ -149,7 +149,7 @@ static void on_play_clicked(struct widget * this, enum WIDGET_BUTTON button DG_U
 {
   struct map * map;
 
-  map = widget_get_pointer(widget_parent(this), "map");
+  map = widget_get_map_pointer(widget_parent(this), "map");
   if(map != NULL)
     if(map->game_paused == true)
       map->toggle_pause(map, false);
@@ -159,7 +159,7 @@ static void on_stop_clicked(struct widget * this DG_UNUSED, enum WIDGET_BUTTON b
 {
   struct map * map;
 
-  map = widget_get_pointer(widget_parent(this), "map");
+  map = widget_get_map_pointer(widget_parent(this), "map");
   if(map != NULL)
     if(map->game_paused == false)
       map->toggle_pause(map, true);
@@ -174,7 +174,7 @@ static void on_forward_clicked(struct widget * this, enum WIDGET_BUTTON button D
 {
   struct map * map;
 
-  map = widget_get_pointer(widget_parent(this), "map");
+  map = widget_get_map_pointer(widget_parent(this), "map");
   if(map != NULL)
     map->fast_forwarding = true;
 }

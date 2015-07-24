@@ -26,25 +26,36 @@
 #include "globals.h"
 #include "gfx.h"
 #include "gfxbuf.h"
-#include "image.h"
 #include "stack.h"
+
+static void draw_mesh(struct td_object_mesh * mesh);
 
 
 void td_object_draw(struct td_object * td_object)
 {
+  draw_mesh(td_object->root);
+}
+
+
+static void draw_mesh(struct td_object_mesh * mesh)
+{
   //glPushMatrix();
-  for(unsigned int i = 0; i < td_object->meshes->size; i++)
+  //glMultMatrixf(mesh->matrix); // Commented out because it looks like exporting from Blender automatically applies location&rotation (perhaps scale as well, did not test it).
+  for(unsigned int i = 0; i < mesh->gfxbufs->size; i++)
     {
-      struct td_object_mesh * mesh;
-      
-      mesh = td_object->meshes->data[i];
-      //glMultMatrixf(mesh->matrix); // Commented out because it looks like exporting from Blender automatically applies location&rotation (perhaps scale as well, did not test it).
-      if(mesh->texture_image != NULL)
-        gfxgl_bind_texture(mesh->texture_image->texture);
-      gfxbuf_draw_init(mesh->gfxbuf);
-      gfxbuf_draw(mesh->gfxbuf);
+      struct gfxbuf * b;
+
+      b = mesh->gfxbufs->data[i];
+      gfxbuf_draw_init(b);
+      gfxbuf_draw(b);
     }
+
+  for(unsigned int i = 0; i < mesh->children->size; i++)
+    draw_mesh(mesh->children->data[i]);
+  
   //glPopMatrix();
 }
+
+
 
 #endif

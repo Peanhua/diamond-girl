@@ -31,7 +31,7 @@ static bool ui_draw_process(struct widget * obj, int z);
 
 static struct stack * destroy;
 
-void ui_draw(bool colorbuffer_clearing)
+void ui_draw(bool colorbuffer_clearing DG_UNUSED_WITHOUT_OPENGL)
 {
 #ifdef WIN32
   /* This fixes garbage staying on screen in Windows8.1: */
@@ -55,15 +55,13 @@ void ui_draw(bool colorbuffer_clearing)
   struct widget * root;
 
   root = widget_root();
-#if defined(UI_DEBUG)
-  assert(root != NULL && root->deleted_ == 0);
-#endif
+  assert(root != NULL && root->deleted_ == false);
 
   bool found;
 
   destroy = stack_new();
   found = true;
-  for(int z = 0; found == true; z++)
+  for(int z = 0; found == true || z < 9; z++)
     found = ui_draw_process(root, z);
 
   ui_call_handler(UIC_DRAW, false, NULL);

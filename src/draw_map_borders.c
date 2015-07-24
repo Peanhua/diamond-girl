@@ -26,6 +26,7 @@
 #include "map.h"
 #include "gfx_glyph.h"
 #include "gfx_image.h"
+#include "gfx_material.h"
 #include "globals.h"
 #include "traits.h"
 #include <assert.h>
@@ -35,7 +36,7 @@ static void generate(struct map * map, int width, int height);
 #endif
 
 
-void draw_map_borders(struct map * map, enum GAME_MODE game_mode, trait_t active_traits, int topleft_x, int topleft_y, int width, int height)
+void draw_map_borders(struct map * map, enum GAME_MODE game_mode DG_UNUSED_WITHOUT_OPENGL, trait_t active_traits DG_UNUSED_WITHOUT_OPENGL, int topleft_x, int topleft_y, int width, int height)
 {
   if(map->borders)
     {
@@ -48,7 +49,6 @@ void draw_map_borders(struct map * map, enum GAME_MODE game_mode, trait_t active
           if(map->borderbuf == NULL)
             generate(map, width, height);
 
-          gfx_colour_white();
           gfxbuf_draw_init(map->borderbuf);
           gfxbuf_draw_at(map->borderbuf, topleft_x, topleft_y);
 
@@ -60,35 +60,42 @@ void draw_map_borders(struct map * map, enum GAME_MODE game_mode, trait_t active
                 enum GFX_IMAGE image_id;
               } traits[] =
                   {
-                    { TRAIT_KEY,            GFX_IMAGE_TRAIT_KEY            },
                     { TRAIT_RIBBON,         GFX_IMAGE_TRAIT_RIBBON         },
                     { TRAIT_GREEDY,         GFX_IMAGE_TRAIT_GREEDY         },
                     { TRAIT_TIME_CONTROL,   GFX_IMAGE_TRAIT_TIME_CONTROL   },
                     { TRAIT_POWER_PUSH,     GFX_IMAGE_TRAIT_POWER_PUSH     },
                     { TRAIT_DIAMOND_PUSH,   GFX_IMAGE_TRAIT_DIAMOND_PUSH   },
-                    { TRAIT_RECYCLER,       GFX_IMAGE_TRAIT_RECYCLER       },
-                    { TRAIT_STARS1,         GFX_IMAGE_TRAIT_STARS1         },
-                    { TRAIT_STARS2,         GFX_IMAGE_TRAIT_STARS2         },
-                    { TRAIT_STARS3,         GFX_IMAGE_TRAIT_STARS3         },
                     { TRAIT_CHAOS,          GFX_IMAGE_TRAIT_CHAOS          },
                     { TRAIT_DYNAMITE,       GFX_IMAGE_TRAIT_DYNAMITE       },
+                    { TRAIT_QUESTS,         GFX_IMAGE_TRAIT_QUESTS         },
                     { TRAIT_ALL,            GFX_IMAGE_SIZEOF_              }
                   };
               int x;
 
               x = topleft_x + 2;
-              for(int i = 0; traits[i].trait_id != TRAIT_ALL; i++)
-                if(active_traits & traits[i].trait_id)
-                  {
-                    struct image * img;
+
+              for(int i = 0; i < TRAIT_SIZEOF_; i++)
+                if(traits_sorted[i] != TRAIT_QUESTS || game_mode == GAME_MODE_ADVENTURE) // No quests trait visible in pyjama party mode.
+                  if(active_traits & traits_sorted[i])
+                    {
+                      bool found;
+                  
+                      found = false;
+                      for(int j = 0; found == false && traits[j].trait_id != TRAIT_ALL; j++)
+                        if(traits[j].trait_id == traits_sorted[i])
+                          {
+                            found = true;
+
+                            struct image * img;
                             
-                    img = gfx_image(traits[i].image_id);
-                    if(img != NULL)
-                      {
-                        gfx2d_draw_image_scaled(x, topleft_y - 24 + 2, img, 20, 20);
-                        x += 24;
-                      }
-                  }
+                            img = gfx_image(traits[j].image_id);
+                            if(img != NULL)
+                              {
+                                gfx2d_draw_image_scaled(x, topleft_y - 24 + 2, img, 20, 20);
+                                x += 24;
+                              }
+                          }
+                    }
               
               enum GFX_IMAGE image_id;
 
@@ -155,7 +162,7 @@ static void generate(struct map * map, int width, int height)
   if(map->borderbuf != NULL)
     {
       gfxbuf_resize(map->borderbuf, 4 * ((width + 2 + height + 2) * 2 + TRAIT_SIZEOF_));
-
+      map->borderbuf->material = gfx_material_default();
       map->borderbuf->vertices = 0;
 
       for(int y = -1; y < height + 1; y++)

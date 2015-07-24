@@ -31,6 +31,7 @@ static void on_right(bool pressed, SDL_Event * event);
 static void on_manipulate(bool pressed, SDL_Event * event);
 static void on_alt_manipulate(bool pressed, SDL_Event * event);
 static void on_manipulate_internal(bool pressed, bool alt);
+static struct widget * get_current(void);
 
 void ui_set_navigation_handlers(void)
 {
@@ -42,13 +43,30 @@ void ui_set_navigation_handlers(void)
   ui_set_handler(UIC_ALT_MANIPULATE, on_alt_manipulate);
 }
 
+static struct widget * get_current(void)
+{
+  struct widget * current;
+  
+  current = widget_focus();
+  if(current == NULL)
+    {
+      struct widget * w;
+
+      w = widget_find_focusable();
+      if(w != NULL)
+        widget_set_focus(w);
+    }
+
+  return current;
+}
+
 static void on_up(bool pressed, SDL_Event * event DG_UNUSED)
 {
   if(pressed == true)
     {
       struct widget * current;
       
-      current = widget_focus();
+      current = get_current();
       while(current != NULL)
         {
           struct widget * new;
@@ -72,7 +90,7 @@ static void on_down(bool pressed, SDL_Event * event DG_UNUSED)
     {
       struct widget * current;
       
-      current = widget_focus();
+      current = get_current();
       while(current != NULL)
         {
           struct widget * new;
@@ -96,7 +114,7 @@ static void on_left(bool pressed, SDL_Event * event DG_UNUSED)
     {
       struct widget * current;
 
-      current = widget_focus();
+      current = get_current();
       while(current != NULL)
         {
           struct widget * new;
@@ -120,7 +138,7 @@ static void on_right(bool pressed, SDL_Event * event DG_UNUSED)
     {
       struct widget * current;
 
-      current = widget_focus();
+      current = get_current();
       while(current != NULL)
         {
           struct widget * new;

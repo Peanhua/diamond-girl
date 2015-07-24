@@ -23,6 +23,7 @@
 #ifndef WIDGET_H_
 #define WIDGET_H_
 
+#include "diamond_girl.h"
 #include "ui.h"
 #include "traits.h"
 #include "stack.h"
@@ -37,6 +38,8 @@ struct theme;
 struct highscore_entry;
 enum GFX_IMAGE;
 struct cave;
+struct td_object;
+struct quest;
 
 
 /* The state of the widget */
@@ -69,18 +72,21 @@ enum WIDGET_TYPE
   };
 
 /* Widget flags */
-#define WF_ALIGN_CENTER      (1<< 0)
-#define WF_ALIGN_IMAGE_RIGHT (1<< 1)
-#define WF_CAST_SHADOW       (1<< 2)
-#define WF_DRAW_BORDERS      (1<< 3)
-#define WF_BACKGROUND        (1<< 4)
-#define WF_FREE_RAW_IMAGE    (1<< 5)
-#define WF_FOCUSABLE         (1<< 6) /* If set, the widget can be focused. */
-#define WF_HIDDEN            (1<< 7) /* If set, the widget is not drawn, recursively. The widget remains active. */
-#define WF_SCALE_RAW_IMAGE   (1<< 8) /* If set, the raw_image is drawn scaled to fit. */
-#define WF_DESTROY           (1<< 9) /* If set, the widget is destroyed by an automatic destroyer function at the end of ui_draw(). */
-#define WF_CLIPPING          (1<<10) /* Clip drawing of this and its children from going outside of the widget. */
-
+#define WF_ALIGN_CENTER       (1<< 0)
+#define WF_ALIGN_IMAGE_RIGHT  (1<< 1)
+#define WF_CAST_SHADOW        (1<< 2)
+#define WF_DRAW_BORDERS       (1<< 3)
+#define WF_BACKGROUND         (1<< 4)
+#define WF_FREE_RAW_IMAGE     (1<< 5)
+#define WF_FOCUSABLE          (1<< 6) /* If set, the widget can be focused. */
+#define WF_HIDDEN             (1<< 7) /* If set, the widget is not drawn, recursively. The widget remains active. */
+#define WF_SCALE_RAW_IMAGE    (1<< 8) /* If set, the raw_image is drawn scaled to fit. */
+#define WF_DESTROY            (1<< 9) /* If set, the widget is destroyed by an automatic destroyer function at the end of ui_draw(). */
+#define WF_CLIPPING           (1<<10) /* Clip drawing of this and its children from going outside of the widget. */
+#define WF_LIGHTER            (1<<11) /* Draw using slightly lighter colours than normally. */
+#define WF_ONLY_FOCUS_BORDERS (1<<12) /* Draw borders only when the widget is focused. */
+#define WF_ACTIVE             (1<<13) /* Selected list item has this. */
+#define WF_FOCUS_HINT         (1<<14) /* When finding suitable widgets for focusing, prefer the ones with this set. */
 
 struct widget;
 struct map;
@@ -109,6 +115,12 @@ struct widget
   char ** user_data_names_;
   void ** user_data_;
   int     user_data_size_;
+#ifndef NDEBUG
+  char *  user_data_types_; /* i=image, s=string, l=long, u=ulong, d=double,
+                             * P=generic pointer, C=cave, G=gamedata, I=image pointer, M=map pointer, Q=questline, S=select options, T=theme, W=widget pointer
+                             */
+#endif
+  
 
   int x_, y_, z_;
   int width_, height_;
@@ -141,13 +153,15 @@ struct widget
     struct widget * widget;
   } tooltip_;
 
-#if defined(UI_DEBUG)
-  int deleted_;
+  bool deleted_;
+#ifndef NDEBUG
+  char * backtrace_;
 #endif
 };
 
 
 extern struct widget * widget_new(int x, int y, int width, int height);
+extern struct widget * widget_free_(struct widget * widget); // Internal function (called by gc), use delete instead for normal code.
 
 #ifdef NDEBUG
 # define    widget_dump(x)
@@ -167,21 +181,29 @@ extern struct widget * widget_new_highscore_einfo(struct widget * parent, struct
 extern struct widget * widget_new_legend(struct widget * parent, int x, int y);
 extern struct widget * widget_new_list(struct widget * parent, int x, int y, int width, int height, struct stack * items);
 extern struct widget * widget_new_map(struct widget * parent, int x, int y, int width, int height, struct map * map, enum GAME_MODE game_mode);
-extern struct widget * widget_new_message_window(const char * title, const char * message);
+extern struct widget * widget_new_text_area(struct widget * parent, int x, int y, int width, int height, char const * text, bool center_horizontally);
+extern void            widget_new_message_window(const char * title, struct widget * header, const char * message);
+extern void            widget_new_message_dialog(const char * title, struct widget * header, const char * message, struct widget * button);
 extern struct widget * widget_new_osd_volume(void);
 extern struct widget * widget_new_playback_controls(struct widget * parent, int x, int y, char const * const title);
 extern struct widget * widget_new_select(struct widget * parent, int x, int y, int width, unsigned int selected_index, struct stack * options);
 extern struct widget * widget_new_slider(struct widget * parent, int x, int y, int width, int initial_value, int min_value, int max_value);
 extern struct widget * widget_new_spacer(struct widget * parent, int width, int height);
 extern struct widget * widget_new_text(struct widget * parent, int x, int y, char const * const text);
+extern struct widget * widget_new_3dobject(struct widget * parent, int x, int y, int width, int height, struct td_object * object);
+extern struct widget * widget_new_gfx_image(struct widget * parent, int x, int y, enum GFX_IMAGE gfx_image_id);
+extern struct widget * widget_new_image(struct widget * parent, int x, int y, struct image * image);
 extern struct widget * widget_new_theme_info_button(struct widget * parent, int x, int y, struct theme * theme);
-extern struct widget * widget_new_theme_info_window(struct theme * theme);
+extern void            widget_new_theme_info_window(struct theme * theme);
+extern struct widget * widget_new_quest_treasure_info(struct widget * parent, int x, int y, struct quest * quest, bool lighter);
 extern struct widget * widget_new_title_credits(struct widget * parent, int x, int y, int width);
 extern struct widget * widget_new_title_help(struct widget * parent, int x, int y, int width, int height);
 extern struct widget * widget_new_title_highscores(struct widget * parent, int x, int y, struct cave * cave);
 extern struct widget * widget_new_title_partystatus(struct widget * parent, int x, int y);
+extern struct widget * widget_new_quest_menu(struct widget * parent, int x, int y);
 extern struct widget * widget_new_tooltip(struct widget * parent);
 extern struct widget * widget_new_trait_button(struct widget * parent, int x, int y, int width, int height, trait_t trait, bool always_enabled_image, bool controls);
+extern void            widget_new_trait_info_window(trait_t trait, bool enable_controls);
 extern struct widget * widget_new_trait_key_button(struct widget * parent, int x, int y, int width, int height, struct cave * cave, unsigned int level);
 extern struct widget * widget_new_traits_available_window(trait_t new_traits);
 extern struct widget * widget_new_window(struct widget * parent, int width, int height, char const * const title);
@@ -189,6 +211,8 @@ extern void            settings(void (*settings_changed_cb)(bool gfx_restart, bo
 
 /* High level widget manipulation */
 extern void     widget_center(struct widget * widget); /* Center in relative to its parent. */
+extern void     widget_center_horizontally(struct widget * widget);
+extern void     widget_center_vertically(struct widget * widget);
 extern bool     widget_enabled(struct widget * widget);
 extern bool     widget_set_enabled(struct widget * widget, bool enabled);
 extern uint32_t widget_flags(struct widget * widget);
@@ -198,13 +222,16 @@ extern uint32_t widget_delete_flags(struct widget * widget, uint32_t flags);
 extern void     widget_set_tooltip(struct widget * widget, char * tooltip);
 extern void     widget_set_no_focus(struct widget * widget, bool recursively);
 extern void     widget_resize_to_fit_children(struct widget * grid_row);
-extern void     widget_center_on_parent(struct widget * widget);
 
 /* Widget specific manipulation */
 extern void     widget_slider_set(struct widget * widget, int value);
-extern void     widget_title_credits_set(struct widget * widget, char * text);
-extern struct ui_widget_select_option * widget_new_select_option(void * data, char * text);
-extern void     widget_set_select_options(struct widget * widget, struct stack * options);
+extern void     widget_title_credits_set(struct widget * widget, char * text, bool long_delay);
+extern struct ui_widget_select_option * widget_new_select_option(void * data, char const * text);
+extern struct stack * widget_get_select_options(struct widget * widget);
+extern struct stack * widget_set_select_options(struct widget * widget, struct stack * options);
+extern void     widget_list_set(struct widget * list, unsigned int active);
+extern void     widget_list_set_item_navigation_right(struct widget * list, struct widget * right); /* Set all items navigation right to the given 'right' widget. */
+extern void     widget_quest_menu_setup_navigation(struct widget * quest_menu, struct widget * widget_down); /* Setup appropriate widgets in quest menu to navigate down to widget_down. */
 
 /* Create/delete widgets */
 extern struct widget * widget_new_root(int x, int y, int width, int height);
@@ -222,9 +249,12 @@ extern int                      widget_absolute_x(struct widget * widget);
 extern int                      widget_absolute_y(struct widget * widget);
 extern int                      widget_width(struct widget * widget);
 extern int                      widget_height(struct widget * widget);
+extern int                      widget_top_z(struct widget * widget); /* Return the topmost z value of the widget and it's children. */
 
 extern struct widget *          widget_parent(struct widget * widget);
+extern struct widget *          widget_reparent(struct widget * widget, struct widget * parent);
 extern struct widget *          widget_find(struct widget * root, const char * id); /* Search from under "root" a widget whose ulong "id" equals to id. */
+extern struct widget *          widget_find_focusable(void); /* Return something that can be focused (or NULL). */
 
 /* Callbacks */
 extern ui_func_on_draw_t        widget_on_draw(struct widget * widget);
@@ -245,7 +275,14 @@ extern char *                   widget_get_string(struct widget * widget, const 
 extern long                     widget_get_long(struct widget * widget, const char * name);
 extern unsigned long            widget_get_ulong(struct widget * widget, const char * name);
 extern double                   widget_get_double(struct widget * widget, const char * name);
-extern void *                   widget_get_pointer(struct widget * widget, const char * name);
+extern void *                   widget_get_pointer(struct widget * widget, const char * name, char type);
+extern struct cave *            widget_get_cave_pointer(struct widget * widget, char const * name);
+extern struct gamedata *        widget_get_gamedata_pointer(struct widget * widget, char const * name);
+extern struct image *           widget_get_image_pointer(struct widget * widget, char const * name);
+extern struct map *             widget_get_map_pointer(struct widget * widget, char const * name);
+extern struct questline *       widget_get_questline_pointer(struct widget * widget, char const * name);
+extern struct theme *           widget_get_theme_pointer(struct widget * widget, char const * name);
+extern struct widget *          widget_get_widget_pointer(struct widget * widget, char const * name);
 
 /* Setters */
 extern struct widget *          widget_set_root(struct widget * widget);
@@ -255,8 +292,10 @@ extern void                     widget_set_modal(struct widget * widget);
 extern void                     widget_unset_modal(struct widget * widget);
 extern int                      widget_set_x(struct widget * widget, int x);
 extern int                      widget_set_y(struct widget * widget, int y);
+extern int                      widget_set_z(struct widget * widget, int z);
 extern int                      widget_set_width(struct widget * widget, int width);
 extern int                      widget_set_height(struct widget * widget, int height);
+extern void                     widget_to_image_size(struct widget * widget, struct image * image);
 /* Callbacks */
 extern ui_func_on_draw_t        widget_set_on_draw(struct widget * widget, ui_func_on_draw_t on_draw);
 extern ui_func_on_focus_t       widget_set_on_focus(struct widget * widget, ui_func_on_focus_t on_focus);
@@ -274,15 +313,18 @@ extern void                     widget_set_navigation_up(struct widget * widget,
 extern void                     widget_set_navigation_down(struct widget * widget, struct widget * down);
 /* User data */
 extern enum GFX_IMAGE           widget_set_image( struct widget * widget, const char * name, enum GFX_IMAGE user_data);
-extern char *                   widget_set_string(struct widget * widget, const char * name, char const * const user_data, ...)
-#ifdef __GNUC__
-  __attribute__((format (printf, 3, 4)))
-#endif
-  ;
+extern char *                   widget_set_string(struct widget * widget, const char * name, char const * const user_data, ...) DG_PRINTF_FORMAT3;
 extern long                     widget_set_long(   struct widget * widget, const char * name, long user_data);
 extern unsigned long            widget_set_ulong(  struct widget * widget, const char * name, unsigned long user_data);
 extern double                   widget_set_double( struct widget * widget, const char * name, double user_data);
-extern void *                   widget_set_pointer(struct widget * widget, const char * name, void * user_data);
+extern void *                   widget_set_pointer(struct widget * widget, const char * name, char type, void * user_data);
+extern struct cave *            widget_set_cave_pointer(struct widget * widget, char const * name, struct cave * cave);
+extern struct gamedata *        widget_set_gamedata_pointer(struct widget * widget, char const * name, struct gamedata * gamedata);
+extern struct image *           widget_set_image_pointer(struct widget * widget, char const * name, struct image * image);
+extern struct map *             widget_set_map_pointer(struct widget * widget, char const * name, struct map * map);
+extern struct questline *       widget_set_questline_pointer(struct widget * widget, char const * name, struct questline * questline);
+extern struct theme *           widget_set_theme_pointer(struct widget * widget, char const * name, struct theme * theme);
+extern struct widget *          widget_set_widget_pointer(struct widget * widget, char const * name, struct widget * widget_pointer);
 
 
 /* misc */

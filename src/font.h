@@ -23,6 +23,7 @@
 #ifndef TEXT_H_
 #define TEXT_H_
 
+#include "diamond_girl.h"
 struct image;
 struct gfxbuf;
 
@@ -66,6 +67,8 @@ extern int           font_nwidth(const char * text, int textlen); /* Return the 
 
 /* Drawing */
 extern void          font_write(int x, int y, const char * text); /* Write to screen. */
+extern void          font_printf(int x, int y, const char * fmt, ...) DG_PRINTF_FORMAT3;
+
 #ifdef WITH_OPENGL
 extern void          font_render(int x, int y, const char * text, struct gfxbuf * gfxbuf); /* Render to gfxbuf. */
 #endif

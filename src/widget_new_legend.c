@@ -30,8 +30,11 @@ static void on_draw(struct widget * this);
 struct widget * widget_new_legend(struct widget * parent, int x, int y)
 {
   struct widget * obj;
+  unsigned int width, height;
+  
+  draw_legend(0, 0, &width, &height);
 
-  obj = widget_new_child(parent, x, y, 34 * font_width("W"), 14 * 26);
+  obj = widget_new_child(parent, x, y, width, height);
   assert(obj != NULL);
   if(obj != NULL)
     widget_set_on_draw(obj, on_draw);
@@ -45,5 +48,5 @@ static void on_draw(struct widget * this)
 
   x = widget_absolute_x(this);
   y = widget_absolute_y(this);
-  draw_legend(x, y);
+  draw_legend(x, y, NULL, NULL);
 }

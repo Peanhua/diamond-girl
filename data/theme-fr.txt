@@ -1,0 +1,10 @@
+Aujourd'hui est un jour sp}cial.
+
+Cela peut avoir un effet
+sur le graphisme,
+sur les sons, et
+sur les r~gles de jeu.
+
+Les journ}es sp}ciales peuvent
+[tre (d}s)activ}es via
+les param~tres.

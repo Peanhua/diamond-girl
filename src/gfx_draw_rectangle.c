@@ -22,6 +22,7 @@
 
 #include "gfx.h"
 #include "gfxbuf.h"
+#include "gfx_material.h"
 #include "globals.h"
 #include <assert.h>
 
@@ -39,25 +40,35 @@ void gfx_draw_rectangle(SDL_Rect * r, uint8_t red, uint8_t green, uint8_t blue, 
       if(buffer == NULL)
         {
           buffer = gfxbuf_new(GFXBUF_DYNAMIC_2D, GL_QUADS, GFXBUF_BLENDING);
-          assert(buffer != NULL);
-          gfxbuf_resize(buffer, 4);
+          if(buffer != NULL)
+            {
+              gfxbuf_resize(buffer, 4);
+              buffer->material = gfx_material_new();
+            }
         }
+      
+      if(buffer != NULL && buffer->material != NULL)
+        {
+          pos = 0;
+          buffer->vbuf[pos++] = 0;
+          buffer->vbuf[pos++] = 0;
+          buffer->vbuf[pos++] = r->w - 1;
+          buffer->vbuf[pos++] = 0;
+          buffer->vbuf[pos++] = r->w - 1;
+          buffer->vbuf[pos++] = r->h - 1;
+          buffer->vbuf[pos++] = 0;
+          buffer->vbuf[pos++] = r->h - 1;
+          assert(pos / 2 == 4);
+          gfxbuf_update(buffer, 0, 4);
 
-      pos = 0;
-      buffer->vbuf[pos++] = 0;
-      buffer->vbuf[pos++] = 0;
-      buffer->vbuf[pos++] = r->w - 1;
-      buffer->vbuf[pos++] = 0;
-      buffer->vbuf[pos++] = r->w - 1;
-      buffer->vbuf[pos++] = r->h - 1;
-      buffer->vbuf[pos++] = 0;
-      buffer->vbuf[pos++] = r->h - 1;
-      assert(pos / 2 == 4);
-      gfxbuf_update(buffer, 0, 4);
+          gfx_material_change4f(buffer->material, GFX_MATERIAL_COLOUR,
+                                (float) red / 255.0,
+                                (float) green / 255.0,
+                                (float) blue / 255.0,
+                                (float) alpha / 255.0);
 
-      gfx_colour(red, green, blue, alpha);
-
-      gfxbuf_draw_at(buffer, r->x, r->y);
+          gfxbuf_draw_at(buffer, r->x, r->y);
+        }
 #endif
     }
   else

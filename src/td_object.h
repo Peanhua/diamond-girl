@@ -30,24 +30,25 @@
 struct gfxbuf;
 struct stack;
 
-/* There is support only for a single texture per mesh */
 struct td_object_mesh
 {
-  GLfloat         matrix[4 * 4];
-  struct gfxbuf * gfxbuf;
-  struct image *  texture_image;
+  GLfloat        matrix[4 * 4];
+  struct stack * gfxbufs;
+  struct stack * children;
 };
 
 struct td_object
 {
 #ifndef NDEBUG
-  char *         filename;
+  char *                  filename;
 #endif
-  struct stack * meshes;
+  struct td_object_mesh * root;
+  double                  bounding_sphere_radius;
 };
 
 
-extern struct td_object * td_object_load(char const * const filename);
+extern struct td_object * td_object_load(char const * const filename, float * material1, float * gemstone1);
+extern struct td_object * td_object_load_assimp(char const * const filename, float * material1, float * gemstone1);
 extern struct td_object * td_object_unload(struct td_object * td_object);
 extern void               td_object_draw(struct td_object * td_object);
 

@@ -144,7 +144,6 @@ struct map
   int  map_fine_x, map_fine_y;   /* Pixel accurate positioning (scrolling). */
   struct girl * girl;            /* The very special main character of the map. */
   bool          in_editor;         /* If it's in editor mode. */
-  uint8_t       display_colour[4]; /* The colour to use for displaying the map (used in glColor() call), range=0x00..0xff. */
   bool          fast_forwarding;
 
 

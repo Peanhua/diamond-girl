@@ -33,6 +33,4 @@ extern void *       seed_rand_state(uint32_t seed);
 
 extern void *       rand_state_duplicate(void * state);
 
-extern const char * get_random_name(void);
-
 #endif

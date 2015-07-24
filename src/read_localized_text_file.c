@@ -26,7 +26,7 @@
 char ** read_localized_text_file(const char * filename)
 {
   char ** rv;
-  char fn[strlen(filename) + (globals.language != NULL ? strlen(globals.language) : 0) + strlen("-.txt") + 1];
+  char fn[strlen(filename) + strlen("-en.txt") + 1];
 
   rv = NULL;
   
@@ -38,7 +38,7 @@ char ** read_localized_text_file(const char * filename)
 
   if(rv == NULL)
     {
-      snprintf(fn, sizeof fn, "%s.txt", filename);
+      snprintf(fn, sizeof fn, "%s-en.txt", filename);
       rv = read_text_file(fn);
     }
   

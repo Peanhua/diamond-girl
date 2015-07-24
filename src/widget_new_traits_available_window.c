@@ -34,43 +34,30 @@ static struct widget * window;
 
 struct widget * widget_new_traits_available_window(trait_t new_traits)
 {
-  trait_t traits[] =
-    {
-      TRAIT_KEY,
-      TRAIT_ADVENTURE_MODE,
-      TRAIT_RIBBON,
-      TRAIT_GREEDY,
-      TRAIT_TIME_CONTROL,
-      TRAIT_POWER_PUSH,
-      TRAIT_DIAMOND_PUSH,
-      TRAIT_RECYCLER,
-      TRAIT_STARS1,
-      TRAIT_STARS2,
-      TRAIT_STARS3,
-      TRAIT_CHAOS,
-      TRAIT_DYNAMITE,
-      TRAIT_IRON_GIRL,
-      TRAIT_PYJAMA_PARTY,
-
-      TRAIT_SIZEOF_
-    };
+  int count;
   int width;
   const int spacing = 50;
 
   assert(new_traits != 0);
+  if(new_traits == 0)
+    return NULL;
 
-  width = 0;
-  for(int i = 0; traits[i] != TRAIT_SIZEOF_; i++)
-    if(new_traits & traits[i])
-      width += spacing;
+  count = 0;
+  for(int i = 0; i < TRAIT_SIZEOF_; i++)
+    if(new_traits & traits_sorted[i])
+      count++;
+  assert(count > 0);
+
+  width = count * spacing;
   if(width < 220)
     width = 220;
 
   window = widget_new_window(widget_root(), 10 + width + 10, 25 + 50 + 10, gettext("New traits available!"));
   if(window != NULL)
     {
-      struct widget * prev;
-      int x, y;
+      struct widget * frame;
+      struct widget * buttons[count];
+                
 
       widget_set_modal(window);
       widget_set_on_unload(window, on_window_unload);
@@ -81,43 +68,51 @@ struct widget * widget_new_traits_available_window(trait_t new_traits)
       ui_set_handler(UIC_EXIT,   on_window_exit);
       ui_set_handler(UIC_CANCEL, on_window_exit);
 
-      x = 10;
-      y = 25;
+      frame = widget_new_frame(window, 10, 25, 0, 0);
+      if(frame != NULL)
+        {
+          struct widget * prev;
+          int current;
 
-      prev = NULL;
-      for(int i = 0; traits[i] != TRAIT_SIZEOF_; i++)
-        if(new_traits & traits[i])
-          {
-            struct widget * b;
+          widget_delete_flags(frame, WF_DRAW_BORDERS | WF_CAST_SHADOW);
 
-            b = widget_new_trait_button(window, x, y, spacing - 10 + 2, spacing - 10 + 2, traits[i], true, false);
-            if(b != NULL)
+          prev = NULL;
+          current = 0;
+          for(int i = 0; i < TRAIT_SIZEOF_; i++)
+            if(new_traits & traits_sorted[i])
               {
-                if(prev != NULL)
-                  widget_set_navigation_leftright(prev, b);
-                prev = b;
+                buttons[current] = widget_new_trait_button(frame, current * spacing, 0, spacing - 10 + 2, spacing - 10 + 2, traits_sorted[i], true, false);
+                if(buttons[current] != NULL)
+                  {
+                    if(prev != NULL)
+                      widget_set_navigation_leftright(prev, buttons[current]);
+                    prev = buttons[current];
+                  }
+                current++;
               }
-            x += spacing;
-          }
+          assert(current == count);
+          widget_resize_to_fit_children(frame);
+          widget_center_horizontally(frame);
 
-      struct widget * b;
+          struct widget * b;
+          char buf[64];
+          
+          snprintf(buf, sizeof buf, " %s ", gettext("Close"));
+          b = widget_new_button(window, 0, widget_y(frame) + widget_height(frame) + 20, buf);
+          widget_center_horizontally(b);
+          widget_set_on_release(b, on_window_close_clicked);
+          widget_set_widget_pointer(window, "previously_selected_object", widget_focus());
+          widget_set_focus(b);
+          if(prev != NULL)
+            widget_set_navigation_up(b, prev);
+          for(int i = 0; i < current; i++)
+            widget_set_navigation_down(buttons[i], b);
 
-      if(prev != NULL)
-        y += widget_height(prev);
-
-      y += 20;
-      b = widget_new_button(window, x, y, gettext(" Close "));
-      widget_set_x(b, (widget_width(window) - widget_width(b)) / 2);
-      widget_set_on_release(b, on_window_close_clicked);
-      widget_set_focus(b);
-      if(prev != NULL)
-        widget_set_navigation_updown(prev, b);
-      y += widget_height(b);
-
-      widget_set_height(window, y + 10);
-      widget_set_y(window, (widget_height(widget_parent(window)) - widget_height(window)) / 2);
+          widget_set_height(window, widget_y(b) + widget_height(b) + 10);
+          widget_center_vertically(window);
+        }
     }
-
+  
   return window;
 }
 
@@ -134,7 +129,13 @@ static void on_window_exit(bool pressed, SDL_Event * event DG_UNUSED)
     widget_delete(window);
 }
 
-static void on_window_unload(struct widget * this DG_UNUSED)
+static void on_window_unload(struct widget * this)
 {
   ui_pop_handlers();
+
+  struct widget * w;
+
+  w = widget_get_widget_pointer(this, "previously_selected_object");
+  if(w != NULL)
+    widget_set_focus(w);
 }

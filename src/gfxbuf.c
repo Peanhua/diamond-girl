@@ -26,7 +26,10 @@
 #include "gfx.h"
 #include "gc.h"
 #include "backtrace.h"
+#include "gfx_material.h"
+#include "gfx_shaders.h"
 #include "globals.h"
+#include "image.h"
 #include <assert.h>
 #include <stdlib.h>
 
@@ -38,6 +41,9 @@ struct gfxbuf * gfxbuf_new(enum GFXBUF_TYPE type, GLenum primitive_type, uint8_t
   assert(rv != NULL);
   if(rv != NULL)
     {
+      rv->material      = NULL;
+      rv->texture_image = NULL;
+      
       rv->vertex_vbo     = 0;
       rv->vbuf           = NULL;
       rv->normal_vbo     = 0;
@@ -77,6 +83,8 @@ struct gfxbuf * gfxbuf_free(struct gfxbuf * buffer)
       gc_free(GCT_GFXBUF, buffer);
 
       gfxbuf_unload(buffer);
+      if(buffer->texture_image != NULL)
+        buffer->texture_image = image_free(buffer->texture_image);
       free(buffer->vbuf);
       free(buffer->nbuf);
       free(buffer->tbuf);
@@ -445,25 +453,44 @@ void gfxbuf_draw_init(struct gfxbuf * buffer)
 
 void gfxbuf_draw(struct gfxbuf * buffer)
 {
-  if(buffer->options & GFXBUF_BLENDING)
-    gfxgl_state(GL_BLEND, true);
+  GFX_GL_ERROR();
 
+  gfxgl_state(GL_BLEND, (buffer->options & GFXBUF_BLENDING) ? true : false);
+
+  if(buffer->material != NULL)
+    gfx_material_use(buffer->material);
+  
+  
   gfxgl_client_state(GL_NORMAL_ARRAY, (buffer->options & GFXBUF_NORMALS) ? true : false);
 
   if(buffer->options & GFXBUF_TEXTURE)
-    gfxgl_state(GL_TEXTURE_2D, true);
-  gfxgl_client_state(GL_TEXTURE_COORD_ARRAY, (buffer->options & GFXBUF_TEXTURE) ? true : false);
+    {
+      gfxgl_state(GL_TEXTURE_2D, true);
 
-  gfxgl_client_state(GL_COLOR_ARRAY, (buffer->options & GFXBUF_COLOUR) ? true : false);
+      if(buffer->texture_image != NULL)
+        gfxgl_bind_texture(buffer->texture_image->texture);
 
+      gfxgl_client_state(GL_TEXTURE_COORD_ARRAY, true);
+    }
+  else
+    {
+      gfxgl_state(GL_TEXTURE_2D, false);
+      gfxgl_client_state(GL_TEXTURE_COORD_ARRAY, false);
+    }
+
+
+  if(buffer->options & GFXBUF_COLOUR)
+    {
+      gfxgl_client_state(GL_COLOR_ARRAY, true);
+      gfx_material_use_invalidate_colour();
+    }
+  else
+    gfxgl_client_state(GL_COLOR_ARRAY, false);
+
+  gfx_shaders_apply();
+  
   glDrawArrays(buffer->primitive_type, 0, buffer->vertices);
   GFX_GL_ERROR();
-
-  if(buffer->options & GFXBUF_BLENDING)
-    gfxgl_state(GL_BLEND, false);
-
-  if(buffer->options & GFXBUF_TEXTURE)
-    gfxgl_state(GL_TEXTURE_2D, false);
 }
 
 
@@ -476,6 +503,18 @@ void gfxbuf_draw_at(struct gfxbuf * buffer, float x, float y)
 
   glPopMatrix();
 }
+
+#ifndef NDEBUG
+void gfxbuf_dump(struct gfxbuf const * buffer)
+{
+  printf("gfxbuf-%p:\n", buffer);
+  if(buffer != NULL)
+    {
+      printf(" vertices = %u / %u\n", buffer->vertices, buffer->max_vertices);
+      printf(" ncoords = %u\n", buffer->ncoords);
+    }
+}
+#endif
 
 
 #endif

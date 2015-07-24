@@ -6,6 +6,8 @@ Amiga specific changes made with help of Jon, Itix and Piru @ http://saku.isovel
 
 Gentoo related changes Vincent Hardy - vincent.hardy.be at gmail.com
 
+French translation by Vincent Hardy - vincent.hardy.be at gmail.com
+
 Original player graphics by Radomir 'The Sheep' Dopieralski
   http://atos.wmid.amu.edu.pl/~sheep/projects/graphics/
   With minor modifications done by Joni Yrjänä.
@@ -15,6 +17,7 @@ Libraries:
 
 Name          | License              | URL
 --------------+----------------------+-----------------------------------------------
+assimp        | BSD                  | http://assimp.sourceforge.net
 bzip2         | BSD                  | http://www.bzip.org/
 FLAC          | BSD, GPLv2+, GFDL    | http://www.xiph.org/flac/
 glew          | BSD, MIT             | http://glew.sourceforge.net
@@ -31,12 +34,13 @@ Lua           | MIT                  | http://www.lua.org/
 mhash         | LGPLv2+              | http://mhash.sourceforge.net/
 mtwist        | LGPL                 | http://www.cs.hmc.edu/~geoff/mtwist.html
 OpenAL Soft   | LGPLv2+              | http://kcat.strangesoft.net/openal.html
+PCG32         | Apache               | http://www.pcg-random.org/
 SDL           | LGPLv2+              | http://www.libsdl.org/
 SDL_gfx       | LGPLv2               | http://www.ferzkopp.net/Software/SDL_gfx-2.0/
 SDL_image     | LGPLv2+              | http://www.libsdl.org/projects/SDL_image/
 zlib          | zlib, Boost          | http://www.zlib.net/
 
 Windows binary distribution also includes the following shared libraries:
-* from GCC, libgcc_s_sjlj-1.dll, licensed GPLv3+ and GPLv3+ with exceptions
-  and GPLv2+ with exceptions, http://gcc.gnu.org
+* from GCC, libgcc_s_sjlj-1.dll and libstdc++-6.dll, licensed GPLv3+
+  and GPLv3+ with exceptions and GPLv2+ with exceptions, http://gcc.gnu.org
 * from mingw, libwinpthread-1.dll, licensed MIT and BSD, http://mingw-w64.org

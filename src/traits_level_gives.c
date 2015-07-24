@@ -25,52 +25,35 @@
 #include <string.h>
 #include <assert.h>
 
-trait_t traits_level_gives(struct cave * cave, int level)
+trait_t traits_level_gives(struct cave * cave, unsigned int level, bool also_previous_levels)
 {
-  trait_t rv;
-
-  struct 
-  {
-    char *  name;
-    int     level; /* level 0 is special: the last level of the cave */
-    trait_t trait_given;
-  } traits[] =
-      {
-        { "/random", 1, TRAIT_QUESTS         },
-        { "/random",  3, TRAIT_ADVENTURE_MODE },
-        { "/random",  5, TRAIT_PYJAMA_PARTY   },
-        { "/random", 15, TRAIT_IRON_GIRL      },
-        { "/random", 25, TRAIT_POWER_PUSH     },
-        { "/random", 50, TRAIT_GREEDY         },
-        { "/random", 75, TRAIT_DYNAMITE       },
-        { "/random",  0, TRAIT_TIME_CONTROL   },
-
-        { "/well", 10, TRAIT_CHAOS        },
-        { "/well", 20, TRAIT_DIAMOND_PUSH },
-        { "/well",  0, TRAIT_RECYCLER     },
-
-        { "a",   5, TRAIT_KEY             },
-        { "a",  10, TRAIT_STARS1          },
-        { "a",  15, TRAIT_STARS2          },
-        { "a",  20, TRAIT_STARS3          },
-        { "a",   0, TRAIT_RIBBON          },
-
-        { NULL, -1, 0                     }
-      };
-  
-  bool last_level;
-  
   assert(cave != NULL);
 
-  last_level = false;
-  if(level == cave->level_count)
-    last_level = true;
+  if(level == (unsigned int) cave->level_count)
+    level = 0; // level 0 equals to "last level"
+
+  
+  trait_t rv;
 
   rv = 0;
-  for(int i = 0; rv == 0 && traits[i].level >= 0; i++)
-    if(traits[i].level == level || (traits[i].level == 0 && last_level == true))
-      if(!strcmp(traits[i].name, cave->name))
-        rv = traits[i].trait_given;
+  for(unsigned int i = 0; i < TRAIT_SIZEOF_; i++)
+    {
+      struct trait * traitdata;
+      trait_t trait;
+
+      trait = 1 << i;
+      traitdata = trait_get(trait);
+      if(traitdata != NULL)
+        if(!strcmp(traitdata->cave_name, cave->name))
+          {
+            if(traitdata->cave_level == level)
+              rv |= trait;
+            
+            if(also_previous_levels)
+              if(level == 0 || (traitdata->cave_level > 0 && traitdata->cave_level < level))
+                rv |= trait;
+          }
+    }
 
   return rv;
 }

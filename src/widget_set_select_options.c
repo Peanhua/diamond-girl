@@ -23,7 +23,7 @@
 #include "widget.h"
 #include <assert.h>
 
-void widget_set_select_options(struct widget * widget, struct stack * options)
+struct stack * widget_set_select_options(struct widget * widget, struct stack * options)
 {
   assert(widget != NULL);
   if(widget != NULL)
@@ -31,18 +31,36 @@ void widget_set_select_options(struct widget * widget, struct stack * options)
       struct stack * old;
 
       /* Free old */
-      old = widget_get_pointer(widget, "options");
+      old = widget_get_pointer(widget, "options", 'S');
       if(old != NULL)
-        stack_free(old);
+        {
+          for(unsigned int i = 0; i < old->size; i++)
+            free(old->data[i]);
+          stack_free(old);
+        }
 
       /* Update options */
-      widget_set_pointer(widget, "options", options);
+      widget_set_pointer(widget, "options", 'S', options);
 
       /* Update currently selected label */
       unsigned int selected_index;
 
       selected_index = widget_get_ulong(widget, "selected_index");
       if(options != NULL && selected_index < options->size)
-        widget_set_string(widget, "text", "%s", (char *) options->data[selected_index]);
+        {
+          struct ui_widget_select_option * option;
+
+          option = options->data[selected_index];
+          widget_set_string(widget, "text", "%s", option->text);
+        }
     }
+
+  return options;
 }
+
+
+struct stack * widget_get_select_options(struct widget * widget)
+{
+  return widget_get_pointer(widget, "options", 'S');
+}
+

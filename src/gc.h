@@ -31,6 +31,7 @@ enum GC_TYPE
     GCT_WIDGET,
     GCT_CAVE,
     GCT_THEME,
+    GCT_STRING,
     GCT_SIZEOF_
   };
 
@@ -43,6 +44,6 @@ extern void           gc_new(enum GC_TYPE type, void * object);
 extern void           gc_free(enum GC_TYPE type, void * object);
 extern struct stack * gc_get_stack(enum GC_TYPE type);
 extern void           gc_empty_stack(enum GC_TYPE type);
-
-
+extern void           gc_run(void); // Run the garbage collector == free marked resources
+extern bool           gc_check(enum GC_TYPE type, void * object); // Return true if the object exists.
 #endif

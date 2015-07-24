@@ -52,6 +52,8 @@ char * ui_command_name(enum UI_COMMAND command)
       "volume_down",
       "volume_up",
       "mute",
+      "recording_start",
+      "recording_stop",
       "catch_all_keyboard",
       "catch_all_mouse",
       "catch_all_joysticks"

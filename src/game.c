@@ -28,6 +28,7 @@
 #include "gfx.h"
 #include "gfx_glyph.h"
 #include "gfx_image.h"
+#include "gfx_material.h"
 #include "gfxbuf.h"
 #include "girl.h"
 #include "globals.h"
@@ -40,6 +41,8 @@
 #include "themes.h"
 #include "title.h"
 #include "traits.h"
+#include "treasure.h"
+#include "treasureinfo.h"
 #include "ui.h"
 #include "widget.h"
 #include "widget_factory.h"
@@ -131,7 +134,7 @@ static struct
 static struct gamedata * gamedata;
 
 
-struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool return_after_one_level, struct ai * computer_player)
+struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool return_after_one_level, struct ai * computer_player, struct treasureinfo * treasure)
 {
   ALfloat saved_listener_position[3];
   struct theme * theme;
@@ -141,6 +144,7 @@ struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool 
 
   scoreboard_is_dirty = true;
 
+  
   /* Overwrite the placeholder texts with locale specific texts: */
   snprintf(scoreboard[0].header, sizeof scoreboard[0].header, gettext("Level:"));
   snprintf(scoreboard[1].header, sizeof scoreboard[1].header, gettext("Girls:"));
@@ -158,11 +162,12 @@ struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool 
 
   game_show_text(NULL);
 
-  { /* Setup the game specific variables: */
+  { /* Setup: */
     gamedata = gamedata_new(cave, iron_girl_mode, traits_get(cave->game_mode));
     gamedata->init_map                  = init_map;
     gamedata->reset_map                 = reset_map;
     gamedata->need_to_clear_colorbuffer = 1;
+    gamedata->treasure                  = treasureinfo_copy(treasure);
 
     if(computer_player == NULL && return_after_one_level == false && cave->savegame.exists && iron_girl_mode == false)
       {
@@ -174,6 +179,7 @@ struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool 
         gamedata->diamond_score  = cave->savegame.diamond_score;
         gamedata->diamonds       = cave->savegame.diamonds;
         gamedata->playback       = cave->savegame.playback;
+        gamedata->treasure       = treasureinfo_copy(cave->savegame.treasure);
 
         if(gamedata->cave->game_mode == GAME_MODE_PYJAMA_PARTY)
           {
@@ -248,8 +254,11 @@ struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool 
   if(globals.opengl)
     {
       scorebuf = gfxbuf_new(GFXBUF_DYNAMIC_2D, GL_QUADS, GFXBUF_TEXTURE | GFXBUF_BLENDING);
-      assert(scorebuf != NULL);
-      gfxbuf_resize(scorebuf, 256 * 4);
+      if(scorebuf != NULL)
+        {
+          gfxbuf_resize(scorebuf, 256 * 4);
+          scorebuf->material = gfx_material_new();
+        }
     }
 #endif
 
@@ -287,19 +296,18 @@ struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool 
         { /* AI controls */
           if(!gamedata->quit && gamedata->ai->quit == false)
             {
-              if(gamedata->map->girl->mob->alive == false)
-                { /* Girl controlled by AI has died. */
-                  /* In non-ai mode the function game_event() does the if&else as below, after the user presses enter.
-                   * This stuff should be moved to the player death function, where we can do additional tweaks to the after-life -game.
-                   * For example in non-ai mode, fade to red and slowly drip blood from top?
-                   */
-                  /* Pause for some time so that the watcher can see the death scene better. */
-                  if(gamedata->girl_death_delay_timer > 0)
-                    {
-                      gamedata->girl_death_delay_timer -= 1;
-                    }
-                  else
-                    {
+              /* In non-ai mode the function game_event() does the code in else branch below, after the user presses enter.
+               * This stuff should be moved to the player death function, where we can do additional tweaks to the after-life -game.
+               * For example in non-ai mode, fade to red and slowly drip blood from top?
+               */
+              if(gamedata->girl_death_delay_timer > 0)
+                { /* Pause for some time so that the watcher can see the death scene better. */
+                  gamedata->girl_death_delay_timer -= 1;
+                }
+              else
+                {
+                  if(gamedata->map->girl->mob->alive == false)
+                    { /* Girl controlled by AI has died. */
                       if(gamedata->girls > 0)
                         {
                           if(gamedata->map->is_intermission)
@@ -309,18 +317,18 @@ struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool 
                       else
                         gamedata->quit = true;
                     }
-                }
               
-              if(gamedata->map->girl->mob->alive == true && gamedata->map->game_paused == false)
-                {
-                  struct playback_step * step;
-                  
-                  step = gamedata->ai->get_next_move(gamedata->ai, gamedata->map->level_start_anim_on ? false : true);
-                  if(step != NULL)
+                  if(gamedata->map->girl->mob->alive == true && gamedata->map->game_paused == false)
                     {
-                      gamedata->map->girl->mob->direction = step->direction;
-                      gamedata->player_shift_move         = step->manipulate;
-                      player_commits_suicide    = step->commit_suicide == true ? 1 : 0;
+                      struct playback_step * step;
+                      
+                      step = gamedata->ai->get_next_move(gamedata->ai, gamedata->map->level_start_anim_on ? false : true);
+                      if(step != NULL)
+                        {
+                          gamedata->map->girl->mob->direction = step->direction;
+                          gamedata->player_shift_move         = step->manipulate;
+                          player_commits_suicide              = step->commit_suicide == true ? 1 : 0;
+                        }
                     }
                 }
             }
@@ -400,16 +408,16 @@ struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool 
                     if(gamedata->map->fast_forwarding == false)
                       sfx_emit(SFX_TIME, gamedata->map->girl->mob->x, gamedata->map->girl->mob->y);
 
-                    if(globals.opengl)
+#ifdef WITH_OPENGL
+                    if(gamedata->map->drawbuf != NULL)
                       {
                         double mood;
 
                         mood = 1.0 - (double) (10 - seconds_left) / 20.0;
                         assert(mood <= 1.0);
-                        gamedata->map->display_colour[0] = mood * 255.0f;
-                        gamedata->map->display_colour[1] = mood * 255.0f;
-                        gamedata->map->display_colour[2] = mood * 255.0f;
+                        gfx_material_change4f(gamedata->map->drawbuf->material, GFX_MATERIAL_COLOUR, mood, mood, mood, 1.0f);
                       }
+#endif
                   }
               }
               
@@ -466,6 +474,7 @@ struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool 
               }
             else
               cave->savegame.pyjama_party_girls = NULL;
+            cave->savegame.treasure = treasureinfo_copy(gamedata->treasure);
           }
         else
           { /* Don't save the game. */
@@ -598,7 +607,6 @@ static void on_ui_draw(bool pressed, SDL_Event * event DG_UNUSED)
 
               struct font * font;
 
-              gfx_colour_white();
               font = font_get();
               gfxgl_bind_texture(font->image->texture);
               gfxbuf_draw_init(scorebuf);
@@ -671,6 +679,25 @@ static void on_ui_draw(bool pressed, SDL_Event * event DG_UNUSED)
                    gamedata->traits,
                    top_x, top_y,
                    width, height);
+
+
+          
+          if(gamedata->treasure != NULL)
+            if(gamedata->treasure->collected == true)
+              {
+                float x, y;
+
+                x = 240.0f;
+                y =   4.0f;
+                if(gamedata->treasureanim_phase < 1.0f)
+                  {
+                    x += (gamedata->treasureanim_pos[0] - 240.0f) * (1.0f - gamedata->treasureanim_phase);
+                    y += (gamedata->treasureanim_pos[1] -   4.0f) * (1.0f - gamedata->treasureanim_phase);
+                    gamedata->treasureanim_phase += 0.03f + gamedata->treasureanim_phase * 0.07f;
+                  }
+
+                gfx2d_draw_image_scaled(x, y, gfx_image_treasure(gamedata->treasure->item, false), 32, 32);
+              }
         }
     }
   else
@@ -904,8 +931,8 @@ static void on_user_show_legend(bool pressed, SDL_Event * event DG_UNUSED)
 
           legend = widget_new_legend(help_window, padding, padding);
 
-          widget_set_width(help_window, widget_width(legend) + padding);
-          widget_set_height(help_window, widget_width(legend) + padding);
+          widget_set_width(help_window, widget_width(legend) + padding * 2);
+          widget_set_height(help_window, widget_height(legend) + padding * 2);
           widget_center(help_window);
         }
     }
@@ -917,9 +944,9 @@ static void on_user_toggle_fullscreen(bool pressed, SDL_Event * event DG_UNUSED)
   if(pressed == true)
     {
       if(globals.fullscreen)
-        globals.fullscreen = 0;
+        globals.fullscreen = false;
       else
-        globals.fullscreen = 1;
+        globals.fullscreen = true;
       gfx_cleanup();
       gfx_initialize();
     }
@@ -963,6 +990,9 @@ static void init_map(void)
   new_pb->traits         = gamedata->traits;
   new_pb->cave           = strdup(gamedata->cave->name);
   new_pb->level          = gamedata->current_level;
+
+  if(gamedata->treasure != NULL)
+    new_pb->treasure = treasureinfo_copy(gamedata->treasure);
 
   new_pb->map_hash = map_calculate_hash(gamedata->map);
 
@@ -1149,7 +1179,7 @@ static void on_toggle_playback_controls(bool pressed, SDL_Event * event DG_UNUSE
           if(playback_controls != NULL)
             {
               widget_set_on_unload(playback_controls, on_playback_controls_unload);
-              widget_set_pointer(playback_controls, "map", gamedata->map);
+              widget_set_map_pointer(playback_controls, "map", gamedata->map);
             }
         }
       else
@@ -1258,6 +1288,7 @@ static void game_pause(void)
           TRAIT_STARS3,
           TRAIT_CHAOS,
           TRAIT_DYNAMITE,
+          TRAIT_QUESTS,
           TRAIT_ALL
         };
   
@@ -1287,7 +1318,7 @@ static void game_pause(void)
           widget_set_tooltip(w, name);
         }
 
-      if(globals.iron_girl_mode)
+      if(gamedata->iron_girl_mode)
         {
           w = widget_new_frame(pause_widgets, top_x - 24, top_y + 2, 20, 20);
           widget_add_flags(w, WF_FOCUSABLE);
@@ -1333,6 +1364,7 @@ static void reset_map(void)
   assert(gamedata->cave != NULL);
   assert(gamedata->map != NULL);
   gamedata->map->player_target = NULL;
+  gamedata->treasureanim_phase = 1.0f;
 
   gamedata->pyjama_party_girl = find_current_girl();
   if(gamedata->pyjama_party_girl != NULL)
@@ -1396,14 +1428,27 @@ static void reset_map(void)
       else
 	gamedata->map->game_speed = 1;
 
-      if(globals.opengl)
-        {
-          gamedata->map->display_colour[0] = 0xff;
-          gamedata->map->display_colour[1] = 0xff;
-          gamedata->map->display_colour[2] = 0xff;
-          gamedata->map->display_colour[3] = 0xff;
-        }
-
+      /* Quest stuff: */
+      gamedata->treasure_placed_this_level = false;
+      if(gamedata->cave->game_mode == GAME_MODE_ADVENTURE)
+        if(gamedata->treasure != NULL)
+          if((int) gamedata->treasure->level == gamedata->map->level)
+            if(gamedata->treasure->collected == false)
+              { /* Match, place the chest in the map. */
+                assert(gamedata->treasure->x < (unsigned int) gamedata->map->width);
+                assert(gamedata->treasure->y < (unsigned int) gamedata->map->height);
+                if(gamedata->treasure->x < (unsigned int) gamedata->map->width && gamedata->treasure->y < (unsigned int) gamedata->map->height)
+                  {
+                    gamedata->map->data[gamedata->treasure->x + gamedata->treasure->y * gamedata->map->width] = MAP_TREASURE;
+                    gamedata->treasure_placed_this_level = true;
+                  }
+              }
+      
+#ifdef WITH_OPENGL
+      if(gamedata->map->drawbuf != NULL)
+        gfx_material_change4f(gamedata->map->drawbuf->material, GFX_MATERIAL_COLOUR, 1.0f, 1.0f, 1.0f, 1.0f);
+#endif
+      
       if(gamedata->cave->game_mode == GAME_MODE_PYJAMA_PARTY && gamedata->pyjama_party_control == PARTYCONTROLLER_PARTY)
         {
           gamedata->map->data[gamedata->map->start_x + gamedata->map->start_y * gamedata->map->width] = MAP_PLAYER;
@@ -1439,7 +1484,7 @@ static void reset_map(void)
     set_playing_speed(0);
 
   if(playback_controls != NULL)
-    widget_set_pointer(playback_controls, "map", gamedata->map);
+    widget_set_map_pointer(playback_controls, "map", gamedata->map);
 }
 
 

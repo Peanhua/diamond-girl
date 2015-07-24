@@ -22,10 +22,17 @@
 
 #include "map.h"
 
+#include <assert.h>
+#include <errno.h>
 #include <stdio.h>
 #include <string.h>
-#include <errno.h>
-#include <assert.h>
+
+#ifdef WIN32
+#include <direct.h>
+#else
+#include <sys/stat.h>
+#include <sys/types.h>
+#endif
 
 void map_save(struct map * map)
 {
@@ -35,6 +42,13 @@ void map_save(struct map * map)
   FILE * fp;
   char filename[1024];
 
+  snprintf(filename, sizeof filename, "maps/%s", map->cave_name);
+#ifdef WIN32
+  mkdir(get_data_filename(filename));
+#else
+  mkdir(get_data_filename(filename), S_IRWXU);
+#endif
+  
   snprintf(filename, sizeof filename, "maps/%s/%d", map->cave_name, (int) map->level);
   fp = fopen(get_data_filename(filename), "w");
   if(fp != NULL)

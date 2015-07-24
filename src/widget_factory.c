@@ -29,6 +29,7 @@
 #include "widget_factory.h"
 #include <assert.h>
 #include <json.h>
+#include <libintl.h>
 
 
 static char current_filename[1024];
@@ -162,6 +163,7 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
     WTYPE_GRID,
     WTYPE_GRID_ROW,
     WTYPE_MAP,
+    WTYPE_QUEST_MENU,
     WTYPE_SELECT,
     WTYPE_SPACER,
     WTYPE_TEXT,
@@ -183,6 +185,7 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
         { WTYPE_GRID,              "grid"              },
         { WTYPE_GRID_ROW,          "row"               },
         { WTYPE_MAP,               "map"               },
+        { WTYPE_QUEST_MENU,        "quest_menu"        },
         { WTYPE_SELECT,            "select"            },
         { WTYPE_SPACER,            "spacer"            },
         { WTYPE_TEXT,              "text"              },
@@ -201,12 +204,9 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
     int             x, y;
     int             width, height;
     int             padding_y;
+    bool            h_align;
     char            title[256];
-    char            title_fi[256];
-    char            title_fr[256];
     char            tooltip[256];
-    char            tooltip_fi[256];
-    char            tooltip_fr[256];
     bool            modal;    /* Set the widget to be modal. */
     bool            focus;    /* Set focus to the widget. */
     bool            no_focus; /* Set the widget to be non-focusable. */
@@ -237,12 +237,9 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
   this.width       = 0;
   this.height      = 0;
   this.padding_y   = 0;
-  strcpy(this.title,    "");
-  strcpy(this.title_fi, "");
-  strcpy(this.title_fr, "");
-  strcpy(this.tooltip,    "");
-  strcpy(this.tooltip_fi, "");
-  strcpy(this.tooltip_fr, "");
+  this.h_align     = false;
+  strcpy(this.title,   "");
+  strcpy(this.tooltip, "");
   this.modal       = false;
   this.focus       = false;
   this.no_focus    = false;
@@ -324,15 +321,12 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
                 { "width",            json_type_int,     &this.width,         1,                          pw },
                 { "height",           json_type_int,     &this.height,        1,                          ph },
                 { "title",            json_type_string,  this.title,          sizeof this.title,          0  },
-                { "title-fi",         json_type_string,  this.title_fi,       sizeof this.title_fi,       0  },
-                { "title-fr",         json_type_string,  this.title_fr,       sizeof this.title_fr,       0  },
                 { "tooltip",          json_type_string,  this.tooltip,        sizeof this.tooltip,        0  },
-                { "tooltip-fi",       json_type_string,  this.tooltip_fi,     sizeof this.tooltip_fi,     0  },
-                { "tooltip-fr",       json_type_string,  this.tooltip_fr,     sizeof this.tooltip_fr,     0  },
                 { "modal",            json_type_boolean, &this.modal,         1,                          0  },
                 { "focus",            json_type_boolean, &this.focus,         1,                          0  },
                 { "no-focus",         json_type_boolean, &this.no_focus,      1,                          0  },
                 { "padding-y",        json_type_int,     &this.padding_y,     1,                          0  },
+                { "h-align",          json_type_boolean, &this.h_align,       1,                          0  },
                 { "on-activate-at",   json_type_string,  this.on_activate_at, sizeof this.on_activate_at, 0  },
                 { "on-activate",      json_type_string,  this.on_activate,    sizeof this.on_activate,    0  },
                 { "on-draw",          json_type_string,  this.on_draw,        sizeof this.on_draw,        0  },
@@ -494,30 +488,12 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
       bool set_width; /* Whether the width needs to be set separately after widget creation. */
       bool set_height;
 
-      if(globals.language != NULL)
-        { /* Use the localized title if it exists, later only "this.title" is referenced. */
-          if(!strcmp(globals.language, "fi"))
-            {
-              if(strlen(this.title_fi) > 0)
-                strcpy(this.title, this.title_fi);
-              if(strlen(this.tooltip_fi) > 0)
-                strcpy(this.tooltip, this.tooltip_fi);
-            }
-          else if(!strcmp(globals.language, "fr"))
-            {
-              if(strlen(this.title_fr) > 0)
-                strcpy(this.title, this.title_fr);
-              if(strlen(this.tooltip_fr) > 0)
-                strcpy(this.tooltip, this.tooltip_fr);
-            }
-        }
-      
       set_width  = false;
       set_height = false;
       switch(this.type)
         {
         case WTYPE_BUTTON:
-          this.widget = widget_new_button(parent, this.x, this.y, this.title);
+          this.widget = widget_new_button(parent, this.x, this.y, gettext(this.title));
           set_width  = true;
           set_height = true;
           break;
@@ -545,6 +521,9 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
             this.widget = widget_new_map(parent, this.x, this.y, this.width, this.height, map, cave->game_mode);
           }
           break;
+        case WTYPE_QUEST_MENU:
+          this.widget = widget_new_quest_menu(parent, this.x, this.y);
+          break;
         case WTYPE_SELECT:
           this.widget = widget_new_select(parent, this.x, this.y, this.width, 0, NULL);
           break;
@@ -552,7 +531,7 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
           this.widget = widget_new_spacer(parent, this.width, this.height);
           break;
         case WTYPE_TEXT:
-          this.widget = widget_new_text(parent, this.x, this.y, this.title);
+          this.widget = widget_new_text(parent, this.x, this.y, gettext(this.title));
           set_width  = true;
           set_height = true;
           break;
@@ -578,7 +557,7 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
           set_height = true;
           break;
         case WTYPE_WINDOW:
-          this.widget = widget_new_window(parent, this.width, this.height, this.title);
+          this.widget = widget_new_window(parent, this.width, this.height, gettext(this.title));
           break;
         case WTYPE_SIZEOF_:
           ok = false;
@@ -608,6 +587,9 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
 
       if(ok == true && this.padding_y > 0)
         widget_set_ulong(this.widget, "padding-y", this.padding_y);
+
+      if(ok == true && this.h_align == true)
+        widget_add_flags(this.widget, WF_ALIGN_CENTER);
 
       if(ok == true && strlen(this.on_activate_at) > 0)
         {
@@ -687,7 +669,7 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
         }
 
       if(ok == true && strlen(this.tooltip) > 0)
-        widget_set_tooltip(this.widget, strdup(this.tooltip));
+        widget_set_tooltip(this.widget, strdup(gettext(this.tooltip)));
     }
 
 

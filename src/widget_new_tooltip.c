@@ -45,6 +45,7 @@ struct widget * widget_new_tooltip(struct widget * parent)
     y = 0;
 
   frame = widget_new_frame(widget_root(), x, y, width, height);
+  frame->z_ = parent->z_ + 1;
   widget_set_ulong(frame, "type", WT_TOOLTIP);
   widget_delete_flags(frame, WF_DRAW_BORDERS);
   widget_set_ulong(frame, "alpha", 0x80);

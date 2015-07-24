@@ -25,7 +25,10 @@
 
 
 struct cave;
+struct image;
 enum GAME_MODE;
+
+#include "gfx_image.h"
 
 #include <inttypes.h>
 #include <stdio.h>
@@ -47,13 +50,29 @@ enum GAME_MODE;
 #define TRAIT_IRON_GIRL      (1<<13)
 #define TRAIT_PYJAMA_PARTY   (1<<14)
 #define TRAIT_QUESTS         (1<<15)
-#define TRAIT_SIZEOF_        16
-#define TRAIT_ALL            0xffff
+#define TRAIT_EDIT           (1<<16)
+#define TRAIT_QUICK_CONTACT  (1<<17)
+#define TRAIT_SIZEOF_        18
+#define TRAIT_ALL            ((1UL<<TRAIT_SIZEOF_) - 1)
 
 typedef uint32_t trait_t;
 
+struct trait
+{
+  char *         filename;
+  char *         cave_name;
+  unsigned int   cave_level;
+  uint64_t       cost;
+  enum GFX_IMAGE image_id;
+  enum GFX_IMAGE disabled_image_id;
+};
+
+extern trait_t traits_sorted[TRAIT_SIZEOF_]; /* All traits listed in sorted order for displaying to the player. */
+
 extern void    traits_initialize(void); /* Initialize and load. */
 extern void    traits_cleanup(void);    /* Save and cleanup. */
+extern void    traits_save(void);       /* Save only. */
+
 extern trait_t traits_get(enum GAME_MODE game_mode); /* Return those traits that are active and valid for the game mode. */
 extern trait_t traits_get_active(void);
 extern trait_t traits_get_available(void);
@@ -61,12 +80,14 @@ extern void    traits_set(trait_t active, trait_t available, uint64_t score);
 extern void    traits_activate(trait_t traits);
 extern void    traits_deactivate(trait_t traits);
 extern void    traits_make_available(trait_t traits);
-extern trait_t traits_level_gives(struct cave * cave, int level);
+extern trait_t traits_level_gives(struct cave * cave, unsigned int level, bool also_previous_levels);
 
 extern uint64_t traits_get_score(void);
 extern void     traits_add_score(uint64_t score);
 extern void     traits_delete_score(uint64_t score);
 
-extern char * trait_get_name(trait_t trait);
+extern struct trait * trait_get(trait_t trait);
+extern char *         trait_get_name(trait_t trait);
+
 
 #endif

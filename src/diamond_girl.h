@@ -45,6 +45,9 @@ struct widget;
 
 enum MOVE_DIRECTION { MOVE_UP, MOVE_RIGHT, MOVE_DOWN, MOVE_LEFT, MOVE_NONE };
 
+enum GENDER { GENDER_NEUTER, GENDER_FEMALE, GENDER_MALE, GENDER_FAMILY };
+
+
 /* main functions */
 extern void intro(void);
 
@@ -81,7 +84,12 @@ extern unsigned int round_to_power_of_two(unsigned int n);
 #else
 # define DG_NDEBUG_UNUSED
 #endif
-
+/* Unused when building without OpenGL. */
+#ifndef WITH_OPENGL
+# define DG_UNUSED_WITHOUT_OPENGL DG_UNUSED
+#else
+# define DG_UNUSED_WITHOUT_OPENGL
+#endif
 
 /* Debugging */
 #ifndef NDEBUG
@@ -90,4 +98,15 @@ extern unsigned int round_to_power_of_two(unsigned int n);
 # define DG_DEBUG
 #endif
 
+#endif
+
+
+#ifdef __GNUC__
+# define DG_PRINTF_FORMAT1 __attribute__((format (printf, 1, 2)))
+# define DG_PRINTF_FORMAT2 __attribute__((format (printf, 2, 3)))
+# define DG_PRINTF_FORMAT3 __attribute__((format (printf, 3, 4)))
+#else
+# define DG_PRINTF_FORMAT1
+# define DG_PRINTF_FORMAT2
+# define DG_PRINTF_FORMAT3
 #endif

@@ -29,6 +29,9 @@
 #include <stdbool.h>
 #include <inttypes.h>
 
+struct image;
+struct gfx_material;
+
 enum GFXBUF_TYPE
   {
     GFXBUF_STREAM_2D,
@@ -46,6 +49,9 @@ enum GFXBUF_TYPE
 
 struct gfxbuf
 {
+  struct gfx_material * material;
+  struct image *        texture_image;
+
   GLuint    vertex_vbo;
   GLfloat * vbuf;
 
@@ -73,6 +79,12 @@ struct gfxbuf
 
 extern struct gfxbuf * gfxbuf_new(enum GFXBUF_TYPE type, GLenum primitive_type, uint8_t options);
 extern struct gfxbuf * gfxbuf_free(struct gfxbuf * buffer);
+
+#ifdef NDEBUG
+#define gfxbuf_dump(X)
+#else
+extern void gfxbuf_dump(struct gfxbuf const * buffer);
+#endif
 
 extern bool gfxbuf_resize(struct gfxbuf * buffer, unsigned int max_vertices);
 extern void gfxbuf_update(struct gfxbuf * buffer, unsigned int start, unsigned int count); /* Does also gfxbuf_draw_init(). */

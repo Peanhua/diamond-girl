@@ -1,0 +1,7 @@
+Mode de jeu suppl}mentaire qui peut [tre
+activ} / d}sactiv} dans les param~tres.
+
+Le mode Iron girl change les r~gles :
++ tous les points sont doubl}s
+- Seulement une fille
+- pas de vies suppl}mentaires

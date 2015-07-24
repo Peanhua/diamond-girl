@@ -22,7 +22,7 @@
 
 #include "game.h"
 #include "playback.h"
-
+#include "treasureinfo.h"
 #include <stdlib.h>
 #include <assert.h>
 
@@ -34,6 +34,8 @@ struct gamedata * gamedata_free(struct gamedata * gamedata)
       if(gamedata->playback != NULL)
         gamedata->playback = playback_free(gamedata->playback);
 
+      gamedata->treasure = treasureinfo_free(gamedata->treasure);
+      
       free(gamedata);
     }
   

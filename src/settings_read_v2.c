@@ -142,7 +142,7 @@ static int lf_config_fullscreen(lua_State * lstate)
     {
       if(lua_isboolean(lstate, 1))
         {
-          globals.fullscreen = lua_toboolean(lstate, 1);
+          globals.fullscreen = lua_toboolean(lstate, 1) ? true : false;
         }
       else
         {
@@ -411,7 +411,7 @@ static int lf_config_opengl(lua_State * lstate)
     {
       if(lua_isboolean(lstate, 1))
         {
-          globals.opengl = lua_toboolean(lstate, 1);
+          globals.opengl = lua_toboolean(lstate, 1) ? true : false;
           if(lua_isboolean(lstate, 2))
             {
               globals.opengl_power_of_two_textures             = lua_toboolean(lstate, 2);

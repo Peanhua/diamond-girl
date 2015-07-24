@@ -20,32 +20,39 @@
   Complete license can be found in the LICENSE file.
 */
 
+#include "ai.h"
+#include "cave.h"
 #include "diamond_girl.h"
+#include "event.h"
 #include "font.h"
+#include "game.h"
+#include "gc.h"
+#include "gfx.h"
+#include "gfxbuf.h"
+#include "gfx_glyph.h"
+#include "gfx_image.h"
+#include "gfx_material.h"
+#include "girl.h"
+#include "globals.h"
+#include "highscore.h"
+#include "image.h"
+#include "map.h"
+#include "playback.h"
+#include "quest.h"
+#include "random.h"
+#include "sfx.h"
+#include "td_object.h"
+#include "texture.h"
+#include "themes.h"
 #include "title.h"
+#include "trader.h"
+#include "traits.h"
+#include "treasure.h"
+#include "treasureinfo.h"
+#include "twinkle.h"
 #include "ui.h"
 #include "widget.h"
 #include "widget_factory.h"
-#include "image.h"
-#include "texture.h"
-#include "td_object.h"
-#include "sfx.h"
-#include "gfx.h"
-#include "gfx_glyph.h"
-#include "highscore.h"
-#include "globals.h"
-#include "playback.h"
-#include "game.h"
-#include "ai.h"
-#include "random.h"
-#include "twinkle.h"
-#include "map.h"
-#include "traits.h"
-#include "gfx_image.h"
-#include "girl.h"
-#include "themes.h"
-#include "cave.h"
-#include "event.h"
 
 #include <assert.h>
 #include <SDL/SDL_framerate.h>
@@ -54,10 +61,12 @@
 #include <ctype.h>
 #include <libintl.h>
 #ifdef WITH_OPENGL
-#include <GL/glew.h>
-#include <GL/glu.h>
+# include <GL/glew.h>
+# include <GL/glu.h>
 #endif
-
+#if HAVE_BITSCANFORWARD
+# include <intrin.h>
+#endif
 
 static void on_ui_draw(bool pressed, SDL_Event * event);
 static void load_cave_data(void);
@@ -65,7 +74,9 @@ static void on_settings_changed(bool gfx_restart, bool sfx_restart, bool new_ope
 static void reset_ui(bool reset_gfx, bool new_opengl, trait_t traits_to_highlight);
 static void player_death(struct gamedata * gamedata, bool sounds);
 static void on_title_exit(bool pressed, SDL_Event * event);
-static void on_trait_changed(int64_t changes);
+static void on_trait_changed(void * user_data, int64_t changes);
+static void reposition_midarea(void);
+static void update_newgame_navigation(struct widget * root);
 
 static bool quit;
 
@@ -73,7 +84,9 @@ static trait_t next_trait_from_this_cave;
 static int     next_trait_from_this_cave_level;
 static int help_screen_timer;
 #define help_screen_seconds 12
-static int anim_timer;
+static int midarea_scrolling;
+static int midarea_x;
+static const int midarea_x_max = SCREEN_WIDTH + 200;
 
 static struct gamedata * previous_game;
 
@@ -94,7 +107,7 @@ static struct widget * uiobj_level_right;
 static struct widget * uiobj_next_trait;
 static struct widget * uiobj_key;
 static struct widget * uiobj_config;
-static struct widget * uiobj_editor;
+static struct widget * uiobj_quests;
 static struct widget * uiobj_quit;
 static struct widget * uiobj_trait_buttons[TRAIT_SIZEOF_];
 
@@ -117,7 +130,7 @@ static void button_cave_right(struct widget * this, enum WIDGET_BUTTON button);
 static void button_level_left(struct widget * this, enum WIDGET_BUTTON button);
 static void button_level_right(struct widget * this, enum WIDGET_BUTTON button);
 static void button_config(struct widget * this, enum WIDGET_BUTTON button);
-static void button_editor(struct widget * this, enum WIDGET_BUTTON button);
+static void button_quests(struct widget * this, enum WIDGET_BUTTON button);
 static void button_quit(struct widget * this, enum WIDGET_BUTTON button);
 static void button_game_mode(struct widget * this, enum WIDGET_BUTTON button);
 static void on_change_game_mode(struct widget * this, enum WIDGET_BUTTON button);
@@ -143,7 +156,8 @@ void title(void)
   quit = false;
 
   help_screen_timer = 0;
-  anim_timer = 0;
+  midarea_scrolling = 0;
+  midarea_x         = 0;
   ui_set_last_user_action(time(NULL));
 
   if(globals.title_game_mode == GAME_MODE_PYJAMA_PARTY)
@@ -185,7 +199,14 @@ void title(void)
 
 
   setup_ui(0);
+  {
+    struct widget * uiobj_credits;
 
+    uiobj_credits = widget_find(NULL, "credits");
+    if(uiobj_credits != NULL)
+      widget_title_credits_set(uiobj_credits, PACKAGE_STRING, false);
+  }
+  
   sfx_music(MUSIC_TITLE, 1);
 
   level_selection_change_timer = 0;
@@ -308,8 +329,29 @@ void title(void)
               on_level_changed();
             }
 
+          
+          if(midarea_scrolling != 0)
+            { /* Scroll the midarea left or right. */
+              midarea_x += midarea_scrolling * 30;
+              if(midarea_scrolling < 0 && midarea_x < 0)
+                {
+                  midarea_x = 0;
+                  midarea_scrolling = 0;
+                }
+              else if(midarea_scrolling > 0 && midarea_x > midarea_x_max)
+                {
+                  midarea_x = midarea_x_max;
+                  midarea_scrolling = 0;
+                }
+
+              reposition_midarea();
+            }
+
+         
           ui_draw(true);
 
+          gc_run();
+          
 	  SDL_framerateDelay(&framerate_manager);
 
 
@@ -358,7 +400,7 @@ static void on_toggle_fullscreen(bool pressed, SDL_Event * event DG_UNUSED)
 {
   if(pressed == true)
     {
-      globals.fullscreen = globals.fullscreen == 0 ? 1 : 0;
+      globals.fullscreen = globals.fullscreen == false ? true : false;
       reset_ui(true, globals.opengl, 0);
     }
 }
@@ -423,21 +465,27 @@ static void on_ui_draw(bool pressed, SDL_Event * event DG_UNUSED)
     {
       map_animations_tick(mainmenu_map);
 
-      {
-        static float colors[3] = { 0.0f, /* Start from different positions in the sine curve. */
-                                   M_PI * 2.0f / 3.0f,
-                                   M_PI * 2.0f / 3.0f * 2.0f };
+#ifdef WITH_OPENGL
+      if(mainmenu_map->drawbuf != NULL)
+        {
+          static float colors[3] = { 0.0f, /* Start from different positions in the sine curve. */
+                                     M_PI * 2.0f / 3.0f,
+                                     M_PI * 2.0f / 3.0f * 2.0f };
         
-        for(int i = 0; i < 3; i++)
-          {
-            mainmenu_map->display_colour[i] = (0.1f + sinf(colors[i]) * 0.1f) * 255.0f;
-            colors[i] += ((float) i + 1.0f) * 0.0001f;
-            if(colors[i] > M_PI * 2.0f)
-              colors[i] -= M_PI * 2.0f;
-          }
-        
-        mainmenu_map->display_colour[3] = 0xff;
-      }
+          for(int i = 0; i < 3; i++)
+            {
+              colors[i] += ((float) i + 1.0f) * 0.0001f;
+              if(colors[i] > M_PI * 2.0f)
+                colors[i] -= M_PI * 2.0f;
+            }
+
+          gfx_material_change4f(mainmenu_map->drawbuf->material, GFX_MATERIAL_COLOUR,
+                                (0.1f + sinf(colors[0]) * 0.1f),
+                                (0.1f + sinf(colors[1]) * 0.1f),
+                                (0.1f + sinf(colors[2]) * 0.1f),
+                                1.0f);
+        }
+#endif
 
       gfx_3d(true);
       draw_title_starfield();
@@ -533,7 +581,7 @@ static void setup_ui(trait_t traits_to_highlight)
       { WFDT_ON_RELEASE,  "button_newgame",         button_newgame         },
       { WFDT_ON_RELEASE,  "button_cave_left",       button_cave_left       },
       { WFDT_ON_RELEASE,  "button_cave_right",      button_cave_right      },
-      { WFDT_ON_RELEASE,  "button_editor",          button_editor          },
+      { WFDT_ON_RELEASE,  "button_quests",          button_quests          },
       { WFDT_ON_RELEASE,  "button_level_left",      button_level_left      },
       { WFDT_ON_RELEASE,  "button_level_right",     button_level_right     },
       { WFDT_ON_RELEASE,  "button_config",          button_config          },
@@ -558,6 +606,14 @@ static void setup_ui(trait_t traits_to_highlight)
   uiobj_partystatus = widget_find(root, "partystatus");
   uiobj_help        = widget_find(root, "help");
 
+  struct widget * ws[4] = { uiobj_highscores, uiobj_partystatus, uiobj_help, widget_find(NULL, "quest_menu") };
+  for(int i = 0; i < 4; i++)
+    if(ws[i] != NULL)
+      widget_set_long(ws[i], "original-x", widget_x(ws[i]));
+
+  midarea_scrolling = 0;
+  midarea_x         = 0;
+  
   
   y = SCREEN_HEIGHT - (font_height() + 5) - (font_height() + 5) * 4;
   w = 120;
@@ -578,30 +634,34 @@ static void setup_ui(trait_t traits_to_highlight)
       bool pyjamaparty_mode;
     } traits[] =
         {
+          { TRAIT_EDIT,           true,  true,  true  },
           { TRAIT_ADVENTURE_MODE, true,  true,  true  },
           { TRAIT_PYJAMA_PARTY,   true,  true,  true  },
-          { TRAIT_QUESTS,         false, true,  false },
-          { TRAIT_IRON_GIRL,      false, true,  false },
           { TRAIT_KEY,            true,  true,  true  },
-          { TRAIT_RIBBON,         false, true,  false },
-          { TRAIT_GREEDY,         false, true,  true  },
-          { TRAIT_TIME_CONTROL,   false, true,  true  },
-          { TRAIT_POWER_PUSH,     false, true,  true  },
-          { TRAIT_DIAMOND_PUSH,   false, true,  true  },
           { TRAIT_RECYCLER,       true,  true,  true  },
           { TRAIT_STARS1,         true,  true,  true  },
           { TRAIT_STARS2,         true,  true,  true  },
           { TRAIT_STARS3,         true,  true,  true  },
+
+          { TRAIT_GREEDY,         false, true,  true  },
+          { TRAIT_TIME_CONTROL,   false, true,  true  },
+          { TRAIT_POWER_PUSH,     false, true,  true  },
+          { TRAIT_DIAMOND_PUSH,   false, true,  true  },
           { TRAIT_CHAOS,          false, true,  true  },
           { TRAIT_DYNAMITE,       false, true,  true  },
+          
+          { TRAIT_QUESTS,         false, true,  false },
+          { TRAIT_IRON_GIRL,      false, true,  false },
+          { TRAIT_RIBBON,         false, true,  false },
+          { TRAIT_QUICK_CONTACT,  false, true,  false },
           
           { TRAIT_ALL,            false, false, false }
         };
     int traitcount;
 
     traitcount = 0;
-    for(int i = 0; traits[i].trait != TRAIT_ALL; i++)
-      if(traits_get_available() & traits[i].trait)
+    for(int i = 0; i < TRAIT_SIZEOF_; i++)
+      if(traits_get_available() & traits_sorted[i])
         traitcount++;
 
     tx = 10;
@@ -621,37 +681,54 @@ static void setup_ui(trait_t traits_to_highlight)
     assert(traitcount <= 18);
 
     prev = NULL;
-    for(int i = 0; traits[i].trait != TRAIT_ALL; i++)
-      if((current_cave->game_mode == GAME_MODE_CLASSIC      && traits[i].classic_mode     == true) ||
-         (current_cave->game_mode == GAME_MODE_ADVENTURE    && traits[i].adventure_mode   == true) ||
-         (current_cave->game_mode == GAME_MODE_PYJAMA_PARTY && traits[i].pyjamaparty_mode == true)    )
-        if(traits_get_available() & traits[i].trait)
-          {
-            struct widget * b;
-          
-            b = widget_new_trait_button(root, tx, ty, spacing - 10 + 2, spacing - 10 + 2, traits[i].trait, false, true);
-            uiobj_trait_buttons[i] = b;
 
-            if(b != NULL)
-              {
-                if(traits_to_highlight & traits[i].trait)
-                  twinkle_area(widget_absolute_x(b),
-                               widget_absolute_y(b),
-                               widget_width(b),
-                               widget_height(b),
-                               100);
-                if(prev != NULL)
-                  widget_set_navigation_leftright(prev, b);
-                prev = b;
-              }
+    for(int i = 0; i < TRAIT_SIZEOF_; i++)
+      {
+        trait_t t;
+        
+        t = traits_sorted[i];
+        if(traits_get_available() & t)
+          {
+            bool found;
+
+            found = false;
+            for(int j = 0; found == false && traits[j].trait != TRAIT_ALL; j++)
+              if(traits[j].trait == t)
+                {
+                  found = true;
+                  if((current_cave->game_mode == GAME_MODE_CLASSIC      && traits[j].classic_mode     == true) ||
+                     (current_cave->game_mode == GAME_MODE_ADVENTURE    && traits[j].adventure_mode   == true) ||
+                     (current_cave->game_mode == GAME_MODE_PYJAMA_PARTY && traits[j].pyjamaparty_mode == true)    )
+                    {
+                      struct widget * b;
           
-            tx += spacing;
-            if(tx + spacing >= x)
-              {
-                tx = 10;
-                ty += spacing;
-              }
+                      b = widget_new_trait_button(root, tx, ty, spacing - 10 + 2, spacing - 10 + 2, traits[j].trait, false, true);
+                      uiobj_trait_buttons[j] = b;
+
+                      if(b != NULL)
+                        {
+                          if(traits_to_highlight & traits[j].trait)
+                            twinkle_area(widget_absolute_x(b),
+                                         widget_absolute_y(b),
+                                         widget_width(b),
+                                         widget_height(b),
+                                         100);
+                          if(prev != NULL)
+                            widget_set_navigation_leftright(prev, b);
+                          prev = b;
+                        }
+          
+                      tx += spacing;
+                      if(tx + spacing >= x)
+                        {
+                          tx = 10;
+                          ty += spacing;
+                        }
+                    }
+                }
+            assert(found == true);
           }
+      }
     last_trait = prev;
   }
 
@@ -661,12 +738,15 @@ static void setup_ui(trait_t traits_to_highlight)
   assert(uiobj_newgame != NULL);
   widget_set_focus(uiobj_newgame);
   if(uiobj_highscores != NULL)
-    widget_set_navigation_updown(uiobj_highscores, uiobj_newgame);
+    widget_set_navigation_down(uiobj_highscores, uiobj_newgame);
   else if(uiobj_partystatus != NULL)
-    widget_set_navigation_updown(widget_get_pointer(uiobj_partystatus, "focus_down_object"), uiobj_newgame);
+    widget_set_navigation_down(widget_get_widget_pointer(uiobj_partystatus, "focus_down_object"), uiobj_newgame);
+  widget_quest_menu_setup_navigation(widget_find(NULL, "quest_menu"), uiobj_newgame);
   if(last_trait != NULL)
     widget_set_navigation_left(uiobj_newgame, last_trait);
 
+  
+  
   uiobj_cave_left = widget_find(root, "cave_left");
   assert(uiobj_cave_left != NULL);
 
@@ -680,12 +760,15 @@ static void setup_ui(trait_t traits_to_highlight)
 
   y += font_height() + 5;
 
-  uiobj_editor = widget_find(root, "editor");
-  assert(uiobj_editor != NULL);
+  uiobj_quests = widget_find(root, "quests");
+  assert(uiobj_quests != NULL);
+  if(traits_get_active() & TRAIT_QUESTS)
+    widget_delete_flags(uiobj_quests, WF_HIDDEN);
+  else
+    widget_add_flags(uiobj_quests, WF_HIDDEN);
 
-  widget_set_navigation_updown(uiobj_newgame, uiobj_editor);
   if(last_trait != NULL)
-    widget_set_navigation_left(uiobj_editor, last_trait);
+    widget_set_navigation_left(uiobj_quests, last_trait);
 
   uiobj_level_left = widget_find(root, "level_left");
   assert(uiobj_level_left != NULL);
@@ -794,6 +877,8 @@ static void setup_ui(trait_t traits_to_highlight)
   widget_set_navigation_leftright(uiobj_quit, uiobj_game_mode);
 
 
+  update_newgame_navigation(root);
+  
 
   struct theme * theme;
 
@@ -801,8 +886,8 @@ static void setup_ui(trait_t traits_to_highlight)
   if(theme != NULL)
     widget_new_theme_info_button(root, SCREEN_WIDTH - 24 - 2, 0, theme);
 
-  event_register(EVENT_TYPE_TRAIT_ACTIVATED,   on_trait_changed);
-  event_register(EVENT_TYPE_TRAIT_DEACTIVATED, on_trait_changed);
+  event_register(EVENT_TYPE_TRAIT_ACTIVATED,   on_trait_changed, NULL);
+  event_register(EVENT_TYPE_TRAIT_DEACTIVATED, on_trait_changed, NULL);
 
   on_cave_changed();
 }
@@ -810,18 +895,24 @@ static void setup_ui(trait_t traits_to_highlight)
 
 static void unload_ui(void)
 {
-  event_unregister(EVENT_TYPE_TRAIT_ACTIVATED,   on_trait_changed);
-  event_unregister(EVENT_TYPE_TRAIT_DEACTIVATED, on_trait_changed);
+  event_unregister(EVENT_TYPE_TRAIT_ACTIVATED,   on_trait_changed, NULL);
+  event_unregister(EVENT_TYPE_TRAIT_DEACTIVATED, on_trait_changed, NULL);
 
   if(uiobj_level_thumbnail != NULL)
     {
       struct image * img;
 
-      img = widget_get_pointer(uiobj_level_thumbnail, "raw_image");
+      img = widget_get_image_pointer(uiobj_level_thumbnail, "raw_image");
       if(img != NULL)
         img = image_free(img);
     }
 
+  widget_delete(widget_root());
+#ifndef NDEBUG
+  for(int i = 0; i < 1000; i++)
+    gc_run();
+#endif
+  
   ui_cleanup();
   draw_title_logo_cleanup();
   mainmenu_map = map_free(mainmenu_map);
@@ -848,44 +939,52 @@ void title_game_intro(void)
   int stepsize;
 
   stepsize = 24;
-  for(int x = 0; done == false && x < SCREEN_WIDTH / 2 / stepsize; x++)
+  for(int x = 0; done == false && x < SCREEN_WIDTH / stepsize; x++)
     {
-      struct widget * down[14] =
-        {
-          widget_find(NULL, "newgame"),
-          uiobj_cave,
-          uiobj_cave_left,
-          uiobj_cave_right,
-          uiobj_level,
-          uiobj_level_thumbnail,
-          uiobj_level_left,
-          uiobj_level_right,
-          uiobj_next_trait,
-          uiobj_key,
-          uiobj_config,
-          uiobj_editor,
-          uiobj_quit,
-          widget_find(NULL, "credits")
+      struct
+      {
+        struct widget * widget;
+        int             xdir;
+        int             ydir;
+      } moves[19] =
+          { /* down */
+            { widget_find(NULL, "newgame"),    0,  1 },
+            { uiobj_cave,                      0,  1 },
+            { uiobj_cave_left,                 0,  1 },
+            { uiobj_cave_right,                0,  1 },
+            { uiobj_level,                     0,  1 },
+            { uiobj_level_thumbnail,           0,  1 },
+            { uiobj_level_left,                0,  1 },
+            { uiobj_level_right,               0,  1 },
+            { uiobj_next_trait,                0,  1 },
+            { uiobj_key,                       0,  1 },
+            { uiobj_config,                    0,  1 },
+            { uiobj_quests,                    0,  1 },
+            { uiobj_quit,                      0,  1 },
+            { widget_find(NULL, "credits"),    0,  1 },
+            { uiobj_game_mode,                 0,  1 },
+            { uiobj_help,                      0,  1 },
+            /* left */
+            { uiobj_highscores,               -1,  0 },
+            { uiobj_partystatus,              -1,  0 },
+            /* right */
+            { widget_find(NULL, "quest_menu"), 1,  0 }
         };
 
-      /* do left */
-      if(uiobj_highscores != NULL)
-        widget_set_x(uiobj_highscores, widget_x(uiobj_highscores) - stepsize);
-      if(uiobj_partystatus != NULL)
-        widget_set_x(uiobj_partystatus, widget_x(uiobj_partystatus) - stepsize);
+      for(int i = 0; i < 19; i++)
+        if(moves[i].widget != NULL)
+          {
+            if(moves[i].xdir != 0)
+              widget_set_x(moves[i].widget, widget_x(moves[i].widget) + stepsize * moves[i].xdir);
+            if(moves[i].ydir != 0)
+              widget_set_y(moves[i].widget, widget_y(moves[i].widget) + stepsize * moves[i].ydir);
+          }
+      
+      /* trait buttons to the left */
       for(int i = 0; i < TRAIT_SIZEOF_; i++)
         if(uiobj_trait_buttons[i] != NULL)
           widget_set_x(uiobj_trait_buttons[i], widget_x(uiobj_trait_buttons[i]) - stepsize);
 
-      /* do right */
-      widget_set_x(uiobj_help, widget_x(uiobj_help) + stepsize);
-      if(uiobj_game_mode != NULL)
-        widget_set_x(uiobj_game_mode, widget_x(uiobj_game_mode) + stepsize);
-
-      /* do down */
-      for(int i = 0; i < 14; i++)
-        if(down[i] != NULL)
-          widget_set_y(down[i], widget_y(down[i]) + stepsize);
 
       ui_draw(true);
 
@@ -916,22 +1015,50 @@ static void play_game(void)
   if(previous_game != NULL)
     gamedata_free(previous_game);
 
+  struct treasureinfo * ti;
+  struct questline * questline;
+
+  ti = NULL;
+  if(current_cave->game_mode == GAME_MODE_ADVENTURE && globals.questlines_size > 0)
+    questline = globals.questlines[globals.active_questline];
+  else
+    questline = NULL;
+  
+  if(questline != NULL && questline->current_phase == QUESTLINE_PHASE_OPENED)
+    {
+      struct quest * quest;
+        
+      quest = questline->quests->data[questline->current_quest];
+      if(!strcmp(quest->treasure_cave, current_cave->name))
+        { /* Match, setup treasure. */
+          static struct treasureinfo tinfo;
+          
+          tinfo.item      = quest->treasure_object;
+          tinfo.level     = quest->treasure_level;
+          tinfo.x         = quest->treasure_x;
+          tinfo.y         = quest->treasure_y;
+          tinfo.collected = false;
+
+          ti = &tinfo;
+        }
+    }
+  
+  
   t1 = traits_get_available();
-  previous_game = game(current_cave, globals.level_selection, globals.iron_girl_mode, false, NULL);
+  previous_game = game(current_cave, globals.level_selection, globals.iron_girl_mode, false, NULL, ti);
   t2 = traits_get_available();
 
   assert(previous_game->playback != NULL);
   if(previous_game->playback != NULL)
     {
-#ifndef PROFILING
       if(previous_game->playback->game_mode != GAME_MODE_PYJAMA_PARTY)
-        {
-          char fn[128];
-
-          snprintf(fn, sizeof fn, "last-%d.dgp", (int) previous_game->playback->game_mode);
-          playback_save(get_save_filename(fn), previous_game->playback);
-        }
-#endif
+        if(globals.read_only == false)
+          {
+            char fn[128];
+            
+            snprintf(fn, sizeof fn, "last-%d.dgp", (int) previous_game->playback->game_mode);
+            playback_save(get_save_filename(fn), previous_game->playback);
+          }
 
       struct playback * pb;
 
@@ -948,9 +1075,25 @@ static void play_game(void)
         }
       if(new_max_starting_level == true)
         set_max_level_selection(current_cave->max_starting_level);
+
+      /* If the player completed a level, give the traders new trading capacity. */
+      if(previous_game->current_level != globals.level_selection)
+        {
+          struct trader * t;
+          
+          t = trader_current();
+          if(t != NULL)
+            t->item_buy_count += playback_get_levels_completed(previous_game->playback);
+        }
     }
 
 
+  int saved_midarea_x;
+  int saved_midarea_scrolling;
+
+  saved_midarea_x         = midarea_x;
+  saved_midarea_scrolling = midarea_scrolling;
+  
   sfx_music(MUSIC_TITLE, 1);
   set_next_trait_from_this_cave();
   setup_ui(t2 & ~t1);
@@ -959,16 +1102,21 @@ static void play_game(void)
   gfx_frame0();
   ui_set_last_user_action(time(NULL));
 
+  midarea_x         = saved_midarea_x;
+  midarea_scrolling = saved_midarea_scrolling;
+  reposition_midarea();
+  update_newgame_navigation(NULL);
+
 
   struct widget * uiobj_newgame;
+  struct widget * uiobj_credits;
 
   uiobj_newgame = widget_find(NULL, "newgame");
+  uiobj_credits = widget_find(NULL, "credits");
+  
   if(current_cave->savegame.exists && globals.iron_girl_mode == false)
     {
-      struct widget * uiobj_credits;
-
-      uiobj_credits = widget_find(NULL, "credits");
-      widget_title_credits_set(uiobj_credits, gettext("The game was saved."));
+      widget_title_credits_set(uiobj_credits, gettext("The game was saved."), false);
       widget_set_string(uiobj_newgame, "text", gettext("Play (*)"));
     }
   else
@@ -976,6 +1124,33 @@ static void play_game(void)
       widget_set_string(uiobj_newgame, "text", gettext("Play"));
       new_highscore(previous_game);
     }
+
+  if(questline != NULL && previous_game->treasure != NULL)
+    if(previous_game->treasure->collected == true)
+      {
+        unsigned int r;
+        
+        if(questline->current_quest + 1 < questline->quests->size)
+          r = 100 + questline->current_quest + questline->reward;
+        else
+          r = 2000 + 250 * questline->reward; // Last item.
+        traits_add_score(r);
+        
+        char buf[1024];
+        
+        snprintf(buf, sizeof buf, gettext("Diamond score from the %s %s:   %u"),
+                 treasure_material_name(previous_game->treasure->item->material),
+                 treasure_type_name(previous_game->treasure->item->type),
+                 r);
+        widget_title_credits_set(uiobj_credits, buf, false);
+        
+        quest_collect_treasure(questline);
+
+        /* Free savegame.treasure because the treasure is now recorded as collected. */
+        if(current_cave->savegame.exists == true)
+          if(current_cave->savegame.treasure != NULL)
+            current_cave->savegame.treasure = treasureinfo_free(current_cave->savegame.treasure);
+      }
 
 
   if(new_max_starting_level == true)
@@ -990,23 +1165,51 @@ static void play_game(void)
                    75);
     }
 
+
   /* Disable playbacking of previous games in pyjama party mode. */
   if(previous_game->playback != NULL)
     if(previous_game->playback->game_mode == GAME_MODE_PYJAMA_PARTY)
       previous_game = gamedata_free(previous_game);
+
+  if(globals.read_only == false)
+    {
+      cave_save(current_cave);
+      traits_save();
+    }
 }
 
 
-static void button_newgame(struct widget * this DG_UNUSED, enum WIDGET_BUTTON button)
+static void button_newgame(struct widget * this, enum WIDGET_BUTTON button)
 {
 #ifndef PROFILING
   if(widget_enabled(this) == true)
+#else
+    if(this == this)
 #endif
     if(button == WIDGET_BUTTON_LEFT)
       {
+        trait_t traits;
+        int n;
+        bool start_new;
+          
+        traits = traits_get(current_cave->game_mode);
+        n = (globals.level_selection - 1) % 5;
+        start_new = false;
+        if(n == 0)
+          start_new = true;
+        else if(n == 1 && (traits & TRAIT_STARS1))
+          start_new = true;
+        else if(n == 2 && (traits & TRAIT_STARS2))
+          start_new = true;
+        else if(n == 3 && (traits & TRAIT_STARS3))
+          start_new = true;
+        else
+          start_new = false;
+        
         if(current_cave->savegame.exists == false || globals.iron_girl_mode == true)
           { /* No savegame there, start a new game immediately. */
-            play_game();
+            if(start_new == true)
+              play_game();
           }
         else
           { /* Savegame exists, ask the player what to do. */
@@ -1046,10 +1249,13 @@ static void button_newgame(struct widget * this DG_UNUSED, enum WIDGET_BUTTON bu
             widget_set_on_release(tmp, button_newgame_resume);
             widget_set_focus(tmp);
 
-            buttons[1] = tmp = widget_new_button(window, 0, y, gettext("Start New"));
-            widget_set_width(tmp, 120);
-            widget_set_x(tmp, (widget_width(window) - widget_width(tmp)) / 2);
-            widget_set_on_release(tmp, button_newgame_new);
+            if(start_new == true)
+              {
+                buttons[1] = tmp = widget_new_button(window, 0, y, gettext("Start New"));
+                widget_set_width(tmp, 120);
+                widget_set_x(tmp, (widget_width(window) - widget_width(tmp)) / 2);
+                widget_set_on_release(tmp, button_newgame_new);
+              }
             y += widget_height(tmp) + 2;
 
             y += 4;
@@ -1059,8 +1265,15 @@ static void button_newgame(struct widget * this DG_UNUSED, enum WIDGET_BUTTON bu
             widget_set_x(tmp, (widget_width(window) - widget_width(tmp)) / 2);
             widget_set_on_release(tmp, button_newgame_cancel);
 
-            widget_set_navigation_updown(buttons[0], buttons[1]);
-            widget_set_navigation_updown(buttons[1], buttons[2]);
+            if(start_new == true)
+              {
+                widget_set_navigation_updown(buttons[0], buttons[1]);
+                widget_set_navigation_updown(buttons[1], buttons[2]);
+              }
+            else
+              {
+                widget_set_navigation_updown(buttons[0], buttons[2]);
+              }
 
             ui_push_handlers();
             ui_set_handler(UIC_CANCEL, button_newgame_cancel2);
@@ -1092,6 +1305,7 @@ static void button_newgame_new(struct widget * this DG_UNUSED, enum WIDGET_BUTTO
   gamedata->starting_girls = current_cave->savegame.starting_girls;
   new_highscore(gamedata);
   gamedata = gamedata_free(gamedata);
+
   
   /* Throw away the current savegame.
    * Note that the playback is not free'd here, because it is done in highscore_new() called by new_highscore() above.
@@ -1100,6 +1314,7 @@ static void button_newgame_new(struct widget * this DG_UNUSED, enum WIDGET_BUTTO
   if(current_cave->game_mode == GAME_MODE_PYJAMA_PARTY)
     free(current_cave->savegame.pyjama_party_girls);
 
+  /* Then play the new game. */
   play_game();
 }
 
@@ -1155,19 +1370,25 @@ static void on_settings_changed(bool gfx_restart, bool sfx_restart, bool new_ope
 }
 
 
-static void button_editor(struct widget * this DG_UNUSED, enum WIDGET_BUTTON button)
+static void button_quests(struct widget * this, enum WIDGET_BUTTON button DG_UNUSED)
 {
-  if(button == WIDGET_BUTTON_LEFT)
-    if(globals.cave_selection[0] != '/')
-      {
-        ui_state_push();
-        sfx_music_stop();
-        map_editor(current_cave, globals.level_selection);
-        sfx_music(MUSIC_TITLE, 1);
-        ui_state_pop();
-        gfx_frame0();
-        ui_set_last_user_action(time(NULL));
-      }
+  if(midarea_scrolling == 0)
+    {
+      if(midarea_x > 0)
+        midarea_scrolling = -1;
+      else
+        midarea_scrolling = 1;
+    }
+  else if(midarea_scrolling == 1)
+    midarea_scrolling = -1;
+  else
+    midarea_scrolling = 1;
+
+  if(midarea_scrolling == 1)
+    widget_set_string(this, "text", gettext("To arcade"));
+
+  if(midarea_scrolling == -1)
+    widget_set_string(this, "text", gettext("To quests"));
 }
 
 
@@ -1260,23 +1481,6 @@ static void on_cave_changed(void)
       else
         widget_set_enabled(uiobj_cave_right, false);
       
-      if(cave[0] == '/')
-        {
-          if(uiobj_editor != NULL)
-            {
-              widget_set_string(uiobj_editor, "text", gettext("Editor N/A"));
-              widget_set_enabled(uiobj_editor, false);
-            }
-        }
-      else
-        {
-          if(uiobj_editor != NULL)
-            {
-              widget_set_string(uiobj_editor, "text", gettext("Editor"));
-              widget_set_enabled(uiobj_editor, true);
-            }
-        }
-
       widget_set_string(uiobj_cave, "text", gettext("Cave: %s"), cave_displayname(cave));
 
       assert(uiobj_next_trait != NULL);
@@ -1308,7 +1512,7 @@ static void on_cave_changed(void)
       uiobj_highscores = widget_find(NULL, "highscores");
       uiobj_newgame = widget_find(NULL, "newgame");
       if(uiobj_highscores != NULL)
-        widget_set_pointer(uiobj_highscores, "cave", current_cave);
+        widget_set_cave_pointer(uiobj_highscores, "cave", current_cave);
 
       if(current_cave->savegame.exists && globals.iron_girl_mode == false)
         widget_set_string(uiobj_newgame, "text", gettext("Play (*)"));
@@ -1329,22 +1533,36 @@ static void on_level_changed(void)
   uiobj_newgame = widget_find(NULL, "newgame");
   if(uiobj_newgame != NULL)
     {
-      int n;
       bool ok;
 
-      ok     = false;
-      n      = (globals.level_selection - 1) % 5;
+      if(current_cave->savegame.exists == true && globals.iron_girl_mode == false)
+        {
+          ok = true;
+        }
+      else
+        {
+          int n;
 
-      if(n == 0)
-        ok = true;
-      else if(n == 1 && (traits & TRAIT_STARS1))
-        ok = true;
-      else if(n == 2 && (traits & TRAIT_STARS2))
-        ok = true;
-      else if(n == 3 && (traits & TRAIT_STARS3))
-        ok = true;
-
+          n = (globals.level_selection - 1) % 5;
+          
+          if(n == 0)
+            ok = true;
+          else if(n == 1 && (traits & TRAIT_STARS1))
+            ok = true;
+          else if(n == 2 && (traits & TRAIT_STARS2))
+            ok = true;
+          else if(n == 3 && (traits & TRAIT_STARS3))
+            ok = true;
+          else
+            ok = false;
+        }
+      
       widget_set_enabled(uiobj_newgame, ok);
+
+      if(ok == true)
+        widget_set_tooltip(uiobj_newgame, NULL);
+      else
+        widget_set_tooltip(uiobj_newgame, gettext("You can only start from every fifth level, and no save game exist."));
     }
 
   if(globals.level_selection > 1)
@@ -1364,7 +1582,7 @@ static void on_level_changed(void)
       if(traits & TRAIT_KEY)
         {
           widget_delete_flags(uiobj_key, WF_HIDDEN);
-          widget_set_pointer(uiobj_key, "cave", current_cave);
+          widget_set_cave_pointer(uiobj_key, "cave", current_cave);
           widget_set_ulong(uiobj_key, "level", globals.level_selection);
 
           int padding;
@@ -1393,10 +1611,10 @@ static void on_level_changed(void)
         {
           struct image * old;
 
-          old = widget_get_pointer(uiobj_level_thumbnail, "raw_image");
+          old = widget_get_image_pointer(uiobj_level_thumbnail, "raw_image");
           if(old != NULL)
             old = image_free(old);
-          widget_set_pointer(uiobj_level_thumbnail, "raw_image", img);
+          widget_set_image_pointer(uiobj_level_thumbnail, "raw_image", img);
         }
 
       map = map_free(map);
@@ -1577,17 +1795,26 @@ static void set_next_trait_from_this_cave(void)
     {
       trait_t tmp;
 
-      tmp = traits_level_gives(current_cave, i);
-      if( (tmp & allt) == 0)
-        {
-          next_trait_from_this_cave       = tmp;
-          next_trait_from_this_cave_level = i;
-        }
+      tmp = traits_level_gives(current_cave, i, false);
+      if(tmp > 0)
+        if( (tmp & allt) == 0)
+          {
+#if HAVE_FFS
+            next_trait_from_this_cave = 1 << (ffs(tmp) - 1);
+#elif HAVE_BITSCANFORWARD
+            unsigned long index;
+            _BitScanForward(&index, tmp);
+            next_trait_from_this_cave = 1 << index;
+#else
+# error No function to find first bit set (ffs).
+#endif
+            next_trait_from_this_cave_level = i;
+          }
     }
 }
 
 
-static void on_trait_changed(int64_t changes)
+static void on_trait_changed(void * user_data DG_UNUSED, int64_t changes)
 {
   trait_t traits;
   bool settings_changed;
@@ -1647,7 +1874,8 @@ static void new_highscore(struct gamedata * gamedata)
   hl->total.diamonds_collected += gamedata->diamonds;
   hl->total.girls_died         += playback_get_girls_died(gamedata->playback);
   highscore_position = highscore_new(hl, gamedata, NULL);
-  highscores_save(hl, current_cave->game_mode, NULL);
+  if(globals.read_only == false)
+    highscores_save(hl, current_cave->game_mode, NULL);
 
   struct widget * uiobj_highscores;
         
@@ -1671,3 +1899,50 @@ static void new_highscore(struct gamedata * gamedata)
       }
 }
 
+
+static void reposition_midarea(void)
+{
+  struct widget * ws[4] = { widget_find(NULL, "highscores"), uiobj_partystatus, uiobj_help, widget_find(NULL, "quest_menu") };
+
+  for(int i = 0; i < 4; i++)
+    if(ws[i] != NULL)
+      widget_set_x(ws[i], widget_get_long(ws[i], "original-x") - midarea_x);
+
+  update_newgame_navigation(NULL);
+}
+
+
+static void update_newgame_navigation(struct widget * root)
+{
+  struct widget * uiobj_newgame;
+  
+  uiobj_newgame = widget_find(root, "newgame");
+  assert(uiobj_newgame != NULL);
+
+  uiobj_newgame->navigation_up_ = NULL;
+  
+  if((midarea_scrolling == 0 && midarea_x == 0) || midarea_scrolling < 0)
+    {
+      struct widget * uiobj_highscores;
+      
+      uiobj_highscores = widget_find(root, "highscores");
+      
+      if(uiobj_highscores != NULL)
+        widget_set_navigation_up(uiobj_newgame, uiobj_highscores);
+      else if(uiobj_partystatus != NULL)
+        widget_set_navigation_up(uiobj_newgame, widget_get_widget_pointer(uiobj_partystatus, "focus_down_object"));
+    }
+  else
+    {
+      struct widget * quest_menu;
+
+      quest_menu = widget_find(NULL, "quest_menu");
+      if(quest_menu != NULL)
+        {
+          struct widget * w;
+          
+          w = widget_get_widget_pointer(quest_menu, "focus_down_object");
+          widget_set_navigation_up(uiobj_newgame, w);
+        }
+    }
+}

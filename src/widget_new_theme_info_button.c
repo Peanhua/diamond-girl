@@ -22,6 +22,7 @@
 
 #include "gfx.h"
 #include "gfx_glyph.h"
+#include "gfx_material.h"
 #include "gfxbuf.h"
 #include "globals.h"
 #include "themes.h"
@@ -44,9 +45,9 @@ struct widget * widget_new_theme_info_button(struct widget * parent, int x, int 
       widget_set_height(button,   24);
       //widget_delete_flags(button, WF_DRAW_BORDERS);
       //widget_set_ulong(button,    "alpha",     0x80);
-      widget_set_pointer(button,  "theme",     theme);
+      widget_set_theme_pointer(button, "theme", theme);
 #ifdef WITH_OPENGL
-      widget_set_pointer(button,  "buffer",    NULL);
+      widget_set_pointer(button, "buffer", 'P', NULL);
 #endif
       widget_set_on_draw(button, on_draw);
       widget_set_on_release(button, on_theme_info_clicked);
@@ -59,7 +60,7 @@ static void on_theme_info_clicked(struct widget * this, enum WIDGET_BUTTON butto
 {
   struct theme * theme;
 
-  theme = widget_get_pointer(this, "theme");
+  theme = widget_get_theme_pointer(this, "theme");
   assert(theme != NULL);
   if(theme != NULL)
     widget_new_theme_info_window(theme);
@@ -69,7 +70,7 @@ static void on_draw(struct widget * this)
 {
   struct theme * theme;
 
-  theme = widget_get_pointer(this, "theme");
+  theme = widget_get_theme_pointer(this, "theme");
   assert(theme != NULL);
   if(theme != NULL && theme->icon.glyph != MAP_SIZEOF_)
     {
@@ -82,22 +83,22 @@ static void on_draw(struct widget * this)
         {
           struct gfxbuf * buffer;
 
-          buffer = widget_get_pointer(this, "buffer");
+          buffer = widget_get_pointer(this, "buffer", 'P');
           if(buffer == NULL)
             {
               buffer = gfxbuf_new(GFXBUF_STATIC_2D, GL_QUADS, GFXBUF_TEXTURE | GFXBUF_BLENDING);
               if(buffer != NULL)
                 {
                   gfxbuf_resize(buffer, 4);
+                  buffer->material = gfx_material_new();
                   gfx_glyph_render_frame(buffer, 0, 0, theme->icon.glyph, theme->icon.direction, 0);
                   gfxbuf_update(buffer, 0, 4);
-                  widget_set_pointer(this, "buffer", buffer);
+                  widget_set_pointer(this, "buffer", 'P', buffer);
                 }
             }
           if(buffer != NULL)
             {
               gfx_set_current_glyph_set(0);
-              gfx_colour_white();
 
               gfxbuf_draw_init(buffer);
               gfxbuf_draw_at(buffer, x, y);

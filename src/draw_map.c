@@ -156,8 +156,10 @@ void draw_map(struct map * map, enum GAME_MODE game_mode, trait_t active_traits,
 
   gfx_gl_log("%s:%s: map cursor", __FILE__, __FUNCTION__);
   draw_map_cursor(map, topleft_x, topleft_y, width, height);
+#ifdef WITH_OPENGL
   if(texturechanged == true)
     gfx_set_current_glyph_set(0);
+#endif
   gfx_gl_log("%s:%s: map borders", __FILE__, __FUNCTION__);
   draw_map_borders(map, game_mode, active_traits, topleft_x, topleft_y, width, height);
 
@@ -315,6 +317,7 @@ static void draw_map_non_opengl(struct map * map, int topleft_x, int topleft_y, 
             break;
           case MAP_TREASURE:
             gfx_draw_glyph(dx, dy, MAP_TREASURE, MOVE_NONE);
+            break;
           case MAP_SIZEOF_:
             break;
           }
@@ -335,22 +338,12 @@ static void draw_map_opengl(struct map * map, enum GAME_MODE game_mode, int topl
   assert(width  < 40);
   assert(height < 40);
 
-  if(map->drawbuf == NULL)
-    { /* Allocate buffer big enough to hold the largest possible amount of data. */
-      map->drawbuf = gfxbuf_new(GFXBUF_DYNAMIC_2D, GL_QUADS, GFXBUF_TEXTURE);
-      if(map->drawbuf != NULL)
-        gfxbuf_resize(map->drawbuf, 40 * 40 * 4);
-    }
   assert(map->drawbuf != NULL);
 
   ppf = map->frames_per_second / map->game_speed - 1;
   if(ppf < 1)
     ppf = 1;
-  
-  gfx_colour(map->display_colour[0],
-             map->display_colour[1],
-             map->display_colour[2],
-             map->display_colour[3]);
+
   map->drawbuf->vertices = 0;
 
   if(gfx_get_frame(MAP_DIAMOND) == gfx_get_maxframe(MAP_DIAMOND) - 1)
@@ -359,8 +352,6 @@ static void draw_map_opengl(struct map * map, enum GAME_MODE game_mode, int topl
     stop_diamond_blink = false;
 
   gfx_set_current_glyph_set(map->glyph_set);
-  gfxgl_state(GL_TEXTURE_2D, true);
-  gfxgl_state(GL_BLEND, true);
 
   /* Draw empty space first. */
   if(map->background_type == 0 || map->extra_life_anim > 0)
@@ -573,11 +564,6 @@ static void draw_map_opengl(struct map * map, enum GAME_MODE game_mode, int topl
       gfxbuf_update(map->drawbuf, 0, map->drawbuf->vertices);
       gfxbuf_draw_at(map->drawbuf, topleft_x + map->map_fine_x, topleft_y + map->map_fine_y);
     }
-
-  gfxgl_state(GL_BLEND, false);
-  GFX_GL_ERROR();
-  gfxgl_state(GL_TEXTURE_2D, false);
-  GFX_GL_ERROR();
 }
 
 

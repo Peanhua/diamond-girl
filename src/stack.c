@@ -37,9 +37,17 @@ struct stack * stack_new(void)
   if(stack != NULL)
     {
       stack->compare_function = NULL;
-      stack->data             = NULL;
       stack->size             = 0;
-      stack->allocated_size   = 0;
+      stack->allocated_size   = 1024 / sizeof(void **);
+
+      stack->data = malloc(sizeof(void **) * stack->allocated_size);;
+      assert(stack->data != NULL);
+      if(stack == NULL)
+        {
+          fprintf(stderr, "%s:%s(): Failed to allocate memory: %s\n", __FILE__, __FUNCTION__, strerror(errno));
+          free(stack);
+          stack = NULL;
+        }          
     }
   else
     fprintf(stderr, "%s:%s(): Failed to allocate memory: %s\n", __FILE__, __FUNCTION__, strerror(errno));

@@ -60,8 +60,13 @@ struct font * font_close(struct font * font)
         current_font = NULL;
 
       font->image = image_free(font->image);
-#ifdef WITH_OPENGL
       free(font->characters);
+#ifdef WITH_OPENGL
+      if(font->gfxbuf != NULL)
+        {
+          font->gfxbuf->texture_image = NULL;
+          font->gfxbuf = gfxbuf_free(font->gfxbuf);
+        }
 #endif
       free(font);
     }
@@ -112,11 +117,7 @@ void font_write(int x, int y, const char * text)
 #ifdef WITH_OPENGL
       current_font->gfxbuf->vertices = 0;
       font_render(x, y, text, current_font->gfxbuf);
-      
       gfxbuf_update(current_font->gfxbuf, 0, current_font->gfxbuf->vertices);
-      
-      gfx_colour_white();
-      gfxgl_bind_texture(current_font->image->texture);
       gfxbuf_draw(current_font->gfxbuf);
 #endif
     }
@@ -152,6 +153,19 @@ void font_write(int x, int y, const char * text)
         }
 #endif
     }
+}
+
+
+void font_printf(int x, int y, const char * fmt, ...)
+{
+  char buf[1024];
+  va_list ap;
+
+  va_start(ap, fmt);
+  vsnprintf(buf, sizeof buf, fmt, ap);
+  va_end(ap);
+
+  font_write(x, y, buf);
 }
 
 

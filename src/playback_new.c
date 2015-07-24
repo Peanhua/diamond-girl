@@ -41,6 +41,7 @@ struct playback * playback_new(void)
       rv->traits         = 0;
       rv->cave           = NULL;
       rv->level          = 0;
+      rv->treasure       = NULL;
       rv->steps          = NULL;
       rv->steps_size     = 0;
       rv->current_step   = 0;

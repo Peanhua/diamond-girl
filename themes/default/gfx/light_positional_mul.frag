@@ -1,0 +1,3 @@
+
+    colour *= light_color;
+  }

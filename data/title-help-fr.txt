@@ -1,0 +1,19 @@
+Touches de l'}cran-titre :
+* Touches de curseur pour naviguer dans
+  les menus
+* ENTER pour accepter
+* ESC pour quitter
+* PGUP et PGDOWN pour faire d}filer
+  la liste des meilleurs scores
+
+Pour rejouer une partie de la liste
+des meilleurs scores,
+cliquez sur le score avec le bouton gauche
+de la souris.
+
+Pour faire d}filer la liste des meilleurs
+scores, cliquez avec le bouton droit
+de la souris en haut ou en bas
+de la liste des meilleurs scores.
+
+Le dernier score a un fond bleu.

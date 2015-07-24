@@ -259,7 +259,7 @@ static void draw(struct widget * this)
     }
   else if(current[help_screen].special != NULL && !strcmp(current[help_screen].special, "legend"))
     { /* game graphics and explanations of them */
-      draw_legend(x, y);
+      draw_legend(x, y + 20, NULL, NULL);
     }
 }
 

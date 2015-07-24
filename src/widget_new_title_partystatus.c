@@ -72,18 +72,18 @@ static void refresh(struct widget * partystatus_widget)
 
   cave = cave_get(globals.title_game_mode, globals.cave_selection);
 
-  frame = widget_get_pointer(partystatus_widget, "contents");
+  frame = widget_get_widget_pointer(partystatus_widget, "contents");
   save_nav = NULL;
   if(frame != NULL)
     {
-      invite_button = widget_get_pointer(frame, "invite_button");
-      assert(invite_button != NULL);
-      save_nav = invite_button->navigation_down_;
+      invite_button = widget_get_widget_pointer(frame, "invite_button");
+      if(invite_button != NULL)
+        save_nav = invite_button->navigation_down_;
       widget_delete(frame);
     }
 
   frame = widget_new_child(partystatus_widget, 0, 0, widget_width(partystatus_widget), widget_height(partystatus_widget));
-  widget_set_pointer(partystatus_widget, "contents", frame);
+  widget_set_widget_pointer(partystatus_widget, "contents", frame);
 
   int x, x2, y;
   int cost;
@@ -97,7 +97,7 @@ static void refresh(struct widget * partystatus_widget)
         { NULL, cave->highscores->total.caves_entered      },
         { NULL, cave->highscores->total.levels_completed   },
         { NULL, cave->highscores->total.diamonds_collected },
-        { NULL,                  0                                                         }
+        { NULL, 0                                          }
       };
   
   x = 10;
@@ -144,8 +144,8 @@ static void refresh(struct widget * partystatus_widget)
 
   cost = (1 + globals.pyjama_party_girls_size) * 500;
   invite_button = widget_new_button(frame, x, 0, gettext("Invite more"));
-  widget_set_pointer(partystatus_widget, "focus_down_object", invite_button);
-  widget_set_pointer(frame, "invite_button", invite_button);
+  widget_set_widget_pointer(partystatus_widget, "focus_down_object", invite_button);
+  widget_set_widget_pointer(frame, "invite_button", invite_button);
   widget_set_width(invite_button, 175);
   widget_set_ulong(invite_button, "cost", cost);
   widget_set_on_release(invite_button, on_invite_more_clicked);
@@ -164,7 +164,7 @@ static void refresh(struct widget * partystatus_widget)
     stack_push(items, globals.pyjama_party_girls[i]->name);
   obj = widget_new_list(frame, x, y, 175, fheight, items);
   widget_set_on_release(obj, on_girl_clicked);
-  fd = widget_get_pointer(obj, "focus_down_object");
+  fd = widget_get_widget_pointer(obj, "focus_down_object");
   if(fd != NULL)
     widget_set_navigation_updown(fd, invite_button);
 
@@ -197,7 +197,7 @@ static void on_invite_more_clicked(struct widget * this, enum WIDGET_BUTTON butt
     {
       widget_set_enabled(this, false);
       snprintf(buf, sizeof buf, gettext("You have %d girls in the party.\nThat is the maximum number."), (int) globals.pyjama_party_girls_size);
-      widget_new_message_window(gettext("Error"), buf);
+      widget_new_message_window(gettext("Error"), NULL, buf);
     }
   else
     {
@@ -208,7 +208,7 @@ static void on_invite_more_clicked(struct widget * this, enum WIDGET_BUTTON butt
       cost = widget_get_ulong(this, "cost");
 
       window = widget_new_window(widget_root(), 450, 50, gettext("Invite a girl to the party?"));
-      widget_set_pointer(window, "previously_selected_object", widget_focus());
+      widget_set_widget_pointer(window, "previously_selected_object", widget_focus());
       x = 10;
       y = 30;
 
@@ -229,15 +229,17 @@ static void on_invite_more_clicked(struct widget * this, enum WIDGET_BUTTON butt
       t2 = widget_new_text(window, x, y, buf);
       y += widget_height(t2) + 20;
 
-      b1 = widget_new_button(window, 0, y, gettext(" Cancel "));
+      snprintf(buf, sizeof buf, " %s ", gettext("Cancel"));
+      b1 = widget_new_button(window, 0, y, buf);
       widget_set_on_release(b1, on_invite_more_no_clicked);
       widget_set_focus(b1);
       x = widget_width(t1) / 2;
       widget_set_x(b1, x - widget_width(b1) - 5);
 
-      b2 = widget_new_button(window, x + 5, y, gettext(" Invite "));
+      snprintf(buf, sizeof buf, " %s ", gettext("Invite"));
+      b2 = widget_new_button(window, x + 5, y, buf);
       widget_set_ulong(b2, "cost", cost);
-      widget_set_pointer(b2, "list_object", widget_parent(widget_parent(this)));
+      widget_set_widget_pointer(b2, "list_object", widget_parent(widget_parent(this)));
       widget_set_on_release(b2, on_invite_more_yes_clicked);
       y += widget_height(b2);
       widget_set_navigation_leftright(b1, b2);
@@ -292,16 +294,18 @@ static void on_invite_more_yes_clicked(struct widget * this, enum WIDGET_BUTTON 
 
       struct widget * list_object;
 
-      list_object = widget_get_pointer(this, "list_object");
-      assert(list_object != NULL);
-      refresh(list_object);
+      list_object = widget_get_widget_pointer(this, "list_object");
+      if(list_object != NULL)
+        {
+          refresh(list_object);
 
-      /* Set prev.. to invite_button, because we know that this window was opened using it. */
-      struct widget * frame, * invite_button;
+          /* Set prev.. to invite_button, because we know that this window was opened using it. */
+          struct widget * frame, * invite_button;
 
-      frame = widget_get_pointer(list_object, "contents");
-      invite_button = widget_get_pointer(frame, "invite_button");
-      widget_set_pointer(window, "previously_selected_object", invite_button);
+          frame = widget_get_widget_pointer(list_object, "contents");
+          invite_button = widget_get_widget_pointer(frame, "invite_button");
+          widget_set_widget_pointer(window, "previously_selected_object", invite_button);
+        }
     }
 
   widget_delete(widget_parent(this));
@@ -320,7 +324,7 @@ static void on_girl_clicked(struct widget * this, enum WIDGET_BUTTON button DG_U
   girl = globals.pyjama_party_girls[girl_index];
   window = widget_new_window(widget_root(), 350, 200, girl->name);
   widget_set_on_unload(window, on_window_unload);
-  widget_set_pointer(window, "previously_selected_object", widget_focus());
+  widget_set_widget_pointer(window, "previously_selected_object", widget_focus());
 
   x1 = 10;
   x2 = x1 + 100;
@@ -387,7 +391,8 @@ static void on_girl_clicked(struct widget * this, enum WIDGET_BUTTON button DG_U
 
   y += 20;
 
-  obj = widget_new_button(window, x1, y, gettext("  Close  "));
+  snprintf(buf, sizeof buf, "  %s  ", gettext("Close"));
+  obj = widget_new_button(window, x1, y, buf);
   widget_set_on_release(obj, on_window_close_clicked);
   widget_set_focus(obj);
   widget_set_x(obj, widget_width(window) / 2 - widget_width(obj) / 2);
@@ -425,7 +430,7 @@ static void on_window_unload(struct widget * this DG_UNUSED)
 {
   struct widget * w;
   
-  w = widget_get_pointer(window, "previously_selected_object");
+  w = widget_get_widget_pointer(window, "previously_selected_object");
   if(w != NULL)
     widget_set_focus(w);
   

@@ -34,6 +34,30 @@
 #include <unistd.h>
 
 
+
+trait_t traits_sorted[TRAIT_SIZEOF_] =
+  {
+    TRAIT_EDIT,
+    TRAIT_ADVENTURE_MODE,
+    TRAIT_PYJAMA_PARTY,
+    TRAIT_QUESTS,
+    TRAIT_IRON_GIRL,
+    TRAIT_KEY,
+    TRAIT_RIBBON,
+    TRAIT_GREEDY,
+    TRAIT_TIME_CONTROL,
+    TRAIT_POWER_PUSH,
+    TRAIT_DIAMOND_PUSH,
+    TRAIT_RECYCLER,
+    TRAIT_STARS1,
+    TRAIT_STARS2,
+    TRAIT_STARS3,
+    TRAIT_CHAOS,
+    TRAIT_DYNAMITE,
+    TRAIT_QUICK_CONTACT
+  };
+
+
 #define FILE_HEADER_V2 "dgt2"
 #define FILE_HEADER_V3 "dgt3"
 
@@ -99,6 +123,11 @@ void traits_initialize(void)
 
 void traits_cleanup(void)
 {
+}
+
+
+void traits_save(void)
+{
   FILE * fp;
 
   fp = fopen(get_save_filename("traits.dat"), "wb");
@@ -131,11 +160,13 @@ trait_t traits_get(enum GAME_MODE game_mode)
       TRAIT_STARS2         |
       TRAIT_STARS3         |
       TRAIT_RECYCLER       |
-      TRAIT_PYJAMA_PARTY;
-
-  /* No iron girl in party mode. */
-  if(game_mode == GAME_MODE_PYJAMA_PARTY)
-    rv &= ~TRAIT_IRON_GIRL;
+      TRAIT_PYJAMA_PARTY   |
+      TRAIT_QUICK_CONTACT;
+  else if(game_mode == GAME_MODE_PYJAMA_PARTY)
+    {
+      rv &= ~TRAIT_IRON_GIRL;
+      rv &= ~TRAIT_QUESTS;
+    }
 
   return rv;
 }

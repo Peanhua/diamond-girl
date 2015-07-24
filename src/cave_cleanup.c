@@ -22,6 +22,7 @@
 
 #include "cave.h"
 #include "gc.h"
+#include "globals.h"
 #include "stack.h"
 #include <stdlib.h>
 
@@ -36,7 +37,8 @@ void cave_cleanup(void)
       cave = stack_pop(s);
       if(cave != NULL)
         {
-          cave_save(cave);
+          if(globals.read_only == false)
+            cave_save(cave);
 
           free(cave->name);
           free(cave);

@@ -260,14 +260,6 @@ void highscores_load(struct highscorelist * list, enum GAME_MODE game_mode, cons
 
 void highscores_save(struct highscorelist * list, enum GAME_MODE game_mode, const char * cave)
 {
-#ifdef PROFILING
-
-  if(list || cave || game_mode)
-    {
-    }
-
-#else
-
   if(list->highscores_dirty)
     {
       FILE * fp;
@@ -361,7 +353,6 @@ void highscores_save(struct highscorelist * list, enum GAME_MODE game_mode, cons
       else
         fprintf(stderr, "Failed to open highscores file '%s': %s\n", get_save_filename(list->filename), strerror(errno));
     }
-#endif
 }
 
 
@@ -531,12 +522,14 @@ static int highscore_add(struct highscorelist * list, time_t timestamp, int scor
                     { /* Remove the 999th highscore entry. */
                       assert(list->total.score >= (uint64_t) list->highscores[list->highscores_size - 1]->score);
                       list->total.score -= list->highscores[list->highscores_size - 1]->score;
-                  
-                      /* Delete the 999th playback file because it'll be purged soon enough. */
-                      char fn[128];
+
+                      if(globals.read_only == false)
+                        { /* Delete the 999th playback file because it'll be purged soon enough. */
+                          char fn[128];
                       
-                      snprintf(fn, sizeof fn, "%s-%d.dgp", list->filename, list->highscores[list->highscores_size - 1]->playback_id);
-                      unlink(get_save_filename(fn));
+                          snprintf(fn, sizeof fn, "%s-%d.dgp", list->filename, list->highscores[list->highscores_size - 1]->playback_id);
+                          unlink(get_save_filename(fn));
+                        }
 
                       /* Free the 999th highscore entry. */
                       if(list->highscores[list->highscores_size - 1]->playback != NULL)
@@ -608,16 +601,19 @@ struct playback * highscore_playback(struct highscore_entry * entry, enum GAME_M
 void highscores_delete(struct highscorelist * list)
 {
   assert(list->filename != NULL);
-  unlink(get_save_filename(list->filename));
+  if(globals.read_only == false)
+    {
+      unlink(get_save_filename(list->filename));
   
-  for(unsigned int i = 0; i < list->highscores_size; i++)
-    if(list->highscores[i] != NULL)
-      {
-        char fn[256];
+      for(unsigned int i = 0; i < list->highscores_size; i++)
+        if(list->highscores[i] != NULL)
+          {
+            char fn[256];
 
-        snprintf(fn, sizeof fn, "%s-%d.dgp.bz2", list->filename, list->highscores[i]->playback_id);
-        unlink(get_save_filename(fn));
-      }
+            snprintf(fn, sizeof fn, "%s-%d.dgp.bz2", list->filename, list->highscores[i]->playback_id);
+            unlink(get_save_filename(fn));
+          }
+    }
 }
 
 

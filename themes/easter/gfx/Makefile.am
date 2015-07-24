@@ -1,6 +1,6 @@
 gfxdir = $(pkgdatadir)/themes/easter/gfx
 diamond.png : glyphs-24x24.xcf
-	$(AM_V_GEN) xcf2png --autocrop $< $$(basename $@ .png) > $@
+	$(AM_V_GEN) xcf2png --autocrop $< $$(basename $@ .png) > $@ 2>/dev/null
 	$(AM_V_GEN) if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
 
  : %.bz2 : %

@@ -33,7 +33,6 @@
 #include <SDL/SDL.h>
 
 #ifdef WITH_OPENGL
-#define LIGHTS 1
 static struct td_object * logo;
 
 struct anim
@@ -56,13 +55,13 @@ static struct anim anim_end_vanish =
     NULL,
 
     { 0, 0, 0 },
-    { 0, 5, 0 },
+    { 0, 0, 0 },
 
-    { 0,  -6, 0 },
-    { 0,   2, 0 },
+    { 0, 0, 6 },
+    { 0, 0, 0 },
     
-    { 0, 0, 1 },
-    { 0, 0, 1 },
+    { 0, 1, 0 },
+    { 0, 1, 0 },
 
     0.0f, 0.0f,
 
@@ -78,11 +77,11 @@ static struct anim anim_end3 =
     { 0, 0, 0 },
     { 0, 0, 0 },
 
-    { 0, -8, 0 },
-    { 0, -6, 0 },
+    { 0, 0, 8 },
+    { 0, 0, 6 },
     
-    { 0, 0, 1 },
-    { 0, 0, 1 },
+    { 0, 1, 0 },
+    { 0, 1, 0 },
 
     0.0f, 0.0f,
 
@@ -98,11 +97,11 @@ static struct anim anim_end2 =
     { 0, 0, 0 },
     { 0, 0, 0 },
 
-    { 0, -9, 0 },
-    { 0, -8, 0 },
+    { 0, 0, 9 },
+    { 0, 0, 8 },
     
-    { 0, 0, 1 },
-    { 0, 0, 1 },
+    { 0, 1, 0 },
+    { 0, 1, 0 },
 
     0.0f, 0.0f,
 
@@ -118,11 +117,11 @@ static struct anim anim_end =
     { 0, 0, 0 },
     { 0, 0, 0 },
 
-    { 0, -11, 0 },
-    { 0,  -9, 0 },
+    { 0, 0, 11 },
+    { 0, 0,  9 },
     
-    { 0, 0, 1 },
-    { 0, 0, 1 },
+    { 0, 1, 0 },
+    { 0, 1, 0 },
 
     0.0f, 0.0f,
 
@@ -138,11 +137,11 @@ static struct anim anim_2 =
     { 10, 0, 0 },
     {  0, 0, 0 },
 
-    {  3, -0.5, 0 },
-    {  0, -11, 0 },
+    {  3, 0, 0.5 },
+    {  0, 0, 11 },
 
-    {  0,  0, 1 },
-    {  0,  0, 1 },
+    {  0,  1, 0 },
+    {  0,  1, 0 },
 
     0.0f, 0.0f,
 
@@ -157,11 +156,11 @@ static struct anim anim_3 =
     {   6,    0, 0 },
     {  10,    0, 0 },
 
-    { -12,   -0.5, 0 },
-    {   3,   -0.5, 0 },
+    { -12,   0, 0.5 },
+    {   3,   0, 0.5 },
 
-    {  0, -1, 0 },
     {  0,  0, 1 },
+    {  0,  1, 0 },
 
     0.0f, 0.0f,
 
@@ -176,11 +175,11 @@ static struct anim anim_4 =
     {   2,    0, 0 },
     {   6,    0, 0 },
 
-    { -22,   -0.5, 0 },
-    { -12,   -0.5, 0 },
+    { -22,   0, 0.5 },
+    { -12,   0, 0.5 },
 
-    {  0, -1, 0 },
-    {  0, -1, 0 },
+    {  0, 0, 1 },
+    {  0, 0, 1 },
 
     0.1f, 0.0f,
 
@@ -195,11 +194,11 @@ static struct anim anim_start =
     {  -6,    0, 0 },
     {   2,    0, 0 },
 
-    { -47,   -0.5, 0 },
-    { -22,   -0.5, 0 },
+    { -47,   0, 0.5 },
+    { -22,   0, 0.5 },
 
-    {  0, -1, 0 },
-    {  0, -1, 0 },
+    {  0, 0, 1 },
+    {  0, 0, 1 },
 
     0.2f, 0.1f,
 
@@ -239,31 +238,17 @@ static void draw_frame(struct anim * anim)
           
           dif = anim->fog_density_end - anim->fog_density_start;
           fog_density = anim->fog_density_start + dif * perc;
-          glFogf(GL_FOG_DENSITY, fog_density);
-          glFogf(GL_FOG_MODE, GL_LINEAR);
-          glFogf(GL_FOG_END, 50.0f);
-
-          gfxgl_state(GL_FOG, true);
+          gfxgl_fog(GL_LINEAR, fog_density, 0.0f, 50.0f);
         }
 
       gluLookAt(camera_eye[0],    camera_eye[1],    camera_eye[2],
                 camera_center[0], camera_center[1], camera_center[2],
                 camera_up[0],     camera_up[1],     camera_up[2]);
 
-#if LIGHTS
-      {
-        GLfloat pos[] = { 10.0f, -20.0f, 0.5f, 1.0f };
-        
-        for(int i = 0; i < 3; i++)
-          pos[i] += (float) get_rand(100) / 50.0f - 0.5f;
-
-        glLightfv(GL_LIGHT0, GL_POSITION, pos);
-      }
-#endif
       td_object_draw(logo);
 
       if(anim->fog_density_start > 0.0f || anim->fog_density_end > 0.0f)
-        gfxgl_state(GL_FOG, false);
+        gfxgl_fog_off();
       
       gfx_flip();
     }
@@ -274,6 +259,7 @@ static void draw_frame(struct anim * anim)
 
 void intro(void)
 {
+  sfx_volume(0.3f);
   if(globals.opengl)
     {
 #ifdef WITH_OPENGL
@@ -289,37 +275,16 @@ void intro(void)
       SDL_initFramerate(&framerate_manager);
       SDL_setFramerate(&framerate_manager, 60);
 
-      logo = td_object_load(get_data_filename("gfx/logo.3ds"));
+      logo = td_object_load(get_data_filename("gfx/logo.obj"), NULL, NULL);
       assert(logo != NULL);
       GFX_GL_ERROR();
 
-#if LIGHTS
-      glLightModeli(GL_LIGHT_MODEL_TWO_SIDE,     GL_FALSE);
-      glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
-
-      gfxgl_state(GL_LIGHT0, true);
-      gfxgl_state(GL_LIGHTING, true);
-
       {
         GLfloat light_a[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-        GLfloat light_d[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+        GLfloat light_d[] = { 0.75f, 0.75f, 0.75f, 1.0f };
         GLfloat light_s[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-        
-        glLightfv(GL_LIGHT0, GL_AMBIENT,  light_a);
-        glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_d);
-        glLightfv(GL_LIGHT0, GL_SPECULAR, light_s);
-      }
-#endif
-      
-      {
-        GLfloat specular[] = { 1.0, 1.0, 1.0, 1.0 };
-        GLfloat emission[] = { 0.0, 0.0, 0.0, 1.0 };
-        
-        glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
-        glMaterialfv(GL_FRONT, GL_EMISSION, emission);
-        glMaterialf(GL_FRONT, GL_SHININESS, 128);
-        gfxgl_state(GL_COLOR_MATERIAL, true);
-        glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+        GLfloat pos[] = { -0.15f, 1.0f, 1.0f, 0.0f };
+        gfxgl_light(light_a, light_d, light_s, pos);
       }
 
       struct anim * anim;
@@ -377,9 +342,7 @@ void intro(void)
 
       logo = td_object_unload(logo);
 
-#if LIGHTS
-      gfxgl_state(GL_LIGHTING, false);
-#endif
+      gfxgl_light_off();
 #endif
     }
 }

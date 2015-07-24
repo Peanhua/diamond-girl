@@ -24,11 +24,16 @@
 #include "game.h"
 #include "map.h"
 #include "girl.h"
+#include "quest.h"
 #include "random.h"
 #include "sfx.h"
 #include "ai.h"
+#include "stack.h"
 #include "traits.h"
+#include "treasure.h"
+#include "treasureinfo.h"
 #include <assert.h>
+#include <libintl.h>
 
 bool game_player_movement(struct map * map, struct gamedata * gamedata)
 {
@@ -173,17 +178,33 @@ bool game_player_movement(struct map * map, struct gamedata * gamedata)
                   gamedata->ai->diamond_collected(gamedata->ai);
             }
 	  break;
+        case MAP_TREASURE:
+          assert(gamedata->treasure != NULL);
+
+          if(gamedata->treasure != NULL)
+            {
+              char buf[128];
+              
+              snprintf(buf, sizeof buf, "%s!", treasure_type_name(gamedata->treasure->item->type));
+              buf[0] = toupper(buf[0]);
+              girl_chat(map->girl, buf);
+              gamedata->treasure->collected = true;
+              /* Determine the screen coordinates for girls current position: */
+              gamedata->treasureanim_pos[0] = (24 + 4)  + (1 + map->girl->mob->x - map->map_x) * 24 - map->map_fine_x;
+              gamedata->treasureanim_pos[1] = (45)      + (1 + map->girl->mob->y - map->map_y) * 24 - map->map_fine_y;
+              gamedata->treasureanim_phase  = 0.0;
+            }
+          /* no break - fallthru */
 	case MAP_EMPTY:
 	case MAP_SAND:
-	  if(map->data[new_x + new_y * map->width] == MAP_EMPTY)
+          if(map->fast_forwarding == false)
             {
-              if(map->fast_forwarding == false)
+              if(map->data[new_x + new_y * map->width] == MAP_EMPTY)
                 sfx_emit(SFX_MOVE_EMPTY, new_x, new_y);
-            }
-	  else if(map->data[new_x + new_y * map->width] == MAP_SAND)
-            {
-              if(map->fast_forwarding == false)
+              else if(map->data[new_x + new_y * map->width] == MAP_SAND)
                 sfx_emit(SFX_MOVE_SAND, new_x, new_y);
+              else if(map->data[new_x + new_y * map->width] == MAP_TREASURE)
+                sfx_emit(SFX_COLLECT_TREASURE, new_x, new_y);
             }
 
 	  if(gamedata->player_shift_move)
@@ -253,10 +274,6 @@ bool game_player_movement(struct map * map, struct gamedata * gamedata)
             if(gamedata->traits & TRAIT_POWER_PUSH)
               if(map->ameba_blocked_timer > 4)
                 map->ameba_blocked_timer -= 3;
-          break;
-        case MAP_TREASURE:
-          printf("TREASURE\n");
-          assert(0);
           break;
 	}
 

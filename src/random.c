@@ -22,8 +22,9 @@
 
 #include "diamond_girl.h"
 #include "random.h"
-
 #include <assert.h>
+
+#include "../pcg/pcg32.c"
 
 #ifdef WITH_BUNDLED_MTWIST
 # define MT_GENERATE_CODE_IN_HEADER 0
@@ -31,6 +32,8 @@
 #else
 # include <mtwist.h>
 #endif
+
+static pcg32_random_t rng;
 
 
 /* range is the maximum number of different values from 0 to range-1 */
@@ -40,7 +43,7 @@ unsigned int get_rand(unsigned int range)
 
   assert(range > 0);
 
-  r = (double) range * mt_drand();
+  r = (double) range * (double) pcg32_random_r(&rng) / (double) ((1ULL<<32ULL) - 1ULL);
 
   assert(r < range);
 
@@ -70,9 +73,9 @@ void seed_rand(uint32_t seed)
 {
 #ifdef PROFILING
   /* When profiling, always use the same seed. */
-  mt_seed32(seed - seed);
+  rng.inc = seed - seed;
 #else
-  mt_seed32(seed);
+  rng.inc = seed;
 #endif
 }
 

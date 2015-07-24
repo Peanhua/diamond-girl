@@ -21,63 +21,35 @@
 */
 
 #include "traits.h"
+#include <assert.h>
 #include <libintl.h>
 
 char * trait_get_name(trait_t trait)
 {
-  static struct
-  {
-    trait_t trait_id;
-    char *  name;
-  } traits[] =
-      {
-        { TRAIT_KEY,            NULL },
-        { TRAIT_ADVENTURE_MODE, NULL },
-        { TRAIT_RIBBON,         NULL },
-        { TRAIT_GREEDY,         NULL },
-        { TRAIT_TIME_CONTROL,   NULL },
-        { TRAIT_POWER_PUSH,     NULL },
-        { TRAIT_DIAMOND_PUSH,   NULL },
-        { TRAIT_RECYCLER,       NULL },
-        { TRAIT_STARS1,         NULL },
-        { TRAIT_STARS2,         NULL },
-        { TRAIT_STARS3,         NULL },
-        { TRAIT_CHAOS,          NULL },
-        { TRAIT_DYNAMITE,       NULL },
-        { TRAIT_IRON_GIRL,      NULL },
-        { TRAIT_PYJAMA_PARTY,   NULL },
-        { TRAIT_QUESTS,         NULL },
-        { TRAIT_ALL,            NULL }
-      };
-  static bool initdone = false;
-
-  if(initdone == false)
-    {
-      traits[0].name  = gettext("Key");
-      traits[1].name  = gettext("AdventureMode");
-      traits[2].name  = gettext("Ribbon");
-      traits[3].name  = gettext("Greedy");
-      traits[4].name  = gettext("Time Control");
-      traits[5].name  = gettext("Power Push");
-      traits[6].name  = gettext("Diamond Push");
-      traits[7].name  = gettext("Recycler");
-      traits[8].name  = gettext("Stars 1");
-      traits[9].name  = gettext("Stars 2");
-      traits[10].name = gettext("Stars 3");
-      traits[11].name = gettext("Chaos");
-      traits[12].name = gettext("Dynamite");
-      traits[13].name = gettext("Iron Girl");
-      traits[14].name = gettext("Pyjama Party");
-      traits[15].name = gettext("Quests");
-      initdone = true;
-    }
-  
   char * name;
 
-  name = NULL;
-  for(trait_t i = 0; name == NULL && traits[i].trait_id != TRAIT_ALL; i++)
-    if(traits[i].trait_id == trait)
-      name = traits[i].name;
-  
+  switch(trait)
+    {
+    case TRAIT_KEY:            name = gettext("Key");            break;
+    case TRAIT_ADVENTURE_MODE: name = gettext("Adventure Mode"); break;
+    case TRAIT_RIBBON:         name = gettext("Ribbon");         break;
+    case TRAIT_GREEDY:         name = gettext("Greedy");         break;
+    case TRAIT_TIME_CONTROL:   name = gettext("Time Control");   break;
+    case TRAIT_POWER_PUSH:     name = gettext("Power Push");     break;
+    case TRAIT_DIAMOND_PUSH:   name = gettext("Diamond Push");   break;
+    case TRAIT_RECYCLER:       name = gettext("Recycler");       break;
+    case TRAIT_STARS1:         name = gettext("Stars 1");        break;
+    case TRAIT_STARS2:         name = gettext("Stars 2");        break;
+    case TRAIT_STARS3:         name = gettext("Stars 3");        break;
+    case TRAIT_CHAOS:          name = gettext("Chaos");          break;
+    case TRAIT_DYNAMITE:       name = gettext("Dynamite");       break;
+    case TRAIT_IRON_GIRL:      name = gettext("Iron Girl");      break;
+    case TRAIT_PYJAMA_PARTY:   name = gettext("Pyjama Party");   break;
+    case TRAIT_QUESTS:         name = gettext("Quests");         break;
+    case TRAIT_EDIT:           name = gettext("Edit");           break;
+    case TRAIT_QUICK_CONTACT:  name = gettext("Quick Contact");  break;
+    default:                   name = NULL; assert(0);           break;
+    }
+
   return name;
 }

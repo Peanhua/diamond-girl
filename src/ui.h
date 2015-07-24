@@ -26,8 +26,6 @@
 #include <SDL/SDL.h>
 #include <stdbool.h>
 
-//#define UI_DEBUG
-
 enum UI_COMMAND
   {
     UIC_DRAW,    /* Called twice when ui_draw() is called.
@@ -55,6 +53,8 @@ enum UI_COMMAND
     UIC_VOLUME_DOWN,
     UIC_VOLUME_UP,
     UIC_MUTE,
+    UIC_RECORDING_START,
+    UIC_RECORDING_STOP,
 
     UIC_CATCH_ALL_KEYBOARD,  /* Catch all events for the keyboard      */
     UIC_CATCH_ALL_MOUSE,     /* Catch all events for the mouse         */
@@ -100,6 +100,7 @@ extern int  ui_initialize(void);
 extern void ui_cleanup(void);
 extern void ui_draw(bool colorbuffer_clearing);
 extern void ui_process_events(bool wait_infinitely);
+extern void ui_destroy_pending_events(void);
 
 extern void ui_state_push(void);
 extern void ui_state_pop(void);
@@ -112,6 +113,7 @@ extern char *          ui_command_name(enum UI_COMMAND command);
 extern char *          ui_keyboard_key_name(SDLKey key);
 extern char *          ui_keyboard_modifier_name(SDLMod mod);
 extern struct widget * ui_get_widget_at_coordinates(int x, int y);
+extern void            ui_wait_for_window_close(struct widget * window, struct widget * closebutton);
 /* Bindings. */
 extern void                 ui_bindings_initialize(void);
 extern void                 ui_bindings_cleanup(void);

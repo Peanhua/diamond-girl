@@ -33,6 +33,7 @@ struct ai;
 struct playback;
 struct cave;
 struct map;
+struct treasureinfo;
 
 #define MAX_PYJAMA_PARTY_SIZE 9
 
@@ -50,20 +51,26 @@ enum PARTYCONTROLLER
     PARTYCONTROLLER_PARTY
   };
 
+
+
 struct gamedata
 {
-  bool              quit;     /* Set to true to exit the current game as soon as possible. */
-  bool              exit_after_one_level;
-  int               starting_girls;
-  int               girls;    /* Number of girls left. */
-  uint64_t          score;    /* The score. */
-  int               diamond_score; /* The diamond score gained. */
-  uint64_t          diamonds; /* Total number of diamonds collected. */
-  struct cave *     cave;     /* The cave where the game takes place. */
-  int               current_level;
-  bool              iron_girl_mode;
-  trait_t           traits;   /* Traits active during this game. */
-  struct playback * playback; /* The playback recorded. */
+  bool               quit;     /* Set to true to exit the current game as soon as possible. */
+  bool               exit_after_one_level;
+  int                starting_girls;
+  int                girls;    /* Number of girls left. */
+  uint64_t           score;    /* The score. */
+  int                diamond_score; /* The diamond score gained. */
+  uint64_t           diamonds; /* Total number of diamonds collected. */
+  struct cave *      cave;     /* The cave where the game takes place. */
+  int                current_level;
+  bool               iron_girl_mode;
+  trait_t            traits;   /* Traits active during this game. */
+  struct playback *  playback; /* The playback recorded. */
+  struct treasureinfo * treasure;
+  bool                  treasure_placed_this_level;
+  float                 treasureanim_pos[2];
+  float                 treasureanim_phase;
 
   struct map *  map;
   struct ai *   ai;
@@ -94,7 +101,7 @@ struct gamedata
   void (*reset_map)(void); /* Reset some of the map, do not initialize it fully. */
 };
 
-extern struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool return_after_one_level, struct ai * computer_player);
+extern struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool return_after_one_level, struct ai * computer_player, struct treasureinfo * treasure);
 
 extern struct gamedata * gamedata_new(struct cave * cave, bool iron_girl_mode, trait_t traits);
 extern struct gamedata * gamedata_free(struct gamedata * gamedata);

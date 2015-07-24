@@ -1,0 +1,13 @@
+Commandes:
+
+ F1	- mettre en pause et afficher cette aide
+ F2	- mettre en pause et afficher la l}gende
+ F10	- basculer en plein }cran
+ ALT+ENTER	- basculer en plein }cran
+ ESC	- suicide
+ PAUSE	- mettre le jeu en pause
+ 	  PAUSE { nouveau pour reprendre
+ les fl~ches	- bouger
+ SHIFT+fl~ches	- ne bouge pas, seulement manipuler
+
+Si vous appuyez sur ESC apr~s [tre mort, vous retournez au menu principal.

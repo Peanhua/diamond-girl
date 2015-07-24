@@ -122,9 +122,7 @@ void twinkle_draw(void)
       if(vbi > 0)
         {
           gfxbuf_update(buffer, 0, vbi / 2);
-          gfxgl_state(GL_BLEND, true);
           gfxbuf_draw(buffer);
-          gfxgl_state(GL_BLEND, false);
         }
     }
 #endif
@@ -254,7 +252,7 @@ void twinkle_fullscreen(void)
     }
 }
 
-void twinkle_area(int x, int y, int width, int height, int amount)
+void twinkle_area(int x DG_UNUSED_WITHOUT_OPENGL, int y DG_UNUSED_WITHOUT_OPENGL, int width DG_UNUSED_WITHOUT_OPENGL, int height DG_UNUSED_WITHOUT_OPENGL, int amount DG_UNUSED_WITHOUT_OPENGL)
 {
 #ifdef WITH_OPENGL
   if(globals.opengl)

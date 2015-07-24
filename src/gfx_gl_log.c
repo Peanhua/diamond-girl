@@ -20,13 +20,14 @@
   Complete license can be found in the LICENSE file.
 */
 
+#ifdef WITH_OPENGL
+#ifndef NDEBUG
+
 #include "gfx.h"
 #include <stdarg.h>
-#ifdef WITH_OPENGL
 #include <GL/glew.h>
-#endif
 
-#ifndef NDEBUG
+
 void gfx_gl_log(char * fmt, ...)
 {
   if(GLEW_GREMEDY_string_marker)
@@ -40,10 +41,6 @@ void gfx_gl_log(char * fmt, ...)
       glStringMarkerGREMEDY(0, buf);
     }
 }
-#endif
-
-#ifndef NDEBUG
-# ifdef WITH_OPENGL
 
 #include "globals.h"
 #include <assert.h>

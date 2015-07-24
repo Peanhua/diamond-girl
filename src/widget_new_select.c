@@ -37,6 +37,7 @@ static struct widget * background;
 static void on_open_list(struct widget * this, enum WIDGET_BUTTON button);
 static void on_background_clicked(struct widget * this, enum WIDGET_BUTTON button);
 static void on_option_clicked(struct widget * this, enum WIDGET_BUTTON button);
+static void cut_option_short(char const * source, char * destination, unsigned int destination_size, unsigned int maxwidth);
 
 struct widget * widget_new_select(struct widget * parent, int x, int y, int width, unsigned int selected_index, struct stack * options)
 {
@@ -46,13 +47,18 @@ struct widget * widget_new_select(struct widget * parent, int x, int y, int widt
   assert(widget != NULL);
   if(widget != NULL)
     {
-      if(options != NULL && selected_index < options->size)
-        widget_set_string(widget, "text", "%s", (char *) options->data[selected_index]);
       widget_set_ulong(widget, "type", WT_SELECT);
       widget_set_enabled(widget, true);
       widget_set_width(widget, width);
+      if(options != NULL && selected_index < options->size)
+        {
+          char buf[128];
+
+          cut_option_short(options->data[selected_index], buf, sizeof buf, width - 2);
+          widget_set_string(widget, "text", "%s", buf);
+        }
       widget_set_ulong(widget, "selected_index", selected_index);
-      widget_set_pointer(widget, "options", options);
+      widget_set_select_options(widget, options);
       widget_set_on_release(widget, on_open_list);
       widget_set_image(widget, "image", GFX_IMAGE_WIDGET_SELECT);
       widget_set_long(widget, "image_offset_x", -1);
@@ -70,7 +76,7 @@ static void on_open_list(struct widget * this, enum WIDGET_BUTTON button)
     {
       struct stack * options;
 
-      options = widget_get_pointer(this, "options");
+      options = widget_get_select_options(this);
       if(options != NULL)
         {
           active_select = this;
@@ -116,23 +122,9 @@ static void on_open_list(struct widget * this, enum WIDGET_BUTTON button)
                   struct widget * option;
                   char buf[128];
                   char * text;
-                  bool done;
 
                   text = ((struct ui_widget_select_option *) options->data[i])->text;
-                  done = false;
-                  for(int j = 0; done == false && j < (int) (sizeof buf) - 1 ; j++)
-                    {
-                      buf[j] = text[j];
-                      buf[j + 1] = '\0';
-                      if(font_width(buf) >= w)
-                        {
-                          buf[j] = '\0';
-                          done = true;
-                        }
-                      else if(text[j] == '\0')
-                        done = true;
-                    }
-
+                  cut_option_short(text, buf, sizeof buf, w);
                   option = widget_new_button(win, 1, y, buf);
                   assert(option != NULL);
                   if(option != NULL)
@@ -157,7 +149,7 @@ static void on_open_list(struct widget * this, enum WIDGET_BUTTON button)
     }
 }
 
-static void on_option_clicked(struct widget * this DG_UNUSED, enum WIDGET_BUTTON button)
+static void on_option_clicked(struct widget * this, enum WIDGET_BUTTON button)
 {
   if(button == WIDGET_BUTTON_LEFT)
     {
@@ -168,15 +160,18 @@ static void on_option_clicked(struct widget * this DG_UNUSED, enum WIDGET_BUTTON
 
       ui_func_on_select_t on_select;
 
-      on_select = widget_get_pointer(active_select, "on_select");
+      on_select = widget_get_pointer(active_select, "on_select", 'P');
       if(on_select != NULL)
         on_select(active_select);
 
-      w = background;
-      background = NULL;
-      widget_delete(w);
+      if(this->deleted_ == false)
+        {
+          w = background;
+          background = NULL;
+          widget_delete(w);
 
-      widget_set_focus(active_select);
+          widget_set_focus(active_select);
+        }
     }
 }
 
@@ -190,5 +185,25 @@ static void on_background_clicked(struct widget * this DG_UNUSED, enum WIDGET_BU
       w = background;
       background = NULL;
       widget_delete(w);
+    }
+}
+
+
+static void cut_option_short(char const * source, char * destination, unsigned int destination_size, unsigned int maxwidth)
+{
+  bool done;
+  
+  done = false;
+  for(unsigned int j = 0; done == false && j + 1 < destination_size; j++)
+    {
+      destination[j] = source[j];
+      destination[j + 1] = '\0';
+      if(font_width(destination) >= (int) maxwidth)
+        {
+          destination[j] = '\0';
+          done = true;
+        }
+      else if(source[j] == '\0')
+        done = true;
     }
 }

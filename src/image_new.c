@@ -46,6 +46,9 @@ struct image * image_new(int width, int height, bool alpha)
 #ifdef WITH_OPENGL
       rv->texture             = 0;
       rv->texture_initialized = false;
+      rv->texture_atlas       = NULL;
+      rv->texture_offset_x    = 0.0f;
+      rv->texture_offset_y    = 0.0f;
       rv->buffer              = NULL;
       rv->bufferw             = 0;
       rv->bufferh             = 0;

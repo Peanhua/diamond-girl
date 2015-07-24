@@ -21,7 +21,7 @@
 */
 
 #include "playback.h"
-
+#include "treasureinfo.h"
 #include <assert.h>
 
 
@@ -41,6 +41,15 @@ struct playback * playback_free(struct playback * playback)
 
       if(playback->next != NULL)
         playback->next = playback_free(playback->next);
+
+      if(playback->treasure != NULL)
+        {
+          free(playback->treasure->item);
+          playback->treasure->item = NULL;
+
+          free(playback->treasure);
+          playback->treasure = NULL;
+        }
 
       free(playback);
     }

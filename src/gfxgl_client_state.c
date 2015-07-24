@@ -61,6 +61,7 @@ void gfxgl_client_state(GLenum cap, bool enabled)
       {
         states[i] = enabled;
         
+        GFX_GL_ERROR();
         if(enabled)
           glEnableClientState(cap);
         else

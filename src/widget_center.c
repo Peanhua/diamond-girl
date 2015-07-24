@@ -22,19 +22,42 @@
 
 #include "widget.h"
 #include "gfx.h"
+#include <assert.h>
 
 void widget_center(struct widget * widget)
 {
-  int x, y;
+  widget_center_horizontally(widget);
+  widget_center_vertically(widget);
+}
 
-  x = (SCREEN_WIDTH  - widget_width(widget) ) / 2;
-  y = (SCREEN_HEIGHT - widget_height(widget)) / 2;
 
-  if(widget_parent(widget) != NULL)
-    {
-      x -= widget_absolute_x(widget_parent(widget));
-      y -= widget_absolute_y(widget_parent(widget));
-    }
-  widget_set_x(widget, x);
-  widget_set_y(widget, y);
+void widget_center_horizontally(struct widget * widget)
+{
+  struct widget * parent;
+  int pw;
+
+  assert(widget != NULL);
+  parent = widget_parent(widget);
+  if(parent != NULL)
+    pw = widget_width(parent);
+  else
+    pw = SCREEN_WIDTH;
+
+  widget_set_x(widget, (pw - widget_width(widget))  / 2);
+}
+
+
+void widget_center_vertically(struct widget * widget)
+{
+  struct widget * parent;
+  int ph;
+
+  assert(widget != NULL);
+  parent = widget_parent(widget);
+  if(parent != NULL)
+    ph = widget_height(parent);
+  else
+    ph = SCREEN_HEIGHT;
+
+  widget_set_y(widget, (ph - widget_height(widget))  / 2);
 }

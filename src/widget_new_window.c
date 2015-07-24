@@ -48,6 +48,8 @@ struct widget * widget_new_window(struct widget * parent, int width, int height,
 
   if(window != NULL)
     {
+      window->z_ = widget_top_z(widget_root()) + 1;
+
       widget_set_ulong(window, "type", WT_WINDOW);
       if(title != NULL)
         widget_set_string(window, "title", "%s", title);
@@ -68,6 +70,8 @@ struct widget * widget_new_window(struct widget * parent, int width, int height,
           widget_set_height(closebutton, img->height + 2);
       
           widget_set_on_release(closebutton, on_close_clicked);
+
+          widget_set_widget_pointer(window, "closebutton", closebutton);
         }
       else
         window = widget_delete(window);

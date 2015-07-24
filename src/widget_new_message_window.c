@@ -20,97 +20,92 @@
   Complete license can be found in the LICENSE file.
 */
 
-#include "diamond_girl.h"
 #include "widget.h"
 #include "font.h"
 #include "gfx.h"
+#include <assert.h>
 #include <libintl.h>
 
-static void on_window_unload(struct widget * this);
-static void on_window_exit(bool pressed, SDL_Event * event);
-static void on_window_close_clicked(struct widget * this, enum WIDGET_BUTTON button);
 
-static struct widget * window;
+static void on_button_clicked(struct widget * this, enum WIDGET_BUTTON button);
 
-struct widget * widget_new_message_window(const char * title, const char * message)
+
+void widget_new_message_window(const char * title, struct widget * header, const char * message)
 {
+  widget_new_message_dialog(title, header, message, NULL);
+}
+
+
+void widget_new_message_dialog(const char * title, struct widget * header, const char * message, struct widget * button)
+{
+  struct widget * window;
+  struct widget * textarea;
   struct widget * bclose;
   int y;
-  char * message_copy;
-  char * p;
 
   window = widget_new_window(widget_root(), 500, 60, title);
 
-  message_copy = strdup(message);
-  p = message_copy;
-  y = 25;
+  y = font_height() + 10;
 
-  do
+  if(header != NULL)
     {
-      char * lf;
-      struct widget * line;
+      struct widget * tmp;
       
-      lf = strchr(p, '\n');
-      if(lf != NULL)
-        *lf = '\0';
-      line = widget_new_text(window, 10, y, p);
-      widget_add_flags(line, WF_ALIGN_CENTER);
-      widget_set_width(line, widget_width(window) - 10 * 2);
-      y += font_height();
-      if(lf != NULL)
-        p = lf + 1;
-      else
-        p = NULL;
+      tmp = widget_reparent(header, window);
+      assert(tmp == window);
+      if(tmp == window)
+        {
+          widget_center_horizontally(header);
+          widget_set_y(header, y);
+          y += widget_height(header) + 20;
+        }
     }
-  while(p != NULL);
   
-  y += 20;
+  textarea = widget_new_text_area(window, 5, y, 500 - 10 * 2, 50, message, true);
+  widget_resize_to_fit_children(textarea);
+  y += widget_height(textarea) + font_height();
+
   bclose = widget_new_button(window, 0, y, gettext("Close"));
-  y += widget_height(bclose) + 10;
-  widget_set_height(window, y);
   widget_set_width(bclose, 100);
-  widget_set_x(bclose, (widget_width(window) - widget_width(bclose)) / 2);
-  widget_set_on_release(bclose, on_window_close_clicked);
+  widget_center_horizontally(bclose);
+
+  if(button != NULL)
+    {
+      widget_reparent(button, window);
+      widget_set_x(button, widget_x(bclose) + widget_width(bclose) + 20);
+      widget_set_y(button, y);
+      widget_set_navigation_leftright(bclose, button);
+
+      ui_func_on_activate_t func;
+      func = widget_on_release(button);
+      widget_set_pointer(button, "saved_on_release", 'P', func);
+      widget_set_on_release(button, on_button_clicked);
+    }
   
-  widget_set_pointer(window, "previously_selected_object", widget_focus());
+  y += widget_height(bclose) + 10;
+  
+  widget_set_widget_pointer(window, "previously_selected_object", widget_focus());
   widget_set_focus(bclose);
   
   
+  widget_set_height(window, y);
+  widget_center_vertically(window);
   widget_set_modal(window);
-  /* Replace cancel and exit handlers. */
-  ui_push_handlers();
-  ui_set_handler(UIC_EXIT,   on_window_exit);
-  ui_set_handler(UIC_CANCEL, on_window_exit);
-  widget_set_on_unload(window, on_window_unload);
 
-  free(message_copy);
-
-  return window;
+  ui_wait_for_window_close(window, bclose);
 }
 
 
-
-static void on_window_unload(struct widget * this DG_UNUSED)
+static void on_button_clicked(struct widget * this, enum WIDGET_BUTTON button)
 {
-  ui_pop_handlers();
-}
+  ui_func_on_activate_t func;
+  void * ptr;
 
-static void on_window_exit(bool pressed, SDL_Event * event DG_UNUSED)
-{
-  if(pressed == true)
-    {
-      struct widget * w;
+  ptr = widget_get_pointer(this, "saved_on_release", 'P');
+  func = ptr;
 
-      w = widget_get_pointer(window, "previously_selected_object");
+  if(func != NULL)
+    func(this, button);
 
-      window = widget_delete(window);
-
-      if(w != NULL)
-        widget_set_focus(w);
-    }
-}
-
-static void on_window_close_clicked(struct widget * this DG_UNUSED, enum WIDGET_BUTTON button DG_UNUSED)
-{
-  on_window_exit(true, NULL);
+  widget_delete(widget_parent(this));
 }

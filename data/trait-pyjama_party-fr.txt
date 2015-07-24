@@ -1,0 +1,11 @@
+Un nouveau mode de jeu : soir}e pyjama
+
+Dans ce mode de jeu, le joueur guide
+une soir}e { travers les grottes.
+
+Le mode soir}e pyjama change les r~gles :
+* la fille est plus r}sistante aux ennemis
+* certaines propri}t}s deviennent disponibles
+* pas de fille suppl}mentaire tous les 200 point
+
+Ce mode de jeu peut [tre activ} via les param~tres.

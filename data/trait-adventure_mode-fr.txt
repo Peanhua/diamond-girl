@@ -1,0 +1,7 @@
+Un nouveau mode de jeu : aventure
+
+Le mode aventure change les r~gles :
+* la fille est plus r}sistante aux ennemis
+* certaines propri}t}s deviennent disponibles
+
+Ce mode de jeu peut [tre activ} via les param~tres.

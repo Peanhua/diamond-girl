@@ -22,6 +22,7 @@
 
 #include "gfx.h"
 #include "gfxbuf.h"
+#include "gfx_material.h"
 #include "globals.h"
 #include <SDL/SDL_gfxPrimitives.h>
 #include <assert.h>
@@ -35,25 +36,35 @@ void gfx_draw_hline(int x, int y, int width, uint8_t red, uint8_t green, uint8_t
   if(globals.opengl)
     {
 #ifdef WITH_OPENGL
-      int pos;
-
       if(buffer == NULL)
         {
           buffer = gfxbuf_new(GFXBUF_DYNAMIC_2D, GL_LINES, 0);
-          assert(buffer != NULL);
-          gfxbuf_resize(buffer, 2);
+          if(buffer != NULL)
+            {
+              gfxbuf_resize(buffer, 2);
+              buffer->material = gfx_material_new();
+            }
         }
 
-      assert(buffer != NULL);
-      pos = 0;
-      buffer->vbuf[pos++] = 0;
-      buffer->vbuf[pos++] = 0;
-      buffer->vbuf[pos++] = width;
-      buffer->vbuf[pos++] = 0;
+      if(buffer != NULL && buffer->material != NULL)
+        {
+          int pos;
 
-      gfx_colour(red, green, blue, alpha);
-      gfxbuf_update(buffer, 0, 2);
-      gfxbuf_draw_at(buffer, x, y);
+          pos = 0;
+          buffer->vbuf[pos++] = 0;
+          buffer->vbuf[pos++] = 0;
+          buffer->vbuf[pos++] = width;
+          buffer->vbuf[pos++] = 0;
+
+          gfx_material_change4f(buffer->material, GFX_MATERIAL_COLOUR,
+                                (float) red / 255.0,
+                                (float) green / 255.0,
+                                (float) blue / 255.0,
+                                (float) alpha / 255.0);
+
+          gfxbuf_update(buffer, 0, 2);
+          gfxbuf_draw_at(buffer, x, y);
+        }
 #endif
     }
 #ifdef WITH_NONOPENGL

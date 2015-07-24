@@ -21,7 +21,8 @@
 */
 
 #include "playback.h"
-
+#include "treasure.h"
+#include "treasureinfo.h"
 #include <bzlib.h>
 #include <assert.h>
 #include <errno.h>
@@ -92,6 +93,28 @@ bool playback_save(char const * const filename, struct playback * playback)
                   snprintf(buf, sizeof buf, "LEVEL=%d\n", playback->level);
                   BZ2_bzWrite(&bzerror, bfp, buf, strlen(buf));
                 }
+
+              if(bzerror == BZ_OK)
+                if(playback->treasure != NULL)
+                  {
+                    snprintf(buf, sizeof buf, "%s", "TREASURE=");
+                    BZ2_bzWrite(&bzerror, bfp, buf, strlen(buf));
+
+                    if(bzerror == BZ_OK)
+                      {
+                        char * str;
+
+                        str = treasureinfo_save(playback->treasure);
+                        BZ2_bzWrite(&bzerror, bfp, str, strlen(str));
+                        free(str);
+
+                        if(bzerror == BZ_OK)
+                          {
+                            snprintf(buf, sizeof buf, "%s", "\n");
+                            BZ2_bzWrite(&bzerror, bfp, buf, strlen(buf));
+                          }
+                      }
+                  }
 
               if(bzerror == BZ_OK)
                 {

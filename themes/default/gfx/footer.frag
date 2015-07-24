@@ -1,0 +1,3 @@
+
+  gl_FragColor = colour;
+}

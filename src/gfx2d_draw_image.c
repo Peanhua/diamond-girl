@@ -42,7 +42,14 @@ void gfx2d_draw_image_scaled(int x, int y, struct image * image, int scale_to_wi
   if(globals.opengl)
     {
 #ifdef WITH_OPENGL
-      assert(image->texture_initialized == true);
+      struct image * blitsource;
+
+      if(image->texture_atlas != NULL)
+        blitsource = image->texture_atlas;
+      else
+        blitsource = image;
+      
+      assert(blitsource->texture_initialized == true);
       assert(image->buffer != NULL);
 
       if(image->bufferw != scale_to_width || image->bufferh != scale_to_height)
@@ -57,37 +64,37 @@ void gfx2d_draw_image_scaled(int x, int y, struct image * image, int scale_to_wi
           vpos = 0;
           tpos = 0;
 
-          toffx = 0.5f / (float) image->width;
-          toffy = 0.5f / (float) image->height;
+          toffx = 0.5f / (float) blitsource->width;
+          toffy = 0.5f / (float) blitsource->height;
 
-          w = (float) image->content_width  / (float) image->width  - toffx;
-          h = (float) image->content_height / (float) image->height - toffy;
+          w = (float) image->content_width  / (float) blitsource->width  - toffx;
+          h = (float) image->content_height / (float) blitsource->height - toffy;
 
-          image->buffer->tbuf[tpos++] = toffx;
-          image->buffer->tbuf[tpos++] = h;
+          image->buffer->tbuf[tpos++] = image->texture_offset_x + toffx;
+          image->buffer->tbuf[tpos++] = image->texture_offset_y + h;
           image->buffer->vbuf[vpos++] = 0;
           image->buffer->vbuf[vpos++] = 0;
 
-          image->buffer->tbuf[tpos++] = w;
-          image->buffer->tbuf[tpos++] = h;
+          image->buffer->tbuf[tpos++] = image->texture_offset_x + w;
+          image->buffer->tbuf[tpos++] = image->texture_offset_y + h;
           image->buffer->vbuf[vpos++] = scale_to_width;
           image->buffer->vbuf[vpos++] = 0;
 
-          image->buffer->tbuf[tpos++] = w;
-          image->buffer->tbuf[tpos++] = toffy;
+          image->buffer->tbuf[tpos++] = image->texture_offset_x + w;
+          image->buffer->tbuf[tpos++] = image->texture_offset_y + toffy;
           image->buffer->vbuf[vpos++] = scale_to_width;
           image->buffer->vbuf[vpos++] = scale_to_height;
 
-          image->buffer->tbuf[tpos++] = toffx;
-          image->buffer->tbuf[tpos++] = toffy;
+          image->buffer->tbuf[tpos++] = image->texture_offset_x + toffx;
+          image->buffer->tbuf[tpos++] = image->texture_offset_y + toffy;
           image->buffer->vbuf[vpos++] = 0;
           image->buffer->vbuf[vpos++] = scale_to_height;
 
           gfxbuf_update(image->buffer, 0, 4);
         }
 
-      gfx_colour_white();
-      gfxgl_bind_texture(image->texture);
+      gfxgl_bind_texture(blitsource->texture);
+      assert(image->buffer->texture_image == NULL);
       gfxbuf_draw_init(image->buffer);
       gfxbuf_draw_at(image->buffer, x, y);
 #endif

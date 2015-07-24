@@ -26,7 +26,7 @@
 #include <errno.h>
 #include <string.h>
 
-struct ui_widget_select_option * widget_new_select_option(void * data, char * text)
+struct ui_widget_select_option * widget_new_select_option(void * data, char const * text)
 {
   struct ui_widget_select_option * o;
 

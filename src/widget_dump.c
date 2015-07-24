@@ -29,7 +29,7 @@ void widget_dump(struct widget * widget)
   printf("Dumping widget: %p\n", widget);
   if(widget != NULL)
     {
-      printf(" parent: %p\n", widget_parent(widget));
+      printf(" parent: %p\n", widget->parent_);
       printf(" user data:\n");
       for(int i = 0; i < widget->user_data_size_; i++)
         if(widget->user_data_names_[i] != NULL)

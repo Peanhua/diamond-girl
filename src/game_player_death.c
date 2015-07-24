@@ -24,12 +24,15 @@
 #include "cave.h"
 #include "game.h"
 #include "gfx.h"
+#include "gfxbuf.h"
+#include "gfx_material.h"
 #include "girl.h"
 #include "globals.h"
 #include "map.h"
 #include "random.h"
 #include "sfx.h"
 #include "traits.h"
+#include "treasureinfo.h"
 #include "widget.h"
 #include "widget_factory.h"
 #include <assert.h>
@@ -51,7 +54,10 @@ void game_player_death(struct gamedata * gamedata, bool sounds)
 
   if(gamedata->cave->game_mode == GAME_MODE_CLASSIC || gamedata->map->girl->mob->armour == 0)
     {
-      gamedata->girl_death_delay_timer = gamedata->map->frames_per_second * 3;
+      if(gamedata->treasure != NULL)
+        if(gamedata->treasure_placed_this_level == true)
+          gamedata->treasure->collected = false;
+      
       if(sounds)
         {
           sfx_pitch(1.0f);
@@ -59,16 +65,14 @@ void game_player_death(struct gamedata * gamedata, bool sounds)
           sfx_emit(SFX_EXPLOSION, gamedata->map->girl->mob->x, gamedata->map->girl->mob->y);
         }
 
+      gamedata->girl_death_delay_timer = gamedata->map->frames_per_second * 3;
       gamedata->map->flash_screen     = true;
       gamedata->map->girl->mob->alive = false;
       gamedata->map->fast_forwarding  = false;
-      if(globals.opengl)
-        {
-          gamedata->map->display_colour[0] = 0xff;
-          gamedata->map->display_colour[1] = 0xff;
-          gamedata->map->display_colour[2] = 0xff;
-          gamedata->map->display_colour[3] = 0xff;
-        }
+#ifdef WITH_OPENGL
+      if(gamedata->map->drawbuf != NULL)
+        gfx_material_change4f(gamedata->map->drawbuf->material, GFX_MATERIAL_COLOUR, 1.0f, 1.0f, 1.0f, 1.0f);
+#endif
 
       if(gamedata->map->is_intermission == false)
         {
@@ -127,16 +131,17 @@ void game_player_death(struct gamedata * gamedata, bool sounds)
                   score = gamedata->map->diamonds / 10;
                   if(gamedata->traits & TRAIT_GREEDY)
                     score *= 2;
-
+                    
                   /* Double the score in iron girl mode. */
                   if(gamedata->iron_girl_mode == true && (gamedata->traits & TRAIT_IRON_GIRL))
                     score *= 2;
-
+                    
                   if(score > 0)
-                    {
-                      traits_add_score(score);
-                      gamedata->diamond_score += score;
-                    }
+                    if(gamedata->cave->editable == false)
+                      {
+                        traits_add_score(score);
+                        gamedata->diamond_score += score;
+                      }
                 }
       
           char msg[256];
@@ -167,15 +172,16 @@ void game_player_death(struct gamedata * gamedata, bool sounds)
                       { WFDT_SIZEOF_,    NULL,               NULL             }
                     };
                   window = widget_factory(wfd, NULL, "game_player_death");
-                  widget_center_on_parent(window);
+                  widget_center(window);
                   widget_set_y(window, 100);
-                  widget_set_pointer(window, "gamedata", gamedata);
+                  widget_set_gamedata_pointer(window, "gamedata", gamedata);
 
                   ui_push_handlers();
                   ui_set_navigation_handlers();
                   ui_set_common_handlers();
                   ui_set_handler(UIC_EXIT,   on_quit);
                   ui_set_handler(UIC_CANCEL, on_quit);
+                  ui_destroy_pending_events();
                 }
               else
                 {
@@ -230,7 +236,7 @@ static void on_play_clicked(struct widget * this DG_UNUSED, enum WIDGET_BUTTON b
     {
       struct gamedata * gamedata;
 
-      gamedata = widget_get_pointer(window, "gamedata");
+      gamedata = widget_get_gamedata_pointer(window, "gamedata");
       if(gamedata->init_map != NULL)
         gamedata->init_map();
       widget_delete(window);
@@ -243,7 +249,7 @@ static void on_save_clicked(struct widget * this DG_UNUSED, enum WIDGET_BUTTON b
     {
       struct gamedata * gamedata;
 
-      gamedata = widget_get_pointer(window, "gamedata");
+      gamedata = widget_get_gamedata_pointer(window, "gamedata");
       gamedata->quit = true;
       widget_delete(window);
     }
@@ -255,7 +261,7 @@ static void on_quit_clicked(struct widget * this DG_UNUSED, enum WIDGET_BUTTON b
     {
       struct gamedata * gamedata;
 
-      gamedata = widget_get_pointer(window, "gamedata");
+      gamedata = widget_get_gamedata_pointer(window, "gamedata");
       gamedata->girls = 0;
       gamedata->quit  = true;
       widget_delete(window);

@@ -1,0 +1,4 @@
+Permet aux niveaux d'[tre d}verrouill}s.
+
+D}verrouiller un niveau co#te des points diamant.
+Le co#t varie avec les niveaux.

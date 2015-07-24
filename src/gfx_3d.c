@@ -25,12 +25,12 @@
 #include <stdbool.h>
 #include <assert.h>
 
+#ifdef WITH_OPENGL
 static bool    projection_matrix_initialized = false;
 static GLfloat projection_matrix[16];
 
 void gfx_3d(bool reset_view)
 {
-#ifdef WITH_OPENGL
   if(globals.opengl)
     {
       if(projection_matrix_initialized == false)
@@ -66,13 +66,11 @@ void gfx_3d(bool reset_view)
       glCullFace(GL_BACK);
       GFX_GL_ERROR();
     }
-#endif
 }
 
 
 void gfx_3d_depthtest(bool reset_view)
 {
-#ifdef WITH_OPENGL
   static bool depthless = true;
 
   gfxgl_state(GL_DEPTH_TEST, true);
@@ -83,15 +81,28 @@ void gfx_3d_depthtest(bool reset_view)
         {
           glDepthFunc(GL_LESS);
           glDepthRange(0.0, 0.5);
+          //glClearColor(0.0, 0.0, 0.0, 0.0);
           depthless = false;
         }
       else
         {
           glDepthFunc(GL_GREATER);
           glDepthRange(1.0, 0.5);
+          //glClearColor(0.0, 0.0, 0.0, 1.0);
           depthless = true;
         }
     }
   GFX_GL_ERROR();
-#endif
 }
+
+#else
+
+void gfx_3d(bool reset_view DG_UNUSED)
+{
+}
+
+void gfx_3d_depthtest(bool reset_view DG_UNUSED)
+{
+}
+
+#endif

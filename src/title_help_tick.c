@@ -32,7 +32,7 @@ void title_help_tick(struct widget * map_widget)
   struct map * map;
   int help_screen;
 
-  map = widget_get_pointer(map_widget, "map");
+  map = widget_get_map_pointer(map_widget, "map");
   help_screen = widget_get_ulong(map_widget, "help_screen");
 
   /* Add the girl to the background scene */

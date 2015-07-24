@@ -47,15 +47,17 @@ bool parse_commandline_arguments(int argc, char * argv[])
       else if(!strcmp(argv[i], "--joysticks")       || !strcmp(argv[i], "-J"))
         globals.use_joysticks = true;
       else if(!strcmp(argv[i], "--fullscreen")      || !strcmp(argv[i], "-f"))
-	globals.fullscreen = 1;
+	globals.fullscreen = true;
       else if(!strcmp(argv[i], "--windowed")        || !strcmp(argv[i], "-w"))
-	globals.fullscreen = 0;
+	globals.fullscreen = false;
 #ifdef WITH_OPENGL
       else if(!strcmp(argv[i], "--opengl")          || !strcmp(argv[i], "-o"))
-        globals.opengl = 1;
+        globals.opengl = true;
+      else if(!strcmp(argv[i], "--disable-shaders"))
+        globals.opengl_disable_shaders = true;
 #endif
       else if(!strcmp(argv[i], "--no-opengl")       || !strcmp(argv[i], "-n"))
-        globals.opengl = 0;
+        globals.opengl = false;
       else if(!strncmp(argv[i], "--language=", strlen("--language=")) && strlen(argv[i]) > strlen("--language="))
         {
           struct
@@ -106,6 +108,8 @@ bool parse_commandline_arguments(int argc, char * argv[])
         }
       else if(!strncmp(argv[i], "--play-sfx=", strlen("--play-sfx=")) && strlen(argv[i]) > strlen("--play-sfx="))
         snprintf(globals.play_sfx_name, sizeof globals.play_sfx_name, "%s", argv[i] + strlen("--play-sfx="));
+      else if(!strcmp(argv[i], "--read-only"))
+        globals.read_only = true;
 #ifndef NDEBUG
       else if(!strcmp(argv[i], "--backtrace"))
         globals.backtrace = true;
@@ -140,6 +144,7 @@ bool parse_commandline_arguments(int argc, char * argv[])
       printf("  -w | --windowed         Windowed mode. (*)\n");
 #ifdef WITH_OPENGL
       printf("  -o | --opengl           OpenGL mode. (*)\n");
+      printf("       --disable-shaders  Use the fixed pipeline.\n");
 #endif
 #ifdef WITH_NONOPENGL
       printf("  -n | --no-opengl        Non-OpenGL mode. (*)\n");
@@ -154,6 +159,7 @@ bool parse_commandline_arguments(int argc, char * argv[])
       printf("  --playback=NAME         Playback NAME and then exit. The name can be seen when manually playbacking a game.\n");
       printf("  --play-sfx=NAME         Play sound effect NAME, and then exit.\n");
       printf("  --skip-intro            Skip the intro screen (visible in OpenGL mode only).\n");
+      printf("  --read-only             Run the game in read-only mode: don't write any files.\n");
 #ifndef NDEBUG
       printf("  --backtrace             Generate debugging backtraces.\n");
       printf("  --quit                  Quit after initialization.\n");

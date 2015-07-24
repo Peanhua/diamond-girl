@@ -1,7 +1,8 @@
-Bienvenue { Lucy the Diamond Girl!
+Bienvenue dans le jeu Lucy the Diamond Girl!
 
 (C) 2005-2015 Joni Yrjana
-French translation: Vincent Hardy { | } ~ [ ` ] ^ _ # $
+Traduction fran&aise : Vincent Hardy
 
-This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License (GPL).
-Complete license can be found in the LICENSE file.
+Ce programme est un logiciel libre; vous pouvez le redistribuer et / ou le
+modifier selon les termes de la GNU General Public License (GPL).
+La licence compl~te peut [tre trouv}e dans le fichier LICENSE.

@@ -28,9 +28,11 @@
 
 struct highscorelist;
 struct playback;
+struct treasureinfo;
 
 #define DIAMOND_GIRL_CAVEFILE_V2 "dgc1" /* Oops, "wrong" magic number there, too late to change because it got into a released version. */
 #define DIAMOND_GIRL_CAVEFILE_V3 "dgc3"
+#define DIAMOND_GIRL_CAVEFILE_V4 "dgc4"
 
 struct cave
 {
@@ -38,21 +40,23 @@ struct cave
   char *         name;
   int            level_count;
   int            max_starting_level;
+  bool           editable;
 
   struct
   {
-    bool              exists; /* If true, then a savegame exists == the data here is usable. */
-    int               game_level;
-    int               game_speed_modifier;
-    int               starting_girls;
-    int               girls;
-    uint64_t          score;
-    int               diamond_score;
-    uint64_t          diamonds;
-    struct playback * playback;
-    bool *            pyjama_party_girls; /* The alive statuses of the girls. */
-    int               pyjama_party_girls_passed;
-    struct map *      map;
+    bool                  exists; /* If true, then a savegame exists == the data here is usable. */
+    int                   game_level;
+    int                   game_speed_modifier;
+    int                   starting_girls;
+    int                   girls;
+    uint64_t              score;
+    int                   diamond_score;
+    uint64_t              diamonds;
+    struct playback *     playback;
+    bool *                pyjama_party_girls; /* The alive statuses of the girls. */
+    int                   pyjama_party_girls_passed;
+    struct map *          map;
+    struct treasureinfo * treasure;
   }              savegame;
   
   struct highscorelist * highscores;

@@ -72,9 +72,7 @@ static int get_maxz(struct widget * obj, int maxz)
 
 static struct widget * object_at_process(struct widget * obj, int x, int y, int z)
 {
-#if defined(UI_DEBUG)
-  assert(obj != NULL && obj->deleted_ == 0);
-#endif
+  assert(obj != NULL && obj->deleted_ == false);
 
   struct widget * rv;
 

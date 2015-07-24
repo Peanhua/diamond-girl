@@ -1,7 +1,0 @@
-After obtaining an extra life, the greedy
-girl gets twice the score she would
-normally get.
-
-The magic lasts for few seconds.
-
-Not applicable in classic game mode.

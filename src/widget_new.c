@@ -20,9 +20,9 @@
   Complete license can be found in the LICENSE file.
 */
 
-#include "widget.h"
+#include "backtrace.h"
 #include "gc.h"
-
+#include "widget.h"
 #include <errno.h>
 
 struct widget * widget_new(int x, int y, int width, int height)
@@ -63,16 +63,48 @@ struct widget * widget_new(int x, int y, int width, int height)
       obj->tooltip_.text   = NULL;
       obj->tooltip_.widget = NULL;
 
-#if defined(UI_DEBUG)
-      obj->deleted_ = 0;
-#endif
+      obj->deleted_ = false;
 
 #ifndef NDEBUG
-      gc_new(GCT_WIDGET, obj);
+      obj->user_data_types_ = NULL;
+      obj->backtrace_ = get_backtrace();
 #endif
+      
+      gc_new(GCT_WIDGET, obj);
     }
   else
     fprintf(stderr, "%s:%d: Failed to allocate memory for widget: %s\n", __FILE__, __LINE__, strerror(errno));
 
   return obj;
+}
+
+
+struct widget * widget_free_(struct widget * widget)
+{
+  for(int j = 0; j < widget->user_data_size_; j++)
+    {
+      free(widget->user_data_names_[j]);
+      widget->user_data_names_[j] = NULL;
+
+      free(widget->user_data_[j]);
+      widget->user_data_[j] = NULL;
+    }
+  
+  free(widget->user_data_names_);
+  widget->user_data_names_ = NULL;
+
+  free(widget->user_data_);
+  widget->user_data_ = NULL;
+
+#ifndef NDEBUG
+  free(widget->user_data_types_);
+  widget->user_data_types_ = NULL;
+  
+  free(widget->backtrace_);
+  widget->backtrace_ = NULL;
+#endif
+
+  free(widget);
+
+  return NULL;
 }

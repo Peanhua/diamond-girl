@@ -46,7 +46,7 @@ struct widget * widget_new_map(struct widget * parent, int x, int y, int width, 
       widget_set_on_draw(obj, draw);
       widget_set_ulong(obj, "type", WT_MAP);
       widget_set_flags(obj, 0);
-      widget_set_pointer(obj, "map", map);
+      widget_set_map_pointer(obj, "map", map);
       widget_set_ulong(obj, "game_mode", game_mode);
       widget_set_enabled(obj, true);
     }
@@ -61,7 +61,7 @@ static void draw(struct widget * this)
     {
       struct map * map;
 
-      map = widget_get_pointer(this, "map");
+      map = widget_get_map_pointer(this, "map");
       if(map != NULL)
         {
           enum GAME_MODE game_mode;

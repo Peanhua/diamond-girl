@@ -50,6 +50,8 @@ AC_PROG_INSTALL
 ACX_PTHREAD
 
 AC_CHECK_PROG([optipng], [optipng], [optipng])
+AC_CHECK_PROG([blender], [blender], [blender])
+AC_CHECK_PROG([convert], [convert], [convert])
 
 # Checks for libraries.
 AC_CHECK_LIB(m, sinf)
@@ -120,11 +122,7 @@ PKG_CHECK_MODULES([glew], [glew], [],
   [AC_CHECK_LIB([GLEW], [glewInit], [],
     [AC_MSG_ERROR([unable to find GLEW library])] )]
 )
-AM_PATH_LIB3DS(2.0.0, [], [
-  AM_PATH_LIB3DS(1, [AC_DEFINE([HAVE_LIB3DS_V1], [1], [Define to 1 if you have lib3ds v1.x.])], [
-    AC_MSG_ERROR([unable to find lib3ds])]
-  )
-])
+PKG_CHECK_MODULES([assimp], [assimp >= 3.0])
 fi
 
 # Libraries for hash checksumming.
@@ -150,7 +148,16 @@ AC_TYPE_UINT8_T
 AC_CHECK_TYPES([ptrdiff_t])
 
 # Checks for library functions.
-AC_CHECK_FUNCS([malloc realloc gettimeofday memset mkdir sqrt strchr strdup strerror strstr strtol strtoul localtime_r])
+AC_CHECK_FUNCS([malloc realloc gettimeofday memset mkdir sqrt strchr strdup strerror strstr strtol strtoul localtime])
+
+AC_CHECK_FUNCS([ffs _BitScanForward])
+AS_IF([test x$ac_cv_func_ffs = "xyes"], [
+  AC_DEFINE([HAVE_FFS], [1], [Define to 1 if you have the ffs() function.])
+])
+AS_IF([test x$ac_cv_func__BitScanForward = "xyes"], [
+  AC_DEFINE([HAVE_BITSCANFORWARD], [1], [Define to 1 if you have the ffs() function.])
+])
+
 
 # Check for backtrace stuff.
 AC_SEARCH_LIBS([backtrace], [execinfo])
@@ -178,5 +185,5 @@ fi
 
 AC_SUBST(CWARNFLAGS)
 AC_CONFIG_HEADERS([config.h])
-AC_CONFIG_FILES([Makefile src/Makefile maps/Makefile data/Makefile themes/Makefile ui/Makefile po/Makefile.in tests/Makefile themes/default/Makefile themes/default/gfx/Makefile themes/default/sfx/Makefile themes/new-year/Makefile themes/new-year/gfx/Makefile themes/new-year/sfx/Makefile themes/halloween/Makefile themes/halloween/gfx/Makefile themes/halloween/sfx/Makefile themes/x-mas/Makefile themes/x-mas/gfx/Makefile themes/easter/Makefile themes/easter/gfx/Makefile themes/easter/sfx/Makefile themes/iron-girl/Makefile themes/iron-girl/gfx/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile maps/Makefile data/Makefile themes/Makefile ui/Makefile po/Makefile.in tests/Makefile themes/default/Makefile themes/default/gfx/Makefile themes/default/sfx/Makefile themes/new-year/Makefile themes/new-year/gfx/Makefile themes/new-year/sfx/Makefile themes/halloween/Makefile themes/halloween/gfx/Makefile themes/halloween/sfx/Makefile themes/x-mas/Makefile themes/x-mas/gfx/Makefile themes/easter/Makefile themes/easter/gfx/Makefile themes/easter/sfx/Makefile themes/iron-girl/Makefile themes/iron-girl/gfx/Makefile maps/a/Makefile maps/beginners_cave/Makefile maps/random/Makefile maps/well/Makefile])
 AC_OUTPUT

@@ -25,6 +25,7 @@
 #include "gfx.h"
 #include "gfxbuf.h"
 #include "gfx_glyph.h"
+#include "gfx_material.h"
 #include "globals.h"
 #include "map.h"
 #include <assert.h>
@@ -34,7 +35,7 @@
 static struct gfxbuf * buffer = NULL;
 #endif
 
-void draw_legend(int x, int y)
+void draw_legend(int x, int y, unsigned int * width, unsigned int * height)
 {
   struct
   {
@@ -47,8 +48,6 @@ void draw_legend(int x, int y)
         { MAP_DIAMOND,           MOVE_UP,   gettext("A diamond, collect.") },
         { MAP_BOULDER,           MOVE_UP,   gettext("A boulder.") },
         { MAP_SAND,              MOVE_UP,   gettext("Sand.") },
-        { MAP_EXTRA_LIFE_ANIM,   MOVE_UP,   gettext("For few seconds, empty space looks like") },
-        { MAP_EXTRA_LIFE_ANIM,   MOVE_UP,   gettext("  this when you get extra girl.") },
         { MAP_BRICK,             MOVE_UP,   gettext("A brick wall.") },
         { MAP_BRICK_MORPHER,     MOVE_UP,   gettext("A morphing wall, turns diamonds into") },
         { MAP_BRICK_MORPHER,     MOVE_UP,   gettext("  boulders and boulders into diamonds.") },
@@ -67,61 +66,72 @@ void draw_legend(int x, int y)
   else
     yadj = 26;
 
+#ifdef WITH_OPENGL
+  if(width == NULL)
+    if(globals.opengl)
+      if(buffer == NULL)
+        {
+          buffer = gfxbuf_new(GFXBUF_STATIC_2D, GL_QUADS, GFXBUF_TEXTURE | GFXBUF_BLENDING);
+          assert(buffer != NULL);
+          if(buffer != NULL)
+            {
+              gfxbuf_resize(buffer, 4 * MAP_SIZEOF_);
+              buffer->material = gfx_material_default();
+              
+              buffer->vertices = 0;
+              for(int i = 0; explanations[i].glyph != MAP_SIZEOF_; i++)
+                gfx_glyph_render_frame(buffer, 0, i * yadj, explanations[i].glyph, explanations[i].mdir, 0);
+              
+              gfxbuf_update(buffer, 0, buffer->vertices);
+            }
+        }
+#endif
+
+
+  int tx;
+
+  tx = x + 30;
+
+  if(width != NULL)
+    {
+      assert(height != NULL);
+      *width = 0;
+      *height = 0;
+    }
+
+  for(int i = 0; explanations[i].glyph != MAP_SIZEOF_; i++)
+    {
+      int ty;
+      
+      ty = (y + i * yadj) + (yadj - font_height()) / 2;
+      if(width == NULL)
+        {
+          font_write(tx, ty, explanations[i].explanation);
+            
+#ifdef WITH_NONOPENGL
+          if(!globals.opengl)
+            gfx_draw_glyph_frame(x, y + i * yadj, explanations[i].glyph, explanations[i].mdir, 0);
+#endif
+        }
+      else
+        {
+          unsigned int w;
+            
+          w = tx + font_width(explanations[i].explanation);
+          if(w > *width)
+            *width = w;
+          *height = ty + font_height();
+        }
+    }
 
 #ifdef WITH_OPENGL
-  if(globals.opengl)
-    if(buffer == NULL)
+  if(width == NULL)
+    if(globals.opengl)
       {
-        buffer = gfxbuf_new(GFXBUF_STATIC_2D, GL_QUADS, GFXBUF_TEXTURE | GFXBUF_BLENDING);
-        assert(buffer != NULL);
-        if(buffer != NULL)
-          {
-            int i;
-            
-            gfxbuf_resize(buffer, 4 * MAP_SIZEOF_);
-            
-            buffer->vertices = 0;
-            i = 0;
-            while(explanations[i].glyph != MAP_SIZEOF_)
-              {
-                gfx_glyph_render_frame(buffer, 0, i * yadj, explanations[i].glyph, explanations[i].mdir, 0);
-                i++;
-              }
-            
-            gfxbuf_update(buffer, 0, buffer->vertices);
-          }
+        gfx_set_current_glyph_set(0);
+        
+        gfxbuf_draw_init(buffer);
+        gfxbuf_draw_at(buffer, x, y);
       }
 #endif
-
-  int i;
-
-  i = 0;
-  while(explanations[i].glyph != MAP_SIZEOF_)
-    {
-      int tx, ty;
-
-      tx = x + 30;
-      ty = (y + i * yadj) + (yadj - font_height()) / 2;
-
-      font_write(tx, ty, explanations[i].explanation);
-
-#ifdef WITH_NONOPENGL
-      if(!globals.opengl)
-        gfx_draw_glyph_frame(x, y + i * yadj, explanations[i].glyph, explanations[i].mdir, 0);
-#endif
-
-      i++;
-    }
-
-#ifdef WITH_OPENGL	    
-  if(globals.opengl)
-    {
-      gfx_set_current_glyph_set(0);
-      gfx_colour_white();
-
-      gfxbuf_draw_init(buffer);
-      gfxbuf_draw_at(buffer, x, y);
-    }
-#endif
-
 }

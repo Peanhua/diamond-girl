@@ -26,6 +26,9 @@
 #include <stdbool.h>
 
 struct image;
+struct treasure;
+struct td_object;
+
 
 
 /* Predefined images, obtained by calling gfx_image().
@@ -50,6 +53,12 @@ enum GFX_IMAGE
     GFX_IMAGE_MODE_SWITCH_LEFT,
     GFX_IMAGE_MODE_SWITCH_UP,
     GFX_IMAGE_MODE_SWITCH_RIGHT,
+    GFX_IMAGE_BOOKPILE,
+    GFX_IMAGE_CAFE,
+    GFX_IMAGE_DIARY,
+    GFX_IMAGE_GRAVESTONE,
+    GFX_IMAGE_NOTES,
+    GFX_IMAGE_TREASURESTAND,
     GFX_IMAGE_TRAIT_ADVENTURE_MODE,
     GFX_IMAGE_TRAIT_ADVENTURE_MODE_DISABLED,
     GFX_IMAGE_TRAIT_RIBBON,
@@ -82,6 +91,10 @@ enum GFX_IMAGE
     GFX_IMAGE_TRAIT_PYJAMA_PARTY_DISABLED,
     GFX_IMAGE_TRAIT_QUESTS,
     GFX_IMAGE_TRAIT_QUESTS_DISABLED,
+    GFX_IMAGE_TRAIT_EDIT,
+    GFX_IMAGE_TRAIT_EDIT_DISABLED,
+    GFX_IMAGE_TRAIT_QUICK_CONTACT,
+    GFX_IMAGE_TRAIT_QUICK_CONTACT_DISABLED,
     GFX_IMAGE_SIZEOF_
   };
 
@@ -89,5 +102,9 @@ enum GFX_IMAGE
 extern bool           gfx_image_initialize(void);
 extern void           gfx_image_cleanup(void);
 extern struct image * gfx_image(enum GFX_IMAGE image_id);
+extern struct image * gfx_image_treasure(struct treasure * treasure, bool greyscale);
+#ifdef WITH_OPENGL
+extern struct td_object * gfx_td_object_treasure(struct treasure * treasure);
+#endif
 
 #endif

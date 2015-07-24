@@ -29,13 +29,14 @@
  */
 //#define DEBUG_PLAYBACK
 
-#define PLAYBACK_FILE_VERSION "1.1"
+#define PLAYBACK_FILE_VERSION "2"
 
 #include "diamond_girl.h"
 #include "globals.h"
 #include "traits.h"
 #include <inttypes.h>
 
+struct treasureinfo;
 
 struct playback_step
 {
@@ -59,10 +60,11 @@ struct playback
   bool           iron_girl_mode;
   trait_t        traits;
 
-  char * cave;
-  int    level;
-  bool   not_for_ai;       /* Don't allow AI to use this (for the tutorial playbacks). */
-  char * map_hash;
+  char *                cave;
+  int                   level;
+  struct treasureinfo * treasure;
+  bool                  not_for_ai;       /* Don't allow AI to use this (for the tutorial playbacks). */
+  char *                map_hash;
 
   struct playback_step * steps;
   uint16_t               steps_size;

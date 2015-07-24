@@ -32,6 +32,20 @@ void widget_set_navigation_down(struct widget * widget, struct widget * down)
 
   assert(widget->navigation_down_ == NULL);
 
+  enum WIDGET_TYPE type_up;
+
+  type_up = widget_get_ulong(widget, "type");
+  if(type_up == WT_TITLE_HIGHSCORES)
+    {
+      int amount;
+      
+      amount = widget_get_ulong(widget, "amount");
+      assert(amount > 0);
+      assert(amount <= widget->children_count_);
+      assert(widget->children_[amount - 1] != NULL);
+      widget = widget->children_[amount - 1];
+    }
+  
   widget->navigation_down_ = down;
   stack_push(widget->widgets_linking_to_this, down);
   stack_push(down->widgets_linking_to_this, widget);

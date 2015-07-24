@@ -44,6 +44,7 @@ struct gamedata * gamedata_new(struct cave * cave, bool iron_girl_mode, trait_t 
       gamedata->iron_girl_mode         = iron_girl_mode;
       gamedata->traits                 = traits;
       gamedata->playback               = NULL;
+      gamedata->treasure               = NULL;
       gamedata->map                    = NULL;
       gamedata->ai                     = NULL;
       gamedata->pyjama_party_girl      = NULL;

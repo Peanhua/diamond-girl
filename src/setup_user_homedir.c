@@ -21,13 +21,13 @@
 */
 
 #include "diamond_girl.h"
-
+#include "gc.h"
+#include "globals.h"
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <errno.h>
 #include <string.h>
 #include <assert.h>
-
 #if defined(WIN32)
 #include <direct.h>
 #include <shlobj.h>
@@ -35,11 +35,7 @@
 
 #if !defined(AMIGA)
 
-#if defined(WIN32)
-static char hdname[MAX_PATH + 32];
-#else
-static char hdname[4096];
-#endif
+static char * hdname = NULL;
 
 
 char * get_user_homedir(void)
@@ -52,9 +48,11 @@ char * get_user_homedir(void)
 bool setup_user_homedir(void)
 {
   bool homedir_ok;
+  int hdname_size;
 
   homedir_ok = false;
-
+  hdname_size = 0;
+  
 #if defined(AMIGA)
 
   homedir_ok = true;
@@ -64,23 +62,32 @@ bool setup_user_homedir(void)
   char tmp[MAX_PATH];
 
   SHGetFolderPath(NULL, CSIDL_MYDOCUMENTS, NULL, 0, tmp);
-  snprintf(hdname, sizeof hdname, "%s/Diamond Girl", tmp);
-  
-  mkdir(hdname);
-  if(stat(hdname, &sb) == 0)
+  hdname_size = strlen(tmp) + 128;
+  hdname = malloc(hdname_size);
+  assert(hdname != NULL);
+  if(hdname != NULL)
     {
-      char * p;
+      snprintf(hdname, hdname_size, "%s/Diamond Girl", tmp);
 
-      homedir_ok = true;
-      do
+      if(globals.read_only == false)
+        mkdir(hdname);
+      if(stat(hdname, &sb) == 0)
         {
-          p = strchr(hdname, '\\');
-          if(p != NULL)
-            *p = '/';
-        } while(p != NULL);
+          char * p;
+          
+          homedir_ok = true;
+          do
+            {
+              p = strchr(hdname, '\\');
+              if(p != NULL)
+                *p = '/';
+            } while(p != NULL);
+        }
+      else
+        fprintf(stderr, "Failed to setup working directory %s.\n", hdname);
     }
   else
-    fprintf(stderr, "Failed to setup working directory %s.\n", hdname);
+    fprintf(stderr, "Failed to allocate memory: %s\n", strerror(errno));
 
 #else
 
@@ -92,11 +99,15 @@ bool setup_user_homedir(void)
       {
 	struct stat sb;
 
-        assert(strlen(hd) + 1 < sizeof hdname);
-        if(strlen(hd) + strlen("/.diamond_girl") + 1 < sizeof hdname)
+        hdname_size = strlen(hd) + 128;
+        hdname = malloc(hdname_size);
+        assert(hdname != NULL);
+        if(hdname != NULL)
           {
-            snprintf(hdname, sizeof hdname, "%s/.diamond_girl", hd);
-            mkdir(hdname, S_IRWXU);
+            snprintf(hdname, hdname_size, "%s/.diamond_girl", hd);
+            assert(globals.read_only == false);
+            if(globals.read_only == false)
+              mkdir(hdname, S_IRWXU);
             if(stat(hdname, &sb) == 0)
               {
                 homedir_ok = true;
@@ -105,26 +116,33 @@ bool setup_user_homedir(void)
               fprintf(stderr, "Failed to setup working directory %s.\n", hdname);
           }
         else
-          fprintf(stderr, "Failed to setup working directory: path to HOME too long (%d, max=%d).\n", (int) strlen(hd), (int) sizeof hdname - (int) strlen("/.diamond_girl") - 1);
+          fprintf(stderr, "Failed to allocate memory: %s\n", strerror(errno));
       }
     else
       fprintf(stderr, "Failed to get environment variable HOME: %s\n", strerror(errno));
   }
 
 #endif
+
+  if(hdname != NULL)
+    gc_new(GCT_STRING, hdname);
   
   if(homedir_ok == true)
     { /* The party subdirectory. */
-      char dn[sizeof hdname];
+      assert(hdname_size > 0);
+      char dn[hdname_size];
 
       snprintf(dn, sizeof dn, "%s/party", hdname);
+      if(globals.read_only == false)
+        {
 #if defined(WIN32)
-      mkdir(dn);
+          mkdir(dn);
 #else
-      mkdir(dn, S_IRWXU);
+          mkdir(dn, S_IRWXU);
 #endif
+        }
     }
-
+  assert(homedir_ok == true);
 
   return homedir_ok;
 }

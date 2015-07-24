@@ -62,7 +62,7 @@ void settings_read_v1(void)
 		  val[j] = '\0';
 			
 		  if(!strcmp(var, "FULLSCREEN"))
-		    globals.fullscreen = strtoul(val, NULL, 0);
+		    globals.fullscreen = strtoul(val, NULL, 0) ? true : false;
 		  else if(!strcmp(var, "SOUND"))
                     {
                       globals.use_sfx = strtoul(val, NULL, 0);

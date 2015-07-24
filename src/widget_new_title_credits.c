@@ -57,7 +57,7 @@ struct widget * widget_new_title_credits(struct widget * parent, int x, int y, i
       widget_set_flags(obj, 0);
       widget_set_ulong(obj, "help_screen", 0);
       widget_set_ulong(obj, "credits_index", 0);
-      widget_set_pointer(obj, "credits", read_credits(filenames[0]));
+      widget_set_pointer(obj, "credits", 'P', read_credits(filenames[0]));
       widget_set_on_unload(obj, on_unload);
 
 #ifdef WITH_OPENGL
@@ -132,7 +132,7 @@ struct widget * widget_new_title_credits(struct widget * parent, int x, int y, i
 
           gfxbuf_update(buf, 0, vpos / 2);
 
-          widget_set_pointer(obj, "gfxbuf", buf);
+          widget_set_pointer(obj, "gfxbuf", 'P', buf);
         }
 #endif
     }
@@ -144,11 +144,11 @@ struct widget * widget_new_title_credits(struct widget * parent, int x, int y, i
 /* Change the currently scrolling credits to something else.
  * When the "something else" has been scrolled, resume the normal operation.
  */
-void widget_title_credits_set(struct widget * widget, char * text)
+void widget_title_credits_set(struct widget * widget, char * text, bool long_delay)
 {
-  if(widget_get_pointer(widget, "saved_credits") == NULL)
+  if(widget_get_pointer(widget, "saved_credits", 'P') == NULL)
     { /* Save the current credits. */
-      widget_set_pointer(widget, "saved_credits",        widget_get_pointer(widget, "credits"));
+      widget_set_pointer(widget, "saved_credits", 'P',   widget_get_pointer(widget, "credits", 'P'));
       widget_set_ulong(widget,   "saved_credits_pos",    widget_get_ulong(widget,   "credits_pos"));
       widget_set_ulong(widget,   "saved_credits_cc",     widget_get_ulong(widget,   "credits_cc"));
       widget_set_ulong(widget,   "saved_credits_offset", widget_get_ulong(widget,   "credits_offset"));
@@ -156,12 +156,12 @@ void widget_title_credits_set(struct widget * widget, char * text)
 
   char * credits;
 
-  credits = credits_padding(text, false);
+  credits = credits_padding(text, long_delay);
 
   widget_set_ulong(widget,   "credits_cc",     0);
   widget_set_ulong(widget,   "credits_offset", 0);
   widget_set_ulong(widget,   "credits_pos",    0);
-  widget_set_pointer(widget, "credits",        credits);
+  widget_set_pointer(widget, "credits", 'P',   credits);
 }
 
 
@@ -169,7 +169,7 @@ static void on_unload(struct widget * this)
 {
   char * credits;
 
-  credits = widget_get_pointer(this, "credits");
+  credits = widget_get_pointer(this, "credits", 'P');
   if(credits != NULL)
     free(credits);
 
@@ -178,7 +178,7 @@ static void on_unload(struct widget * this)
     {
       struct gfxbuf * buf;
 
-      buf = widget_get_pointer(this, "gfxbuf");
+      buf = widget_get_pointer(this, "gfxbuf", 'P');
       if(buf != NULL)
         buf = gfxbuf_free(buf);
     }
@@ -191,7 +191,7 @@ static char * read_credits(char const * const filename)
   char * tmp;
   int    credits_length;
   char * default_credits = "Lucy the Diamond Girl (C) 2005-2015 Joni Yrjana";
-  char fn[strlen(filename) + (globals.language != NULL ? strlen(globals.language) : 0) + strlen("-.txt") + 1];
+  char fn[strlen(filename) + strlen("-en.txt") + 1];
   bool readok;
   
   credits = NULL;
@@ -204,7 +204,7 @@ static char * read_credits(char const * const filename)
     }
   if(readok == false)
     {
-      snprintf(fn, sizeof fn, "%s.txt", filename);
+      snprintf(fn, sizeof fn, "%s-en.txt", filename);
       readok = read_file(get_data_filename(fn), &tmp, &credits_length);
     }
   
@@ -239,7 +239,7 @@ static void draw(struct widget * this)
   bool   skip_to_next;
 
   left_x      = widget_x(this);
-  credits     = widget_get_pointer(this, "credits");
+  credits     = widget_get_pointer(this, "credits", 'P');
   credits_pos = widget_get_ulong(this, "credits_pos");
 
   skip_to_next = false;
@@ -290,7 +290,7 @@ static void draw(struct widget * this)
 #ifdef WITH_OPENGL
           struct gfxbuf * buffer;
 
-          buffer = widget_get_pointer(this, "gfxbuf");
+          buffer = widget_get_pointer(this, "gfxbuf", 'P');
           assert(buffer != NULL);
 
           glScissor(left_x, SCREEN_HEIGHT - y - font_height(), widget_width(this), font_height());
@@ -334,14 +334,14 @@ static void draw(struct widget * this)
     {
       free(credits);
 
-      if(widget_get_pointer(this, "saved_credits") != NULL)
+      if(widget_get_pointer(this, "saved_credits", 'P') != NULL)
         { /* Restore saved credits. */
-          widget_set_pointer(this, "credits",        widget_get_pointer(this, "saved_credits"));
+          widget_set_pointer(this, "credits", 'P',   widget_get_pointer(this, "saved_credits", 'P'));
           widget_set_ulong(this,   "credits_pos",    widget_get_ulong(this,   "saved_credits_pos"));
           widget_set_ulong(this,   "credits_cc",     widget_get_ulong(this,   "saved_credits_cc"));
           widget_set_ulong(this,   "credits_offset", widget_get_ulong(this,   "saved_credits_offset"));
 
-          widget_set_pointer(this, "saved_credits", NULL);
+          widget_set_pointer(this, "saved_credits", 'P', NULL);
         }
       else
         { /* Advance to the next credits file. */
@@ -355,7 +355,7 @@ static void draw(struct widget * this)
           credits = read_credits(filenames[ind]);
 
           widget_set_ulong(this, "credits_index", ind);
-          widget_set_pointer(this, "credits", credits);
+          widget_set_pointer(this, "credits", 'P', credits);
         }
     }
 }

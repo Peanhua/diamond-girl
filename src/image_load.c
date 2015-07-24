@@ -43,7 +43,8 @@ struct image * image_load(const char * filename, bool generate_alpha)
         {
           rv->sdl_surface = bmp;
           if(!globals.opengl)
-            SDL_SetAlpha(rv->sdl_surface, 0, SDL_ALPHA_OPAQUE);
+            if(generate_alpha == true)
+              SDL_SetAlpha(rv->sdl_surface, 0, SDL_ALPHA_OPAQUE);
         }
       else
         SDL_FreeSurface(bmp);

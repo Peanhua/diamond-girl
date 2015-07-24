@@ -29,12 +29,17 @@
 #include <SDL/SDL_joystick.h>
 
 struct girl;
+struct questline;
+struct trader;
 
+
+#define MAX_QUESTLINES 128
+#define MAX_TRADERS      5
 
 struct globals
 {
-  int  fullscreen;
-  int  opengl;
+  bool fullscreen;
+  bool opengl;
   bool opengl_swap_control;
   bool opengl_power_of_two_textures;
   bool opengl_power_of_two_textures_benchmarked;
@@ -43,6 +48,8 @@ struct globals
   bool opengl_1_4;
   bool opengl_1_5;
   unsigned int opengl_max_draw_vertices;
+  bool         opengl_disable_shaders; /* If true, use the fixed pipeline even if there is support for shaders. */
+  unsigned int opengl_shaders; /* 0 == no shaders, 1 == ARB extension shaders, 2 == OpenGL 2.0 shaders */
   bool gfx_girl_animation;    /* Whether we can use the extra animation(s) of the girl. */
   bool gfx_diamond_animation; /* Whether we can use the extra animation(s) of the diamond. */
   bool skip_intro;
@@ -53,8 +60,9 @@ struct globals
   bool map_tilting;
   bool smooth_classic_mode;
   bool write_settings; /* If TRUE (default), settings are written on the disk, overwritting their current contents.
-                        * Set to FALSE if user wants to manually control the settings.lua file.
+                        * Set to FALSE if user wants to manually control the settings.json file.
                         */
+  bool read_only; /* Run in read-only mode: don't write any files. */
   char * cave_selection;
   int    level_selection;
 
@@ -90,6 +98,14 @@ struct globals
 
   struct girl **         pyjama_party_girls;
   int                    pyjama_party_girls_size;
+
+  struct questline * questlines[MAX_QUESTLINES];
+  unsigned int       questlines_size; // The number of questline pointers in use.
+  unsigned int       active_questline;
+
+  struct trader * traders[MAX_TRADERS];
+  unsigned int    active_trader;
+  time_t          active_trader_start;
 };
 
 

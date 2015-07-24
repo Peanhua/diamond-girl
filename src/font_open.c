@@ -23,6 +23,7 @@
 #include "diamond_girl.h"
 #include "font.h"
 #include "gfxbuf.h"
+#include "gfx_material.h"
 #include "globals.h"
 #include "image.h"
 #include "texture.h"
@@ -109,7 +110,11 @@ struct font * font_open(const char * name)
                       font->gfxbuf = gfxbuf_new(GFXBUF_DYNAMIC_2D, GL_QUADS, GFXBUF_TEXTURE | GFXBUF_BLENDING);
                       assert(font->gfxbuf != NULL);
                       if(font->gfxbuf != NULL)
-                        gfxbuf_resize(font->gfxbuf, 256 * 4);
+                        {
+                          font->gfxbuf->texture_image = font->image;
+                          gfxbuf_resize(font->gfxbuf, 256 * 4);
+                          font->gfxbuf->material = gfx_material_default();
+                        }
                       else
                         font = font_close(font);
                     }

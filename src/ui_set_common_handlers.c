@@ -30,6 +30,8 @@ static void adjust_volume(int adjustment);
 static void on_volume_down(bool pressed, SDL_Event * event);
 static void on_volume_up(bool pressed, SDL_Event * event);
 static void on_mute(bool pressed, SDL_Event * event);
+static void on_recording_start(bool pressed, SDL_Event * event);
+static void on_recording_stop(bool pressed, SDL_Event * event);
 
 
 void ui_set_common_handlers(void)
@@ -37,6 +39,9 @@ void ui_set_common_handlers(void)
   ui_set_handler(UIC_VOLUME_DOWN, on_volume_down);
   ui_set_handler(UIC_VOLUME_UP,   on_volume_up);
   ui_set_handler(UIC_MUTE,        on_mute);
+
+  ui_set_handler(UIC_RECORDING_START, on_recording_start);
+  ui_set_handler(UIC_RECORDING_STOP,  on_recording_stop);
 }
 
 
@@ -90,4 +95,30 @@ static void adjust_volume(int adjustment)
   widget = widget_find(widget_root(), "slider_volume");
   if(widget != NULL)
     widget_slider_set(widget, globals.volume);
+}
+
+
+static void on_recording_start(bool pressed, SDL_Event * event DG_UNUSED)
+{
+  if(pressed == true)
+    if(globals.screen_capture_path == NULL)
+      {
+#ifdef WIN32
+        globals.screen_capture_path = strdup(getenv("TEMP"));
+#else
+        globals.screen_capture_path = strdup("/tmp/");
+#endif
+        printf("Capturing to: %s\n", globals.screen_capture_path);
+      }
+}
+
+static void on_recording_stop(bool pressed, SDL_Event * event DG_UNUSED)
+{
+  if(pressed == true)
+    if(globals.screen_capture_path != NULL)
+      {
+        printf("Stopped capturing to: %s\n", globals.screen_capture_path);
+        free(globals.screen_capture_path);
+        globals.screen_capture_path = NULL;
+      }
 }

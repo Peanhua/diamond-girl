@@ -23,6 +23,7 @@
 #include "girl.h"
 #include "random.h"
 #include "map.h"
+#include "names.h"
 #include "globals.h"
 #include <assert.h>
 #include <errno.h>
@@ -63,7 +64,7 @@ struct girl * girl_new(void)
           name = NULL;
           while(ok == false)
             {
-              name = get_random_name();
+              name = names_get(GENDER_FEMALE, 4, 12);
               ok = true;
               for(int i = 0; ok == true && i < globals.pyjama_party_girls_size; i++)
                 if(globals.pyjama_party_girls[i] != NULL)

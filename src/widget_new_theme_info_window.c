@@ -20,7 +20,6 @@
   Complete license can be found in the LICENSE file.
 */
 
-#include "diamond_girl.h"
 #include "font.h"
 #include "widget.h"
 #include "gfx.h"
@@ -30,15 +29,10 @@
 #include <assert.h>
 #include <libintl.h>
 
-static void on_window_close_clicked(struct widget * this, enum WIDGET_BUTTON button);
-static void on_window_exit(bool pressed, SDL_Event * event);
-static void on_window_unload(struct widget * this);
-
-static struct widget * window;
-
-struct widget * widget_new_theme_info_window(struct theme * theme)
+void widget_new_theme_info_window(struct theme * theme)
 {
   char linebuf[40 + 1];
+  struct widget * window;
 
   assert(theme != NULL);
   snprintf(linebuf, sizeof linebuf, gettext("Special day: %s"), theme->name);
@@ -50,11 +44,6 @@ struct widget * widget_new_theme_info_window(struct theme * theme)
       int left_x, y;
 
       widget_set_modal(window);
-      widget_set_on_unload(window,  on_window_unload);
-
-      ui_push_handlers();
-      ui_set_handler(UIC_EXIT,   on_window_exit);
-      ui_set_handler(UIC_CANCEL, on_window_exit);
 
       left_x = 10;
       y = 2 * font_height();
@@ -86,35 +75,18 @@ struct widget * widget_new_theme_info_window(struct theme * theme)
         }
 
       
-      struct widget * b;
+      struct widget * closebutton;
 
       y += 20;
-      b = widget_new_button(window, left_x, y, gettext(" Close "));
-      widget_set_x(b, (widget_width(window) - widget_width(b)) / 2);
-      widget_set_on_release(b, on_window_close_clicked);
-      widget_set_focus(b);
-      y += widget_height(b);
+      snprintf(linebuf, sizeof linebuf, " %s ", gettext("Close"));
+      closebutton = widget_new_button(window, left_x, y, linebuf);
+      widget_set_x(closebutton, (widget_width(window) - widget_width(closebutton)) / 2);
+      widget_set_focus(closebutton);
+      y += widget_height(closebutton);
 
       widget_set_height(window, y + 10);
       widget_set_y(window, (widget_height(widget_parent(window)) - widget_height(window)) / 2);
+
+      ui_wait_for_window_close(window, closebutton);
     }
-
-  return window;
-}
-
-
-static void on_window_close_clicked(struct widget * this, enum WIDGET_BUTTON button DG_UNUSED)
-{
-  widget_delete(widget_parent(this));
-}
-
-static void on_window_exit(bool pressed, SDL_Event * event DG_UNUSED)
-{
-  if(pressed == true)
-    widget_delete(window);
-}
-
-static void on_window_unload(struct widget * this DG_UNUSED)
-{
-  ui_pop_handlers();
 }

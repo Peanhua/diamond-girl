@@ -51,7 +51,7 @@ struct widget * widget_new_trait_key_button(struct widget * parent, int x, int y
   rv = widget_new_trait_button(parent, x, y, width, height, TRAIT_KEY, true, false);
   assert(rv != NULL);
   widget_set_on_release(rv, on_clicked);
-  widget_set_pointer(rv, "cave", cave);
+  widget_set_cave_pointer(rv, "cave", cave);
   widget_set_ulong(rv, "level", level);
 
   return rv;
@@ -63,15 +63,15 @@ static void on_clicked(struct widget * this, enum WIDGET_BUTTON button DG_UNUSED
   struct cave * cave;
   unsigned int level;
 
-  cave = widget_get_pointer(this, "cave");
+  cave = widget_get_cave_pointer(this, "cave");
   level = widget_get_ulong(this, "level");
 
   score = traits_get_score();
   score_needed = get_cost(cave, level);
 
   window = widget_new_window(widget_root(), 420, 200, gettext("Unlock level"));
-  widget_set_pointer(window, "raw_image", gfx_image(GFX_IMAGE_TRAIT_KEY));
-  widget_set_pointer(window, "previously_selected_object", this);
+  widget_set_image(window, "image", GFX_IMAGE_TRAIT_KEY);
+  widget_set_widget_pointer(window, "previously_selected_object", this);
   widget_set_on_unload(window, on_window_unload);
 
   int y;
@@ -103,10 +103,11 @@ static void on_clicked(struct widget * this, enum WIDGET_BUTTON button DG_UNUSED
 
   if(score >= score_needed)
     {
-      unlock_obj = widget_new_button(window, 0, y, gettext(" Unlock this level "));
+      snprintf(buf, sizeof buf, " %s ", gettext("Unlock this level"));
+      unlock_obj = widget_new_button(window, 0, y, buf);
       widget_set_x(unlock_obj, (widget_width(window) - widget_width(unlock_obj)) / 2);
-      widget_set_pointer(unlock_obj, "cave",  cave);
-      widget_set_ulong(unlock_obj,   "level", level);
+      widget_set_cave_pointer(unlock_obj, "cave", cave);
+      widget_set_ulong(unlock_obj,   "level",     level);
       widget_set_on_release(unlock_obj, on_unlock_clicked);
       y += widget_height(unlock_obj);
     }
@@ -119,7 +120,8 @@ static void on_clicked(struct widget * this, enum WIDGET_BUTTON button DG_UNUSED
     }
 
   y += 20;
-  obj = widget_new_button(window, 0, y, gettext("  Cancel  "));
+  snprintf(buf, sizeof buf, "  %s  ", gettext("Cancel"));
+  obj = widget_new_button(window, 0, y, buf);
   widget_set_x(obj, (widget_width(window) - widget_width(obj)) / 2);
   widget_set_on_release(obj, on_window_close_clicked);
   if(unlock_obj != NULL)
@@ -151,7 +153,7 @@ static void on_window_exit(bool pressed, SDL_Event * event DG_UNUSED)
     {
       struct widget * w;
 
-      w = widget_get_pointer(window, "previously_selected_object");
+      w = widget_get_widget_pointer(window, "previously_selected_object");
 
       widget_delete(window);
 
@@ -174,7 +176,7 @@ static void on_unlock_clicked(struct widget * this, enum WIDGET_BUTTON button DG
   struct cave * cave;
   unsigned int level;
 
-  cave = widget_get_pointer(this, "cave");
+  cave = widget_get_cave_pointer(this, "cave");
   level = widget_get_ulong(this, "level");
 
   cost = get_cost(cave, level);

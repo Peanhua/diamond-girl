@@ -51,9 +51,9 @@ struct widget * widget_new_title_highscores(struct widget * parent, int x, int y
       widget_set_ulong(obj, "type", WT_TITLE_HIGHSCORES);
       widget_set_flags(obj, 0);
       widget_set_ulong(obj, "first_highscore", 0);
-      widget_set_long(obj, "selected_highscore", -1);
+      widget_set_ulong(obj, "selected_highscore", -1);
       widget_set_ulong(obj, "amount", amount);
-      widget_set_pointer(obj, "cave", cave);
+      widget_set_cave_pointer(obj, "cave", cave);
       obj->z_ += 1; /* Draw above its children. */
 
       struct widget * prev;
@@ -95,17 +95,17 @@ static void draw(struct widget * this)
   amount             = widget_get_ulong(this, "amount");
   first_highscore    = widget_get_ulong(this, "first_highscore");
 
-  snprintf(tbuf, sizeof tbuf, gettext("Highscores %d -> %d:"), first_highscore + 1, (int) (first_highscore + amount));
+  snprintf(tbuf, sizeof tbuf, gettext("High scores %d -> %d:"), first_highscore + 1, (int) (first_highscore + amount));
   font_write(x + 10, y, tbuf);
   y += font_height();
   gfx_draw_hline(x + 0,   y, width - 20, 0x00, 0xff, 0x00, 0xff);
   gfx_draw_vline(x + 40,  y, (amount + 1) * font_height(),  0x00, 0xff, 0x00, 0xff);
   gfx_draw_vline(x + 130, y, (amount + 1) * font_height(),  0x00, 0xff, 0x00, 0xff);
   gfx_draw_vline(x + 195, y, (amount + 1) * font_height(),  0x00, 0xff, 0x00, 0xff);
-  font_write(x + 10,  y, " #");
-  font_write(x + 40,  y, gettext(" Score"));
-  font_write(x + 130, y, gettext(" Level"));
-  font_write(x + 195, y, gettext(" Timestamp"));
+  font_printf(x + 10,  y, " %s", gettext("#"));
+  font_printf(x + 40,  y, " %s", gettext("Score"));
+  font_printf(x + 130, y, " %s", gettext("Level"));
+  font_printf(x + 195, y, " %s", gettext("Timestamp"));
   y += font_height();
   gfx_draw_hline(x, y, width - 20, 0x00, 0xff, 0x00, 0xff);
 }
@@ -121,7 +121,7 @@ static void draw_row(struct widget * this)
   bool enabled;
   struct cave * cave;
 
-  cave = widget_get_pointer(widget_parent(this), "cave");
+  cave = widget_get_cave_pointer(widget_parent(this), "cave");
 
   enabled            = widget_enabled(this);
   x                  = widget_absolute_x(this);
@@ -198,7 +198,8 @@ static void draw_row(struct widget * this)
       struct tm * tm;
 	  
       tm = localtime(&entries[hind]->timestamp);
-      strftime(tbuf, sizeof tbuf, gettext(" %Y-%m-%d %H:%M"), tm);
+      tbuf[0] = ' ';
+      strftime(tbuf + 1, (sizeof tbuf) - 1, gettext("%Y-%m-%d %H:%M"), tm);
       font_write(x + 195, y, tbuf);
     }
 }
@@ -232,7 +233,7 @@ static void on_highscore_row_clicked(struct widget * this, enum WIDGET_BUTTON bu
           size_t size;
           struct cave * cave;
 
-          cave = widget_get_pointer(widget_parent(this), "cave");
+          cave = widget_get_cave_pointer(widget_parent(this), "cave");
           highscores_get(cave->highscores, &size);
           if(first + 20 < (int) size)
             first += 20;
