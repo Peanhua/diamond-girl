@@ -447,6 +447,7 @@ static void refresh(struct widget * window)
     }
 
   widget_set_height(window, y);
+  widget_center_vertically(window);
 }
 
 

@@ -703,7 +703,7 @@ static void init_map(const char * cave, int level)
   if(cave == NULL)
     cave = oldmap->cave_name;
 
-  widget_set_string(uiobj[UIOBJ_CAVE], "text", gettext("Cave: '%-.8s'"), cave);
+  widget_set_string(uiobj[UIOBJ_CAVE], "text", "%s '%-.8s'", gettext("Cave:"), cave);
   
   map = map_load(cave, level);
   if(map != NULL)

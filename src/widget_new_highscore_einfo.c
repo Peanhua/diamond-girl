@@ -56,6 +56,7 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
 
   struct tm * tm;
   int deaths;
+  int time_played;
   int diamonds;
   int start_level;
   int levels_completed;
@@ -68,6 +69,7 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
     labelwidth = 110;
 
   deaths           = 0;
+  time_played      = 0;
   diamonds         = entry->diamonds_collected;
   start_level      = 0;
   levels_completed = 0;
@@ -78,6 +80,7 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
       deaths           = playback_get_girls_died(playback);
       start_level      = playback->level;
       levels_completed = playback_get_levels_completed(playback);
+      time_played      = playback_get_time_played(playback);
     }
 
   col = 0;
@@ -120,8 +123,38 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
       y += font_height();
     }
 
+  {
+    int hours, minutes, seconds;
+
+
+    hours = time_played / (60 * 60);
+    minutes = (time_played / 60) % 60;
+    seconds = time_played % 60;
+    col = 0;
+    widget_new_text(window, x[col], y, gettext("Length:"));
+    if(hours > 0)
+      {
+        snprintf(tbuf, sizeof tbuf, ngettext("1 hours", "%d hours", hours), hours);
+        snprintf(tbuf + strlen(tbuf), sizeof tbuf - strlen(tbuf), ", ");
+        snprintf(tbuf + strlen(tbuf), sizeof tbuf - strlen(tbuf), ngettext("1 minute", "%d minutes", minutes), minutes);
+      }
+    else if(minutes > 0)
+      {
+        snprintf(tbuf, sizeof tbuf, ngettext("1 minute", "%d minutes", minutes), minutes);
+        snprintf(tbuf + strlen(tbuf), sizeof tbuf - strlen(tbuf), ", ");
+        snprintf(tbuf + strlen(tbuf), sizeof tbuf - strlen(tbuf), ngettext("1 second", "%d seconds", seconds), seconds);
+      }
+    else
+      snprintf(tbuf, sizeof tbuf, ngettext("1 second", "%d seconds", seconds), seconds);
+
+    widget_new_text(window, x[col] + labelwidth, y, tbuf);
+  
+    y += font_height();
+  }
+  
   y += font_height() / 2;
 
+  
   int bottomlabelwidths[2];
 
   bottomlabelwidths[0] = 110;
@@ -184,6 +217,7 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
 
   y += font_height();
 
+
   if(entry->diamond_score > 0)
     {
       col = 0;
@@ -235,6 +269,7 @@ struct widget * widget_new_highscore_einfo(struct widget * parent, struct highsc
 
   if(strlen(entry->notes) > 0)
     {
+      y += font_height() / 2;
       col = 0;
       widget_new_text(window, x[col], y, gettext("Notes:"));
       y += font_height();

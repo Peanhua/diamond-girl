@@ -89,7 +89,7 @@ static void on_clicked(struct widget * this, enum WIDGET_BUTTON button DG_UNUSED
   widget_set_x(obj, (widget_width(window) - widget_width(obj)) / 2);
   y += widget_height(obj);
 
-  snprintf(buf, sizeof buf, gettext("Cost: %lu"), (unsigned long) score_needed);
+  snprintf(buf, sizeof buf, "%s %lu", gettext("Cost:"), (unsigned long) score_needed);
   obj = widget_new_text(window, 0, y, buf);
   widget_set_x(obj, (widget_width(window) - widget_width(obj)) / 2);
   y += widget_height(obj);

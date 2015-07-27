@@ -114,7 +114,6 @@ struct sfx_synth
 extern struct sfx_synth * sfx_synth_load(const char * filename);
 extern struct sfx_synth * sfx_synth_new(enum SFX_SYNTH_WAVEFORM waveform, uint32_t length, uint16_t frequency_hz);
 extern struct sfx_synth * sfx_synth_free(struct sfx_synth * sfx_synth);
-extern ALuint             sfx_synth_to_buffer(struct sfx_synth * sfx_synth);
 extern uint32_t           sfx_synth_get_samples(struct sfx_synth * sfx_synth, int16_t * buffer, uint32_t max_amount);
 extern void               sfx_synth_restart(struct sfx_synth * sfx_synth);
 

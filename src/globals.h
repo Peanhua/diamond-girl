@@ -89,6 +89,7 @@ struct globals
 #ifndef NDEBUG
   bool backtrace; /* Generate backtraces in some places for debugging. */
   bool quit_after_initialization;
+  bool save_sound_effects;
 #endif
 
 

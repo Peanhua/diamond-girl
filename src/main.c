@@ -141,6 +141,7 @@ int main(int argc, char * argv[])
 #ifndef NDEBUG
   globals.backtrace                 = false;
   globals.quit_after_initialization = false;
+  globals.save_sound_effects        = false;
 #endif
 #ifdef PROFILING
   globals.read_only  = true;

@@ -1,4 +1,4 @@
-AC_INIT([Lucy the Diamond Girl], [1.26b], [joniyrjana@gmail.com], [diamond-girl], [http://www.netikka.net/joyr/diamond_girl/])
+AC_INIT([Lucy the Diamond Girl], [2.0b], [joniyrjana@gmail.com], [diamond-girl], [http://www.netikka.net/joyr/diamond_girl/])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror dist-xz subdir-objects])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AC_CONFIG_SRCDIR([src/main.c])
@@ -50,8 +50,19 @@ AC_PROG_INSTALL
 ACX_PTHREAD
 
 AC_CHECK_PROG([optipng], [optipng], [optipng])
+if test "x$optipng" == "x" ; then
+  AC_MSG_WARN(['optipng' not found, install optipng for optimized asset files.])
+fi
+
 AC_CHECK_PROG([blender], [blender], [blender])
+if test "x$blender" == "x" ; then
+  AC_MSG_ERROR(['blender' not found error, install Blender.])
+fi
+
 AC_CHECK_PROG([convert], [convert], [convert])
+if test "x$convert" == "x" ; then
+  AC_MSG_ERROR(['convert' not found error, install Imagemagick or similar.])
+fi
 
 # Checks for libraries.
 AC_CHECK_LIB(m, sinf)

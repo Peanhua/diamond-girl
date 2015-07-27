@@ -115,6 +115,8 @@ bool parse_commandline_arguments(int argc, char * argv[])
         globals.backtrace = true;
       else if(!strcmp(argv[i], "--quit"))
         globals.quit_after_initialization = true;
+      else if(!strcmp(argv[i], "--save-sfx"))
+        globals.save_sound_effects = true;
 #endif
       else if(!strcmp(argv[i], "--skip-intro"))
         globals.skip_intro = true;
@@ -161,6 +163,7 @@ bool parse_commandline_arguments(int argc, char * argv[])
       printf("  --skip-intro            Skip the intro screen (visible in OpenGL mode only).\n");
       printf("  --read-only             Run the game in read-only mode: don't write any files.\n");
 #ifndef NDEBUG
+      printf("  --save-sfx              Save sound effects to .wav files.\n");
       printf("  --backtrace             Generate debugging backtraces.\n");
       printf("  --quit                  Quit after initialization.\n");
 #endif

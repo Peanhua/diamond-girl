@@ -6,7 +6,7 @@
   "children": [
     { "type":   "quest_menu",
       "id":     "quest_menu",
-      "x":      1000,
+      "x":      1100,
       "y":       110,
       "navigation-down": [ "newgame" ]
     },

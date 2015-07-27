@@ -20,37 +20,42 @@
   Complete license can be found in the LICENSE file.
 */
 
-#include "playback.h"
-
+#include "sfx.h"
+#include <sndfile.h>
 #include <assert.h>
-#include <string.h>
-#include <errno.h>
-#include <stdio.h>
 
-struct playback * playback_new(void)
+bool sfx_save(struct sfx * sfx, char const * filename)
 {
-  struct playback * rv;
+  bool success;
 
-  rv = malloc(sizeof(struct playback));
-  assert(rv != NULL);
-  if(rv != NULL)
+  success = false;
+  if(sfx != NULL && sfx->waveform != NULL)
     {
-      rv->next            = NULL;
-      rv->game_mode       = GAME_MODE_CLASSIC;
-      rv->iron_girl_mode  = false;
-      rv->traits          = 0;
-      rv->cave            = NULL;
-      rv->level           = 0;
-      rv->treasure        = NULL;
-      rv->steps           = NULL;
-      rv->steps_size      = 0;
-      rv->steps_allocated = 0;
-      rv->current_step    = 0;
-      rv->not_for_ai      = false;
-      rv->map_hash        = NULL;
+      SNDFILE * fp;
+      SF_INFO info;
+
+      info.format = SF_FORMAT_WAV | SF_FORMAT_PCM_16;
+      info.samplerate = 44100;
+      info.channels = 1;
+      fp = sf_open(filename, SFM_WRITE, &info);
+      if(fp != NULL)
+        {
+          success = true;
+          for(uint32_t i = 0; i < sfx->waveform_length; i++)
+            {
+              short tmp;
+
+              tmp = sfx->waveform[i];
+              if(sf_write_short(fp, &tmp, 1) != 1)
+                {
+                  success = false;
+                  fprintf(stderr, "%s(): Failed.\n", __FUNCTION__);
+                }
+            }
+          sf_close(fp);
+        }
     }
-  else
-    fprintf(stderr, "%s: Failed to allocate memory: %s\n", __FUNCTION__, strerror(errno));
-      
-  return rv;
+
+  assert(success == true);
+  return success;
 }

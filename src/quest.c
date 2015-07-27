@@ -268,7 +268,7 @@ static struct quest * quest_new(enum QUEST_TYPE type, struct questline * questli
           else
             {
               quest->action_to_open = QUEST_ACTION_EXAMINE_NOTES;
-              quest->description_id = get_rand(2);
+              quest->description_id = 1 + get_rand(2);
             }
         }
       else if(type == QUEST_TYPE_CHILDHOOD_DREAM)

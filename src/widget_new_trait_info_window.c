@@ -107,8 +107,9 @@ void widget_new_trait_info_window(trait_t trait, bool enable_controls)
                       struct widget * b;
 
                       snprintf(buf, sizeof buf, " %s ", gettext("Edit cave"));
-                      b = widget_new_button(window, 10, y, buf);
+                      b = widget_new_button(window, 0, y, buf);
                       widget_set_on_release(b, on_edit_trait_clicked);
+                      widget_center_horizontally(b);
                       y += widget_height(b);
                       if(prev != NULL)
                         widget_set_navigation_updown(prev, b);

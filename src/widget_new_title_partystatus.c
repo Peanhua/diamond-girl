@@ -137,7 +137,7 @@ static void refresh(struct widget * partystatus_widget)
   y += 20;
   x2 = x + 175 + 10;
 
-  snprintf(buf, sizeof buf, gettext("Girls: %d"), globals.pyjama_party_girls_size);
+  snprintf(buf, sizeof buf, "%s %d", gettext("Girls:"), globals.pyjama_party_girls_size);
   obj = widget_new_text(frame, x, y, buf);
   obj = widget_new_text(frame, x2, y, gettext("Cavings:"));
   y += widget_height(obj);

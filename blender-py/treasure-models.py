@@ -22,7 +22,7 @@ for obj in bpy.data.objects:
         filename = obj.name
 
         if output_filename != None:
-            if output_filename == filename + '.obj':
+            if output_filename == '*' or output_filename == filename + '.obj':
                 obj.hide = False
                 obj.hide_render = False
                 obj.select = True

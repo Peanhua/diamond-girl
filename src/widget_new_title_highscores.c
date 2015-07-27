@@ -101,11 +101,11 @@ static void draw(struct widget * this)
   gfx_draw_hline(x + 0,   y, width - 20, 0x00, 0xff, 0x00, 0xff);
   gfx_draw_vline(x + 40,  y, (amount + 1) * font_height(),  0x00, 0xff, 0x00, 0xff);
   gfx_draw_vline(x + 130, y, (amount + 1) * font_height(),  0x00, 0xff, 0x00, 0xff);
-  gfx_draw_vline(x + 195, y, (amount + 1) * font_height(),  0x00, 0xff, 0x00, 0xff);
+  gfx_draw_vline(x + 210, y, (amount + 1) * font_height(),  0x00, 0xff, 0x00, 0xff);
   font_printf(x + 10,  y, " %s", gettext("#"));
   font_printf(x + 40,  y, " %s", gettext("Score"));
   font_printf(x + 130, y, " %s", gettext("Level"));
-  font_printf(x + 195, y, " %s", gettext("Timestamp"));
+  font_printf(x + 210, y, " %s", gettext("Timestamp"));
   y += font_height();
   gfx_draw_hline(x, y, width - 20, 0x00, 0xff, 0x00, 0xff);
 }
@@ -181,26 +181,26 @@ static void draw_row(struct widget * this)
       
   if(hind < (int) size)
     {
-      {
-        int tmpx;
+      int tmpx;
 
-        snprintf(tbuf, sizeof tbuf, "%3d", (int) hind + 1);
-        tmpx = (40 - 2) - font_width(tbuf);
-        font_write(x + tmpx, y, tbuf);
-      }
+      snprintf(tbuf, sizeof tbuf, "%d", (int) hind + 1);
+      tmpx = 40 - font_width(tbuf);
+      font_write(x + tmpx / 2, y, tbuf);
 
-      snprintf(tbuf, sizeof tbuf, " %6d", (int) entries[hind]->score);
-      font_write(x + 40, y, tbuf);
+      snprintf(tbuf, sizeof tbuf, "%d", (int) entries[hind]->score);
+      tmpx = 130 - 40 - font_width(tbuf);
+      font_write(x + 40 + tmpx / 2, y, tbuf);
 
-      snprintf(tbuf, sizeof tbuf, " %3d", (int) entries[hind]->level);
-      font_write(x + 130, y, tbuf);
+      snprintf(tbuf, sizeof tbuf, "%d", (int) entries[hind]->level);
+      tmpx = 210 - 130 - font_width(tbuf);
+      font_write(x + 130 + tmpx / 2, y, tbuf);
 	  
       struct tm * tm;
 	  
       tm = localtime(&entries[hind]->timestamp);
-      tbuf[0] = ' ';
-      strftime(tbuf + 1, (sizeof tbuf) - 1, gettext("%Y-%m-%d %H:%M"), tm);
-      font_write(x + 195, y, tbuf);
+      strftime(tbuf, sizeof tbuf, gettext("%Y-%m-%d %H:%M"), tm);
+      tmpx = (width - 20) - 210 - font_width(tbuf);
+      font_write(x + 210 + tmpx / 2, y, tbuf);
     }
 }
 

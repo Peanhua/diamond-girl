@@ -31,7 +31,7 @@ for obj in bpy.data.objects:
                     filename = obj.name + '-' + mat.name[4:] + '.png'
 
                     if output_filename != None:
-                        if output_filename == filename:
+                        if output_filename == '*' or output_filename == filename:
                             obj.material_slots[0].material = mat
                             scene.render.filepath = bpy.path.abspath('tmp.' + filename)
                             bpy.ops.render.render(write_still=True)
@@ -47,7 +47,7 @@ for obj in bpy.data.objects:
                             filename = obj.name + '-' + mat.name[4:] + '-' + gsmat.name[6:] + '.png'
 
                             if output_filename != None:
-                                if output_filename == filename:
+                                if output_filename == '*' or output_filename == filename:
                                     obj.material_slots[0].material = mat
                                     obj.material_slots[1].material = gsmat
                                     scene.render.filepath = bpy.path.abspath('tmp.' + filename)

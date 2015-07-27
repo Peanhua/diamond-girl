@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: diamond-girl 1.25b\n"
 "Report-Msgid-Bugs-To: joniyrjana@gmail.com\n"
-"POT-Creation-Date: 2015-07-24 15:55+0300\n"
+"POT-Creation-Date: 2015-07-27 21:36+0300\n"
 "PO-Revision-Date: 2015-06-18 19:22+0200\n"
 "Last-Translator: Steve Joni Yrjänä <joniyrjana@gmail.com>\n"
 "Language-Team: Finnish\n"
@@ -87,10 +87,9 @@ msgstr "Radioaktiivinen }t}kk|, v|lt|."
 msgid "A radioactive butterfly, avoid."
 msgstr "Radioaktiivinen perhonen, v|lt|."
 
-#: src/editor.c:706
-#, c-format
-msgid "Cave: '%-.8s'"
-msgstr "Luola: '%-.8s'"
+#: src/editor.c:706 src/title.c:1488 src/widget_new_highscore_einfo.c:95
+msgid "Cave:"
+msgstr "Luola:"
 
 #: src/editor.c:750
 #, c-format
@@ -222,24 +221,24 @@ msgstr "Palauta(R)"
 msgid "Intermission:"
 msgstr "V|liaika:"
 
-#: src/game.c:149 src/title.c:1230
+#: src/game.c:149 src/title.c:1234
 #, c-format
 msgid "Level:"
 msgstr "Taso:"
 
-#: src/game.c:150 src/game.c:232 src/title.c:1234
-#: src/widget_new_highscore_einfo.c:163
+#: src/game.c:150 src/game.c:232 src/title.c:1238
+#: src/widget_new_highscore_einfo.c:196 src/widget_new_title_partystatus.c:140
 #, c-format
 msgid "Girls:"
 msgstr "Tyt}t:"
 
-#: src/game.c:151 src/title.c:1239 src/widget_new_highscore_einfo.c:134
+#: src/game.c:151 src/title.c:1243 src/widget_new_highscore_einfo.c:167
 #: src/widget_new_title_partystatus.c:107
 #, c-format
 msgid "Score:"
 msgstr "Pisteet:"
 
-#: src/game.c:152 src/widget_new_highscore_einfo.c:149
+#: src/game.c:152 src/widget_new_highscore_einfo.c:182
 #: src/widget_new_title_partystatus.c:347
 #, c-format
 msgid "Diamonds:"
@@ -309,7 +308,7 @@ msgstr "Kentt| l|p|isty!"
 msgid "Found: %s"
 msgstr ""
 
-#: src/main.c:184
+#: src/main.c:185
 msgid "_current_locale"
 msgstr "fi"
 
@@ -497,10 +496,10 @@ msgid "My Diary"
 msgstr ""
 
 #: src/quest_diary.c:84 src/quest_treasures.c:122
-#: src/widget_new_highscore_einfo.c:262 src/widget_new_message_window.c:68
+#: src/widget_new_highscore_einfo.c:297 src/widget_new_message_window.c:68
 #: src/widget_new_theme_info_window.c:81
 #: src/widget_new_title_partystatus.c:394
-#: src/widget_new_trait_info_window.c:169
+#: src/widget_new_trait_info_window.c:170
 #: src/widget_new_traits_available_window.c:100
 msgid "Close"
 msgstr "Sulje"
@@ -679,16 +678,16 @@ msgstr "Kieli"
 msgid "Game mode"
 msgstr "Pelitila"
 
-#: src/settings.c:367 src/title.c:1421 src/widget_new_highscore_einfo.c:102
+#: src/settings.c:367 src/title.c:1425 src/widget_new_highscore_einfo.c:105
 msgid "Classic"
 msgstr "Klassinen"
 
-#: src/settings.c:368 src/title.c:1422 src/widget_new_highscore_einfo.c:103
+#: src/settings.c:368 src/title.c:1426 src/widget_new_highscore_einfo.c:106
 msgid "Adventure"
 msgstr "Seikkailu"
 
-#: src/settings.c:369 src/title.c:1423 src/trait_get_name.c:47
-#: src/widget_new_highscore_einfo.c:104
+#: src/settings.c:369 src/title.c:1427 src/trait_get_name.c:47
+#: src/widget_new_highscore_einfo.c:107
 msgid "Pyjama Party"
 msgstr "Pyjamabileet"
 
@@ -755,67 +754,62 @@ msgstr "Kent|n %d esittely."
 msgid "Brain malfunction!\n"
 msgstr "Aivovamma!\n"
 
-#: src/title.c:831
+#: src/title.c:835
 msgid "Change game mode"
 msgstr "Vaihda pelitilaa"
 
-#: src/title.c:1119
+#: src/title.c:1123
 msgid "The game was saved."
 msgstr "Peli tallennettu."
 
-#: src/title.c:1120 src/title.c:1518
+#: src/title.c:1124 src/title.c:1522
 msgid "Play (*)"
 msgstr "Pelaa (*)"
 
-#: src/title.c:1124 src/title.c:1520 ui/title_common.js:34
+#: src/title.c:1128 src/title.c:1524 ui/title_common.js:34
 msgid "Play"
 msgstr "Pelaa"
 
-#: src/title.c:1141
+#: src/title.c:1145
 #, c-format
 msgid "Diamond score from the %s %s:   %u"
 msgstr ""
 
-#: src/title.c:1222
+#: src/title.c:1226
 msgid "A saved game exists"
 msgstr "Tallennettu peli l}ytyy"
 
-#: src/title.c:1245 ui/game_player_death.js:43 ui/game_player_next_level.js:53
+#: src/title.c:1249 ui/game_player_death.js:43 ui/game_player_next_level.js:53
 #: ui/game_pyjama_party_level_completed.js:35
 msgid "Continue"
 msgstr "Jatka"
 
-#: src/title.c:1254
+#: src/title.c:1258
 msgid "Start New"
 msgstr "Aloita Uusi"
 
-#: src/title.c:1263 src/widget_new_title_partystatus.c:232
+#: src/title.c:1267 src/widget_new_title_partystatus.c:232
 #: src/widget_new_trait_key_button.c:123
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: src/title.c:1388
+#: src/title.c:1392
 msgid "To arcade"
 msgstr ""
 
-#: src/title.c:1391 ui/title_common.js:65
+#: src/title.c:1395 ui/title_common.js:65
 msgid "To quests"
 msgstr ""
 
-#: src/title.c:1430
+#: src/title.c:1434
 msgid "Game mode:"
 msgstr "Pelitila:"
 
-#: src/title.c:1484
-#, c-format
-msgid "Cave: %s"
-msgstr "Luola: %s"
-
-#: src/title.c:1565
+#: src/title.c:1569
 msgid "You can only start from every fifth level, and no save game exist."
 msgstr ""
 
-#: src/title.c:1600
+#: src/title.c:1604
 #, c-format
 msgid "Level: %d / %d"
 msgstr "Kentt|: %d / %d"
@@ -994,63 +988,84 @@ msgstr ""
 msgid "%s %s '%s'%s"
 msgstr ""
 
-#: src/widget_new_highscore_einfo.c:47 src/widget_new_highscore_einfo.c:66
-#: src/widget_new_highscore_einfo.c:113
+#: src/widget_new_highscore_einfo.c:47 src/widget_new_highscore_einfo.c:67
+#: src/widget_new_highscore_einfo.c:116
 msgid "Filename:"
 msgstr "Tiedosto:"
 
-#: src/widget_new_highscore_einfo.c:85
+#: src/widget_new_highscore_einfo.c:88
 msgid "Played on:"
 msgstr "Pelattu:"
 
-#: src/widget_new_highscore_einfo.c:86 src/widget_new_title_highscores.c:202
+#: src/widget_new_highscore_einfo.c:89 src/widget_new_title_highscores.c:201
 #: src/widget_new_title_partystatus.c:179
 #: src/widget_new_title_partystatus.c:341
 msgid "%Y-%m-%d %H:%M"
 msgstr ""
 
-#: src/widget_new_highscore_einfo.c:92
-msgid "Cave:"
-msgstr "Luola:"
-
-#: src/widget_new_highscore_einfo.c:99
+#: src/widget_new_highscore_einfo.c:102
 msgid "Mode:"
 msgstr "Tila:"
 
-#: src/widget_new_highscore_einfo.c:117 src/widget_new_highscore_einfo.c:143
-#: src/widget_new_highscore_einfo.c:173 src/widget_new_highscore_einfo.c:182
+#: src/widget_new_highscore_einfo.c:120 src/widget_new_highscore_einfo.c:176
+#: src/widget_new_highscore_einfo.c:206 src/widget_new_highscore_einfo.c:215
 msgid "N/A"
 msgstr ""
 
-#: src/widget_new_highscore_einfo.c:129 src/widget_new_highscore_einfo.c:139
+#: src/widget_new_highscore_einfo.c:134
+msgid "Length:"
+msgstr ""
+
+#: src/widget_new_highscore_einfo.c:137
+#, c-format
+msgid "1 hours"
+msgid_plural "%d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/widget_new_highscore_einfo.c:139 src/widget_new_highscore_einfo.c:143
+#, c-format
+msgid "1 minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/widget_new_highscore_einfo.c:145 src/widget_new_highscore_einfo.c:148
+#, c-format
+msgid "1 second"
+msgid_plural "%d seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/widget_new_highscore_einfo.c:162 src/widget_new_highscore_einfo.c:172
 msgid "Start level:"
 msgstr "Aloitusk.:"
 
-#: src/widget_new_highscore_einfo.c:154
+#: src/widget_new_highscore_einfo.c:187
 msgid "End level:"
 msgstr "Lopetusk.:"
 
-#: src/widget_new_highscore_einfo.c:169
+#: src/widget_new_highscore_einfo.c:202
 msgid "Deaths:"
 msgstr "Kuolemat:"
 
-#: src/widget_new_highscore_einfo.c:178
+#: src/widget_new_highscore_einfo.c:211
 msgid "Completed:"
 msgstr "Suoritettu:"
 
-#: src/widget_new_highscore_einfo.c:190
+#: src/widget_new_highscore_einfo.c:224
 msgid "Diam.score:"
 msgstr "Tim.pisteet:"
 
-#: src/widget_new_highscore_einfo.c:200 src/widget_new_title_partystatus.c:365
+#: src/widget_new_highscore_einfo.c:234 src/widget_new_title_partystatus.c:365
 msgid "Traits:"
 msgstr "Ominais.:"
 
-#: src/widget_new_highscore_einfo.c:239
+#: src/widget_new_highscore_einfo.c:274
 msgid "Notes:"
 msgstr "Merkinn|t:"
 
-#: src/widget_new_highscore_einfo.c:252
+#: src/widget_new_highscore_einfo.c:287
 msgid "Replay"
 msgstr "Uusinta"
 
@@ -1122,11 +1137,6 @@ msgstr "Ker|tyt timantit:"
 msgid "Pyjama party status:"
 msgstr "Pyjamabileiden tila:"
 
-#: src/widget_new_title_partystatus.c:140
-#, c-format
-msgid "Girls: %d"
-msgstr "Tyt}t: %d"
-
 #: src/widget_new_title_partystatus.c:142
 msgid "Cavings:"
 msgstr "Luolak|ynnit:"
@@ -1192,28 +1202,28 @@ msgstr "Kierr|t| hintaan %lu"
 msgid "Edit cave"
 msgstr ""
 
-#: src/widget_new_trait_info_window.c:124
+#: src/widget_new_trait_info_window.c:125
 msgid "You don't have this trait."
 msgstr "Sinulla ei ole t|t| ominaisuutta."
 
-#: src/widget_new_trait_info_window.c:129
+#: src/widget_new_trait_info_window.c:130
 msgid "Buy"
 msgstr "Osta"
 
-#: src/widget_new_trait_info_window.c:139
+#: src/widget_new_trait_info_window.c:140 src/widget_new_trait_key_button.c:92
 msgid "Cost:"
 msgstr "Hinta:"
 
-#: src/widget_new_trait_info_window.c:144
+#: src/widget_new_trait_info_window.c:145
 msgid "You have:"
 msgstr "Sinulla on:"
 
-#: src/widget_new_trait_info_window.c:148
+#: src/widget_new_trait_info_window.c:149
 #, c-format
 msgid " [need %u more]"
 msgstr " (tarvitset %u lis||)"
 
-#: src/widget_new_trait_info_window.c:159
+#: src/widget_new_trait_info_window.c:160
 #, c-format
 msgid "Level required: %u"
 msgstr "Kentt|vaatimus: %u"
@@ -1226,11 +1236,6 @@ msgstr "Avaa kentt|"
 #, c-format
 msgid "Level: %u"
 msgstr "Kentt|: %u"
-
-#: src/widget_new_trait_key_button.c:92
-#, c-format
-msgid "Cost: %lu"
-msgstr "Hinta: %lu"
 
 #: src/widget_new_trait_key_button.c:97
 #, c-format
@@ -1368,3 +1373,15 @@ msgstr ""
 #: ui/title_common.js:99
 msgid "Settings"
 msgstr "Asetukset"
+
+#~ msgid "Girls: %d"
+#~ msgstr "Tyt}t: %d"
+
+#~ msgid "Cost: %lu"
+#~ msgstr "Hinta: %lu"
+
+#~ msgid "Cave: '%-.8s'"
+#~ msgstr "Luola: '%-.8s'"
+
+#~ msgid "Cave: %s"
+#~ msgstr "Luola: %s"

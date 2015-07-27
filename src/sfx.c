@@ -134,7 +134,20 @@ void sfx_initialize(void)
                         {
                           assert(sfx_filenames[i].id == i);
                           sounds[i]->base_filename = strdup(sfx_filenames[i].base_filename);
-                          if(sfx_load(sounds[i]) == false)
+                          if(sfx_load(sounds[i]) == true)
+                            {
+#ifndef NDEBUG
+                              if(globals.save_sound_effects == true)
+                                {
+                                  char fn[128];
+
+                                  snprintf(fn, sizeof fn, "%s.wav", sounds[i]->base_filename);
+                                  printf("Saving %s...\n", fn);
+                                  sfx_save(sounds[i], fn);
+                                }
+#endif
+                            }
+                          else
                             { /* Failed to load. */
                               assert(0);
                             }
@@ -398,9 +411,11 @@ static struct sfx * sfx_new(void)
   assert(sfx != NULL);
   if(sfx != NULL)
     {
-      sfx->openal_buffer = AL_NONE;
-      sfx->base_filename = NULL;
-      sfx->synth         = NULL;
+      sfx->openal_buffer   = AL_NONE;
+      sfx->base_filename   = NULL;
+      sfx->waveform        = NULL;
+      sfx->waveform_length = 0;
+      sfx->synth           = NULL;
     }
   else
     fprintf(stderr, "%s(): Failed to allocate memory: %s\n", __FUNCTION__, strerror(errno));
@@ -422,6 +437,7 @@ static struct sfx * sfx_free(struct sfx * sfx)
   sfx->synth = sfx_synth_free(sfx->synth);
 
   free(sfx->base_filename);
+  free(sfx->waveform);
 
   free(sfx);
 

@@ -62,3 +62,17 @@ uint32_t playback_get_girls_died(struct playback * playback)
   return rv;
 }
 
+
+uint32_t playback_get_time_played(struct playback * playback)
+{
+  uint32_t rv;
+
+  rv = 0;
+  while(playback != NULL)
+    {
+      rv += playback->steps_size / 30;
+      playback = playback->next;
+    }
+  
+  return rv;
+}

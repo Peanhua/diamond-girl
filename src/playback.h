@@ -68,6 +68,7 @@ struct playback
 
   struct playback_step * steps;
   uint16_t               steps_size;
+  uint16_t               steps_allocated;
 
   uint16_t               current_step;
 };
@@ -89,5 +90,6 @@ extern void playback_step_initialize(struct playback_step * step);
 
 extern uint32_t playback_get_levels_completed(struct playback * playback);
 extern uint32_t playback_get_girls_died(struct playback * playback);
+extern uint32_t playback_get_time_played(struct playback * playback);
 
 #endif

@@ -57,6 +57,8 @@ struct sfx
 {
   ALuint             openal_buffer;
   char *             base_filename;
+  int16_t *          waveform;
+  uint32_t           waveform_length;
   struct sfx_synth * synth;
 };
 
@@ -84,5 +86,8 @@ extern bool     sfx_load(struct sfx * sfx);
 extern bool     sfx_load_xm(struct sfx * sfx);
 extern bool     sfx_load_file(struct sfx * sfx, const char * filename);
 extern bool     sfx_load_ogg(struct sfx * sfx);
+extern bool     sfx_load_synth(struct sfx * sfx);
+
+extern bool     sfx_save(struct sfx * sfx, char const * filename);
 
 #endif

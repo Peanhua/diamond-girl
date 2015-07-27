@@ -3,11 +3,12 @@ Building
 
 Lucy the Diamond Girl uses autotools.
 
-You can use the following example commands to install under the current
-directory:
- ./configure --prefix=$(pwd)/inst && make install
+You can use the following example commands to install under "inst" in the
+current directory:
+$ ./configure --prefix=$(pwd)/inst
+$ make install
 To run the game:
- ./inst/bin/diamond_girl
+$ ./inst/bin/diamond_girl
 
 
 In addition to the standard configure stuff, the following are specific
@@ -16,3 +17,36 @@ to the Lucy the Diamond Girl (defaults in UPPER case):
  --enable-nonopengl=[YES|no]    Compile in non-OpenGL support.
  --without-lua                  Compile without LUA support,
                                 old user settings were saved in LUA format.
+
+
+
+
+Building on a system without Blender
+------------------------------------
+
+1. Build on a system with Blender:
+system-with-blender$ tar xf diamond-girl-xx.tar.xz
+system-with-blender$ cd diamond-girl-xx
+system-with-blender$ ./configure
+system-with-blender$ make
+
+2. Copy the files over to the system without a Blender:
+system-with-blender$ cd ..
+system-with-blender$ tar cf diamond-girl-xx-prebuilt.tar diamond-girl-xx
+system-with-blender$ scp diamond-girl-xx-prebuilt.tar system-without-blender:
+
+3. Build and install in the system without Blender:
+system-without-blender$ tar xf diamond-girl-xx-prebuilt.tar.xz
+system-without-blender$ cd diamond-girl-xx
+system-without-blender$ ./configure blender=$(which false) # add more options as needed
+system-without-blender$ make install
+
+
+
+
+Known problems building in PC BSD
+---------------------------------
+
+You need to build using gmake.
+
+If you use --prefix for configure, you need to use --with-libintl-prefix=/usr/local

@@ -20,11 +20,13 @@
   Complete license can be found in the LICENSE file.
 */
 
+#include "globals.h"
 #include "sfx.h"
 #include "sfx_synth.h"
 #include <AL/al.h>
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 bool sfx_load(struct sfx * sfx)
 {
@@ -43,22 +45,18 @@ bool sfx_load(struct sfx * sfx)
     rv = sfx_load_xm(sfx);
 
   if(rv == false)
-    {
-      char fn[1024];
-
-      snprintf(fn, sizeof fn, "sfx/%s.sfx", sfx->base_filename);
-      sfx->synth = sfx_synth_load(fn);
-      if(sfx->synth != NULL)
-        {
-          sfx->openal_buffer = sfx_synth_to_buffer(sfx->synth);
-          if(sfx->openal_buffer != AL_NONE)
-            rv = true;
-        }
-    }
+    rv = sfx_load_synth(sfx);
 
   if(rv == false)
     fprintf(stderr, "%s(): Failed to load sfx '%s'.\n", __FUNCTION__, sfx->base_filename);
   assert(rv == true);
 
+  if(globals.save_sound_effects == false)
+    {
+      free(sfx->waveform);
+      sfx->waveform = NULL;
+      sfx->waveform_length = 0;
+    }
+  
   return rv;
 }

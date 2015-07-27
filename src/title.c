@@ -606,7 +606,11 @@ static void setup_ui(trait_t traits_to_highlight)
   uiobj_partystatus = widget_find(root, "partystatus");
   uiobj_help        = widget_find(root, "help");
 
-  struct widget * ws[4] = { uiobj_highscores, uiobj_partystatus, uiobj_help, widget_find(NULL, "quest_menu") };
+  struct widget * uiobj_quest_menu;
+
+  uiobj_quest_menu = widget_find(NULL, "quest_menu");
+
+  struct widget * ws[4] = { uiobj_highscores, uiobj_partystatus, uiobj_help, uiobj_quest_menu };
   for(int i = 0; i < 4; i++)
     if(ws[i] != NULL)
       widget_set_long(ws[i], "original-x", widget_x(ws[i]));
@@ -741,7 +745,7 @@ static void setup_ui(trait_t traits_to_highlight)
     widget_set_navigation_down(uiobj_highscores, uiobj_newgame);
   else if(uiobj_partystatus != NULL)
     widget_set_navigation_down(widget_get_widget_pointer(uiobj_partystatus, "focus_down_object"), uiobj_newgame);
-  widget_quest_menu_setup_navigation(widget_find(NULL, "quest_menu"), uiobj_newgame);
+  widget_quest_menu_setup_navigation(uiobj_quest_menu, uiobj_newgame);
   if(last_trait != NULL)
     widget_set_navigation_left(uiobj_newgame, last_trait);
 
@@ -1481,7 +1485,7 @@ static void on_cave_changed(void)
       else
         widget_set_enabled(uiobj_cave_right, false);
       
-      widget_set_string(uiobj_cave, "text", gettext("Cave: %s"), cave_displayname(cave));
+      widget_set_string(uiobj_cave, "text", "%s %s", gettext("Cave:"), cave_displayname(cave));
 
       assert(uiobj_next_trait != NULL);
       if(uiobj_next_trait != NULL)
@@ -1850,6 +1854,9 @@ static void on_trait_changed(void * user_data DG_UNUSED, int64_t changes)
         }
     }
 
+  int saved_midarea_x;
+
+  saved_midarea_x = midarea_x;
   reset_ui(false, globals.opengl, changes);
 
   if(settings_changed)
@@ -1858,6 +1865,26 @@ static void on_trait_changed(void * user_data DG_UNUSED, int64_t changes)
                  widget_width(uiobj_config),
                  widget_height(uiobj_config),
                  100);
+
+  if(changes & TRAIT_QUESTS)
+    {
+      struct widget * w;
+
+      w = widget_find(NULL, "quests");
+      if(w != NULL)
+        twinkle_area(widget_absolute_x(w),
+                     widget_absolute_y(w),
+                     widget_width(w),
+                     widget_height(w),
+                     100);
+
+      /* Show/hide quest menu. */
+      midarea_x = saved_midarea_x;
+      if(traits & TRAIT_QUESTS)
+        midarea_scrolling = 1;
+      else
+        midarea_scrolling = -1;
+    }
 }
 
 

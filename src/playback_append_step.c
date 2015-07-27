@@ -29,24 +29,39 @@
 
 struct playback_step * playback_append_step(struct playback * playback)
 {
-  struct playback_step * step;
-  struct playback_step * tmp;
-
   assert(playback != NULL);
 
-  step = NULL;
-
-  tmp = realloc(playback->steps, sizeof(struct playback_step) * (playback->steps_size + 1));
-  assert(tmp != NULL);
-  if(tmp != NULL)
+  if(playback->steps_size + 1 >= playback->steps_allocated)
     {
-      playback->steps = tmp;
+      struct playback_step * tmp;
+      uint16_t n;
+
+      if(playback->steps_allocated == 0)
+        n = 256;
+      else
+        n = playback->steps_allocated * 2;
+      tmp = realloc(playback->steps, sizeof(struct playback_step) * n);
+      assert(tmp != NULL);
+      if(tmp != NULL)
+        {
+          playback->steps = tmp;
+          playback->steps_allocated = n;
+        }
+      else
+        fprintf(stderr, "%s: Failed to allocate memory: %s\n", __FUNCTION__, strerror(errno));
+    }
+
+  
+  struct playback_step * step;
+
+  if(playback->steps_size + 1 < playback->steps_allocated)
+    {
       step = &playback->steps[playback->steps_size];
       playback->steps_size++;
       playback_step_initialize(step);
     }
-  else
-    fprintf(stderr, "%s: Failed to allocate memory: %s\n", __FUNCTION__, strerror(errno));
+
+  assert(step != NULL);
 
   return step;
 }
