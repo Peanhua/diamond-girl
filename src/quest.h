@@ -40,6 +40,7 @@ enum QUEST_TYPE
   {
     QUEST_TYPE_RELATIVE,
     QUEST_TYPE_CHILDHOOD_DREAM,
+    QUEST_TYPE_ZOMBIES,
     QUEST_TYPE_SIZEOF_
   };
 
@@ -136,6 +137,9 @@ struct questline
 {
   enum QUEST_TYPE    type;
   int                opening_weekday;  /* The months first weekday when this can be opened, -1 to ignore, 0 = Sunday, 1 = Monday, ... 6 = Saturday. */
+  int                opening_monthday_max;
+  int                opening_time_hour;   /* The first hour this questline, and the quests in it, can be opened, -1 to disable. */
+  int                opening_time_length; /* The last hour this questline, and the quests in it, can be opened, is hour+length */
   struct person      first_questgiver; /* The person who initiates the quest, part of the story. */
   struct person      ancient_person;   /* Some ancient person, probably dead by now, part of the story. */
   unsigned int       reward;           /* Diamond score from obtained item = 100 + 'quest#' + 'reward', and from the last item = 2000 + 250 * 'reward' */

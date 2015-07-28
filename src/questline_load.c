@@ -81,6 +81,9 @@ bool questline_load(void)
               
               if(success == true) success = get(&ql->type,                                sizeof ql->type);
               if(success == true) success = get(&ql->opening_weekday,                     sizeof ql->opening_weekday);
+              if(success == true) success = get(&ql->opening_monthday_max,                sizeof ql->opening_monthday_max);
+              if(success == true) success = get(&ql->opening_time_hour,                   sizeof ql->opening_time_hour);
+              if(success == true) success = get(&ql->opening_time_length,                 sizeof ql->opening_time_length);
               if(success == true) success = get(&ql->first_questgiver.relation_to_player, sizeof ql->first_questgiver.relation_to_player);
               if(success == true) success = getstring(&ql->first_questgiver.name);
               if(success == true) success = get(&ql->first_questgiver.gender,             sizeof ql->first_questgiver.gender);

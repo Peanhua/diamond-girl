@@ -127,18 +127,57 @@ char const * quest_description(struct quest * quest)
       break;
       
     case QUEST_ACTION_VISIT_LIBRARY:
-      if(quest->questline->ancient_person.gender == GENDER_FEMALE)
-        snprintf(buf, sizeof buf, gettext("I have found a book of %s %s from the library.  Her %s must have been buried somewhere in %s.  I decided to pursue my childhood dream of finding it."),
-                 relation_type_name(quest->questline->ancient_person.relation_to_player),
-                 quest->questline->ancient_person.name,
-                 treasure_longname(quest->treasure_object),
-                 cave_displayname(quest->treasure_cave));
-      else
-        snprintf(buf, sizeof buf, gettext("I have found a book of %s %s from the library.  His %s must have been buried somewhere in %s.  I decided to pursue my childhood dream of finding it."),
-                 relation_type_name(quest->questline->ancient_person.relation_to_player),
-                 quest->questline->ancient_person.name,
-                 treasure_longname(quest->treasure_object),
-                 cave_displayname(quest->treasure_cave));
+      switch(quest->description_id)
+        {
+        case 0:
+          if(quest->questline->ancient_person.gender == GENDER_FEMALE)
+            snprintf(buf, sizeof buf, gettext("I have found a book of %s %s from the library.  Her %s must have been buried somewhere in %s.  I decided to pursue my childhood dream of finding it."),
+                     relation_type_name(quest->questline->ancient_person.relation_to_player),
+                     quest->questline->ancient_person.name,
+                     treasure_longname(quest->treasure_object),
+                     cave_displayname(quest->treasure_cave));
+          else
+            snprintf(buf, sizeof buf, gettext("I have found a book of %s %s from the library.  His %s must have been buried somewhere in %s.  I decided to pursue my childhood dream of finding it."),
+                     relation_type_name(quest->questline->ancient_person.relation_to_player),
+                     quest->questline->ancient_person.name,
+                     treasure_longname(quest->treasure_object),
+                     cave_displayname(quest->treasure_cave));
+          break;
+        case 1:
+          { /* Zombies initialization quest. They want the item of the last quest. */
+            struct quest * last;
+
+            assert(quest->questline->quests->size > 0);
+            last = quest->questline->quests->data[quest->questline->quests->size - 1];
+            snprintf(buf, sizeof buf, "%s", gettext("The library is filled with zombies!"));
+            snprintf(buf + strlen(buf), sizeof buf - strlen(buf), "\n\n");
+
+            char * pos;
+
+            pos = buf + strlen(buf);
+            snprintf(pos, sizeof buf - strlen(buf), gettext("%s %s, the leader of the zombies, promised they would leave if I can find the %s of the ancient %s %s.  I should start from %s."),
+                     relation_type_name(quest->questline->first_questgiver.relation_to_player),
+                     quest->questline->first_questgiver.name,
+                     treasure_type_name(last->treasure_object->type),
+                     relation_type_name(quest->questline->ancient_person.relation_to_player),
+                     quest->questline->ancient_person.name,
+                     cave_displayname(quest->treasure_cave));
+            *pos = toupper(*pos);
+          }
+          break;
+        case 7: /* Zombies last quest. */
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6: /* Zombies other quests. */
+          snprintf(buf, sizeof buf, gettext("%s %s, the leader of the zombies says the next lead should be somewhere in %s."),
+                   relation_type_name(quest->questline->first_questgiver.relation_to_player),
+                   quest->questline->first_questgiver.name,
+                   cave_displayname(quest->treasure_cave));
+          buf[0] = toupper(buf[0]);
+          break;
+        }
       break;
     case QUEST_ACTION_VISIT_CAFE:
       assert(0);

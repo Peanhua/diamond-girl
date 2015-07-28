@@ -45,10 +45,10 @@ void quest_action(struct questline * questline, enum QUEST_ACTION action)
   struct quest *    quest;
   struct quest *    headerquest;
   struct treasure * object;
-  bool              generic_failure;
+  bool              handled;
 
   headerquest = quest = questline->quests->data[questline->current_quest];
-  generic_failure = false;
+  handled = false;
   assert(questline->current_phase != QUESTLINE_PHASE_NONE);
   if(questline->current_phase == QUESTLINE_PHASE_OPENED)
     { /* Treasure is not yet collected, so display "history". */
@@ -65,10 +65,7 @@ void quest_action(struct questline * questline, enum QUEST_ACTION action)
       if(quest->action_to_open == action)
         {
           snprintf(buf, sizeof buf, quest_description(quest));
-        }
-      else
-        {
-          generic_failure = true;
+          handled = true;
         }
     }
   else if(questline->current_phase == QUESTLINE_PHASE_TREASURE_COLLECTED)
@@ -82,23 +79,19 @@ void quest_action(struct questline * questline, enum QUEST_ACTION action)
           nextquest = questline->quests->data[questline->current_quest + 1];
           if(nextquest->action_to_open == action)
             { /* Next quest is opened by the given action, so we do that. */
-              questline->current_quest++;
-              quest_open(nextquest);
-              snprintf(buf, sizeof buf, quest_description(nextquest));
+              struct tm * now;
+              time_t      tnow;
+              
+              tnow = time(NULL);
+              now = localtime(&tnow);
+              if(questline->opening_time_hour < 0 || (questline->opening_time_hour < now->tm_hour && now->tm_hour <= questline->opening_time_hour + questline->opening_time_length))
+                {
+                  questline->current_quest++;
+                  quest_open(nextquest);
+                  snprintf(buf, sizeof buf, quest_description(nextquest));
+                  handled = true;
+                }
             }
-          else
-            { /* Next quest is not opened by the given action, so we find nothing now. */
-              generic_failure = true;
-            }
-        }
-      else
-        { /* End of quests, so we find nothing now. */
-          if(action == QUEST_ACTION_EXAMINE_OBJECT)
-            snprintf(buf, sizeof buf, gettext("This is it, the last treasure associated to the %s.\n\nR.I.P. %s"),
-                     relation_type_name(questline->ancient_person.relation_to_player),
-                     questline->ancient_person.name);
-          else
-            generic_failure = true;
         }
     }
 
@@ -116,13 +109,14 @@ void quest_action(struct questline * questline, enum QUEST_ACTION action)
       header = widget_new_gfx_image(widget_root(), 0, 0, GFX_IMAGE_NOTES);
       widget_delete_flags(header, WF_BACKGROUND);
 
-      if(generic_failure == true)
+      if(handled == false)
         switch(questline->type)
           {
           case QUEST_TYPE_RELATIVE:
             snprintf(buf, sizeof buf, gettext("I've gone through the notes of %s again,\nbut found nothing new."), questline->ancient_person.name);
             break;
           case QUEST_TYPE_CHILDHOOD_DREAM:
+          case QUEST_TYPE_ZOMBIES:
             snprintf(buf, sizeof buf, "%s", gettext("I've gone through the notes again,\nbut found nothing new."));
             break;
           case QUEST_TYPE_SIZEOF_:
@@ -138,18 +132,74 @@ void quest_action(struct questline * questline, enum QUEST_ACTION action)
 
       header = widget_new_quest_treasure_info(widget_root(), 0, 0, headerquest, true);
 
-      if(generic_failure == true)
+      if(handled == false)
+        if(questline->current_quest + 1 == questline->quests->size)
+          {
+            snprintf(buf, sizeof buf, gettext("This is it, the last treasure associated to the %s.\n\nR.I.P. %s"),
+                     relation_type_name(questline->ancient_person.relation_to_player),
+                     questline->ancient_person.name);
+            handled = true;
+          }
+      
+      if(handled == false)
         snprintf(buf, sizeof buf, gettext("I've carefully examined the %s,\nbut didn't find anything special on it."), treasure_type_name(object->type));
       break;
 
     case QUEST_ACTION_VISIT_LIBRARY:
       snprintf(title, sizeof title, "%s", gettext("Library"));
 
-      header = widget_new_gfx_image(widget_root(), 0, 0, GFX_IMAGE_BOOKPILE);
+      if(questline->type == QUEST_TYPE_ZOMBIES)
+        header = widget_new_gfx_image(widget_root(), 0, 0, GFX_IMAGE_ZOMBIE);
+      else
+        header = widget_new_gfx_image(widget_root(), 0, 0, GFX_IMAGE_BOOKPILE);
       widget_delete_flags(header, WF_BACKGROUND);
-      
-      if(generic_failure == true)
-        snprintf(buf, sizeof buf, gettext("None of the books seems to be interesting right now."));
+
+      if(handled == false)
+        {
+          struct tm * now;
+          time_t      tnow;
+          
+          tnow = time(NULL);
+          now = localtime(&tnow);
+            
+          struct questline * zombieql;
+          {
+            int zqlcount;
+            
+            zombieql = NULL;
+            zqlcount = 0;
+            for(unsigned int i = 0; zombieql == NULL && i < globals.questlines_size; i++)
+              if(globals.questlines[i]->type == QUEST_TYPE_ZOMBIES)
+                {
+                  if(zqlcount == now->tm_wday)
+                    zombieql = globals.questlines[i];
+                  else
+                    zqlcount++;
+                }
+          }
+
+          bool is_zombie_time;
+          if(now->tm_hour >= 0 && now->tm_hour <= 4)
+            is_zombie_time = true;
+          else
+            is_zombie_time = false;
+
+          bool is_zombie_completed;
+          if(zombieql != NULL && zombieql->current_quest + 1 == zombieql->quests->size && zombieql->current_phase == QUESTLINE_PHASE_TREASURE_COLLECTED)
+            is_zombie_completed = true;
+          else
+            is_zombie_completed = false;
+
+          char const * pre;
+          if(is_zombie_completed == true)
+            pre = gettext("The librarian greets you with a smile.");
+          else if(is_zombie_time == true)
+            pre = gettext("The librarian talks something about zombies.");
+          else
+            pre = gettext("The librarian greets you.");
+          
+          snprintf(buf, sizeof buf, "%s\n\n%s", pre, gettext("None of the books seems to be interesting right now."));
+        }
       break;
 
     case QUEST_ACTION_VISIT_CAFE:
@@ -158,7 +208,7 @@ void quest_action(struct questline * questline, enum QUEST_ACTION action)
       header = widget_new_gfx_image(widget_root(), 0, 0, GFX_IMAGE_CAFE);
       widget_delete_flags(header, WF_BACKGROUND);
 
-      if(generic_failure == true)
+      if(handled == false)
         {
           struct trader * trader;
           time_t          now;
@@ -223,7 +273,7 @@ void quest_action(struct questline * questline, enum QUEST_ACTION action)
                                cost,
                                (unsigned int) traits_get_score());
                     
-                    generic_failure = false;
+                    handled = true;
                   }
                 else
                   {
@@ -239,12 +289,12 @@ void quest_action(struct questline * questline, enum QUEST_ACTION action)
                     
                     snprintf(buf + strlen(buf), sizeof buf - strlen(buf), "\n\n%s", gettext("I drink my favorite beverage and read the local newspaper."));
                     
-                    generic_failure = false;
+                    handled = true;
                   }
               }
 
           /* Give player a chance to buy back previous quests treasure item if the player has sold it and that item is required for opening the next quest. */
-          if(generic_failure == true)
+          if(handled == false)
             if(quest->treasure_sold == true)
               if(questline->current_phase == QUESTLINE_PHASE_TREASURE_COLLECTED)
                 if(questline->current_quest + 1 < questline->quests->size)
@@ -286,11 +336,11 @@ void quest_action(struct questline * questline, enum QUEST_ACTION action)
                                    cost,
                                    (unsigned int) traits_get_score());
 
-                        generic_failure = false;
+                        handled = true;
                       }
                   }
 
-          if(generic_failure == true)
+          if(handled == false)
             if(trader_is_here == true)
               if(trader->item_buy_count > 0)
                 {
@@ -322,12 +372,12 @@ void quest_action(struct questline * questline, enum QUEST_ACTION action)
                       else
                         snprintf(buf, sizeof buf, gettext("I see %s in the cafe, he offers to buy some items."), trader->name);
                     
-                      generic_failure = false;
+                      handled = true;
                     }
                 }
         }
       
-      if(generic_failure == true)
+      if(handled == false)
         snprintf(buf, sizeof buf, gettext("I drink my favorite beverage and read the local newspaper."));
       break;
     }
@@ -396,19 +446,23 @@ bool open_other_questlines(enum QUEST_ACTION action)
 
       ql = globals.questlines[i];
       if(ql->current_quest == 0 && ql->current_phase == QUESTLINE_PHASE_NONE)
-        if(ql->opening_weekday < 0 || (ql->opening_weekday == now->tm_wday && now->tm_mday <= 7))
-          {
-            struct quest * first;
-
-            assert(ql->quests->size > 0);
-            first = ql->quests->data[0];
-            if(first->action_to_open == action)
-              {
-                opened = true;
-                quest_open(first);
-                quest_action(ql, action);
-              }
-          }
+        if(ql->opening_weekday < 0 ||
+           (ql->opening_weekday == now->tm_wday && (ql->opening_monthday_max < 0 || now->tm_mday <= ql->opening_monthday_max)))
+          if(ql->opening_time_hour < 0 ||
+             (ql->opening_time_hour < now->tm_hour && now->tm_hour <= ql->opening_time_hour + ql->opening_time_length))
+            {
+              struct quest * first;
+              
+              assert(ql->quests->size > 0);
+              first = ql->quests->data[0];
+              if(first->action_to_open == action)
+                {
+                  globals.active_questline = i;
+                  opened = true;
+                  quest_open(first);
+                  quest_action(ql, action);
+                }
+            }
     }
   
   return opened;

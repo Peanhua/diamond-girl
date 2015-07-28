@@ -75,27 +75,59 @@ struct questline * questline_new(enum QUEST_TYPE type, enum RELATION_TYPE first_
       { RELATION_TYPE_ANCIENT_PRIEST,   GENDER_NEUTER, 0.0, 0.5 },
       { RELATION_TYPE_ANCIENT_SHAMAN,   GENDER_NEUTER, 0.0, 0.5 },
       { RELATION_TYPE_SIZEOF_,          GENDER_NEUTER, 0.0, 0.0 }
-    };        
-  
+    };
+
+  struct persondata zombiepersons[] =
+    {
+      { RELATION_TYPE_ANCIENT_QUEEN,    GENDER_FEMALE, 0.2, 0.2 },
+      { RELATION_TYPE_ANCIENT_KING,     GENDER_MALE,   0.2, 0.2 },
+      { RELATION_TYPE_ANCIENT_PRINCESS, GENDER_FEMALE, 0.2, 0.2 },
+      { RELATION_TYPE_ANCIENT_PRINCE,   GENDER_MALE,   0.2, 0.2 },
+      { RELATION_TYPE_ANCIENT_KNIGHT,   GENDER_MALE,   0.2, 0.2 },
+      { RELATION_TYPE_ANCIENT_WAR_HERO, GENDER_NEUTER, 0.2, 0.2 },
+      { RELATION_TYPE_ANCIENT_PRIEST,   GENDER_NEUTER, 0.2, 0.2 },
+      { RELATION_TYPE_ANCIENT_SHAMAN,   GENDER_NEUTER, 0.2, 0.2 },
+      { RELATION_TYPE_SIZEOF_,          GENDER_NEUTER, 0.2, 0.2 }
+    };      
+
   struct persondata * qgdata;
   struct persondata * apdata;
   struct questline * questline;
 
-  qgdata = NULL;
-  for(int i = 0; qgdata == NULL && questgivers[i].relation_type != RELATION_TYPE_SIZEOF_; i++)
-    if(questgivers[i].relation_type == first_questgiver_relation)
-      qgdata = &questgivers[i];
-  apdata = NULL;
-  for(int i = 0; apdata == NULL && ancientpersons[i].relation_type != RELATION_TYPE_SIZEOF_; i++)
-    if(ancientpersons[i].relation_type == ancient_person_relation)
-      apdata = &ancientpersons[i];
+  {
+    struct persondata * plist1, * plist2;
 
+    if(type == QUEST_TYPE_ZOMBIES)
+      {
+        plist1 = zombiepersons;
+        plist2 = zombiepersons;
+      }
+    else
+      {
+        plist1 = questgivers;
+        plist2 = ancientpersons;
+      }
+  
+    qgdata = NULL;
+    for(int i = 0; qgdata == NULL && plist1[i].relation_type != RELATION_TYPE_SIZEOF_; i++)
+      if(plist1[i].relation_type == first_questgiver_relation)
+        qgdata = &plist1[i];
+    
+    apdata = NULL;
+    for(int i = 0; apdata == NULL && plist2[i].relation_type != RELATION_TYPE_SIZEOF_; i++)
+      if(plist2[i].relation_type == ancient_person_relation)
+        apdata = &plist2[i];
+  }
+  
   questline = malloc(sizeof *questline);
   assert(questline != NULL);
   if(questline != NULL)
     {
       questline->type                                = type;
       questline->opening_weekday                     = -1;
+      questline->opening_monthday_max                = -1;
+      questline->opening_time_hour                   = -1;
+      questline->opening_time_length                 = 0;
       questline->first_questgiver.relation_to_player = first_questgiver_relation;
       questline->first_questgiver.gender             = qgdata != NULL ? qgdata->gender : GENDER_NEUTER;
       questline->first_questgiver.name               = NULL;
@@ -115,23 +147,66 @@ struct questline * questline_new(enum QUEST_TYPE type, enum RELATION_TYPE first_
         {
           assert(qgdata != NULL);
           assert(apdata != NULL);
+
           questline->first_questgiver.name = quest_new_human_name(questline->first_questgiver.relation_to_player,
                                                                   questline->first_questgiver.gender,
                                                                   qgdata->name_chance_players, qgdata->name_chance_existing);
-              
+          
           questline->ancient_person.name = quest_new_human_name(questline->ancient_person.relation_to_player,
                                                                 questline->ancient_person.gender,
                                                                 apdata->name_chance_players, apdata->name_chance_existing);
-
-          int qcount;
           
+          if(questline->type == QUEST_TYPE_ZOMBIES)
+            { /* Must have same surname if king/queen type of pairs (first_questgiver and ancient_person) */
+              enum RELATION_TYPE musts[4] = { RELATION_TYPE_ANCIENT_KING, RELATION_TYPE_ANCIENT_QUEEN, RELATION_TYPE_ANCIENT_PRINCE, RELATION_TYPE_ANCIENT_PRINCESS };
+              bool must1, must2;
+            
+              assert(questline->first_questgiver.relation_to_player != questline->ancient_person.relation_to_player);
+              must1 = false;
+              for(int i = 0; must1 == false && i < 4; i++)
+                if(questline->first_questgiver.relation_to_player == musts[i])
+                  must1 = true;
+              must2 = false;
+              for(int i = 0; must2 == false && i < 4; i++)
+                if(questline->ancient_person.relation_to_player == musts[i])
+                  must2 = true;
+              if(must1 == true && must2 == true)
+                { /* Force same surnames. */
+                  char * surname;
+
+                  surname = strchr(questline->first_questgiver.name, ' ');
+                  assert(surname != NULL);
+                  if(surname != NULL)
+                    {
+                      char buf[strlen(questline->ancient_person.name) + strlen(surname) + 1];
+                      char * src;
+                      int i;
+
+                      while(*surname == ' ')
+                        surname++;
+                      src = questline->ancient_person.name;
+                      for(i = 0; src[i] != ' ' && src[i] != '\0'; i++)
+                        buf[i] = src[i];
+                      snprintf(buf + i, sizeof buf - i, " %s", surname);
+
+                      free(questline->ancient_person.name);
+                      questline->ancient_person.name = strdup(buf);
+                    }
+                }
+            }
+          
+          
+          int qcount;
+
+          qcount = 0;
           switch(type)
             {
             case QUEST_TYPE_RELATIVE:        qcount = 10; break;
             case QUEST_TYPE_CHILDHOOD_DREAM: qcount = 20; break;
+            case QUEST_TYPE_ZOMBIES:         qcount =  7; break;
             case QUEST_TYPE_SIZEOF_:         qcount =  0; break;
-            default:              assert(0); qcount =  0; break;
             }
+          assert(qcount > 0);
 
           for(int i = 0; i < qcount; i++)
             {
@@ -218,13 +293,47 @@ static struct quest * quest_new(enum QUEST_TYPE type, struct questline * questli
       quest->hours_to_salesman = 2 + get_rand(22);
       
       /* Treasure object */
-      quest->treasure_object = treasure_new(get_rand(TREASURE_TYPE_SIZEOF_), get_rand(TREASURE_MATERIAL_SIZEOF_), get_rand(TREASURE_GEMSTONE_SIZEOF_));
-      quest->treasure_sold   = false;
+      quest->treasure_sold = false;
+      if(type == QUEST_TYPE_ZOMBIES)
+        {
+          if(questline->quests->size == 0)
+            { /* First is random. */
+              quest->treasure_object = treasure_new(get_rand(TREASURE_TYPE_SIZEOF_), get_rand(TREASURE_MATERIAL_SIZEOF_), get_rand(TREASURE_GEMSTONE_SIZEOF_));
+            }
+          else
+            { /* The rest are of same material and with same gemstones. */
+              enum TREASURE_TYPE t;
+              bool already_exists;
+
+              do {
+                t = get_rand(TREASURE_TYPE_SIZEOF_);
+                already_exists = false;
+                for(unsigned int i = 0; already_exists == false && i < questline->quests->size; i++)
+                  {
+                    struct quest * q;
+
+                    q = questline->quests->data[i];
+                    if(q->treasure_object->type == t)
+                      already_exists = true;
+                  }
+              } while(already_exists == true);
+
+              struct quest * first;
+
+              first = questline->quests->data[0];
+              quest->treasure_object = treasure_new(t, first->treasure_object->material, first->treasure_object->gemstones);
+            }
+        }
+      else
+        { /* Generic treasure object */
+          quest->treasure_object = treasure_new(get_rand(TREASURE_TYPE_SIZEOF_), get_rand(TREASURE_MATERIAL_SIZEOF_), get_rand(TREASURE_GEMSTONE_SIZEOF_));
+        }
+      
       /* Treasure location */
       quest->treasure_cave = strdup(caves[get_rand(3)]);
       quest->treasure_level = 1 + level;
 
-      /* Find the previous quest */
+      /* Action to open and description + other quest type specific stuff */
       struct quest * prevquest;
 
       if(questline->quests->size == 0)
@@ -275,6 +384,11 @@ static struct quest * quest_new(enum QUEST_TYPE type, struct questline * questli
         {
           quest->action_to_open = QUEST_ACTION_VISIT_LIBRARY;
           quest->description_id = 0;
+        }
+      else if(type == QUEST_TYPE_ZOMBIES)
+        {
+          quest->action_to_open = QUEST_ACTION_VISIT_LIBRARY;
+          quest->description_id = 1 + level;
         }
       else
         assert(0);

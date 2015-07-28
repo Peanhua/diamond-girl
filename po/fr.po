@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: diamond-girl 1.25b4\n"
 "Report-Msgid-Bugs-To: joniyrjana@gmail.com\n"
-"POT-Creation-Date: 2015-07-27 21:36+0300\n"
+"POT-Creation-Date: 2015-07-28 18:11+0300\n"
 "PO-Revision-Date: 2015-07-19 17:14+0200\n"
 "Last-Translator: Vincent Hardy <vincent.hardy.be@gmail.com>\n"
 "Language-Team: French\n"
@@ -328,7 +328,30 @@ msgstr ""
 msgid "Checksum error on map %s:%d."
 msgstr "Erreur de checksum sur la carte %s:%d."
 
-#: src/quest_action.c:97
+#: src/quest_action.c:107 src/widget_new_quest_menu.c:259
+#, c-format
+msgid "Notes of %s"
+msgstr ""
+
+#: src/quest_action.c:116
+#, c-format
+msgid ""
+"I've gone through the notes of %s again,\n"
+"but found nothing new."
+msgstr ""
+
+#: src/quest_action.c:120
+msgid ""
+"I've gone through the notes again,\n"
+"but found nothing new."
+msgstr ""
+
+#: src/quest_action.c:130
+#, c-format
+msgid "Latest find"
+msgstr ""
+
+#: src/quest_action.c:138
 #, c-format
 msgid ""
 "This is it, the last treasure associated to the %s.\n"
@@ -336,106 +359,94 @@ msgid ""
 "R.I.P. %s"
 msgstr ""
 
-#: src/quest_action.c:114 src/widget_new_quest_menu.c:259
-#, c-format
-msgid "Notes of %s"
-msgstr ""
-
-#: src/quest_action.c:123
-#, c-format
-msgid ""
-"I've gone through the notes of %s again,\n"
-"but found nothing new."
-msgstr ""
-
-#: src/quest_action.c:126
-msgid ""
-"I've gone through the notes again,\n"
-"but found nothing new."
-msgstr ""
-
-#: src/quest_action.c:136
-#, c-format
-msgid "Latest find"
-msgstr ""
-
-#: src/quest_action.c:142
+#: src/quest_action.c:145
 #, c-format
 msgid ""
 "I've carefully examined the %s,\n"
 "but didn't find anything special on it."
 msgstr ""
 
-#: src/quest_action.c:146 src/widget_new_quest_menu.c:285
+#: src/quest_action.c:149 src/widget_new_quest_menu.c:285
 msgid "Library"
 msgstr ""
 
-#: src/quest_action.c:152
-#, c-format
+#: src/quest_action.c:195
+msgid "The librarian greets you with a smile."
+msgstr ""
+
+#: src/quest_action.c:197
+msgid "The librarian talks something about zombies."
+msgstr ""
+
+#: src/quest_action.c:199
+msgid "The librarian greets you."
+msgstr ""
+
+#: src/quest_action.c:201
 msgid "None of the books seems to be interesting right now."
 msgstr ""
 
-#: src/quest_action.c:156 src/widget_new_quest_menu.c:273
+#: src/quest_action.c:206 src/widget_new_quest_menu.c:273
 msgid "Cafe"
 msgstr ""
 
-#: src/quest_action.c:199 src/quest_action.c:262
+#: src/quest_action.c:249 src/quest_action.c:312
 msgid "Accept offer"
 msgstr ""
 
-#: src/quest_action.c:210
+#: src/quest_action.c:260
 #, c-format
 msgid ""
 "I see %s in the cafe, she offers to fetch the %s %s '%s' for %u.\n"
 "I have %u."
 msgstr ""
 
-#: src/quest_action.c:218
+#: src/quest_action.c:268
 #, c-format
 msgid ""
 "I see %s in the cafe, he offers to fetch the %s %s '%s' for %u.\n"
 "I have %u."
 msgstr ""
 
-#: src/quest_action.c:237
+#: src/quest_action.c:287
 #, c-format
 msgid "The bartender says %s was here a moment ago."
 msgstr ""
 
-#: src/quest_action.c:238
+#: src/quest_action.c:288
 #, c-format
 msgid "The bartender says %s was here %d hours ago."
 msgstr ""
 
-#: src/quest_action.c:240 src/quest_action.c:331
+#: src/quest_action.c:290 src/quest_action.c:381
 #, c-format
 msgid "I drink my favorite beverage and read the local newspaper."
 msgstr ""
 
-#: src/quest_action.c:273
+#: src/quest_action.c:323
 #, c-format
 msgid ""
 "%s is in the cafe, she says she could sell the %s %s '%s' for %u.\n"
 "I have %u."
 msgstr ""
 
-#: src/quest_action.c:281
+#: src/quest_action.c:331
 #, c-format
 msgid ""
 "%s is in the cafe, he says she could sell the %s %s '%s' for %u.\n"
 "I have %u."
 msgstr ""
 
-#: src/quest_action.c:311
+#: src/quest_action.c:361
 msgid "Sell items"
 msgstr ""
 
-#: src/quest_action.c:321
+#: src/quest_action.c:371
 #, c-format
 msgid "I see %s in the cafe, she offers to buy some items."
 msgstr ""
 
-#: src/quest_action.c:323
+#: src/quest_action.c:373
 #, c-format
 msgid "I see %s in the cafe, he offers to buy some items."
 msgstr ""
@@ -480,14 +491,28 @@ msgstr ""
 msgid "The %s seems to be one of many, perhaps there are more nearby."
 msgstr ""
 
-#: src/quest_description.c:131
+#: src/quest_description.c:134
 #, c-format
 msgid "I have found a book of %s %s from the library.  Her %s must have been buried somewhere in %s.  I decided to pursue my childhood dream of finding it."
 msgstr ""
 
-#: src/quest_description.c:137
+#: src/quest_description.c:140
 #, c-format
 msgid "I have found a book of %s %s from the library.  His %s must have been buried somewhere in %s.  I decided to pursue my childhood dream of finding it."
+msgstr ""
+
+#: src/quest_description.c:152
+msgid "The library is filled with zombies!"
+msgstr ""
+
+#: src/quest_description.c:158
+#, c-format
+msgid "%s %s, the leader of the zombies, promised they would leave if I can find the %s of the ancient %s %s.  I should start from %s."
+msgstr ""
+
+#: src/quest_description.c:174
+#, c-format
+msgid "%s %s, the leader of the zombies says the next lead should be somewhere in %s."
 msgstr ""
 
 #: src/quest_diary.c:50 src/widget_new_quest_menu.c:246

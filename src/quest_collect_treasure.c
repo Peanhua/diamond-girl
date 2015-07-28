@@ -40,6 +40,10 @@ void quest_collect_treasure(struct questline * questline)
   
   if(questline->current_phase == QUESTLINE_PHASE_OPENED)
     {
+      int progress;
+
+      progress = (questline->current_quest + 1) * 100 / questline->quests->size;
+      
       questline->current_phase = QUESTLINE_PHASE_TREASURE_COLLECTED;
       quest->completed = time(NULL);
   
@@ -70,6 +74,24 @@ void quest_collect_treasure(struct questline * questline)
         }
       
       questline_diary_add(questline, quest->completed, quest->treasure_object, buf);
+
+      if(progress < 50)
+        { /* If 50% is passed, then next zombiequestline becomes available. */
+          int newprogress;
+
+          newprogress = (questline->current_quest + 1) * 100 / questline->quests->size;
+          if(newprogress >= 50)
+            {
+              struct questline * ql;
+
+              ql = questline_generate(QUEST_TYPE_ZOMBIES);
+              if(ql != NULL)
+                {
+                  globals.questlines[globals.questlines_size] = ql;
+                  globals.questlines_size++;
+                }
+            }
+        }
     }
   else if(questline->current_phase == QUESTLINE_PHASE_TREASURE_COLLECTED)
     { /* Player had sold the item earlier and is now buying it back. */

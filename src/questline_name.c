@@ -28,6 +28,7 @@ char const * questline_name(struct questline * questline)
 {
   static char buf[128];
 
+  strcpy(buf, "");
   switch(questline->type)
     {
     case QUEST_TYPE_RELATIVE:
@@ -38,11 +39,15 @@ char const * questline_name(struct questline * questline)
     case QUEST_TYPE_CHILDHOOD_DREAM:
       snprintf(buf, sizeof buf, gettext("Childhood dream"));
       break;
-    default:
-      assert(0);
-      strcpy(buf, "");
+    case QUEST_TYPE_ZOMBIES:
+      snprintf(buf, sizeof buf, gettext("Zombie %s %s"),
+               relation_type_name(questline->ancient_person.relation_to_player),
+               questline->ancient_person.name);
+      break;
+    case QUEST_TYPE_SIZEOF_:
       break;
     }
+  assert(strlen(buf) > 0);
   buf[0] = toupper(buf[0]);
 
   return buf;

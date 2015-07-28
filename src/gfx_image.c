@@ -73,6 +73,7 @@ static struct
     { GFX_IMAGE_GRAVESTONE,                    NULL, "gfx/gravestone",            true,  true, false, false, false, 0 },
     { GFX_IMAGE_NOTES,                         NULL, "gfx/notes",                 true,  true, false, false, false, 0 },
     { GFX_IMAGE_TREASURESTAND,                 NULL, "gfx/treasurestand",         true,  true, false, false, false, 0 },
+    { GFX_IMAGE_ZOMBIE,                        NULL, "gfx/zombie",                true,  true, false, false, false, 0 },
     { GFX_IMAGE_TRAIT_ADVENTURE_MODE,          NULL, "gfx/trait_adventure_mode",  true,  true,  true, false, false, 1 },
     { GFX_IMAGE_TRAIT_ADVENTURE_MODE_DISABLED, NULL, "gfx/trait_adventure_mode",  true,  true,  true,  true, false, 1 },
     { GFX_IMAGE_TRAIT_RIBBON,                  NULL, "gfx/trait_ribbon",          true,  true,  true, false, false, 1 },

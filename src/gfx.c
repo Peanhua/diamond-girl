@@ -284,7 +284,10 @@ static bool gfx_initialize_opengl(Uint32 flags)
           globals.opengl_shaders = 1;
         }
       else
-        printf("no");
+        {
+          printf("no");
+          globals.opengl_shaders = 0;
+        }
      if(globals.opengl_disable_shaders == true)
        {
          printf(" (disabled)");

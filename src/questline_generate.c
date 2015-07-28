@@ -29,7 +29,7 @@
 struct questline * questline_generate(enum QUEST_TYPE type)
 {
   struct questline * questline;
-  enum RELATION_TYPE reltype;
+  enum RELATION_TYPE reltype, ap_reltype;
   unsigned int typecount;
 
   typecount = 0;
@@ -38,7 +38,8 @@ struct questline * questline_generate(enum QUEST_TYPE type)
       typecount++;
   
   questline = NULL;
-  reltype = RELATION_TYPE_SIZEOF_;
+  reltype    = RELATION_TYPE_SIZEOF_;
+  ap_reltype = RELATION_TYPE_SIZEOF_;
   
   if(type == QUEST_TYPE_RELATIVE)
     {
@@ -116,6 +117,31 @@ struct questline * questline_generate(enum QUEST_TYPE type)
       else
         reltype = RELATION_TYPE_MALE_FRIEND;        
     }
+  else if(type == QUEST_TYPE_ZOMBIES && typecount < 7)
+    {
+      enum RELATION_TYPE t[5 * 2] =
+        {
+          RELATION_TYPE_ANCIENT_KING,   RELATION_TYPE_ANCIENT_QUEEN,
+          RELATION_TYPE_ANCIENT_PRINCE, RELATION_TYPE_ANCIENT_PRINCESS,
+          RELATION_TYPE_ANCIENT_KNIGHT, RELATION_TYPE_ANCIENT_PRINCESS,
+          RELATION_TYPE_ANCIENT_KNIGHT, RELATION_TYPE_ANCIENT_QUEEN,
+          RELATION_TYPE_ANCIENT_KNIGHT, RELATION_TYPE_ANCIENT_KING
+        };
+
+      int i;
+
+      i = get_rand(5) * 2;
+      if(get_rand(100) < 60)
+        {
+          reltype    = t[i];
+          ap_reltype = t[i + 1];
+        }
+      else
+        { /* swapped order */
+          reltype    = t[i + 1];
+          ap_reltype = t[i];
+        }
+    }
 
 
   if(reltype < RELATION_TYPE_SIZEOF_)
@@ -132,11 +158,24 @@ struct questline * questline_generate(enum QUEST_TYPE type)
           RELATION_TYPE_ANCIENT_SHAMAN
         };
 
-      questline = questline_new(type, reltype, ap_reltypes[get_rand(8)]);
+      if(ap_reltype == RELATION_TYPE_SIZEOF_)
+        ap_reltype = ap_reltypes[get_rand(8)];
+
+      questline = questline_new(type, reltype, ap_reltype);
       if(questline != NULL)
         {
           if(type == QUEST_TYPE_CHILDHOOD_DREAM)
-            questline->opening_weekday = 6;
+            {
+              questline->opening_weekday      = 6;
+              questline->opening_monthday_max = 7;
+            }
+          else if(type == QUEST_TYPE_ZOMBIES)
+            {
+              questline->opening_weekday = typecount;
+              questline->opening_time_hour   = 0;
+              questline->opening_time_length = 4;
+            }
+              
           
           /* Calculate reward = number of earlier completed questlines */
           for(unsigned int i = 0; i < globals.questlines_size; i++)
