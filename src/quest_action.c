@@ -49,6 +49,7 @@ void quest_action(struct questline * questline, enum QUEST_ACTION action)
 
   headerquest = quest = questline->quests->data[questline->current_quest];
   handled = false;
+  object  = NULL;
   assert(questline->current_phase != QUESTLINE_PHASE_NONE);
   if(questline->current_phase == QUESTLINE_PHASE_OPENED)
     { /* Treasure is not yet collected, so display "history". */
@@ -64,7 +65,7 @@ void quest_action(struct questline * questline, enum QUEST_ACTION action)
 
       if(quest->action_to_open == action)
         {
-          snprintf(buf, sizeof buf, quest_description(quest));
+          snprintf(buf, sizeof buf, "%s", quest_description(quest));
           handled = true;
         }
     }
@@ -88,7 +89,7 @@ void quest_action(struct questline * questline, enum QUEST_ACTION action)
                 {
                   questline->current_quest++;
                   quest_open(nextquest);
-                  snprintf(buf, sizeof buf, quest_description(nextquest));
+                  snprintf(buf, sizeof buf, "%s", quest_description(nextquest));
                   handled = true;
                 }
             }

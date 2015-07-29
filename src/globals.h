@@ -95,6 +95,7 @@ struct globals
 
   unsigned int   volume;
   enum GAME_MODE title_game_mode; /* The current game mode in title screen. */
+  int            title_midarea;
   bool           iron_girl_mode;
 
   struct girl **         pyjama_party_girls;

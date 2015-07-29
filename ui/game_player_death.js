@@ -23,7 +23,11 @@
                 { "type":     "row",
                   "children": [
                     { "type":  "text",
-                      "title": gettext("Diamond score: ${score}")
+                      "title": gettext("Diamond score:")
+                    },
+                    { "type":  "text",
+                      "x":     135,
+                      "title": "${diamond_score}"
                     }
                   ]
                 }

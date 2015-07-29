@@ -126,32 +126,14 @@ static void initialize_chain(struct link * chain, unsigned char const * seed)
 
 static char * names_get_neuter(void)
 {
-  static char buf[32];
-  int len;
-  char vow[] = "aeiouy";
-  char con[] = "bcdfghjklmnpqrstvwxz";
-  bool vowcon;
+  struct link * chain;
+  
+  if(get_rand(100) < 50)
+    chain = femalechain;
+  else
+    chain = malechain;
 
-  len = 4 + get_rand(8);
-  vowcon = get_rand(2);
-  for(int i = 0; i < len; i++)
-    {
-      if(vowcon == true)
-        { /* vowel */
-          buf[i] = vow[get_rand(strlen(vow))];
-          if(get_rand(100) < 35)
-            vowcon = false;
-        }
-      else
-        { /* consonant */
-          buf[i] = con[get_rand(strlen(con))];
-          if(get_rand(100) < 66)
-            vowcon = true;
-        }
-    }
-  buf[len] = '\0';
-
-  return buf;
+  return names_get_markov(chain);
 }
 
 

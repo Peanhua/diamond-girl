@@ -164,7 +164,7 @@ void game_player_death(struct gamedata * gamedata, bool sounds)
                     {
                       { WFDT_CAVE,       "cave",             gamedata->cave   },
                       { WFDT_MAP,        "map",              gamedata->map    },
-                      { WFDT_STRING,     "score",            scorestring      },
+                      { WFDT_STRING,     "diamond_score",    scorestring      },
                       { WFDT_ON_RELEASE, "on_play_clicked",  on_play_clicked  },
                       { WFDT_ON_RELEASE, "on_save_clicked",  on_save_clicked  },
                       { WFDT_ON_RELEASE, "on_quit_clicked",  on_quit_clicked  },
@@ -185,18 +185,18 @@ void game_player_death(struct gamedata * gamedata, bool sounds)
                 }
               else
                 {
-                  snprintf(msg, sizeof msg,
-                           gettext("The girl is dead.\n"
-                                   "Diamond score: %d"),
+                  snprintf(msg, sizeof msg, "%s\n\n%s %d",
+                           gettext("The girl is dead."),
+                           gettext("Diamond score:"),
                            score);
                   game_show_text(msg);
                 }
             }
           else
             {
-              snprintf(msg, sizeof msg,
-                       gettext("    Game Over!\n"
-                               "Diamond score: %d"),
+              snprintf(msg, sizeof msg, "%s\n%s %d",
+                       gettext("    Game Over!"),
+                       gettext("Diamond score:"),
                        score);
               game_show_text(msg);
             }

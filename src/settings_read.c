@@ -43,6 +43,7 @@ static bool cb_sound_volume(struct json_object * value, void * value_ptr);
 static bool cb_cave_selection(struct json_object * value, void * value_ptr);
 static bool cb_cave_selection_level(struct json_object * value, void * value_ptr);
 static bool cb_game_mode(struct json_object * value, void * value_ptr);
+static bool cb_title_midarea(struct json_object * value, void * value_ptr);
 static bool cb_locale(struct json_object * value, void * value_ptr);
 static bool cb_bindings(struct json_object * value, void * value_ptr);
 static bool cb_themes(struct json_object * value, void * value_ptr);
@@ -87,10 +88,13 @@ bool settings_read(void)
           bool ok;
           struct json_object_iterator it;
           struct json_object_iterator itEnd;
+          int active_questline;
 
           ok    = true;
           it    = json_object_iter_begin(obj);
           itEnd = json_object_iter_end(obj);
+
+          active_questline = globals.active_questline;
 
           while(ok == true && !json_object_iter_equal(&it, &itEnd))
             {
@@ -124,6 +128,8 @@ bool settings_read(void)
                     { "CaveSelectionLevel",         json_type_int,     cb_cave_selection_level, NULL                                  },
                     { "ShowFPS",                    json_type_boolean, cb_bool,                 &globals.fps_counter_active           },
                     { "GameMode",                   json_type_string,  cb_game_mode,            NULL                                  },
+                    { "ActiveQuestline",            json_type_int,     cb_int,                  &active_questline                     },
+                    { "TitleMidarea",               json_type_string,  cb_title_midarea,        NULL                                  },
                     { "IronGirlMode",               json_type_boolean, cb_bool,                 &globals.iron_girl_mode               },
                     { "Locale",                     json_type_string,  cb_locale,               NULL                                  },
                     { "MapTilting",                 json_type_boolean, cb_bool,                 &globals.map_tilting                  },
@@ -167,7 +173,9 @@ bool settings_read(void)
               json_object_iter_next(&it);
             }
 
-          if(ok == false)
+          if(ok == true)
+            globals.active_questline = active_questline;
+          else
             rv = false;
         }
       else
@@ -315,6 +323,31 @@ static bool cb_game_mode(struct json_object * value, void * value_ptr DG_UNUSED)
     {
       rv = false;
       fprintf(stderr, "Incorrect game mode '%s' in settings.json.\n", modename);
+    }
+
+  return rv;
+}
+
+
+
+static bool cb_title_midarea(struct json_object * value, void * value_ptr DG_UNUSED)
+{
+  bool rv;
+  const char * id;
+
+  assert(value != NULL);
+
+  rv = true;
+  id = json_object_get_string(value);
+
+  if(!strcmp(id, "arcade"))
+    globals.title_midarea = 0;
+  else if(!strcmp(id, "quests"))
+    globals.title_midarea = 1;
+  else
+    {
+      rv = false;
+      fprintf(stderr, "Incorrect id '%s' for TitleMidarea in settings.json.\n", id);
     }
 
   return rv;

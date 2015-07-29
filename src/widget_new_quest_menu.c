@@ -415,6 +415,10 @@ static void refresh(struct widget * window)
                     }
                 }
             }
+          else
+            {
+              widget_set_widget_pointer(window, "focus_down_object", obj_diary);
+            }
         }
       else
         {

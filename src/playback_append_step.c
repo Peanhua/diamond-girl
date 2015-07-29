@@ -60,6 +60,8 @@ struct playback_step * playback_append_step(struct playback * playback)
       playback->steps_size++;
       playback_step_initialize(step);
     }
+  else
+    step = NULL;
 
   assert(step != NULL);
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: diamond-girl 1.25b\n"
 "Report-Msgid-Bugs-To: joniyrjana@gmail.com\n"
-"POT-Creation-Date: 2015-07-28 18:11+0300\n"
+"POT-Creation-Date: 2015-07-29 11:06+0300\n"
 "PO-Revision-Date: 2015-06-18 19:22+0200\n"
 "Last-Translator: Steve Joni Yrjänä <joniyrjana@gmail.com>\n"
 "Language-Team: Finnish\n"
@@ -87,7 +87,7 @@ msgstr "Radioaktiivinen }t}kk|, v|lt|."
 msgid "A radioactive butterfly, avoid."
 msgstr "Radioaktiivinen perhonen, v|lt|."
 
-#: src/editor.c:706 src/title.c:1488 src/widget_new_highscore_einfo.c:95
+#: src/editor.c:706 src/title.c:1495 src/widget_new_highscore_einfo.c:95
 msgid "Cave:"
 msgstr "Luola:"
 
@@ -221,18 +221,18 @@ msgstr "Palauta(R)"
 msgid "Intermission:"
 msgstr "V|liaika:"
 
-#: src/game.c:149 src/title.c:1234
+#: src/game.c:149 src/title.c:1247
 #, c-format
 msgid "Level:"
 msgstr "Taso:"
 
-#: src/game.c:150 src/game.c:232 src/title.c:1238
+#: src/game.c:150 src/game.c:232 src/title.c:1251
 #: src/widget_new_highscore_einfo.c:196 src/widget_new_title_partystatus.c:140
 #, c-format
 msgid "Girls:"
 msgstr "Tyt}t:"
 
-#: src/game.c:151 src/title.c:1243 src/widget_new_highscore_einfo.c:167
+#: src/game.c:151 src/title.c:1256 src/widget_new_highscore_einfo.c:167
 #: src/widget_new_title_partystatus.c:107
 #, c-format
 msgid "Score:"
@@ -270,22 +270,17 @@ msgid "Iron Girl"
 msgstr "Ter|stytt}"
 
 #: src/game_player_death.c:189
-#, c-format
-msgid ""
-"The girl is dead.\n"
-"Diamond score: %d"
-msgstr ""
-"Tytt} on kuollut.\n"
-"Timanttipisteet: %d"
+msgid "The girl is dead."
+msgstr "Tytt} on kuollut."
+
+#: src/game_player_death.c:190 src/game_player_death.c:199
+#: ui/game_player_death.js:26 ui/game_player_next_level.js:25
+msgid "Diamond score:"
+msgstr "Timanttipisteet:"
 
 #: src/game_player_death.c:198
-#, c-format
-msgid ""
-"    Game Over!\n"
-"Diamond score: %d"
-msgstr ""
-"    Peli loppu!\n"
-"Timanttipisteet: %d"
+msgid "    Game Over!"
+msgstr "    Peli loppu!"
 
 #: src/game_player_death.c:210
 msgid "Ouch!"
@@ -303,7 +298,7 @@ msgstr ""
 msgid "Level completed!"
 msgstr "Kentt| l|p|isty!"
 
-#: src/game_player_next_level.c:198
+#: src/game_player_next_level.c:177
 #, c-format
 msgid "Found: %s"
 msgstr ""
@@ -329,30 +324,30 @@ msgstr ""
 msgid "Checksum error on map %s:%d."
 msgstr "Virhe kent|n %s:%d tarkistussummassa."
 
-#: src/quest_action.c:107 src/widget_new_quest_menu.c:259
+#: src/quest_action.c:108 src/widget_new_quest_menu.c:259
 #, c-format
 msgid "Notes of %s"
 msgstr ""
 
-#: src/quest_action.c:116
+#: src/quest_action.c:117
 #, c-format
 msgid ""
 "I've gone through the notes of %s again,\n"
 "but found nothing new."
 msgstr ""
 
-#: src/quest_action.c:120
+#: src/quest_action.c:121
 msgid ""
 "I've gone through the notes again,\n"
 "but found nothing new."
 msgstr ""
 
-#: src/quest_action.c:130
+#: src/quest_action.c:131
 #, c-format
 msgid "Latest find"
 msgstr ""
 
-#: src/quest_action.c:138
+#: src/quest_action.c:139
 #, c-format
 msgid ""
 "This is it, the last treasure associated to the %s.\n"
@@ -360,94 +355,94 @@ msgid ""
 "R.I.P. %s"
 msgstr ""
 
-#: src/quest_action.c:145
+#: src/quest_action.c:146
 #, c-format
 msgid ""
 "I've carefully examined the %s,\n"
 "but didn't find anything special on it."
 msgstr ""
 
-#: src/quest_action.c:149 src/widget_new_quest_menu.c:285
+#: src/quest_action.c:150 src/widget_new_quest_menu.c:285
 msgid "Library"
 msgstr ""
 
-#: src/quest_action.c:195
+#: src/quest_action.c:196
 msgid "The librarian greets you with a smile."
 msgstr ""
 
-#: src/quest_action.c:197
+#: src/quest_action.c:198
 msgid "The librarian talks something about zombies."
 msgstr ""
 
-#: src/quest_action.c:199
+#: src/quest_action.c:200
 msgid "The librarian greets you."
 msgstr ""
 
-#: src/quest_action.c:201
+#: src/quest_action.c:202
 msgid "None of the books seems to be interesting right now."
 msgstr ""
 
-#: src/quest_action.c:206 src/widget_new_quest_menu.c:273
+#: src/quest_action.c:207 src/widget_new_quest_menu.c:273
 msgid "Cafe"
 msgstr ""
 
-#: src/quest_action.c:249 src/quest_action.c:312
+#: src/quest_action.c:250 src/quest_action.c:313
 msgid "Accept offer"
 msgstr ""
 
-#: src/quest_action.c:260
+#: src/quest_action.c:261
 #, c-format
 msgid ""
 "I see %s in the cafe, she offers to fetch the %s %s '%s' for %u.\n"
 "I have %u."
 msgstr ""
 
-#: src/quest_action.c:268
+#: src/quest_action.c:269
 #, c-format
 msgid ""
 "I see %s in the cafe, he offers to fetch the %s %s '%s' for %u.\n"
 "I have %u."
 msgstr ""
 
-#: src/quest_action.c:287
+#: src/quest_action.c:288
 #, c-format
 msgid "The bartender says %s was here a moment ago."
 msgstr ""
 
-#: src/quest_action.c:288
+#: src/quest_action.c:289
 #, c-format
 msgid "The bartender says %s was here %d hours ago."
 msgstr ""
 
-#: src/quest_action.c:290 src/quest_action.c:381
+#: src/quest_action.c:291 src/quest_action.c:382
 #, c-format
 msgid "I drink my favorite beverage and read the local newspaper."
 msgstr ""
 
-#: src/quest_action.c:323
+#: src/quest_action.c:324
 #, c-format
 msgid ""
 "%s is in the cafe, she says she could sell the %s %s '%s' for %u.\n"
 "I have %u."
 msgstr ""
 
-#: src/quest_action.c:331
+#: src/quest_action.c:332
 #, c-format
 msgid ""
 "%s is in the cafe, he says she could sell the %s %s '%s' for %u.\n"
 "I have %u."
 msgstr ""
 
-#: src/quest_action.c:361
+#: src/quest_action.c:362
 msgid "Sell items"
 msgstr ""
 
-#: src/quest_action.c:371
+#: src/quest_action.c:372
 #, c-format
 msgid "I see %s in the cafe, she offers to buy some items."
 msgstr ""
 
-#: src/quest_action.c:373
+#: src/quest_action.c:374
 #, c-format
 msgid "I see %s in the cafe, he offers to buy some items."
 msgstr ""
@@ -703,15 +698,15 @@ msgstr "Kieli"
 msgid "Game mode"
 msgstr "Pelitila"
 
-#: src/settings.c:367 src/title.c:1425 src/widget_new_highscore_einfo.c:105
+#: src/settings.c:367 src/title.c:1432 src/widget_new_highscore_einfo.c:105
 msgid "Classic"
 msgstr "Klassinen"
 
-#: src/settings.c:368 src/title.c:1426 src/widget_new_highscore_einfo.c:106
+#: src/settings.c:368 src/title.c:1433 src/widget_new_highscore_einfo.c:106
 msgid "Adventure"
 msgstr "Seikkailu"
 
-#: src/settings.c:369 src/title.c:1427 src/trait_get_name.c:47
+#: src/settings.c:369 src/title.c:1434 src/trait_get_name.c:47
 #: src/widget_new_highscore_einfo.c:107
 msgid "Pyjama Party"
 msgstr "Pyjamabileet"
@@ -774,70 +769,70 @@ msgstr "Virhe"
 msgid "This is a demo of level %d."
 msgstr "Kent|n %d esittely."
 
-#: src/title.c:453
+#: src/title.c:458
 #, c-format
 msgid "Brain malfunction!\n"
 msgstr "Aivovamma!\n"
 
-#: src/title.c:835
+#: src/title.c:847
 msgid "Change game mode"
 msgstr "Vaihda pelitilaa"
 
-#: src/title.c:1123
+#: src/title.c:1136
 msgid "The game was saved."
 msgstr "Peli tallennettu."
 
-#: src/title.c:1124 src/title.c:1522
+#: src/title.c:1137 src/title.c:1529
 msgid "Play (*)"
 msgstr "Pelaa (*)"
 
-#: src/title.c:1128 src/title.c:1524 ui/title_common.js:34
+#: src/title.c:1141 src/title.c:1531 ui/title_common.js:34
 msgid "Play"
 msgstr "Pelaa"
 
-#: src/title.c:1145
+#: src/title.c:1158
 #, c-format
 msgid "Diamond score from the %s %s:   %u"
 msgstr ""
 
-#: src/title.c:1226
+#: src/title.c:1239
 msgid "A saved game exists"
 msgstr "Tallennettu peli l}ytyy"
 
-#: src/title.c:1249 ui/game_player_death.js:43 ui/game_player_next_level.js:53
+#: src/title.c:1262 ui/game_player_death.js:47 ui/game_player_next_level.js:54
 #: ui/game_pyjama_party_level_completed.js:35
 msgid "Continue"
 msgstr "Jatka"
 
-#: src/title.c:1258
+#: src/title.c:1271
 msgid "Start New"
 msgstr "Aloita Uusi"
 
-#: src/title.c:1267 src/widget_new_title_partystatus.c:232
+#: src/title.c:1280 src/widget_new_title_partystatus.c:232
 #: src/widget_new_trait_key_button.c:123
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: src/title.c:1392
-msgid "To arcade"
-msgstr ""
-
-#: src/title.c:1395 ui/title_common.js:65
-msgid "To quests"
-msgstr ""
-
-#: src/title.c:1434
+#: src/title.c:1441
 msgid "Game mode:"
 msgstr "Pelitila:"
 
-#: src/title.c:1569
+#: src/title.c:1576
 msgid "You can only start from every fifth level, and no save game exist."
 msgstr ""
 
-#: src/title.c:1604
+#: src/title.c:1611
 #, c-format
 msgid "Level: %d / %d"
 msgstr "Kentt|: %d / %d"
+
+#: src/title.c:1949
+msgid "To arcade"
+msgstr ""
+
+#: src/title.c:1951 ui/title_common.js:65
+msgid "To quests"
+msgstr ""
 
 #: src/trait_get_name.c:33
 msgid "Key"
@@ -1104,19 +1099,19 @@ msgstr "`|nenvoimakkuus: %d%%"
 msgid "Latest find: %s %s"
 msgstr ""
 
-#: src/widget_new_quest_menu.c:423
+#: src/widget_new_quest_menu.c:427
 msgid "No questlines available."
 msgstr ""
 
-#: src/widget_new_quest_menu.c:437
+#: src/widget_new_quest_menu.c:441
 msgid "Quests are not available in classic game mode."
 msgstr ""
 
-#: src/widget_new_quest_menu.c:438
+#: src/widget_new_quest_menu.c:442
 msgid "Quests trait is not active."
 msgstr ""
 
-#: src/widget_new_quest_menu.c:439
+#: src/widget_new_quest_menu.c:443
 msgid "Quests are not available in pyjama party game mode."
 msgstr ""
 
@@ -1283,17 +1278,13 @@ msgstr "Uusia ominaisuuksia k|ytett|viss|!"
 msgid "You are dead."
 msgstr "Olet kuollut."
 
-#: ui/game_player_death.js:26
-msgid "Diamond score: ${score}"
-msgstr "Timanttipisteet: ${score}"
-
-#: ui/game_player_death.js:55 ui/game_player_next_level.js:65
+#: ui/game_player_death.js:59 ui/game_player_next_level.js:66
 #: ui/game_pyjama_party_ask_next.js:77
 #: ui/game_pyjama_party_level_completed.js:47
 msgid "Save"
 msgstr "Tallenna"
 
-#: ui/game_player_death.js:67 ui/game_player_next_level.js:77
+#: ui/game_player_death.js:71 ui/game_player_next_level.js:78
 #: ui/game_pyjama_party_ask_next.js:89
 #: ui/game_pyjama_party_level_completed.js:59 ui/title_common.js:110
 msgid "Quit"
@@ -1302,10 +1293,6 @@ msgstr "Lopeta"
 #: ui/game_player_next_level.js:18
 msgid "Level completed."
 msgstr "Kentt| suoritettu."
-
-#: ui/game_player_next_level.js:25
-msgid "Diamond score:"
-msgstr "Timanttipisteet:"
 
 #: ui/game_pyjama_party_ask_next.js:17
 msgid "Manually control the next girl?"
@@ -1398,15 +1385,3 @@ msgstr ""
 #: ui/title_common.js:99
 msgid "Settings"
 msgstr "Asetukset"
-
-#~ msgid "Girls: %d"
-#~ msgstr "Tyt}t: %d"
-
-#~ msgid "Cost: %lu"
-#~ msgstr "Hinta: %lu"
-
-#~ msgid "Cave: '%-.8s'"
-#~ msgstr "Luola: '%-.8s'"
-
-#~ msgid "Cave: %s"
-#~ msgstr "Luola: %s"

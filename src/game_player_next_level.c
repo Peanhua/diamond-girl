@@ -65,7 +65,7 @@ void game_player_next_level(struct gamedata * gamedata)
       int do_sfx;
 
       game_show_text(gettext("Level completed!"));
-      game_add_score(gamedata->map->game_time * gamedata->map->time_score);
+      game_add_score(gamedata->map->time_score * (gamedata->map->game_time / gamedata->map->frames_per_second));
 
       pitch      = 1.0f;
       pitch_step = 0.5f / (float) (gamedata->map->game_time / gamedata->map->frames_per_second);
@@ -134,27 +134,8 @@ void game_player_next_level(struct gamedata * gamedata)
       if(gamedata->ai == NULL)
         if(gamedata->cave->game_mode == GAME_MODE_CLASSIC || gamedata->cave->game_mode == GAME_MODE_ADVENTURE)
           {
-            struct widget_factory_data wfd[] =
-              {
-                { WFDT_CAVE,       "cave",             gamedata->cave   },
-                { WFDT_MAP,        "map",              gamedata->map    },
-                { WFDT_ON_RELEASE, "on_play_clicked",  on_play_clicked  },
-                { WFDT_ON_RELEASE, "on_save_clicked",  on_save_clicked  },
-                { WFDT_ON_RELEASE, "on_quit_clicked",  on_quit_clicked  },
-                { WFDT_ON_UNLOAD,  "on_window_unload", on_window_unload },
-                { WFDT_SIZEOF_,    NULL,               NULL             }
-              };
-            window = widget_factory(wfd, NULL, "game_player_next_level");
-            widget_center(window);
-            widget_set_gamedata_pointer(window, "gamedata", gamedata);
-
-            ui_push_handlers();
-            ui_set_navigation_handlers();
-            ui_set_common_handlers();
-            ui_set_handler(UIC_EXIT,   on_quit);
-            ui_set_handler(UIC_CANCEL, on_quit);
-            ui_destroy_pending_events();
-
+            char t_diamond_score[32];
+            
             { /* Add some trait score */
               int tr_score;
 
@@ -183,11 +164,9 @@ void game_player_next_level(struct gamedata * gamedata)
                   gamedata->diamond_score += tr_score;
                 }
 
+              snprintf(t_diamond_score, sizeof t_diamond_score, "%d", tr_score);
+              
               struct widget * w;
-
-              w = widget_find(window, "gpnl_diamond_score");
-              if(w != NULL)
-                widget_set_string(w, "text", "%d", tr_score);
 
               if(gamedata->treasure != NULL)
                 if(gamedata->treasure->collected == true)
@@ -199,6 +178,30 @@ void game_player_next_level(struct gamedata * gamedata)
                     }
             }
 
+
+            struct widget_factory_data wfd[] =
+              {
+                { WFDT_CAVE,       "cave",             gamedata->cave   },
+                { WFDT_MAP,        "map",              gamedata->map    },
+                { WFDT_STRING,     "diamond_score",    t_diamond_score  },
+                { WFDT_ON_RELEASE, "on_play_clicked",  on_play_clicked  },
+                { WFDT_ON_RELEASE, "on_save_clicked",  on_save_clicked  },
+                { WFDT_ON_RELEASE, "on_quit_clicked",  on_quit_clicked  },
+                { WFDT_ON_UNLOAD,  "on_window_unload", on_window_unload },
+                { WFDT_SIZEOF_,    NULL,               NULL             }
+              };
+            window = widget_factory(wfd, NULL, "game_player_next_level");
+            widget_center(window);
+            widget_set_gamedata_pointer(window, "gamedata", gamedata);
+
+            ui_push_handlers();
+            ui_set_navigation_handlers();
+            ui_set_common_handlers();
+            ui_set_handler(UIC_EXIT,   on_quit);
+            ui_set_handler(UIC_CANCEL, on_quit);
+            ui_destroy_pending_events();
+
+            
 
             /* Some levels make certain traits available. */
             trait_t curt, levt, newt;

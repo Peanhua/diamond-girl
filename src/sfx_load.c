@@ -51,12 +51,14 @@ bool sfx_load(struct sfx * sfx)
     fprintf(stderr, "%s(): Failed to load sfx '%s'.\n", __FUNCTION__, sfx->base_filename);
   assert(rv == true);
 
+#ifndef NDEBUG
   if(globals.save_sound_effects == false)
     {
       free(sfx->waveform);
       sfx->waveform = NULL;
       sfx->waveform_length = 0;
     }
+#endif
   
   return rv;
 }

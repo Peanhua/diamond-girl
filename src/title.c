@@ -369,6 +369,11 @@ void title(void)
     previous_game = gamedata_free(previous_game);
 
   cave_names = free_cave_names(cave_names);
+
+  if(midarea_x == 0)
+    globals.title_midarea = 0;
+  else
+    globals.title_midarea = 1;
 }
 
 
@@ -615,9 +620,16 @@ static void setup_ui(trait_t traits_to_highlight)
     if(ws[i] != NULL)
       widget_set_long(ws[i], "original-x", widget_x(ws[i]));
 
-  midarea_scrolling = 0;
-  midarea_x         = 0;
-  
+  if(globals.title_midarea == 0)
+    {
+      midarea_x = 0;
+      midarea_scrolling = -1;
+    }
+  else /* if(globals.title_midarea == 1) */
+    {
+      midarea_x = midarea_x_max;
+      midarea_scrolling = 1;
+    }
   
   y = SCREEN_HEIGHT - (font_height() + 5) - (font_height() + 5) * 4;
   w = 120;
@@ -894,6 +906,7 @@ static void setup_ui(trait_t traits_to_highlight)
   event_register(EVENT_TYPE_TRAIT_DEACTIVATED, on_trait_changed, NULL);
 
   on_cave_changed();
+  reposition_midarea();
 }
 
 
@@ -1374,7 +1387,7 @@ static void on_settings_changed(bool gfx_restart, bool sfx_restart, bool new_ope
 }
 
 
-static void button_quests(struct widget * this, enum WIDGET_BUTTON button DG_UNUSED)
+static void button_quests(struct widget * this DG_UNUSED, enum WIDGET_BUTTON button DG_UNUSED)
 {
   if(midarea_scrolling == 0)
     {
@@ -1387,12 +1400,6 @@ static void button_quests(struct widget * this, enum WIDGET_BUTTON button DG_UNU
     midarea_scrolling = -1;
   else
     midarea_scrolling = 1;
-
-  if(midarea_scrolling == 1)
-    widget_set_string(this, "text", gettext("To arcade"));
-
-  if(midarea_scrolling == -1)
-    widget_set_string(this, "text", gettext("To quests"));
 }
 
 
@@ -1936,6 +1943,12 @@ static void reposition_midarea(void)
       widget_set_x(ws[i], widget_get_long(ws[i], "original-x") - midarea_x);
 
   update_newgame_navigation(NULL);
+
+  assert(uiobj_quests != NULL);
+  if(midarea_scrolling == 1)
+    widget_set_string(uiobj_quests, "text", gettext("To arcade"));
+  else if(midarea_scrolling == -1)
+    widget_set_string(uiobj_quests, "text", gettext("To quests"));
 }
 
 
@@ -1969,7 +1982,8 @@ static void update_newgame_navigation(struct widget * root)
           struct widget * w;
           
           w = widget_get_widget_pointer(quest_menu, "focus_down_object");
-          widget_set_navigation_up(uiobj_newgame, w);
+          if(w != NULL)
+            widget_set_navigation_up(uiobj_newgame, w);
         }
     }
 }

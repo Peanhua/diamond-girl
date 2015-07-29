@@ -246,7 +246,7 @@ static void refresh_item(unsigned int selected)
       if(active_trader == NULL)
         snprintf(buf + strlen(buf), sizeof buf - strlen(buf), gettext("local market"));
       else
-        snprintf(buf + strlen(buf), sizeof buf - strlen(buf), active_trader->name);
+        snprintf(buf + strlen(buf), sizeof buf - strlen(buf), "%s", active_trader->name);
       snprintf(buf + strlen(buf), sizeof buf - strlen(buf), " ");
 
       sell = widget_new_button(window, widget_x(info), widget_y(info) + widget_height(info) + 5, buf);

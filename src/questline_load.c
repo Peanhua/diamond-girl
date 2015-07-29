@@ -56,6 +56,7 @@ bool questline_load(void)
           if(strcmp(version_str, QUESTLINE_SAVEFILE_V1))
             success = false;
         }
+      free(version_str);
 
       if(success == true)
         success = get(&globals.active_questline, sizeof globals.active_questline);
@@ -152,7 +153,10 @@ static bool get(void * data, unsigned int len)
       rv = true;
     }
   else
-    rv = false;
+    {
+      memset(data, 0, len);
+      rv = false;
+    }
 
   return rv;
 }

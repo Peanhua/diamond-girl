@@ -26,8 +26,9 @@
                     },
                     { "type":  "text",
                       "id":    "gpnl_diamond_score",
-                      "x":     135
-                    },
+                      "x":     135,
+                      "title": "${diamond_score}"
+                    }
                   ]
                 },
                 { "type":     "row",

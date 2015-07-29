@@ -120,6 +120,20 @@ void settings_write(void)
 
           if(ok == true)
             {
+              snprintf(linebuf, sizeof linebuf, "  \"ActiveQuestline\": %u,\n", (unsigned int) globals.active_questline);
+              if(fwrite(linebuf, strlen(linebuf), 1, fp) != 1)
+                ok = false;
+            }
+          
+          if(ok == true)
+            {
+              snprintf(linebuf, sizeof linebuf, "  \"TitleMidarea\": \"%s\",\n", globals.title_midarea == 0 ? "arcade" : "quests");
+              if(fwrite(linebuf, strlen(linebuf), 1, fp) != 1)
+                ok = false;
+            }
+
+          if(ok == true)
+            {
               snprintf(linebuf, sizeof linebuf, "  \"MapTilting\": %s,\n", globals.map_tilting == true ? "true" : "false");
               if(fwrite(linebuf, strlen(linebuf), 1, fp) != 1)
                 ok = false;
