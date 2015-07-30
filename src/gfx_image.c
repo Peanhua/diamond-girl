@@ -336,8 +336,12 @@ struct image * gfx_image(enum GFX_IMAGE image_id)
                   else
                     {
                       image_save(atlas, "/tmp/error.png");
-                      fprintf(stderr, "%s: Error while packing into texture atlas#%d, current atlas image saved to /tmp/error.png. Dumping the atlas data:\n",
-                              __FUNCTION__, images[image_id].texture_atlas_group - 1);
+                      fprintf(stderr, "%s: Error while packing '%s'(%dx%d) into texture atlas#%d, current atlas image saved to /tmp/error.png. Dumping the atlas data:\n",
+                              __FUNCTION__,
+                              images[image_id].filename,
+                              image->width,
+                              image->height,
+                              images[image_id].texture_atlas_group - 1);
                       image_pack_dump(root);
                       images[image_id].image = image = image_free(image);
                     }                      
