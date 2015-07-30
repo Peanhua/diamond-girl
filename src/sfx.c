@@ -115,19 +115,20 @@ void sfx_initialize(void)
                         char *   base_filename;
                       } sfx_filenames[SFX_SIZEOF_] =
                           {
-                            { SFX_BOULDER_FALL,     "boulder_fall"     },
-                            { SFX_BOULDER_MOVE,     "boulder_move"     },
-                            { SFX_DIAMOND_FALL,     "diamond_fall"     },
-                            { SFX_DIAMOND_COLLECT,  "diamond_collect"  },
-                            { SFX_MOVE_EMPTY,       "move_empty"       },
-                            { SFX_MOVE_SAND,        "move_sand"        },
-                            { SFX_COLLECT_TREASURE, "collect_treasure" },
-                            { SFX_AMEBA,            "ameba"            },
-                            { SFX_EXPLOSION,        "explosion"        },
-                            { SFX_SMALL_EXPLOSION,  "small_explosion"  },
-                            { SFX_TIME,             "time"             },
-                            { SFX_ENTER_EXIT,       "enter_exit"       },
-                            { SFX_INTRO,            "intro"            }
+                            { SFX_BOULDER_FALL,        "boulder_fall"         },
+                            { SFX_BOULDER_MOVE,        "boulder_move"         },
+                            { SFX_DIAMOND_FALL,        "diamond_fall"         },
+                            { SFX_DIAMOND_COLLECT,     "diamond_collect"      },
+                            { SFX_MOVE_EMPTY,          "move_empty"           },
+                            { SFX_MOVE_SAND,           "move_sand"            },
+                            { SFX_COLLECT_TREASURE,    "collect_treasure"     },
+                            { SFX_AMEBA,               "ameba"                },
+                            { SFX_EXPLOSION,           "explosion"            },
+                            { SFX_NOISELESS_EXPLOSION, "noiseless_explosion"  },
+                            { SFX_SMALL_EXPLOSION,     "small_explosion"      },
+                            { SFX_TIME,                "time"                 },
+                            { SFX_ENTER_EXIT,          "enter_exit"           },
+                            { SFX_INTRO,               "intro"                }
                           };
 
                       for(unsigned int i = 0; i < SFX_SIZEOF_; i++)

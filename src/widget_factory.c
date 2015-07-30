@@ -24,7 +24,6 @@
 #include "diamond_girl.h"
 #include "game.h"
 #include "gfx.h"
-#include "globals.h"
 #include "widget.h"
 #include "widget_factory.h"
 #include <assert.h>
@@ -208,6 +207,9 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
     char            title[256];
     char            tooltip[256];
     bool            modal;    /* Set the widget to be modal. */
+    bool            hidden;    // true = add WF_HIDDEN
+    bool            no_shadow; // true = delete WF_CAST_SHADOW
+    bool            no_borders; // true = delete WF_DRAW_BORDERS
     bool            focus;    /* Set focus to the widget. */
     bool            no_focus; /* Set the widget to be non-focusable. */
     char            on_activate_at[256];
@@ -241,6 +243,9 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
   strcpy(this.title,   "");
   strcpy(this.tooltip, "");
   this.modal       = false;
+  this.hidden      = false;
+  this.no_shadow   = false;
+  this.no_borders  = false;
   this.focus       = false;
   this.no_focus    = false;
   strcpy(this.on_activate_at, "");
@@ -323,6 +328,9 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
                 { "title",            json_type_string,  this.title,          sizeof this.title,          0  },
                 { "tooltip",          json_type_string,  this.tooltip,        sizeof this.tooltip,        0  },
                 { "modal",            json_type_boolean, &this.modal,         1,                          0  },
+                { "hidden",           json_type_boolean, &this.hidden,        1,                          0  },
+                { "no-shadow",        json_type_boolean, &this.no_shadow,     1,                          0  },
+                { "no-borders",       json_type_boolean, &this.no_borders,    1,                          0  },
                 { "focus",            json_type_boolean, &this.focus,         1,                          0  },
                 { "no-focus",         json_type_boolean, &this.no_focus,      1,                          0  },
                 { "padding-y",        json_type_int,     &this.padding_y,     1,                          0  },
@@ -579,6 +587,15 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
       if(ok == true && this.modal == true)
         widget_set_modal(this.widget);
 
+      if(ok == true && this.hidden == true)
+        widget_add_flags(this.widget, WF_HIDDEN);
+
+      if(ok == true && this.no_shadow == true)
+        widget_delete_flags(this.widget, WF_CAST_SHADOW);
+
+      if(ok == true && this.no_borders == true)
+        widget_delete_flags(this.widget, WF_DRAW_BORDERS);
+      
       if(ok == true && this.focus == true)
         widget_set_focus(this.widget);
 

@@ -25,7 +25,6 @@
 
 #include "td_object.h"
 #include "gfxbuf.h"
-#include "globals.h"
 #include "image.h"
 #include "stack.h"
 

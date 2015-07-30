@@ -25,9 +25,11 @@
                     { "type":  "text",
                       "title": gettext("Diamond score:")
                     },
-                    { "type":  "text",
-                      "x":     135,
-                      "title": "${diamond_score}"
+                    { "type":   "text",
+                      "id":     "diamond_score",
+                      "hidden": true,
+                      "x":      135,
+                      "title":  "${diamond_score}"
                     }
                   ]
                 }

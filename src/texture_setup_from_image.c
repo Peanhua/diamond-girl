@@ -34,6 +34,8 @@ void texture_setup_from_image(struct image * image, bool generate_alpha, bool us
   GLint internalformat;
   GLenum format;
 
+  image->texture_wanted = true;
+  
   glGenTextures(1, &image->texture);
   GFX_GL_ERROR();
   image->texture_initialized = true;

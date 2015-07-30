@@ -68,9 +68,9 @@ struct gfxbuf * gfxbuf_new(enum GFXBUF_TYPE type, GLenum primitive_type, uint8_t
 #endif
       
       gfxbuf_load(rv);
-    }
 
-  gc_new(GCT_GFXBUF, rv);
+      gc_new(GCT_GFXBUF, rv);
+    }
 
   return rv;
 }

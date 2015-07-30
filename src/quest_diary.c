@@ -22,7 +22,6 @@
 
 #include "cave.h"
 #include "font.h"
-#include "globals.h"
 #include "quest.h"
 #include "image.h"
 #include "trader.h"
@@ -47,7 +46,7 @@ void quest_diary(struct questline * questline)
   struct widget * window;
 
   assert(questline != NULL);
-  window = widget_new_window(NULL, 700, 500, gettext("My Diary"));
+  window = widget_new_window(NULL, 720, 520, gettext("My Diary"));
   if(window != NULL)
     {
       widget_set_questline_pointer(window, "questline", questline);

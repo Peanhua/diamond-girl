@@ -23,8 +23,6 @@
 #include "widget.h"
 #include "gfx.h"
 #include "game.h"
-#include "globals.h"
-
 #include <assert.h>
 
 static void draw(struct widget * this);

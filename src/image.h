@@ -31,7 +31,9 @@
 
 struct gfxbuf;
 
-#define IF_ALPHA (1<<0)
+#define IF_ALPHA      (1<<0)
+#define IF_MIPMAPPING (1<<1)
+#define IF_LINEAR     (1<<2)
 
 struct image
 {
@@ -45,11 +47,15 @@ struct image
 #ifdef WITH_OPENGL
   GLuint          texture;
   bool            texture_initialized;
+  bool            texture_wanted;
   struct image *  texture_atlas;
   float           texture_offset_x;
   float           texture_offset_y;
   struct gfxbuf * buffer;
   int             bufferw, bufferh;
+#endif
+#ifndef NDEBUG
+  char * backtrace;
 #endif
 };
 
@@ -77,13 +83,19 @@ extern void           image_blit(struct image * src, struct image * dst, int dst
 extern void           image_blit_partial(struct image * src, int src_x, int src_y, int width, int height, struct image * dst, int dst_x, int dst_y);
 extern void           image_blit_rotated(struct image * src, int degrees, struct image * dst, int dst_x, int dst_y);
 
+#ifndef NDEBUG
+extern void           image_dump(struct image const * image, unsigned int indentation);
+#endif
+
 #ifdef WITH_OPENGL
-extern void           image_to_texture(struct image * image, bool generate_alpha, bool use_mipmapping, bool linear);
+extern void           image_to_texture(struct image * image, bool use_mipmapping, bool linear);
+extern void           image_free_texture(struct image * image);
 extern bool           image_setup_buffer(struct image * image, bool alpha);
 
 extern struct imagepacknode * image_pack_new(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
 extern struct imagepacknode * image_pack_free(struct imagepacknode * node);
 extern struct imagepacknode * image_pack(struct imagepacknode * node, struct image * image);
+extern void                   image_pack_dump(struct imagepacknode * node);
 #endif
 
 #endif

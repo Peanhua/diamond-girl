@@ -130,4 +130,15 @@ struct imagepacknode * image_pack(struct imagepacknode * node, struct image * im
   return rv;
 }
 
+void image_pack_dump(struct imagepacknode * node)
+{
+  printf("node=%p, left=%p, right=%p, image=%p, x=%d, y=%d, w=%d, h=%d\n", node, node->left, node->right, node->image, node->x, node->y, node->w, node->h);
+  if(node->left != NULL)
+    image_pack_dump(node->left);
+  if(node->right != NULL)
+    image_pack_dump(node->right);
+}
+
+
+
 #endif

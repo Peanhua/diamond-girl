@@ -142,13 +142,6 @@ bool gfx_initialize(void)
     }
 
   if(rv)
-    if(gfx_image_initialize() == false)
-      {
-        fprintf(stderr, "Failed to initialize gfx_image system.\n");
-        rv = false;
-      }
-
-  if(rv)
     if(gfx_glyph_initialize() == false)
       {
         fprintf(stderr, "Failed to initialize gfx_glyph system.\n");
@@ -165,6 +158,21 @@ bool gfx_initialize(void)
         for(unsigned int i = 0; i < s->size; i++)
           if(s->data[i] != NULL)
             gfxbuf_load(s->data[i]);
+
+        /* And textures */
+        s = gc_get_stack(GCT_IMAGE);
+        for(unsigned int i = 0; i < s->size; i++)
+          {
+            struct image * image;
+
+            image = s->data[i];
+            if(image != NULL)
+              if(image->texture_wanted == true)
+                if(image->texture_initialized == false)
+                  image_to_texture(image,
+                                   (image->flags & IF_MIPMAPPING) ? true : false,
+                                   (image->flags & IF_LINEAR)     ? true : false);
+          }
       }
 #endif
 
@@ -174,7 +182,6 @@ bool gfx_initialize(void)
 void gfx_cleanup(void)
 {
   gfx_glyph_cleanup();
-  gfx_image_cleanup();
 
 #ifdef WITH_OPENGL
   if(globals.opengl)
@@ -187,6 +194,16 @@ void gfx_cleanup(void)
       for(unsigned int i = 0; i < s->size; i++)
         if(s->data[i] != NULL)
           gfxbuf_unload(s->data[i]);
+
+      s = gc_get_stack(GCT_IMAGE);
+      for(unsigned int i = 0; i < s->size; i++)
+        {
+          struct image * image;
+
+          image = s->data[i];
+          if(image != NULL)
+            image_free_texture(image);
+        }
     }
 #endif
 
@@ -433,7 +450,7 @@ static double opengl_test_blitting(int width, int height, int blitw, int blith, 
   glNormal3f(0.0f, 0.0f, 1.0f);
   
   img = image_new(width, height, false);
-  image_to_texture(img, false, false, false);
+  image_to_texture(img, false, false);
   
   tx1 = 0.0f / (float) img->width;
   tx2 = tx1 + (float) blitw / (float) img->width;

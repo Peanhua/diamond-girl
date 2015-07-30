@@ -26,7 +26,6 @@
 #include "map.h"
 #include "random.h"
 #include "girl.h"
-#include "globals.h"
 #include "traits.h"
 #include "game.h"
 

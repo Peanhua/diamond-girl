@@ -37,4 +37,13 @@ void gfxgl_bind_texture(GLuint texture_id)
       GFX_GL_ERROR();
     }
 }
+
+void gfxgl_unbind_texture_if_in_use(GLuint texture_id)
+{
+  if(texture_id != 0)
+    if(current_texture_id == texture_id)
+      gfxgl_bind_texture(0);
+}
+
+
 #endif

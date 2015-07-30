@@ -194,6 +194,9 @@ bool settings_read(void)
   if(bind_defaults)
     ui_bindings_default(true);
 
+  if(globals.iron_girl_mode)
+    theme_set(THEME_TRAIT, "iron-girl");
+  
   return rv;
 }
 

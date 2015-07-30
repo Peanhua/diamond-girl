@@ -53,10 +53,10 @@ char * cave_displayname(char * cave_name)
   if(initdone == false)
     {
       lang = strdup(globals.language);
-      caves[0].displayname = gettext("The Deep Cave");
-      caves[1].displayname = gettext("The Well");
-      caves[2].displayname = gettext("The Antiquitarian Land");
-      caves[3].displayname = gettext("The Beginners Cave");
+      caves[0].displayname = gettext("the Deep Cave");
+      caves[1].displayname = gettext("the Well");
+      caves[2].displayname = gettext("the Antiquitarian Land");
+      caves[3].displayname = gettext("the Beginners Cave");
       initdone = true;
     }
   

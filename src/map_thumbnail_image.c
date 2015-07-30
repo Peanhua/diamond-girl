@@ -105,7 +105,7 @@ struct image * map_thumbnail_image(struct map * map)
               }
 #ifdef WITH_OPENGL
           if(globals.opengl)
-            image_to_texture(image, true, true, true);
+            image_to_texture(image, true, true);
 #endif
         }
     }

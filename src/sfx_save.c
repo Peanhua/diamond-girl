@@ -20,6 +20,7 @@
   Complete license can be found in the LICENSE file.
 */
 
+#include "diamond_girl.h"
 #include "sfx.h"
 #include <sndfile.h>
 #include <assert.h>
@@ -41,6 +42,8 @@ bool sfx_save(struct sfx * sfx, char const * filename)
       if(fp != NULL)
         {
           success = true;
+          sf_set_string(fp, SF_STR_TITLE, sfx->base_filename);
+          sf_set_string(fp, SF_STR_SOFTWARE, PACKAGE_STRING);
           for(uint32_t i = 0; i < sfx->waveform_length; i++)
             {
               short tmp;

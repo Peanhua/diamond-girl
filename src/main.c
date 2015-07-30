@@ -212,40 +212,41 @@ int main(int argc, char * argv[])
               
                           if(gfx_initialize())
                             {
-                              rv = EXIT_SUCCESS;
+                              if(gfx_image_initialize() == true)
+                                {
+                                  rv = EXIT_SUCCESS;
 
-                              questline_load();
-                              twinkle_initialize();
-                              sfx_initialize();
+                                  questline_load();
+                                  twinkle_initialize();
+                                  sfx_initialize();
 
 #ifndef NDEBUG
-                              if(globals.quit_after_initialization == false)
-                                {
+                                  if(globals.quit_after_initialization == false)
+                                    {
 #endif
-                                  if(globals.skip_intro == false)
-                                    intro();
-
-                                  title();
+                                      if(globals.skip_intro == false)
+                                        intro();
+                                    
+                                      title();
 #ifndef NDEBUG
-                                }
+                                    }
 #endif
-
-                              if(globals.read_only == false)
-                                {
-                                  pyjama_party_save();
-                                  ai_brains_save(get_save_filename("lucy.brains"));
-                                  settings_write();
-
-                                  questline_save();
-                                  traits_save();
+                                
+                                  if(globals.read_only == false)
+                                    {
+                                      pyjama_party_save();
+                                      ai_brains_save(get_save_filename("lucy.brains"));
+                                      settings_write();
+                                    
+                                      questline_save();
+                                      traits_save();
+                                    }
+                                
+                                  twinkle_cleanup();
+                                  sfx_cleanup();
                                 }
-                      
-                              twinkle_cleanup();
-                              sfx_cleanup();
+                              gfx_image_cleanup();
                             }
-                          else
-                            rv = EXIT_FAILURE;
-                  
                           gfx_cleanup();
 
                           if(globals.joysticks != NULL)
@@ -318,20 +319,21 @@ static bool cmdline_play_sfx(const char * name)
     enum SFX sfx;
     char *   name;
   } sounds[] = {
-    { SFX_BOULDER_FALL,     "boulder_fall"     },
-    { SFX_BOULDER_MOVE,     "boulder_move"     },
-    { SFX_DIAMOND_FALL,     "diamond_fall"     },
-    { SFX_DIAMOND_COLLECT,  "diamond_collect"  },
-    { SFX_MOVE_EMPTY,       "move_empty"       },
-    { SFX_MOVE_SAND,        "move_sand"        },
-    { SFX_COLLECT_TREASURE, "collect_treasure" },
-    { SFX_AMEBA,            "ameba"            },
-    { SFX_EXPLOSION,        "explosion"        },
-    { SFX_SMALL_EXPLOSION,  "small_explosion"  },
-    { SFX_TIME,             "time"             },
-    { SFX_ENTER_EXIT,       "enter_exit"       },
-    { SFX_INTRO,            "intro"            },
-    { SFX_SIZEOF_,          NULL               }
+    { SFX_BOULDER_FALL,        "boulder_fall"         },
+    { SFX_BOULDER_MOVE,        "boulder_move"         },
+    { SFX_DIAMOND_FALL,        "diamond_fall"         },
+    { SFX_DIAMOND_COLLECT,     "diamond_collect"      },
+    { SFX_MOVE_EMPTY,          "move_empty"           },
+    { SFX_MOVE_SAND,           "move_sand"            },
+    { SFX_COLLECT_TREASURE,    "collect_treasure"     },
+    { SFX_AMEBA,               "ameba"                },
+    { SFX_EXPLOSION,           "explosion"            },
+    { SFX_NOISELESS_EXPLOSION, "noiseless_explosion"  },
+    { SFX_SMALL_EXPLOSION,     "small_explosion"      },
+    { SFX_TIME,                "time"                 },
+    { SFX_ENTER_EXIT,          "enter_exit"           },
+    { SFX_INTRO,               "intro"                },
+    { SFX_SIZEOF_,             NULL                   }
   };
   enum SFX sfx;
   bool rv;

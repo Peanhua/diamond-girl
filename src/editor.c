@@ -20,19 +20,20 @@
   Complete license can be found in the LICENSE file.
 */
 
+#include "cave.h"
 #include "diamond_girl.h"
 #include "font.h"
-#include "ui.h"
-#include "widget.h"
-#include "sfx.h"
+#include "game.h"
 #include "gfx.h"
-#include "gfxbuf.h"
 #include "gfx_glyph.h"
 #include "gfx_material.h"
+#include "gfxbuf.h"
 #include "globals.h"
-#include "game.h"
 #include "map.h"
-#include "cave.h"
+#include "sfx.h"
+#include "ui.h"
+#include "widget.h"
+#include "widget_factory.h"
 
 #include <assert.h>
 #include <stdlib.h>
@@ -1186,13 +1187,65 @@ static void play_test(void)
       clear_area(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
       cave = cave_get(globals.title_game_mode, map->cave_name);
       gr = game(cave, map->level, false, true, NULL, NULL);
-      if(gr != NULL)
-        gr = gamedata_free(gr);
       sfx_stop();
       clear_area(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
       gfx_frame0();
 
       widget_set_root(root);
+
+      assert(gr != NULL);
+      assert(gr->map != NULL);
+      if(gr != NULL)
+        {
+          if(gr->map != NULL)
+            {
+              int diamonds, enemy1, enemy2;
+
+              diamonds = 0;
+              enemy1 = 0;
+              enemy2 = 0;
+              for(int y = 0; y < gr->map->height; y++)
+                for(int x = 0; x < gr->map->width; x++)
+                  switch(gr->map->data[x + y * gr->map->width])
+                    {
+                    case MAP_DIAMOND: diamonds++; break;
+                    case MAP_ENEMY1:  enemy1++;   break;
+                    case MAP_ENEMY2:  enemy2++;   break;
+                    }
+
+              char t_score[32];
+              char t_dc[32];
+              char t_dl[32];
+              char t_e1l[32];
+              char t_e2l[32];
+              char t_tl[32];
+
+              snprintf(t_score, sizeof t_score, "%d", (int) gr->score);
+              snprintf(t_dc,    sizeof t_dc,    "%d", (int) gr->diamonds);
+              snprintf(t_dl,    sizeof t_dl,    "%d", diamonds);
+              snprintf(t_e1l,   sizeof t_e1l,   "%d", enemy1);
+              snprintf(t_e2l,   sizeof t_e2l,   "%d", enemy2);
+              snprintf(t_tl,    sizeof t_tl,    "%d", (int) (gr->map->game_time / gr->map->frames_per_second));
+
+              struct widget_factory_data wfd[] =
+                {
+                  { WFDT_STRING,  "score",              t_score },
+                  { WFDT_STRING,  "diamonds_collected", t_dc    },
+                  { WFDT_STRING,  "diamonds_left",      t_dl    },
+                  { WFDT_STRING,  "enemy1_left",        t_e1l   },
+                  { WFDT_STRING,  "enemy2_left",        t_e2l   },
+                  { WFDT_STRING,  "time_left",          t_tl    },
+                  { WFDT_SIZEOF_, NULL,                 NULL    }
+              };
+              struct widget * stats;
+              
+              stats = widget_factory(wfd, NULL, "playtesting_results");
+              widget_new_message_dialog("Playtesting results", stats, NULL, NULL);
+
+              gr->map = map_free(gr->map);
+            }
+          gr = gamedata_free(gr);
+        }
     }
 }
 

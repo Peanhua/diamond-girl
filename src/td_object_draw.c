@@ -23,7 +23,6 @@
 #ifdef WITH_OPENGL
 
 #include "td_object.h"
-#include "globals.h"
 #include "gfx.h"
 #include "gfxbuf.h"
 #include "stack.h"

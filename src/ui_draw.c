@@ -91,6 +91,21 @@ static bool ui_draw_process(struct widget * obj, int z)
         if(obj->z_ == z)
           {
             found = true;
+
+            if(obj->on_timeout_ != NULL)
+              {
+                if(obj->timeout_timer_ == 0)
+                  {
+                    ui_func_on_timeout_t f;
+
+                    f = obj->on_timeout_;
+                    obj->on_timeout_ = NULL;
+                    f(obj);
+                  }
+                else
+                  obj->timeout_timer_--;
+              }
+            
             if(obj->on_draw_ != NULL)
               obj->on_draw_(obj);
 

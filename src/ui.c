@@ -387,6 +387,12 @@ ui_func_on_unload_t widget_on_unload(struct widget * object)
   return object->on_unload_;
 }
 
+ui_func_on_timeout_t widget_on_timeout(struct widget * object)
+{
+  assert(object != NULL && object->deleted_ == false);
+  return object->on_timeout_;
+}
+
 struct widget * widget_parent(struct widget * object)
 {
   assert(object != NULL && object->deleted_ == false);
@@ -576,6 +582,14 @@ ui_func_on_unload_t widget_set_on_unload(struct widget * object, ui_func_on_unlo
   assert(object != NULL && object->deleted_ == false);
   object->on_unload_ = on_unload;
   return widget_on_unload(object);
+}
+
+ui_func_on_timeout_t widget_set_on_timeout(struct widget * object, ui_func_on_timeout_t on_timeout, unsigned int delay)
+{
+  assert(object != NULL && object->deleted_ == false);
+  object->on_timeout_ = on_timeout;
+  object->timeout_timer_ = delay;
+  return widget_on_timeout(object);
 }
 
 

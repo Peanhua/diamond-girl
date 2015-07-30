@@ -27,7 +27,6 @@
 #include "gfxbuf.h"
 #include "gfx_material.h"
 #include "girl.h"
-#include "globals.h"
 #include "map.h"
 #include "random.h"
 #include "sfx.h"
@@ -85,35 +84,38 @@ void game_player_death(struct gamedata * gamedata, bool sounds)
               game_set_pyjama_party_control(PARTYCONTROLLER_PLAYER);
             }
 
-          if(gamedata->traits & TRAIT_DYNAMITE)
+          if(gamedata->exit_after_one_level == false)
             {
-              for(int y = -4; y <= 4; y++)
-                for(int x = -4; x <= 4; x++)
-                  {
-                    enum MAP_GLYPH g;
-                    int d;
+              if(gamedata->traits & TRAIT_DYNAMITE)
+                {
+                  for(int y = -4; y <= 4; y++)
+                    for(int x = -4; x <= 4; x++)
+                      {
+                        enum MAP_GLYPH g;
+                        int d;
                   
-                    d = abs(x) + abs(y);
-                    if(d < 5)
-                      g = MAP_DIAMOND;
-                    else if(d < 7)
-                      g = MAP_EMPTY;
-                    else
-                      g = MAP_ILLEGAL;
+                        d = abs(x) + abs(y);
+                        if(d < 5)
+                          g = MAP_DIAMOND;
+                        else if(d < 7)
+                          g = MAP_EMPTY;
+                        else
+                          g = MAP_ILLEGAL;
 
-                    if(g != MAP_ILLEGAL)
+                        if(g != MAP_ILLEGAL)
+                          if(x + gamedata->map->girl->mob->x >= 0 && x + gamedata->map->girl->mob->x < gamedata->map->width &&
+                             y + gamedata->map->girl->mob->y >= 0 && y + gamedata->map->girl->mob->y < gamedata->map->height)
+                            gamedata->map->data[x + gamedata->map->girl->mob->x + (y + gamedata->map->girl->mob->y) * gamedata->map->width] = g;
+                      }
+                }
+              else
+                {
+                  for(int y = -1; y <= 1; y++)
+                    for(int x = -1; x <= 1; x++)
                       if(x + gamedata->map->girl->mob->x >= 0 && x + gamedata->map->girl->mob->x < gamedata->map->width &&
                          y + gamedata->map->girl->mob->y >= 0 && y + gamedata->map->girl->mob->y < gamedata->map->height)
-                        gamedata->map->data[x + gamedata->map->girl->mob->x + (y + gamedata->map->girl->mob->y) * gamedata->map->width] = g;
-                  }
-            }
-          else
-            {
-              for(int y = -1; y <= 1; y++)
-                for(int x = -1; x <= 1; x++)
-                  if(x + gamedata->map->girl->mob->x >= 0 && x + gamedata->map->girl->mob->x < gamedata->map->width &&
-                     y + gamedata->map->girl->mob->y >= 0 && y + gamedata->map->girl->mob->y < gamedata->map->height)
-                    gamedata->map->data[x + gamedata->map->girl->mob->x + (y + gamedata->map->girl->mob->y) * gamedata->map->width] = MAP_DIAMOND;
+                        gamedata->map->data[x + gamedata->map->girl->mob->x + (y + gamedata->map->girl->mob->y) * gamedata->map->width] = MAP_DIAMOND;
+                }
             }
 
           if(gamedata->ai != NULL)
@@ -182,6 +184,9 @@ void game_player_death(struct gamedata * gamedata, bool sounds)
                   ui_set_handler(UIC_EXIT,   on_quit);
                   ui_set_handler(UIC_CANCEL, on_quit);
                   ui_destroy_pending_events();
+
+                  /* Show the scores and bonuses stuff */
+                  game_end_of_level_bonuses(window);
                 }
               else
                 {

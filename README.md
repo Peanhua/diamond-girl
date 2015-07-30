@@ -1,9 +1,9 @@
-### Important notice
+# Important notice
 
 The development versions of Lucy the Diamond Girl may break your save game files.
 
+Latest official release can be found from the website: [www.netikka.net/joyr/diamond_girl/](http://www.netikka.net/joyr/diamond_girl/)
 
-Below is copy of README:
 
 
 Lucy the Diamond Girl
@@ -26,8 +26,8 @@ More information
 
 See README.building for building/compiling instructions,
 README.users for notes about using the game,
-README.sfx for notes how to edit sound effect files,
-README.translations for notes for doing translations,
+README.sfx for notes on how to edit sound effect files,
+README.translations for notes on doing translations,
 LICENSE for the GPLv2+ license,
 Changelog for version history,
 and CREDITS for list of authors and libraries used.

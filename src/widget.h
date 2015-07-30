@@ -98,6 +98,7 @@ typedef void (*ui_func_on_activate_at_t)(struct widget * this, enum WIDGET_BUTTO
 typedef void (*ui_func_on_mouse_move_t)(struct widget * this, int x, int y);
 typedef void (*ui_func_on_unload_t)(struct widget * this);
 typedef void (*ui_func_on_select_t)(struct widget * this);
+typedef void (*ui_func_on_timeout_t)(struct widget * this);
 
 struct ui_widget_select_option
 {
@@ -135,6 +136,9 @@ struct widget
   ui_func_on_mouse_move_t  on_mouse_move_;
   ui_func_on_unload_t      on_unload_;
 
+  ui_func_on_timeout_t     on_timeout_;
+  unsigned int             timeout_timer_;
+  
   struct widget *  parent_;
   struct widget ** children_;
   int              children_count_;
@@ -264,6 +268,7 @@ extern ui_func_on_activate_at_t widget_on_activate_at(struct widget * widget);
 extern ui_func_on_activate_t    widget_on_release(struct widget * widget);
 extern ui_func_on_mouse_move_t  widget_on_mouse_move(struct widget * widget);
 extern ui_func_on_unload_t      widget_on_unload(struct widget * widget);
+extern ui_func_on_timeout_t     widget_on_timeout(struct widget * widget);
 /* Navigation */
 extern struct widget *          widget_get_navigation_left(struct widget * widget);
 extern struct widget *          widget_get_navigation_right(struct widget * widget);
@@ -304,6 +309,7 @@ extern ui_func_on_activate_at_t widget_set_on_activate_at(struct widget * widget
 extern ui_func_on_activate_t    widget_set_on_release(struct widget * widget, ui_func_on_activate_t on_release);
 extern ui_func_on_mouse_move_t  widget_set_on_mouse_move(struct widget * widget, ui_func_on_mouse_move_t on_mouse_move);
 extern ui_func_on_unload_t      widget_set_on_unload(struct widget * widget, ui_func_on_unload_t on_unload);
+extern ui_func_on_timeout_t     widget_set_on_timeout(struct widget * widget, ui_func_on_timeout_t on_timeout, unsigned int delay); // Delay is in frames
 /* Navigation */
 extern void                     widget_set_navigation_leftright(struct widget * left, struct widget * right);
 extern void                     widget_set_navigation_left(struct widget * widget, struct widget * right);

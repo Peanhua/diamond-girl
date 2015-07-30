@@ -47,6 +47,12 @@ static void on_quit_clicked(struct widget * this, enum WIDGET_BUTTON button);
 
 void game_player_next_level(struct gamedata * gamedata)
 {
+  int time_left;
+
+  time_left = gamedata->map->game_time / gamedata->map->frames_per_second;
+  if(gamedata->map->game_time % gamedata->map->frames_per_second > 0)
+    time_left++;
+  
   gamedata->map->game_paused = true;
   gamedata->map->fast_forwarding = false;
 
@@ -65,7 +71,6 @@ void game_player_next_level(struct gamedata * gamedata)
       int do_sfx;
 
       game_show_text(gettext("Level completed!"));
-      game_add_score(gamedata->map->time_score * (gamedata->map->game_time / gamedata->map->frames_per_second));
 
       pitch      = 1.0f;
       pitch_step = 0.5f / (float) (gamedata->map->game_time / gamedata->map->frames_per_second);
@@ -77,6 +82,7 @@ void game_player_next_level(struct gamedata * gamedata)
           gfx_next_frame();
           map_scroll_to_girl(gamedata->map, 24 / 6);
           gamedata->map->game_time -= gamedata->map->frames_per_second;
+          game_add_score(gamedata->map->time_score);
 
           if(gamedata->map->game_time > 3 * gamedata->map->frames_per_second)
             pitch -= pitch_step;
@@ -111,7 +117,10 @@ void game_player_next_level(struct gamedata * gamedata)
               
               while(SDL_PollEvent(&e))
                 if(e.type == SDL_QUIT || e.type == SDL_KEYDOWN || e.type == SDL_MOUSEBUTTONDOWN)
-                  gamedata->map->game_time = 0;
+                  { /* Add remaining score and end the loop. */
+                    game_add_score(gamedata->map->time_score * (gamedata->map->game_time / gamedata->map->frames_per_second));
+                    gamedata->map->game_time = 0;
+                  }
             }
 
           if(gamedata->playing_speed > 0)
@@ -134,11 +143,27 @@ void game_player_next_level(struct gamedata * gamedata)
       if(gamedata->ai == NULL)
         if(gamedata->cave->game_mode == GAME_MODE_CLASSIC || gamedata->cave->game_mode == GAME_MODE_ADVENTURE)
           {
+            char t_score[32];
+            char t_score_diamonds[32];
+            char t_score_time[32];
+            char t_score_greedy[32];
             char t_diamond_score[32];
-            
-            { /* Add some trait score */
-              int tr_score;
+            char t_diamond_score_alive[32];
+            char t_diamond_score_diamonds[32];
+            char t_diamond_score_greedy[32];
+            char t_irongirl[32];
 
+            { /* Add some trait score and build UI strings */
+              int tr_score;
+              int scoremult;
+
+              strcpy(t_score_greedy,           "-");
+              strcpy(t_diamond_score_alive,    "-");
+              strcpy(t_diamond_score_diamonds, "-");
+              strcpy(t_diamond_score_greedy,   "-");
+              strcpy(t_irongirl,               "-");
+              scoremult = 1;
+              
               if(gamedata->cave->editable == true)
                 {
                   tr_score = 0;
@@ -146,16 +171,28 @@ void game_player_next_level(struct gamedata * gamedata)
               else
                 {
                   tr_score = gamedata->map->diamonds;
+                  snprintf(t_diamond_score_diamonds, sizeof t_diamond_score_diamonds, "%d", (int) gamedata->map->diamonds);
 
                   if(gamedata->map->girl->mob->alive == true) /* Also intermission maps needs to be completed successfully for full score. */
-                    tr_score += 10;
+                    {
+                      tr_score += 10;
+                      snprintf(t_diamond_score_alive, sizeof t_diamond_score_alive, "%d", 10);
+                    }
 
                   if(gamedata->traits & TRAIT_GREEDY)
-                    tr_score *= 2;
+                    {
+                      tr_score *= 2;
+                      strcpy(t_diamond_score_greedy, "x2");
+                      snprintf(t_score_greedy, sizeof t_score_greedy, "%d", gamedata->current_greedy_score);
+                    }
 
                   /* Double the score in iron girl mode. */
                   if(gamedata->iron_girl_mode == true && (gamedata->traits & TRAIT_IRON_GIRL))
-                    tr_score *= 2;
+                    {
+                      tr_score *= 2;
+                      strcpy(t_irongirl, "x2");
+                      scoremult *= 2;
+                    }
                 }
               
               if(tr_score > 0)
@@ -164,36 +201,56 @@ void game_player_next_level(struct gamedata * gamedata)
                   gamedata->diamond_score += tr_score;
                 }
 
-              snprintf(t_diamond_score, sizeof t_diamond_score, "%d", tr_score);
               
-              struct widget * w;
-
-              if(gamedata->treasure != NULL)
-                if(gamedata->treasure->collected == true)
-                  if(gamedata->treasure_placed_this_level == true)
-                    {
-                      w = widget_find(window, "gpnl_other");
-                      if(w != NULL)
-                        widget_set_string(w, "text", gettext("Found: %s"), treasure_type_name(gamedata->treasure->item->type));
-                    }
+              snprintf(t_score_diamonds, sizeof t_score_diamonds, "%d x %d", gamedata->map->diamonds, gamedata->map->diamond_score);
+              snprintf(t_score_time, sizeof t_score_time, "%d x %d", time_left, gamedata->map->time_score);
+              snprintf(t_score, sizeof t_score, "%d",
+                       scoremult * ( gamedata->map->diamonds * gamedata->map->diamond_score +
+                                     time_left * gamedata->map->time_score +
+                                     gamedata->current_greedy_score));
+              snprintf(t_diamond_score, sizeof t_diamond_score, "%d", tr_score);
             }
 
 
             struct widget_factory_data wfd[] =
               {
-                { WFDT_CAVE,       "cave",             gamedata->cave   },
-                { WFDT_MAP,        "map",              gamedata->map    },
-                { WFDT_STRING,     "diamond_score",    t_diamond_score  },
-                { WFDT_ON_RELEASE, "on_play_clicked",  on_play_clicked  },
-                { WFDT_ON_RELEASE, "on_save_clicked",  on_save_clicked  },
-                { WFDT_ON_RELEASE, "on_quit_clicked",  on_quit_clicked  },
-                { WFDT_ON_UNLOAD,  "on_window_unload", on_window_unload },
-                { WFDT_SIZEOF_,    NULL,               NULL             }
+                { WFDT_CAVE,       "cave",                   gamedata->cave           },
+                { WFDT_MAP,        "map",                    gamedata->map            },
+                { WFDT_STRING,     "score_total",            t_score                  },
+                { WFDT_STRING,     "score_diamonds",         t_score_diamonds         },
+                { WFDT_STRING,     "score_time",             t_score_time             },
+                { WFDT_STRING,     "score_greedy",           t_score_greedy           },
+                { WFDT_STRING,     "diamond_score",          t_diamond_score          },
+                { WFDT_STRING,     "diamond_score_alive",    t_diamond_score_alive    },
+                { WFDT_STRING,     "diamond_score_diamonds", t_diamond_score_diamonds },
+                { WFDT_STRING,     "diamond_score_greedy",   t_diamond_score_greedy   },
+                { WFDT_STRING,     "irongirl",               t_irongirl               },
+                { WFDT_ON_RELEASE, "on_play_clicked",        on_play_clicked          },
+                { WFDT_ON_RELEASE, "on_save_clicked",        on_save_clicked          },
+                { WFDT_ON_RELEASE, "on_quit_clicked",        on_quit_clicked          },
+                { WFDT_ON_UNLOAD,  "on_window_unload",       on_window_unload         },
+                { WFDT_SIZEOF_,    NULL,                     NULL                     }
               };
             window = widget_factory(wfd, NULL, "game_player_next_level");
             widget_center(window);
             widget_set_gamedata_pointer(window, "gamedata", gamedata);
 
+            {
+              struct widget * w;
+
+              w = widget_find(window, "other");
+              if(w != NULL)
+                if(gamedata->treasure != NULL)
+                  if(gamedata->treasure->collected == true)
+                    if(gamedata->treasure_placed_this_level == true)
+                      {
+                        widget_set_string(w, "text", gettext("Found: %s"), treasure_type_name(gamedata->treasure->item->type));
+                        w = NULL;
+                      }
+              if(w != NULL)
+                widget_delete(w);
+            }
+            
             ui_push_handlers();
             ui_set_navigation_handlers();
             ui_set_common_handlers();
@@ -214,6 +271,9 @@ void game_player_next_level(struct gamedata * gamedata)
                 traits_make_available(newt);
                 widget_new_traits_available_window(newt);
               }
+
+            /* Show the scores and bonuses stuff */
+            game_end_of_level_bonuses(window);
           }
 
       gamedata->map->girl->mob->alive  = false;

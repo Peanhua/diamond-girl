@@ -29,12 +29,28 @@
 #include "texture.h"
 #include <assert.h>
 
-void image_to_texture(struct image * image, bool generate_alpha, bool use_mipmapping, bool linear)
+void image_to_texture(struct image * image, bool use_mipmapping, bool linear)
 {
   assert(globals.opengl);
   assert(image->texture_initialized == false);
-  assert(((image->flags & IF_ALPHA) == 0 && generate_alpha == false) || ((image->flags & IF_ALPHA) != 0 && generate_alpha == true));
 
+  bool generate_alpha;
+
+  if(image->flags & IF_ALPHA)
+    generate_alpha = true;
+  else
+    generate_alpha = false;
+  
+  if(use_mipmapping == true)
+    image->flags |= IF_MIPMAPPING;
+  else
+    image->flags &= ~IF_MIPMAPPING;
+
+  if(linear == true)
+    image->flags |= IF_LINEAR;
+  else
+    image->flags &= ~IF_LINEAR;
+  
   texture_setup_from_image(image, generate_alpha, use_mipmapping, linear);
 
   image_setup_buffer(image, generate_alpha);

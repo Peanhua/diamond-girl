@@ -20,46 +20,28 @@
   Complete license can be found in the LICENSE file.
 */
 
-#include "gc.h"
-#include "gfx.h"
-#include "gfxbuf.h"
+#ifndef NDEBUG
+
 #include "image.h"
 
-#include "backtrace.h"
-struct image * image_free(struct image * image)
+void image_dump(struct image const * image, unsigned int indentation)
 {
+  printf("%*sDumping image: %p\n", indentation, "", image);
   if(image != NULL)
     {
-      gc_free(GCT_IMAGE, image);
-      
-      if(image->sdl_surface != NULL)
-        SDL_FreeSurface(image->sdl_surface);
-      if(image->data != NULL)
-	free(image->data);
+      printf("%*s size          = %d x %d\n", indentation, "", image->width, image->height);
+      printf("%*s content size  = %d x %d\n", indentation, "", image->content_width, image->content_height);
+      printf("%*s flags         =", indentation, "");
+      if(image->flags & IF_ALPHA)
+        printf(" alpha");
+      printf("\n");
 #ifdef WITH_OPENGL
-      image_free_texture(image);
-      if(image->buffer != NULL)
-        image->buffer = gfxbuf_free(image->buffer);
+      printf("%*s texture init  = %s\n", indentation, "", image->texture_initialized == true ? "true" : "false");
+      printf("%*s texture want  = %s\n", indentation, "", image->texture_wanted      == true ? "true" : "false");
+      printf("%*s texture atlas = %p\n", indentation, "", image->texture_atlas);
+      if(image->texture_atlas != NULL)
+        image_dump(image->texture_atlas, indentation + 2);
 #endif
-#ifndef NDEBUG
-      free(image->backtrace);
-#endif
-      free(image);
     }
-  return NULL;
-}
-
-#ifdef WITH_OPENGL
-void image_free_texture(struct image * image)
-{
-  if(image != NULL)
-    if(image->texture_initialized == true)
-      {
-        gfxgl_unbind_texture_if_in_use(image->texture);
-        glDeleteTextures(1, &image->texture);
-        GFX_GL_ERROR();
-        image->texture             = 0;
-        image->texture_initialized = false;
-      }
 }
 #endif

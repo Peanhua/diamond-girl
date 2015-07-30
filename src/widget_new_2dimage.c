@@ -20,7 +20,9 @@
   Complete license can be found in the LICENSE file.
 */
 
+#include "gc.h"
 #include "widget.h"
+#include <assert.h>
 
 struct widget * widget_new_gfx_image(struct widget * parent, int x, int y, enum GFX_IMAGE gfx_image_id)
 {
@@ -43,6 +45,7 @@ struct widget * widget_new_image(struct widget * parent, int x, int y, struct im
 {
   struct widget * widget;
 
+  assert(gc_check(GCT_IMAGE, image) == true);
   widget = widget_new_child(parent, x, y, 0, 0);
   if(widget != NULL)
     {

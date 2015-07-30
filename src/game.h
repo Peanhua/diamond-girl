@@ -34,6 +34,7 @@ struct playback;
 struct cave;
 struct map;
 struct treasureinfo;
+struct widget;
 
 #define MAX_PYJAMA_PARTY_SIZE 9
 
@@ -65,6 +66,7 @@ struct gamedata
   struct cave *      cave;     /* The cave where the game takes place. */
   int                current_level;
   bool               iron_girl_mode;
+  int                current_greedy_score; /* The amount of score gained via the greedy trait. */
   trait_t            traits;   /* Traits active during this game. */
   struct playback *  playback; /* The playback recorded. */
   struct treasureinfo * treasure;
@@ -111,6 +113,7 @@ extern void game_move_girl(struct map * map, int new_x, int new_y);
 extern void game_player_next_level(struct gamedata * gamedata);
 extern void game_player_death(struct gamedata * gamedata, bool sounds);
 extern void game_pyjama_party_ask_next(struct gamedata * gamedata);
+extern void game_end_of_level_bonuses(struct widget * window); /* Show the scores and bonuses stuff by revealing certain widgets from window and making noise. */
 extern void game_add_score(int score);
 extern void game_show_text(char * text);
 extern void game_set_pyjama_party_control(enum PARTYCONTROLLER controller);

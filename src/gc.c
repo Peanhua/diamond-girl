@@ -21,10 +21,11 @@
 */
 
 #include "gc.h"
-#include "stack.h"
 #include "gfx.h"
-#include "widget.h"
 #include "gfxbuf.h"
+#include "image.h"
+#include "stack.h"
+#include "widget.h"
 #include <assert.h>
 #include <stdio.h>
 
@@ -65,13 +66,15 @@ void gc_cleanup(void)
       char * t_cave   = "cave";
       char * t_theme  = "theme";
       char * t_string = "string";
+      char * t_image  = "image";
       switch(i)
         {
         case GCT_GFXBUF:    typename = t_gfxbuf; break;
         case GCT_WIDGET:    typename = t_widget; break;
         case GCT_CAVE:      typename = t_cave;   break;
         case GCT_THEME:     typename = t_theme;  break;
-        case GCT_STRING:    typename = t_string;  break;
+        case GCT_STRING:    typename = t_string; break;
+        case GCT_IMAGE:     typename = t_image;  break;
         default: assert(0); typename = NULL;     break;
         }
       count = 0;
@@ -96,6 +99,10 @@ void gc_cleanup(void)
               case GCT_STRING:
                 bt = NULL;
                 printf(" string = %s\n", (char *) gcdata[i].stack->data[j]);
+                break;
+              case GCT_IMAGE:
+                bt = ((struct image *) gcdata[i].stack->data[j])->backtrace;
+                image_dump(gcdata[i].stack->data[j], 0);
                 break;
               case GCT_SIZEOF_:
                 bt = NULL;

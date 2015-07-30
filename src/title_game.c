@@ -25,7 +25,6 @@
 #include "ai.h"
 #include "game.h"
 #include "playback.h"
-#include "globals.h"
 #include "traits.h"
 #include "cave.h"
 #include "ui.h"

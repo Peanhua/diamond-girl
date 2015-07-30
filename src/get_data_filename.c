@@ -21,7 +21,6 @@
 */
 
 #include "diamond_girl.h"
-#include "globals.h"
 #include "themes.h"
 #include <unistd.h>
 #include <assert.h>

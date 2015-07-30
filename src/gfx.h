@@ -73,6 +73,7 @@ enum GFX_LIGHT_TYPE
     GFX_LIGHT_TYPE_DIRECTIONAL
   };
 extern void gfxgl_bind_texture(GLuint texture_id);        // glBindTexture()
+extern void gfxgl_unbind_texture_if_in_use(GLuint texture_id);
 extern void gfxgl_client_state(GLenum cap, bool enabled); // glEnableClientState() / glDisableClientState()
 extern void gfxgl_state(GLenum cap, bool enabled);        // glEnable() / glDisable()
 

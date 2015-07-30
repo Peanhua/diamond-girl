@@ -41,7 +41,9 @@ struct gamedata * gamedata_new(struct cave * cave, bool iron_girl_mode, trait_t 
       gamedata->diamond_score          = 0;
       gamedata->diamonds               = 0;
       gamedata->cave                   = cave;
+      gamedata->current_level          = 0;
       gamedata->iron_girl_mode         = iron_girl_mode;
+      gamedata->current_greedy_score   = 0;
       gamedata->traits                 = traits;
       gamedata->playback               = NULL;
       gamedata->treasure               = NULL;

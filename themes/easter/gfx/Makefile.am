@@ -7,5 +7,5 @@ diamond.png : glyphs-24x24.xcf
 	$(AM_V_GEN) bzip2 --stdout --compress < $< > $@
 
 gfx_DATA = diamond.png 
-CLEANFILES = diamond.png 
+CLEANFILES = diamond.png diamond.png.bak 
 EXTRA_DIST = glyphs-24x24.xcf 

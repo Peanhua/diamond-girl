@@ -212,8 +212,8 @@ bool gfx_glyph_initialize(void)
           }
       root = image_pack_free(root);
 
-      image_to_texture(all_glyphs,     true, false, false);
-      image_to_texture(all_glyphs_alt, true, false, false);
+      image_to_texture(all_glyphs,     false, false);
+      image_to_texture(all_glyphs_alt, false, false);
 
       /* Free unused copies. */
       SDL_FreeSurface(all_glyphs->sdl_surface    );

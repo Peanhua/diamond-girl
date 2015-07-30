@@ -489,9 +489,10 @@ struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool 
   sfx_music_volume(saved_music_volume);
   sfx_set_listener_position(saved_listener_position[0], saved_listener_position[1]);
 
-  if(gamedata->map != NULL)
-    gamedata->map = map_free(gamedata->map);
-
+  if(gamedata->exit_after_one_level == false) // Save the map for editor.
+    if(gamedata->map != NULL)
+      gamedata->map = map_free(gamedata->map);
+  
   ui_pop_handlers();
 
   if(gamedata->ai != NULL)
@@ -1101,7 +1102,10 @@ void game_add_score(int score)
   /* Double score if she's greedy, and the extra life anim is on. */
   if(gamedata->traits & TRAIT_GREEDY)
     if(gamedata->map->extra_life_anim > 0)
-      score *= 2;
+      {
+        gamedata->current_greedy_score += score;
+        score *= 2;
+      }
 
   if(iron == false && gamedata->cave->game_mode != GAME_MODE_PYJAMA_PARTY)
     { /* Extra girl */
@@ -1363,8 +1367,10 @@ static void reset_map(void)
 {
   assert(gamedata->cave != NULL);
   assert(gamedata->map != NULL);
+  
   gamedata->map->player_target = NULL;
   gamedata->treasureanim_phase = 1.0f;
+  gamedata->current_greedy_score = 0;
 
   gamedata->pyjama_party_girl = find_current_girl();
   if(gamedata->pyjama_party_girl != NULL)

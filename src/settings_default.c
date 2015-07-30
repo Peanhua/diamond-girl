@@ -21,7 +21,6 @@
 */
 
 #include "diamond_girl.h"
-#include "globals.h"
 #include "game.h"
 #include "highscore.h"
 #include "playback.h"

@@ -83,7 +83,7 @@ bool sfx_load_xm(struct sfx * sfx)
         {
           MODULE * module;
      
-          module = Player_Load((char *) get_data_filename(fn), 2, 0);
+          module = Player_Load((char *) get_data_filename(fn), 8, 0);
           if(module != NULL)
             {
               Player_Start(module);

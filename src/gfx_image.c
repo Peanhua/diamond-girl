@@ -192,7 +192,7 @@ bool gfx_image_initialize(void)
   for(int i = 0; rv == true && i < TEXTUREATLAS_COUNT; i++)
     if(textureatlas_images[i] != NULL)
       {
-        image_to_texture(textureatlas_images[i], true, false, true);
+        image_to_texture(textureatlas_images[i], false, true);
 #if 0
         char fn[1024];
         snprintf(fn, sizeof fn, "/tmp/atlas-%d.png", (int) i);
@@ -323,20 +323,27 @@ struct image * gfx_image(enum GFX_IMAGE image_id)
                   root  = textureatlas_roots[images[image_id].texture_atlas_group - 1];
                   atlas = textureatlas_images[images[image_id].texture_atlas_group - 1];
                   node = image_pack(root, image);
-                  if(node == NULL)
-                    image_save(atlas, "/tmp/error.png");
-                  assert(node != NULL);
-
-                  /* Copy image pixels to the atlas. */
-                  image_blit(image, atlas, node->x, node->y);
-                  /* Update image data. The texture is set in gfx_image_initialize(). */
-                  image->texture_atlas       = atlas;
-                  image->texture_initialized = true;
-                  image->texture_offset_x    = (double) node->x / (double) atlas->width;
-                  image->texture_offset_y    = (double) node->y / (double) atlas->height;
+                  if(node != NULL)
+                    {
+                      /* Copy image pixels to the atlas. */
+                      image_blit(image, atlas, node->x, node->y);
+                      /* Update image data. The texture is set in gfx_image_initialize(). */
+                      image->texture_atlas       = atlas;
+                      image->texture_initialized = true;
+                      image->texture_offset_x    = (double) node->x / (double) atlas->width;
+                      image->texture_offset_y    = (double) node->y / (double) atlas->height;
+                    }
+                  else
+                    {
+                      image_save(atlas, "/tmp/error.png");
+                      fprintf(stderr, "%s: Error while packing into texture atlas#%d, current atlas image saved to /tmp/error.png. Dumping the atlas data:\n",
+                              __FUNCTION__, images[image_id].texture_atlas_group - 1);
+                      image_pack_dump(root);
+                      images[image_id].image = image = image_free(image);
+                    }                      
                 }
               else if(images[image_id].texturize == true)
-                image_to_texture(image, images[image_id].alpha, images[image_id].mipmapping, true);
+                image_to_texture(image, images[image_id].mipmapping, true);
             }
 #endif
         }
@@ -388,7 +395,7 @@ struct image * gfx_image_treasure(struct treasure * treasure, bool greyscale)
                 image_to_greyscale(ti->image);
 #ifdef WITH_OPENGL
               if(globals.opengl)
-                image_to_texture(ti->image, true, false, true);
+                image_to_texture(ti->image, false, true);
 #endif
               stack_push(treasure_images, ti);
             }

@@ -24,7 +24,6 @@
 #include "widget.h"
 #include "traits.h"
 #include "gfx_image.h"
-#include "globals.h"
 #include "cave.h"
 #include "gfx.h"
 #include "twinkle.h"

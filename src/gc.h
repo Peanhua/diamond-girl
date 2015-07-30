@@ -32,6 +32,7 @@ enum GC_TYPE
     GCT_CAVE,
     GCT_THEME,
     GCT_STRING,
+    GCT_IMAGE,
     GCT_SIZEOF_
   };
 

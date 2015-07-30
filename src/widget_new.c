@@ -48,6 +48,8 @@ struct widget * widget_new(int x, int y, int width, int height)
       obj->on_release_      = NULL;
       obj->on_mouse_move_   = NULL;
       obj->on_unload_       = NULL;
+      obj->on_timeout_      = NULL;
+      obj->timeout_timer_   = 0;
       obj->state_           = WIDGET_STATE_NORMAL;
       
       obj->parent_         = NULL;

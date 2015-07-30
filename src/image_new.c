@@ -20,6 +20,8 @@
   Complete license can be found in the LICENSE file.
 */
 
+#include "backtrace.h"
+#include "gc.h"
 #include "image.h"
 
 #include <stdio.h>
@@ -46,12 +48,16 @@ struct image * image_new(int width, int height, bool alpha)
 #ifdef WITH_OPENGL
       rv->texture             = 0;
       rv->texture_initialized = false;
+      rv->texture_wanted      = false;
       rv->texture_atlas       = NULL;
       rv->texture_offset_x    = 0.0f;
       rv->texture_offset_y    = 0.0f;
       rv->buffer              = NULL;
       rv->bufferw             = 0;
       rv->bufferh             = 0;
+#endif
+#ifndef NDEBUG
+      rv->backtrace = get_backtrace();
 #endif
 
       if(alpha)
@@ -66,11 +72,10 @@ struct image * image_new(int width, int height, bool alpha)
       if(rv->data != NULL)
 	{
 #ifndef NDEBUG
-          /* Valgrind complains. Possibly false alarm, ignored now.
-           * But could be OpenGL texture drawing over it's limits: could cause gfx artifacts near image borders.
-           */
+          /* Valgrind complains. Possibly false alarm, ignored now. */
           memset(rv->data, 0, rv->width * rv->height * bpp);
 #endif
+          gc_new(GCT_IMAGE, rv);
 	}
       else
 	{

@@ -39,7 +39,6 @@ void widget_new_message_window(const char * title, struct widget * header, const
 void widget_new_message_dialog(const char * title, struct widget * header, const char * message, struct widget * button)
 {
   struct widget * window;
-  struct widget * textarea;
   struct widget * bclose;
   int y;
 
@@ -60,10 +59,15 @@ void widget_new_message_dialog(const char * title, struct widget * header, const
           y += widget_height(header) + 20;
         }
     }
-  
-  textarea = widget_new_text_area(window, 5, y, 500 - 10 * 2, 50, message, true);
-  widget_resize_to_fit_children(textarea);
-  y += widget_height(textarea) + font_height();
+
+  if(message != NULL)
+    {
+      struct widget * textarea;
+      
+      textarea = widget_new_text_area(window, 5, y, 500 - 10 * 2, 50, message, true);
+      widget_resize_to_fit_children(textarea);
+      y += widget_height(textarea) + font_height();
+    }
 
   bclose = widget_new_button(window, 0, y, gettext("Close"));
   widget_set_width(bclose, 100);

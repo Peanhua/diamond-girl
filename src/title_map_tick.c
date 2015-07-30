@@ -22,7 +22,6 @@
 
 #include "diamond_girl.h"
 #include "title.h"
-#include "globals.h"
 #include "random.h"
 #include "map.h"
 
