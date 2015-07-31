@@ -298,19 +298,6 @@ struct image * gfx_image(enum GFX_IMAGE image_id)
 #ifdef WITH_OPENGL
           if(globals.opengl)
             {
-              if(globals.opengl_power_of_two_textures == true)
-                {
-                  int origw, origh, w, h;
-                  
-                  origw = image->width;
-                  origh = image->height;
-                  w = round_to_power_of_two(origw);
-                  h = round_to_power_of_two(origh);
-                  
-                  if(w != origw || h != origh)
-                    image_expand(image, w, h);
-                }
-              
               if(images[image_id].texture_atlas_group > 0 &&
                  textureatlas_roots[images[image_id].texture_atlas_group - 1] != NULL &&
                  textureatlas_images[images[image_id].texture_atlas_group - 1] != NULL   )
@@ -346,8 +333,24 @@ struct image * gfx_image(enum GFX_IMAGE image_id)
                       images[image_id].image = image = image_free(image);
                     }                      
                 }
-              else if(images[image_id].texturize == true)
-                image_to_texture(image, images[image_id].mipmapping, true);
+              else
+                {
+                  if(globals.opengl_power_of_two_textures == true)
+                    {
+                      int origw, origh, w, h;
+                      
+                      origw = image->width;
+                      origh = image->height;
+                      w = round_to_power_of_two(origw);
+                      h = round_to_power_of_two(origh);
+                      
+                      if(w != origw || h != origh)
+                        image_expand(image, w, h);
+                    }
+              
+                  if(images[image_id].texturize == true)
+                    image_to_texture(image, images[image_id].mipmapping, true);
+                }
             }
 #endif
         }
