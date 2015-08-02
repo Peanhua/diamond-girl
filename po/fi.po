@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: diamond-girl 1.25b\n"
 "Report-Msgid-Bugs-To: joniyrjana@gmail.com\n"
-"POT-Creation-Date: 2015-07-30 19:49+0300\n"
+"POT-Creation-Date: 2015-08-02 08:41+0300\n"
 "PO-Revision-Date: 2015-06-18 19:22+0200\n"
 "Last-Translator: Steve Joni Yrjänä <joniyrjana@gmail.com>\n"
 "Language-Team: Finnish\n"
@@ -87,7 +87,7 @@ msgstr "Radioaktiivinen }t}kk|, v|lt|."
 msgid "A radioactive butterfly, avoid."
 msgstr "Radioaktiivinen perhonen, v|lt|."
 
-#: src/editor.c:707 src/title.c:1495 src/widget_new_highscore_einfo.c:95
+#: src/editor.c:707 src/title.c:1489 src/widget_new_highscore_einfo.c:95
 msgid "Cave:"
 msgstr "Luola:"
 
@@ -221,18 +221,18 @@ msgstr "Palauta(R)"
 msgid "Intermission:"
 msgstr "V|liaika:"
 
-#: src/game.c:149 src/title.c:1247
+#: src/game.c:149 src/title.c:1241
 #, c-format
 msgid "Level:"
 msgstr "Taso:"
 
-#: src/game.c:150 src/game.c:232 src/title.c:1251
+#: src/game.c:150 src/game.c:232 src/title.c:1245
 #: src/widget_new_highscore_einfo.c:196 src/widget_new_title_partystatus.c:140
 #, c-format
 msgid "Girls:"
 msgstr "Tyt}t:"
 
-#: src/game.c:151 src/title.c:1256 src/widget_new_highscore_einfo.c:167
+#: src/game.c:151 src/title.c:1250 src/widget_new_highscore_einfo.c:167
 #: src/widget_new_title_partystatus.c:107 ui/game_player_next_level.js:43
 #, c-format
 msgid "Score:"
@@ -324,7 +324,7 @@ msgstr ""
 msgid "Checksum error on map %s:%d."
 msgstr "Virhe kent|n %s:%d tarkistussummassa."
 
-#: src/quest_action.c:108 src/widget_new_quest_menu.c:259
+#: src/quest_action.c:108 src/widget_new_quest_menu.c:261
 #, c-format
 msgid "Notes of %s"
 msgstr ""
@@ -362,7 +362,7 @@ msgid ""
 "but didn't find anything special on it."
 msgstr ""
 
-#: src/quest_action.c:150 src/widget_new_quest_menu.c:285
+#: src/quest_action.c:150 src/widget_new_quest_menu.c:287
 msgid "Library"
 msgstr ""
 
@@ -382,7 +382,7 @@ msgstr ""
 msgid "None of the books seems to be interesting right now."
 msgstr ""
 
-#: src/quest_action.c:207 src/widget_new_quest_menu.c:273
+#: src/quest_action.c:207 src/widget_new_quest_menu.c:275
 msgid "Cafe"
 msgstr ""
 
@@ -469,7 +469,7 @@ msgstr ""
 
 #: src/quest_description.c:68
 #, c-format
-msgid "More thorough study of the notes of %s %s revealed knowledge about %s named '%s'.  The old people buried it somewhere in %s."
+msgid "More thorough study of the notes of %s %s revealed knowledge about %s named '%s'.  The ancient people buried it somewhere in %s."
 msgstr ""
 
 #: src/quest_description.c:83
@@ -477,41 +477,71 @@ msgstr ""
 msgid "Closer inspection of the %s %s '%s' revealed writing: %s"
 msgstr ""
 
-#: src/quest_description.c:115
+#: src/quest_description.c:93
+#, c-format
+msgid "Stuck between the frames of the %s %s '%s' is a note: %s"
+msgstr ""
+
+#: src/quest_description.c:100
+#, c-format
+msgid "Stuck in the nose of the %s %s '%s' is a note: %s"
+msgstr ""
+
+#: src/quest_description.c:107
+#, c-format
+msgid "Inside of a false bottom of the %s %s '%s' is a note: %s"
+msgstr ""
+
+#: src/quest_description.c:114
+#, c-format
+msgid "Inside one of the rings of the %s %s '%s' is a note: %s"
+msgstr ""
+
+#: src/quest_description.c:121
+#, c-format
+msgid "Inside the hollow handle of the %s %s '%s' is a note: %s"
+msgstr ""
+
+#: src/quest_description.c:132
+#, c-format
+msgid "Inside the %s %s '%s' is small writing: %s"
+msgstr ""
+
+#: src/quest_description.c:166
 #, c-format
 msgid "There is a damaged writing on the %s %s '%s', it reads: %s"
 msgstr ""
 
-#: src/quest_description.c:123
+#: src/quest_description.c:174
 #, c-format
 msgid "The %s seems to be one of many, perhaps there are more nearby."
 msgstr ""
 
-#: src/quest_description.c:134
+#: src/quest_description.c:185
 #, c-format
 msgid "I have found a book of %s %s from the library.  Her %s must have been buried somewhere in %s.  I decided to pursue my childhood dream of finding it."
 msgstr ""
 
-#: src/quest_description.c:140
+#: src/quest_description.c:191
 #, c-format
 msgid "I have found a book of %s %s from the library.  His %s must have been buried somewhere in %s.  I decided to pursue my childhood dream of finding it."
 msgstr ""
 
-#: src/quest_description.c:152
+#: src/quest_description.c:203
 msgid "The library is filled with zombies!"
 msgstr ""
 
-#: src/quest_description.c:158
+#: src/quest_description.c:209
 #, c-format
 msgid "%s %s, the leader of the zombies, promised they would leave if I can find the %s of the ancient %s %s.  I should start from %s."
 msgstr ""
 
-#: src/quest_description.c:174
+#: src/quest_description.c:225
 #, c-format
 msgid "%s %s, the leader of the zombies says the next lead should be somewhere in %s."
 msgstr ""
 
-#: src/quest_diary.c:49 src/widget_new_quest_menu.c:246
+#: src/quest_diary.c:49 src/widget_new_quest_menu.c:248
 msgid "My Diary"
 msgstr ""
 
@@ -537,11 +567,11 @@ msgstr ""
 msgid "%A, %e of %B %Y, at %H:%M"
 msgstr ""
 
-#: src/quest_treasures.c:61 src/widget_new_quest_menu.c:315
+#: src/quest_treasures.c:61 src/widget_new_quest_menu.c:317
 msgid "My collection"
 msgstr ""
 
-#: src/quest_treasures.c:72 src/widget_new_quest_menu.c:188
+#: src/quest_treasures.c:72 src/widget_new_quest_menu.c:190
 msgid "Questline:"
 msgstr ""
 
@@ -698,15 +728,15 @@ msgstr "Kieli"
 msgid "Game mode"
 msgstr "Pelitila"
 
-#: src/settings.c:367 src/title.c:1432 src/widget_new_highscore_einfo.c:105
+#: src/settings.c:367 src/title.c:1426 src/widget_new_highscore_einfo.c:105
 msgid "Classic"
 msgstr "Klassinen"
 
-#: src/settings.c:368 src/title.c:1433 src/widget_new_highscore_einfo.c:106
+#: src/settings.c:368 src/title.c:1427 src/widget_new_highscore_einfo.c:106
 msgid "Adventure"
 msgstr "Seikkailu"
 
-#: src/settings.c:369 src/title.c:1434 src/trait_get_name.c:47
+#: src/settings.c:369 src/title.c:1428 src/trait_get_name.c:47
 #: src/widget_new_highscore_einfo.c:107
 msgid "Pyjama Party"
 msgstr "Pyjamabileet"
@@ -769,68 +799,68 @@ msgstr "Virhe"
 msgid "This is a demo of level %d."
 msgstr "Kent|n %d esittely."
 
-#: src/title.c:458
+#: src/title.c:457
 #, c-format
 msgid "Brain malfunction!\n"
 msgstr "Aivovamma!\n"
 
-#: src/title.c:847
+#: src/title.c:845
 msgid "Change game mode"
 msgstr "Vaihda pelitilaa"
 
-#: src/title.c:1136
+#: src/title.c:1130
 msgid "The game was saved."
 msgstr "Peli tallennettu."
 
-#: src/title.c:1137 src/title.c:1529
+#: src/title.c:1131 src/title.c:1523
 msgid "Play (*)"
 msgstr "Pelaa (*)"
 
-#: src/title.c:1141 src/title.c:1531 ui/title_common.js:34
+#: src/title.c:1135 src/title.c:1525 ui/title_common.js:34
 msgid "Play"
 msgstr "Pelaa"
 
-#: src/title.c:1158
+#: src/title.c:1152
 #, c-format
 msgid "Diamond score from the %s %s:   %u"
 msgstr ""
 
-#: src/title.c:1239
+#: src/title.c:1233
 msgid "A saved game exists"
 msgstr "Tallennettu peli l}ytyy"
 
-#: src/title.c:1262 ui/game_player_death.js:49
+#: src/title.c:1256 ui/game_player_death.js:49
 #: ui/game_player_next_level.js:246 ui/game_pyjama_party_level_completed.js:35
 msgid "Continue"
 msgstr "Jatka"
 
-#: src/title.c:1271
+#: src/title.c:1265
 msgid "Start New"
 msgstr "Aloita Uusi"
 
-#: src/title.c:1280 src/widget_new_title_partystatus.c:232
+#: src/title.c:1274 src/widget_new_title_partystatus.c:232
 #: src/widget_new_trait_key_button.c:122
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: src/title.c:1441
+#: src/title.c:1435
 msgid "Game mode:"
 msgstr "Pelitila:"
 
-#: src/title.c:1576
+#: src/title.c:1570
 msgid "You can only start from every fifth level, and no save game exist."
 msgstr ""
 
-#: src/title.c:1611
+#: src/title.c:1605
 #, c-format
 msgid "Level: %d / %d"
 msgstr "Kentt|: %d / %d"
 
-#: src/title.c:1949
+#: src/title.c:1943
 msgid "To arcade"
 msgstr ""
 
-#: src/title.c:1951 ui/title_common.js:65
+#: src/title.c:1945 ui/title_common.js:65
 msgid "To quests"
 msgstr ""
 
@@ -1094,24 +1124,24 @@ msgstr "Uusinta"
 msgid "Volume: %d%%"
 msgstr "`|nenvoimakkuus: %d%%"
 
-#: src/widget_new_quest_menu.c:370
+#: src/widget_new_quest_menu.c:372
 #, c-format
 msgid "Latest find: %s %s"
 msgstr ""
 
-#: src/widget_new_quest_menu.c:427
+#: src/widget_new_quest_menu.c:429
 msgid "No questlines available."
 msgstr ""
 
-#: src/widget_new_quest_menu.c:441
+#: src/widget_new_quest_menu.c:443
 msgid "Quests are not available in classic game mode."
 msgstr ""
 
-#: src/widget_new_quest_menu.c:442
+#: src/widget_new_quest_menu.c:444
 msgid "Quests trait is not active."
 msgstr ""
 
-#: src/widget_new_quest_menu.c:443
+#: src/widget_new_quest_menu.c:445
 msgid "Quests are not available in pyjama party game mode."
 msgstr ""
 

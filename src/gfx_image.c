@@ -393,8 +393,16 @@ struct image * gfx_image_treasure(struct treasure * treasure, bool greyscale)
           ti->reference.type      = treasure->type;
           ti->reference.material  = treasure->material;
           ti->reference.gemstones = treasure->gemstones;
+          
+          struct image * tmp;
 
-          ti->image = image_load(get_data_filename(treasure_filename(&ti->reference, "png")), true);
+          ti->image = NULL;
+          tmp = image_load(get_data_filename(treasure_filename(&ti->reference, "png")), true);
+          if(tmp != NULL)
+            {
+              ti->image = image_trim(tmp);
+              tmp = image_free(tmp);
+            }
           image = ti->image;
           if(ti->image != NULL)
             {

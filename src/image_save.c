@@ -26,7 +26,7 @@
 #include <zlib.h>
 #include <assert.h>
 
-void image_save(struct image * image, const char * filename)
+void image_save(struct image const * image, const char * filename)
 {
   FILE * fp;
 

@@ -23,7 +23,7 @@
 #include "image.h"
 #include <assert.h>
 
-struct image * image_duplicate(struct image * image)
+struct image * image_duplicate(struct image const * image)
 {
   struct image * new;
   bool alpha;

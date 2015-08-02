@@ -23,12 +23,12 @@
 #include "image.h"
 #include <assert.h>
 
-void image_blit(struct image * src, struct image * dst, int dst_x, int dst_y)
+void image_blit(struct image const * src, struct image * dst, int dst_x, int dst_y)
 {
   image_blit_partial(src, 0, 0, src->width, src->height, dst, dst_x, dst_y);
 }
 
-void image_blit_partial(struct image * src, int src_x, int src_y, int width, int height, struct image * dst, int dst_x, int dst_y)
+void image_blit_partial(struct image const * src, int src_x, int src_y, int width, int height, struct image * dst, int dst_x, int dst_y)
 {
   int srcbpp, dstbpp;
 
@@ -63,7 +63,7 @@ void image_blit_partial(struct image * src, int src_x, int src_y, int width, int
 
 }
 
-void image_blit_rotated(struct image * src, int degrees, struct image * dst, int dst_x, int dst_y)
+void image_blit_rotated(struct image const * src, int degrees, struct image * dst, int dst_x, int dst_y)
 {
   assert(src != NULL);
   assert(dst != NULL);

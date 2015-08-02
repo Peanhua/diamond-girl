@@ -352,12 +352,12 @@ static struct quest * quest_new(enum QUEST_TYPE type, struct questline * questli
           else if(get_rand(100) < 30)
             {
               quest->action_to_open = QUEST_ACTION_EXAMINE_OBJECT;
-              quest->description_id = get_rand(2);
+              quest->description_id = get_rand(3);
             }
           else if(get_rand(100) < 50)
             {
               quest->action_to_open = QUEST_ACTION_EXAMINE_OBJECT;
-              quest->description_id = 2;
+              quest->description_id = 3;
 
               /* The treasure object should be similar to the previous one, so copy the data, except for the jewels which we modify manually. */
               enum TREASURE_GEMSTONE g;

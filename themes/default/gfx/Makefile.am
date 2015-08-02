@@ -36,1444 +36,1084 @@ map_cursor.png : map_cursor.xcf
 	$(AM_V_GEN) if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
 
 bracelet-bronze.png : tmp.bracelet-bronze.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 bracelet-copper.png : tmp.bracelet-copper.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 bracelet-gold.png : tmp.bracelet-gold.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 bracelet-silver.png : tmp.bracelet-silver.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 earring-bronze.png : tmp.earring-bronze.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 earring-copper.png : tmp.earring-copper.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 earring-gold.png : tmp.earring-gold.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 earring-silver.png : tmp.earring-silver.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-bronze-amber.png : tmp.gemstone_bracelet-bronze-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-bronze-amethyst.png : tmp.gemstone_bracelet-bronze-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-bronze-diamond.png : tmp.gemstone_bracelet-bronze-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-bronze-emerald.png : tmp.gemstone_bracelet-bronze-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-bronze-jade.png : tmp.gemstone_bracelet-bronze-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-bronze-opal.png : tmp.gemstone_bracelet-bronze-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-bronze-ruby.png : tmp.gemstone_bracelet-bronze-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-bronze-sapphire.png : tmp.gemstone_bracelet-bronze-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-bronze-turquoise.png : tmp.gemstone_bracelet-bronze-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-copper-amber.png : tmp.gemstone_bracelet-copper-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-copper-amethyst.png : tmp.gemstone_bracelet-copper-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-copper-diamond.png : tmp.gemstone_bracelet-copper-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-copper-emerald.png : tmp.gemstone_bracelet-copper-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-copper-jade.png : tmp.gemstone_bracelet-copper-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-copper-opal.png : tmp.gemstone_bracelet-copper-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-copper-ruby.png : tmp.gemstone_bracelet-copper-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-copper-sapphire.png : tmp.gemstone_bracelet-copper-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-copper-turquoise.png : tmp.gemstone_bracelet-copper-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-gold-amber.png : tmp.gemstone_bracelet-gold-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-gold-amethyst.png : tmp.gemstone_bracelet-gold-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-gold-diamond.png : tmp.gemstone_bracelet-gold-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-gold-emerald.png : tmp.gemstone_bracelet-gold-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-gold-jade.png : tmp.gemstone_bracelet-gold-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-gold-opal.png : tmp.gemstone_bracelet-gold-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-gold-ruby.png : tmp.gemstone_bracelet-gold-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-gold-sapphire.png : tmp.gemstone_bracelet-gold-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-gold-turquoise.png : tmp.gemstone_bracelet-gold-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-silver-amber.png : tmp.gemstone_bracelet-silver-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-silver-amethyst.png : tmp.gemstone_bracelet-silver-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-silver-diamond.png : tmp.gemstone_bracelet-silver-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-silver-emerald.png : tmp.gemstone_bracelet-silver-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-silver-jade.png : tmp.gemstone_bracelet-silver-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-silver-opal.png : tmp.gemstone_bracelet-silver-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-silver-ruby.png : tmp.gemstone_bracelet-silver-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-silver-sapphire.png : tmp.gemstone_bracelet-silver-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_bracelet-silver-turquoise.png : tmp.gemstone_bracelet-silver-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-bronze-amber.png : tmp.gemstone_earring-bronze-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-bronze-amethyst.png : tmp.gemstone_earring-bronze-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-bronze-diamond.png : tmp.gemstone_earring-bronze-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-bronze-emerald.png : tmp.gemstone_earring-bronze-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-bronze-jade.png : tmp.gemstone_earring-bronze-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-bronze-opal.png : tmp.gemstone_earring-bronze-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-bronze-ruby.png : tmp.gemstone_earring-bronze-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-bronze-sapphire.png : tmp.gemstone_earring-bronze-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-bronze-turquoise.png : tmp.gemstone_earring-bronze-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-copper-amber.png : tmp.gemstone_earring-copper-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-copper-amethyst.png : tmp.gemstone_earring-copper-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-copper-diamond.png : tmp.gemstone_earring-copper-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-copper-emerald.png : tmp.gemstone_earring-copper-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-copper-jade.png : tmp.gemstone_earring-copper-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-copper-opal.png : tmp.gemstone_earring-copper-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-copper-ruby.png : tmp.gemstone_earring-copper-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-copper-sapphire.png : tmp.gemstone_earring-copper-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-copper-turquoise.png : tmp.gemstone_earring-copper-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-gold-amber.png : tmp.gemstone_earring-gold-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-gold-amethyst.png : tmp.gemstone_earring-gold-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-gold-diamond.png : tmp.gemstone_earring-gold-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-gold-emerald.png : tmp.gemstone_earring-gold-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-gold-jade.png : tmp.gemstone_earring-gold-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-gold-opal.png : tmp.gemstone_earring-gold-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-gold-ruby.png : tmp.gemstone_earring-gold-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-gold-sapphire.png : tmp.gemstone_earring-gold-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-gold-turquoise.png : tmp.gemstone_earring-gold-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-silver-amber.png : tmp.gemstone_earring-silver-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-silver-amethyst.png : tmp.gemstone_earring-silver-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-silver-diamond.png : tmp.gemstone_earring-silver-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-silver-emerald.png : tmp.gemstone_earring-silver-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-silver-jade.png : tmp.gemstone_earring-silver-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-silver-opal.png : tmp.gemstone_earring-silver-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-silver-ruby.png : tmp.gemstone_earring-silver-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-silver-sapphire.png : tmp.gemstone_earring-silver-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_earring-silver-turquoise.png : tmp.gemstone_earring-silver-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-bronze-amber.png : tmp.gemstone_hand_mirror-bronze-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-bronze-amethyst.png : tmp.gemstone_hand_mirror-bronze-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-bronze-diamond.png : tmp.gemstone_hand_mirror-bronze-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-bronze-emerald.png : tmp.gemstone_hand_mirror-bronze-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-bronze-jade.png : tmp.gemstone_hand_mirror-bronze-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-bronze-opal.png : tmp.gemstone_hand_mirror-bronze-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-bronze-ruby.png : tmp.gemstone_hand_mirror-bronze-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-bronze-sapphire.png : tmp.gemstone_hand_mirror-bronze-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-bronze-turquoise.png : tmp.gemstone_hand_mirror-bronze-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-copper-amber.png : tmp.gemstone_hand_mirror-copper-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-copper-amethyst.png : tmp.gemstone_hand_mirror-copper-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-copper-diamond.png : tmp.gemstone_hand_mirror-copper-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-copper-emerald.png : tmp.gemstone_hand_mirror-copper-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-copper-jade.png : tmp.gemstone_hand_mirror-copper-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-copper-opal.png : tmp.gemstone_hand_mirror-copper-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-copper-ruby.png : tmp.gemstone_hand_mirror-copper-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-copper-sapphire.png : tmp.gemstone_hand_mirror-copper-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-copper-turquoise.png : tmp.gemstone_hand_mirror-copper-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-gold-amber.png : tmp.gemstone_hand_mirror-gold-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-gold-amethyst.png : tmp.gemstone_hand_mirror-gold-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-gold-diamond.png : tmp.gemstone_hand_mirror-gold-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-gold-emerald.png : tmp.gemstone_hand_mirror-gold-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-gold-jade.png : tmp.gemstone_hand_mirror-gold-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-gold-opal.png : tmp.gemstone_hand_mirror-gold-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-gold-ruby.png : tmp.gemstone_hand_mirror-gold-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-gold-sapphire.png : tmp.gemstone_hand_mirror-gold-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-gold-turquoise.png : tmp.gemstone_hand_mirror-gold-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-silver-amber.png : tmp.gemstone_hand_mirror-silver-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-silver-amethyst.png : tmp.gemstone_hand_mirror-silver-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-silver-diamond.png : tmp.gemstone_hand_mirror-silver-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-silver-emerald.png : tmp.gemstone_hand_mirror-silver-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-silver-jade.png : tmp.gemstone_hand_mirror-silver-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-silver-opal.png : tmp.gemstone_hand_mirror-silver-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-silver-ruby.png : tmp.gemstone_hand_mirror-silver-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-silver-sapphire.png : tmp.gemstone_hand_mirror-silver-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_hand_mirror-silver-turquoise.png : tmp.gemstone_hand_mirror-silver-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-bronze-amber.png : tmp.gemstone_mirror-bronze-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-bronze-amethyst.png : tmp.gemstone_mirror-bronze-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-bronze-diamond.png : tmp.gemstone_mirror-bronze-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-bronze-emerald.png : tmp.gemstone_mirror-bronze-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-bronze-jade.png : tmp.gemstone_mirror-bronze-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-bronze-opal.png : tmp.gemstone_mirror-bronze-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-bronze-ruby.png : tmp.gemstone_mirror-bronze-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-bronze-sapphire.png : tmp.gemstone_mirror-bronze-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-bronze-turquoise.png : tmp.gemstone_mirror-bronze-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-copper-amber.png : tmp.gemstone_mirror-copper-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-copper-amethyst.png : tmp.gemstone_mirror-copper-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-copper-diamond.png : tmp.gemstone_mirror-copper-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-copper-emerald.png : tmp.gemstone_mirror-copper-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-copper-jade.png : tmp.gemstone_mirror-copper-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-copper-opal.png : tmp.gemstone_mirror-copper-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-copper-ruby.png : tmp.gemstone_mirror-copper-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-copper-sapphire.png : tmp.gemstone_mirror-copper-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-copper-turquoise.png : tmp.gemstone_mirror-copper-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-gold-amber.png : tmp.gemstone_mirror-gold-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-gold-amethyst.png : tmp.gemstone_mirror-gold-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-gold-diamond.png : tmp.gemstone_mirror-gold-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-gold-emerald.png : tmp.gemstone_mirror-gold-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-gold-jade.png : tmp.gemstone_mirror-gold-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-gold-opal.png : tmp.gemstone_mirror-gold-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-gold-ruby.png : tmp.gemstone_mirror-gold-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-gold-sapphire.png : tmp.gemstone_mirror-gold-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-gold-turquoise.png : tmp.gemstone_mirror-gold-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-silver-amber.png : tmp.gemstone_mirror-silver-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-silver-amethyst.png : tmp.gemstone_mirror-silver-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-silver-diamond.png : tmp.gemstone_mirror-silver-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-silver-emerald.png : tmp.gemstone_mirror-silver-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-silver-jade.png : tmp.gemstone_mirror-silver-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-silver-opal.png : tmp.gemstone_mirror-silver-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-silver-ruby.png : tmp.gemstone_mirror-silver-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-silver-sapphire.png : tmp.gemstone_mirror-silver-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_mirror-silver-turquoise.png : tmp.gemstone_mirror-silver-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-bronze-amber.png : tmp.gemstone_necklace-bronze-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-bronze-amethyst.png : tmp.gemstone_necklace-bronze-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-bronze-diamond.png : tmp.gemstone_necklace-bronze-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-bronze-emerald.png : tmp.gemstone_necklace-bronze-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-bronze-jade.png : tmp.gemstone_necklace-bronze-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-bronze-opal.png : tmp.gemstone_necklace-bronze-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-bronze-ruby.png : tmp.gemstone_necklace-bronze-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-bronze-sapphire.png : tmp.gemstone_necklace-bronze-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-bronze-turquoise.png : tmp.gemstone_necklace-bronze-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-copper-amber.png : tmp.gemstone_necklace-copper-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-copper-amethyst.png : tmp.gemstone_necklace-copper-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-copper-diamond.png : tmp.gemstone_necklace-copper-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-copper-emerald.png : tmp.gemstone_necklace-copper-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-copper-jade.png : tmp.gemstone_necklace-copper-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-copper-opal.png : tmp.gemstone_necklace-copper-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-copper-ruby.png : tmp.gemstone_necklace-copper-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-copper-sapphire.png : tmp.gemstone_necklace-copper-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-copper-turquoise.png : tmp.gemstone_necklace-copper-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-gold-amber.png : tmp.gemstone_necklace-gold-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-gold-amethyst.png : tmp.gemstone_necklace-gold-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-gold-diamond.png : tmp.gemstone_necklace-gold-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-gold-emerald.png : tmp.gemstone_necklace-gold-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-gold-jade.png : tmp.gemstone_necklace-gold-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-gold-opal.png : tmp.gemstone_necklace-gold-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-gold-ruby.png : tmp.gemstone_necklace-gold-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-gold-sapphire.png : tmp.gemstone_necklace-gold-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-gold-turquoise.png : tmp.gemstone_necklace-gold-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-silver-amber.png : tmp.gemstone_necklace-silver-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-silver-amethyst.png : tmp.gemstone_necklace-silver-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-silver-diamond.png : tmp.gemstone_necklace-silver-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-silver-emerald.png : tmp.gemstone_necklace-silver-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-silver-jade.png : tmp.gemstone_necklace-silver-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-silver-opal.png : tmp.gemstone_necklace-silver-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-silver-ruby.png : tmp.gemstone_necklace-silver-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-silver-sapphire.png : tmp.gemstone_necklace-silver-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_necklace-silver-turquoise.png : tmp.gemstone_necklace-silver-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-bronze-amber.png : tmp.gemstone_pendant-bronze-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-bronze-amethyst.png : tmp.gemstone_pendant-bronze-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-bronze-diamond.png : tmp.gemstone_pendant-bronze-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-bronze-emerald.png : tmp.gemstone_pendant-bronze-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-bronze-jade.png : tmp.gemstone_pendant-bronze-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-bronze-opal.png : tmp.gemstone_pendant-bronze-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-bronze-ruby.png : tmp.gemstone_pendant-bronze-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-bronze-sapphire.png : tmp.gemstone_pendant-bronze-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-bronze-turquoise.png : tmp.gemstone_pendant-bronze-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-copper-amber.png : tmp.gemstone_pendant-copper-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-copper-amethyst.png : tmp.gemstone_pendant-copper-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-copper-diamond.png : tmp.gemstone_pendant-copper-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-copper-emerald.png : tmp.gemstone_pendant-copper-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-copper-jade.png : tmp.gemstone_pendant-copper-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-copper-opal.png : tmp.gemstone_pendant-copper-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-copper-ruby.png : tmp.gemstone_pendant-copper-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-copper-sapphire.png : tmp.gemstone_pendant-copper-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-copper-turquoise.png : tmp.gemstone_pendant-copper-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-gold-amber.png : tmp.gemstone_pendant-gold-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-gold-amethyst.png : tmp.gemstone_pendant-gold-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-gold-diamond.png : tmp.gemstone_pendant-gold-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-gold-emerald.png : tmp.gemstone_pendant-gold-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-gold-jade.png : tmp.gemstone_pendant-gold-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-gold-opal.png : tmp.gemstone_pendant-gold-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-gold-ruby.png : tmp.gemstone_pendant-gold-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-gold-sapphire.png : tmp.gemstone_pendant-gold-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-gold-turquoise.png : tmp.gemstone_pendant-gold-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-silver-amber.png : tmp.gemstone_pendant-silver-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-silver-amethyst.png : tmp.gemstone_pendant-silver-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-silver-diamond.png : tmp.gemstone_pendant-silver-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-silver-emerald.png : tmp.gemstone_pendant-silver-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-silver-jade.png : tmp.gemstone_pendant-silver-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-silver-opal.png : tmp.gemstone_pendant-silver-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-silver-ruby.png : tmp.gemstone_pendant-silver-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-silver-sapphire.png : tmp.gemstone_pendant-silver-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_pendant-silver-turquoise.png : tmp.gemstone_pendant-silver-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-bronze-amber.png : tmp.gemstone_ring-bronze-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-bronze-amethyst.png : tmp.gemstone_ring-bronze-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-bronze-diamond.png : tmp.gemstone_ring-bronze-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-bronze-emerald.png : tmp.gemstone_ring-bronze-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-bronze-jade.png : tmp.gemstone_ring-bronze-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-bronze-opal.png : tmp.gemstone_ring-bronze-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-bronze-ruby.png : tmp.gemstone_ring-bronze-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-bronze-sapphire.png : tmp.gemstone_ring-bronze-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-bronze-turquoise.png : tmp.gemstone_ring-bronze-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-copper-amber.png : tmp.gemstone_ring-copper-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-copper-amethyst.png : tmp.gemstone_ring-copper-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-copper-diamond.png : tmp.gemstone_ring-copper-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-copper-emerald.png : tmp.gemstone_ring-copper-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-copper-jade.png : tmp.gemstone_ring-copper-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-copper-opal.png : tmp.gemstone_ring-copper-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-copper-ruby.png : tmp.gemstone_ring-copper-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-copper-sapphire.png : tmp.gemstone_ring-copper-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-copper-turquoise.png : tmp.gemstone_ring-copper-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-gold-amber.png : tmp.gemstone_ring-gold-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-gold-amethyst.png : tmp.gemstone_ring-gold-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-gold-diamond.png : tmp.gemstone_ring-gold-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-gold-emerald.png : tmp.gemstone_ring-gold-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-gold-jade.png : tmp.gemstone_ring-gold-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-gold-opal.png : tmp.gemstone_ring-gold-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-gold-ruby.png : tmp.gemstone_ring-gold-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-gold-sapphire.png : tmp.gemstone_ring-gold-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-gold-turquoise.png : tmp.gemstone_ring-gold-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-silver-amber.png : tmp.gemstone_ring-silver-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-silver-amethyst.png : tmp.gemstone_ring-silver-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-silver-diamond.png : tmp.gemstone_ring-silver-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-silver-emerald.png : tmp.gemstone_ring-silver-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-silver-jade.png : tmp.gemstone_ring-silver-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-silver-opal.png : tmp.gemstone_ring-silver-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-silver-ruby.png : tmp.gemstone_ring-silver-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-silver-sapphire.png : tmp.gemstone_ring-silver-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_ring-silver-turquoise.png : tmp.gemstone_ring-silver-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-bronze-amber.png : tmp.gemstone_statue-bronze-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-bronze-amethyst.png : tmp.gemstone_statue-bronze-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-bronze-diamond.png : tmp.gemstone_statue-bronze-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-bronze-emerald.png : tmp.gemstone_statue-bronze-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-bronze-jade.png : tmp.gemstone_statue-bronze-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-bronze-opal.png : tmp.gemstone_statue-bronze-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-bronze-ruby.png : tmp.gemstone_statue-bronze-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-bronze-sapphire.png : tmp.gemstone_statue-bronze-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-bronze-turquoise.png : tmp.gemstone_statue-bronze-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-copper-amber.png : tmp.gemstone_statue-copper-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-copper-amethyst.png : tmp.gemstone_statue-copper-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-copper-diamond.png : tmp.gemstone_statue-copper-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-copper-emerald.png : tmp.gemstone_statue-copper-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-copper-jade.png : tmp.gemstone_statue-copper-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-copper-opal.png : tmp.gemstone_statue-copper-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-copper-ruby.png : tmp.gemstone_statue-copper-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-copper-sapphire.png : tmp.gemstone_statue-copper-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-copper-turquoise.png : tmp.gemstone_statue-copper-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-gold-amber.png : tmp.gemstone_statue-gold-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-gold-amethyst.png : tmp.gemstone_statue-gold-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-gold-diamond.png : tmp.gemstone_statue-gold-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-gold-emerald.png : tmp.gemstone_statue-gold-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-gold-jade.png : tmp.gemstone_statue-gold-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-gold-opal.png : tmp.gemstone_statue-gold-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-gold-ruby.png : tmp.gemstone_statue-gold-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-gold-sapphire.png : tmp.gemstone_statue-gold-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-gold-turquoise.png : tmp.gemstone_statue-gold-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-silver-amber.png : tmp.gemstone_statue-silver-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-silver-amethyst.png : tmp.gemstone_statue-silver-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-silver-diamond.png : tmp.gemstone_statue-silver-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-silver-emerald.png : tmp.gemstone_statue-silver-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-silver-jade.png : tmp.gemstone_statue-silver-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-silver-opal.png : tmp.gemstone_statue-silver-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-silver-ruby.png : tmp.gemstone_statue-silver-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-silver-sapphire.png : tmp.gemstone_statue-silver-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_statue-silver-turquoise.png : tmp.gemstone_statue-silver-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-bronze-amber.png : tmp.gemstone_vase-bronze-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-bronze-amethyst.png : tmp.gemstone_vase-bronze-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-bronze-diamond.png : tmp.gemstone_vase-bronze-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-bronze-emerald.png : tmp.gemstone_vase-bronze-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-bronze-jade.png : tmp.gemstone_vase-bronze-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-bronze-opal.png : tmp.gemstone_vase-bronze-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-bronze-ruby.png : tmp.gemstone_vase-bronze-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-bronze-sapphire.png : tmp.gemstone_vase-bronze-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-bronze-turquoise.png : tmp.gemstone_vase-bronze-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-copper-amber.png : tmp.gemstone_vase-copper-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-copper-amethyst.png : tmp.gemstone_vase-copper-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-copper-diamond.png : tmp.gemstone_vase-copper-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-copper-emerald.png : tmp.gemstone_vase-copper-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-copper-jade.png : tmp.gemstone_vase-copper-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-copper-opal.png : tmp.gemstone_vase-copper-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-copper-ruby.png : tmp.gemstone_vase-copper-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-copper-sapphire.png : tmp.gemstone_vase-copper-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-copper-turquoise.png : tmp.gemstone_vase-copper-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-gold-amber.png : tmp.gemstone_vase-gold-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-gold-amethyst.png : tmp.gemstone_vase-gold-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-gold-diamond.png : tmp.gemstone_vase-gold-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-gold-emerald.png : tmp.gemstone_vase-gold-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-gold-jade.png : tmp.gemstone_vase-gold-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-gold-opal.png : tmp.gemstone_vase-gold-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-gold-ruby.png : tmp.gemstone_vase-gold-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-gold-sapphire.png : tmp.gemstone_vase-gold-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-gold-turquoise.png : tmp.gemstone_vase-gold-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-silver-amber.png : tmp.gemstone_vase-silver-amber.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-silver-amethyst.png : tmp.gemstone_vase-silver-amethyst.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-silver-diamond.png : tmp.gemstone_vase-silver-diamond.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-silver-emerald.png : tmp.gemstone_vase-silver-emerald.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-silver-jade.png : tmp.gemstone_vase-silver-jade.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-silver-opal.png : tmp.gemstone_vase-silver-opal.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-silver-ruby.png : tmp.gemstone_vase-silver-ruby.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-silver-sapphire.png : tmp.gemstone_vase-silver-sapphire.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 gemstone_vase-silver-turquoise.png : tmp.gemstone_vase-silver-turquoise.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 hand_mirror-bronze.png : tmp.hand_mirror-bronze.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 hand_mirror-copper.png : tmp.hand_mirror-copper.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 hand_mirror-gold.png : tmp.hand_mirror-gold.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 hand_mirror-silver.png : tmp.hand_mirror-silver.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 mirror-bronze.png : tmp.mirror-bronze.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 mirror-copper.png : tmp.mirror-copper.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 mirror-gold.png : tmp.mirror-gold.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 mirror-silver.png : tmp.mirror-silver.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 necklace-bronze.png : tmp.necklace-bronze.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 necklace-copper.png : tmp.necklace-copper.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 necklace-gold.png : tmp.necklace-gold.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 necklace-silver.png : tmp.necklace-silver.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 pendant-bronze.png : tmp.pendant-bronze.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 pendant-copper.png : tmp.pendant-copper.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 pendant-gold.png : tmp.pendant-gold.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 pendant-silver.png : tmp.pendant-silver.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 ring-bronze.png : tmp.ring-bronze.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 ring-copper.png : tmp.ring-copper.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 ring-gold.png : tmp.ring-gold.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 ring-silver.png : tmp.ring-silver.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 statue-bronze.png : tmp.statue-bronze.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 statue-copper.png : tmp.statue-copper.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 statue-gold.png : tmp.statue-gold.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 statue-silver.png : tmp.statue-silver.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 vase-bronze.png : tmp.vase-bronze.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 vase-copper.png : tmp.vase-copper.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 vase-gold.png : tmp.vase-gold.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 vase-silver.png : tmp.vase-silver.png
-	$(AM_V_GEN) @convert@ tmp.$@ -trim $@
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
 
 tmp.bracelet-bronze.png: treasures.blend
 	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- "*" > /dev/null
@@ -1523,32 +1163,22 @@ earring.obj gemstone_bracelet.obj gemstone_earring.obj gemstone_hand_mirror.obj 
 
 bookpile.png : bookpile.blend 
 	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/render.py -- $@ > /dev/null
-	@convert@ tmp.$@ -trim +repage -scale 100 $@
-	$(RM) tmp.$@
 	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
 
 cafe.png : cafe.blend 
 	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/render.py -- $@ > /dev/null
-	@convert@ tmp.$@ -trim +repage -scale 100 $@
-	$(RM) tmp.$@
 	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
 
 diary.png : diary.blend 
 	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/render.py -- $@ > /dev/null
-	@convert@ tmp.$@ -trim +repage -scale 100 $@
-	$(RM) tmp.$@
 	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
 
 gravestone.png : gravestone.blend 
 	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/render.py -- $@ > /dev/null
-	@convert@ tmp.$@ -trim +repage -scale x200 $@
-	$(RM) tmp.$@
 	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
 
 logo.png : logo.blend logo_tex.png
 	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/render.py -- $@ > /dev/null
-	@convert@ tmp.$@ -trim +repage -scale 520x55! $@
-	$(RM) tmp.$@
 	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
 
 logo.mtl : logo.obj
@@ -1558,20 +1188,14 @@ logo.obj : logo.blend
 
 notes.png : notes.blend 
 	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/render.py -- $@ > /dev/null
-	@convert@ tmp.$@ -trim +repage -scale 100 $@
-	$(RM) tmp.$@
 	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
 
 treasurestand.png : treasurestand.blend 
 	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/render.py -- $@ > /dev/null
-	@convert@ tmp.$@ -trim +repage -scale x200 $@
-	$(RM) tmp.$@
 	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
 
 zombie.png : zombie.blend 
 	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/render.py -- $@ > /dev/null
-	@convert@ tmp.$@ -trim +repage -scale x200 $@
-	$(RM) tmp.$@
 	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
 
 

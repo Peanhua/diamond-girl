@@ -512,8 +512,8 @@ void widget_to_image_size(struct widget * widget, struct image * image)
     {
       int w, h;
 
-      w = image->width;
-      h = image->height;
+      w = image->content_width;
+      h = image->content_height;
       if(widget->flags_ & WF_DRAW_BORDERS)
         {
           w += 2;
@@ -522,7 +522,7 @@ void widget_to_image_size(struct widget * widget, struct image * image)
       widget_set_width(widget, w);
       widget_set_height(widget, h);
     }
-}  
+}
 
 
 

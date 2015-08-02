@@ -1,6 +1,6 @@
 # Important notice
 
-The development versions of Lucy the Diamond Girl may break your save game files.
+The development versions of Lucy the Diamond Girl may break your settings, saved games, highscores, and other progress.
 
 Latest official release can be found from the website: [www.netikka.net/joyr/diamond_girl/](http://www.netikka.net/joyr/diamond_girl/)
 
@@ -17,8 +17,8 @@ collecting some number of diamonds, and then moving to the exit.
 * four caves, with a total of 173 levels
 * keyboard and joystick support
 * three game modes
-* 15 traits to upgrade players character
-* quests
+* 18 traits to upgrade players character and unlock features
+* quests in several quest lines
 
 
 More information

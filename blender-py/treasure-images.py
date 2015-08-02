@@ -2,8 +2,6 @@ import bpy
 import sys
 
 scene = bpy.context.scene
-scene.render.resolution_x = 1024
-scene.render.resolution_y = 768
 scene.render.image_settings.file_format = 'PNG'
 scene.frame_set(1)
 

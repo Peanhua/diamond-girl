@@ -44,6 +44,7 @@ extern void title_map_tick(struct map * map);
 extern void title_help_tick(struct widget * map_widget);
 
 extern bool title_map_girl_movement(struct map * map, struct gamedata * gamedata);
+extern void title_update_newgame_navigation(struct widget * root);
 
 extern void draw_title_starfield_initialize(void);
 extern void draw_title_starfield(void);

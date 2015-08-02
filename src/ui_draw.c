@@ -29,7 +29,7 @@
 
 static bool ui_draw_process(struct widget * obj, int z);
 
-static struct stack * destroy;
+static struct stack * destroy = NULL;
 
 void ui_draw(bool colorbuffer_clearing DG_UNUSED_WITHOUT_OPENGL)
 {
@@ -59,7 +59,10 @@ void ui_draw(bool colorbuffer_clearing DG_UNUSED_WITHOUT_OPENGL)
 
   bool found;
 
-  destroy = stack_new();
+  if(destroy == NULL)
+    destroy = stack_new();
+  destroy->size = 0;
+  
   found = true;
   for(int z = 0; found == true || z < 9; z++)
     found = ui_draw_process(root, z);
@@ -73,8 +76,6 @@ void ui_draw(bool colorbuffer_clearing DG_UNUSED_WITHOUT_OPENGL)
     if(widget != NULL)
       widget_delete(widget);
   } while(widget != NULL);
-
-  destroy = stack_free(destroy);
 
   gfx_flip();
 }

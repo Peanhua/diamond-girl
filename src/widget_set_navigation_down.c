@@ -30,6 +30,9 @@ void widget_set_navigation_down(struct widget * widget, struct widget * down)
   assert(down != NULL);
   assert(widget != down);
 
+  if(widget->navigation_down_ == down)
+    return;
+  
   assert(widget->navigation_down_ == NULL);
 
   enum WIDGET_TYPE type_up;

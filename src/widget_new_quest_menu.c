@@ -27,6 +27,7 @@
 #include "image.h"
 #include "quest.h"
 #include "random.h"
+#include "title.h"
 #include "treasure.h"
 #include "widget.h"
 #include <assert.h>
@@ -132,6 +133,7 @@ static void on_questline_selected(struct widget * this)
 
       window = widget_get_widget_pointer(this, "window");
       refresh(window);
+      title_update_newgame_navigation(NULL);
       widget_set_focus(widget_find(window, "obj_questline")); // Using widget_find() to find this, because the call to refresh() has deleted this (and created new one).
     }
 }
@@ -245,7 +247,7 @@ static void refresh(struct widget * window)
           widget_add_flags(obj_diary, WF_ONLY_FOCUS_BORDERS);
           widget_set_tooltip(obj_diary, gettext("My Diary"));
           widget_set_on_release(obj_diary, on_quest_diary_clicked);
-          widget_to_image_size(obj_diary, gfx_image(GFX_IMAGE_BOOKPILE));
+          widget_to_image_size(obj_diary, gfx_image(GFX_IMAGE_DIARY));
           tmpy = widget_y(obj_diary) + widget_height(obj_diary);
           if(tmpy > y)
             y = tmpy;

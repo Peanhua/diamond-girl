@@ -59,11 +59,6 @@ if test "x$blender" == "x" ; then
   AC_MSG_ERROR(['blender' not found error, install Blender.])
 fi
 
-AC_CHECK_PROG([convert], [convert], [convert])
-if test "x$convert" == "x" ; then
-  AC_MSG_ERROR(['convert' not found error, install Imagemagick or similar.])
-fi
-
 # Checks for libraries.
 AC_CHECK_LIB(m, sinf)
 

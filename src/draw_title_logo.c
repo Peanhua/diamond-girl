@@ -46,10 +46,10 @@ static struct map * map = NULL;
 static struct td_object * logo;
 
 /* The stable destination location and stuff for logo. */
-static const float logo_center_pos[3] = {  0.0f, 3.0f, 6.6f };
+static const float logo_center_pos[3] = {  0.0f, 4.0f, 6.8f };
 static const float logo_center_sca[3] = {  1.0f, 1.0f, 1.0f };
 static const float logo_center_rot    = 40.0f;
-static const float light_center_pos[3] = { 0, 4, -12 };
+static const float light_center_pos[3] = { 0, 6, -12 };
 /* The current state of logo. */
 static float logo_pos[3];
 static float logo_sca[3];
@@ -166,7 +166,7 @@ void draw_title_logo(void)
 
         glTranslatef(logo_pos[0], logo_pos[1], logo_pos[2]);
         glRotatef(logo_rot + 70, 1.0, 0.0, 0.0);
-        glScalef(logo_sca[0] * 1.0f, logo_sca[1] * 0.3f, logo_sca[2] * 1.0f);
+        glScalef(logo_sca[0], logo_sca[1], logo_sca[2]);
 
         td_object_draw(logo);
             

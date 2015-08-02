@@ -76,7 +76,6 @@ static void player_death(struct gamedata * gamedata, bool sounds);
 static void on_title_exit(bool pressed, SDL_Event * event);
 static void on_trait_changed(void * user_data, int64_t changes);
 static void reposition_midarea(void);
-static void update_newgame_navigation(struct widget * root);
 
 static bool quit;
 
@@ -757,7 +756,6 @@ static void setup_ui(trait_t traits_to_highlight)
     widget_set_navigation_down(uiobj_highscores, uiobj_newgame);
   else if(uiobj_partystatus != NULL)
     widget_set_navigation_down(widget_get_widget_pointer(uiobj_partystatus, "focus_down_object"), uiobj_newgame);
-  widget_quest_menu_setup_navigation(uiobj_quest_menu, uiobj_newgame);
   if(last_trait != NULL)
     widget_set_navigation_left(uiobj_newgame, last_trait);
 
@@ -892,9 +890,6 @@ static void setup_ui(trait_t traits_to_highlight)
 
   widget_set_navigation_leftright(uiobj_quit, uiobj_game_mode);
 
-
-  update_newgame_navigation(root);
-  
 
   struct theme * theme;
 
@@ -1122,7 +1117,6 @@ static void play_game(void)
   midarea_x         = saved_midarea_x;
   midarea_scrolling = saved_midarea_scrolling;
   reposition_midarea();
-  update_newgame_navigation(NULL);
 
 
   struct widget * uiobj_newgame;
@@ -1942,7 +1936,7 @@ static void reposition_midarea(void)
     if(ws[i] != NULL)
       widget_set_x(ws[i], widget_get_long(ws[i], "original-x") - midarea_x);
 
-  update_newgame_navigation(NULL);
+  title_update_newgame_navigation(NULL);
 
   assert(uiobj_quests != NULL);
   if(midarea_scrolling == 1)
@@ -1952,7 +1946,7 @@ static void reposition_midarea(void)
 }
 
 
-static void update_newgame_navigation(struct widget * root)
+void title_update_newgame_navigation(struct widget * root)
 {
   struct widget * uiobj_newgame;
   
@@ -1960,11 +1954,11 @@ static void update_newgame_navigation(struct widget * root)
   assert(uiobj_newgame != NULL);
 
   uiobj_newgame->navigation_up_ = NULL;
-  
+
   if((midarea_scrolling == 0 && midarea_x == 0) || midarea_scrolling < 0)
     {
       struct widget * uiobj_highscores;
-      
+
       uiobj_highscores = widget_find(root, "highscores");
       
       if(uiobj_highscores != NULL)
@@ -1984,6 +1978,7 @@ static void update_newgame_navigation(struct widget * root)
           w = widget_get_widget_pointer(quest_menu, "focus_down_object");
           if(w != NULL)
             widget_set_navigation_up(uiobj_newgame, w);
+          widget_quest_menu_setup_navigation(quest_menu, uiobj_newgame);
         }
     }
 }

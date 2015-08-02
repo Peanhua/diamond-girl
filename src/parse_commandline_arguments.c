@@ -155,7 +155,7 @@ bool parse_commandline_arguments(int argc, char * argv[])
       printf("                          Possible values for NAME are: en, fi, fr\n");
       printf("  -F | --show-fps         Output FPS every 1000th frame to stdout (console). (*)\n");
       printf("  -N | --no-show-fps      Don't output FPS every 1000th frame to stdout. (*)\n");
-      printf("  -c | --capture          Capture each frame into the current directory as a bmp file.\n");
+      printf("  -c | --capture          Capture each frame into the current directory as a png file.\n");
       printf("  --capture-frameskip=N   Capture every Nth frame.\n");
       printf("  -C | --no-swap-control  Disable OpenGL swap control, may allow faster FPS than the refresh rate of the monitor is.\n");
       printf("  --playback=NAME         Playback NAME and then exit. The name can be seen when manually playbacking a game.\n");

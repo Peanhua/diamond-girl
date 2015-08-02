@@ -65,7 +65,7 @@ char const * quest_description(struct quest * quest)
                    cave_displayname(quest->treasure_cave));
           break;
         case 2:
-          snprintf(buf, sizeof buf, gettext("More thorough study of the notes of %s %s revealed knowledge about %s named '%s'.  The old people buried it somewhere in %s."),
+          snprintf(buf, sizeof buf, gettext("More thorough study of the notes of %s %s revealed knowledge about %s named '%s'.  The ancient people buried it somewhere in %s."),
                    relation_type_name(quest->questline->ancient_person.relation_to_player),
                    quest->questline->ancient_person.name,
                    treasure_type_name(quest->treasure_object->type),
@@ -87,6 +87,57 @@ char const * quest_description(struct quest * quest)
                    cave_displayname(quest->treasure_cave));
           break;
         case 1:
+          switch(prevquest->treasure_object->type)
+            {
+            case TREASURE_TYPE_MIRROR:
+              snprintf(buf, sizeof buf, gettext("Stuck between the frames of the %s %s '%s' is a note: %s"),
+                       treasure_material_name(prevquest->treasure_object->material),
+                       treasure_type_name(prevquest->treasure_object->type),
+                       prevquest->treasure_object->name,
+                       cave_displayname(quest->treasure_cave));
+              break;
+            case TREASURE_TYPE_STATUE:
+              snprintf(buf, sizeof buf, gettext("Stuck in the nose of the %s %s '%s' is a note: %s"),
+                       treasure_material_name(prevquest->treasure_object->material),
+                       treasure_type_name(prevquest->treasure_object->type),
+                       prevquest->treasure_object->name,
+                       cave_displayname(quest->treasure_cave));
+              break;
+            case TREASURE_TYPE_VASE:
+              snprintf(buf, sizeof buf, gettext("Inside of a false bottom of the %s %s '%s' is a note: %s"),
+                       treasure_material_name(prevquest->treasure_object->material),
+                       treasure_type_name(prevquest->treasure_object->type),
+                       prevquest->treasure_object->name,
+                       cave_displayname(quest->treasure_cave));
+              break;
+            case TREASURE_TYPE_BRACELET:
+              snprintf(buf, sizeof buf, gettext("Inside one of the rings of the %s %s '%s' is a note: %s"),
+                       treasure_material_name(prevquest->treasure_object->material),
+                       treasure_type_name(prevquest->treasure_object->type),
+                       prevquest->treasure_object->name,
+                       cave_displayname(quest->treasure_cave));
+              break;
+            case TREASURE_TYPE_HAND_MIRROR:
+              snprintf(buf, sizeof buf, gettext("Inside the hollow handle of the %s %s '%s' is a note: %s"),
+                       treasure_material_name(prevquest->treasure_object->material),
+                       treasure_type_name(prevquest->treasure_object->type),
+                       prevquest->treasure_object->name,
+                       cave_displayname(quest->treasure_cave));
+              break;
+            case TREASURE_TYPE_EARRING:
+            case TREASURE_TYPE_NECKLACE:
+            case TREASURE_TYPE_PENDANT:
+            case TREASURE_TYPE_RING:
+            case TREASURE_TYPE_SIZEOF_:
+              snprintf(buf, sizeof buf, gettext("Inside the %s %s '%s' is small writing: %s"),
+                       treasure_material_name(prevquest->treasure_object->material),
+                       treasure_type_name(prevquest->treasure_object->type),
+                       prevquest->treasure_object->name,
+                       cave_displayname(quest->treasure_cave));
+              break;
+            }
+          break;
+        case 2:
           { /* Make some of the cave name characters garbage. */
             char tmp[20 + 1];
             int  garbageinds[] = { 1, 3, 5, 6, 9, 10, 11, 16, 18, 19, 20, -1 };
@@ -119,7 +170,7 @@ char const * quest_description(struct quest * quest)
                                               tmp);
           }
           break;
-        case 2:
+        case 3:
           snprintf(buf, sizeof buf, gettext("The %s seems to be one of many, perhaps there are more nearby."),
                    treasure_longname(prevquest->treasure_object));
           break;
