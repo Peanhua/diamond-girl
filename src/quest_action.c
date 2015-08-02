@@ -116,7 +116,7 @@ void quest_action(struct questline * questline, enum QUEST_ACTION action)
           case QUEST_TYPE_RELATIVE:
             snprintf(buf, sizeof buf, gettext("I've gone through the notes of %s again,\nbut found nothing new."), questline->ancient_person.name);
             break;
-          case QUEST_TYPE_CHILDHOOD_DREAM:
+          case QUEST_TYPE_LIBRARY:
           case QUEST_TYPE_ZOMBIES:
             snprintf(buf, sizeof buf, "%s", gettext("I've gone through the notes again,\nbut found nothing new."));
             break;

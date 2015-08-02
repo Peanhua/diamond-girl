@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: diamond-girl 1.25b\n"
 "Report-Msgid-Bugs-To: joniyrjana@gmail.com\n"
-"POT-Creation-Date: 2015-08-02 11:45+0300\n"
+"POT-Creation-Date: 2015-08-02 21:15+0300\n"
 "PO-Revision-Date: 2015-06-18 19:22+0200\n"
 "Last-Translator: Steve Joni Yrjänä <joniyrjana@gmail.com>\n"
 "Language-Team: Finnish\n"
@@ -517,28 +517,72 @@ msgstr ""
 msgid "The %s seems to be one of many, perhaps there are more nearby."
 msgstr ""
 
-#: src/quest_description.c:185
+#: src/quest_description.c:184
 #, c-format
-msgid "I have found a book of %s %s from the library.  Her %s must have been buried somewhere in %s.  I decided to pursue my childhood dream of finding it."
+msgid "I have found a book of ancient %s named '%s' from the library.  %s legendary %s '%s' must have been buried somewhere in %s."
 msgstr ""
 
-#: src/quest_description.c:191
-#, c-format
-msgid "I have found a book of %s %s from the library.  His %s must have been buried somewhere in %s.  I decided to pursue my childhood dream of finding it."
+#: src/quest_description.c:187 src/quest_description.c:225
+msgid "Her"
 msgstr ""
 
-#: src/quest_description.c:203
-msgid "The library is filled with zombies!"
+#: src/quest_description.c:187 src/quest_description.c:225
+msgid "His"
+msgstr ""
+
+#: src/quest_description.c:205
+msgid "the second"
+msgstr ""
+
+#: src/quest_description.c:207
+msgid "the third"
 msgstr ""
 
 #: src/quest_description.c:209
+msgid "the fourth"
+msgstr ""
+
+#: src/quest_description.c:211
+msgid "the fifth"
+msgstr ""
+
+#: src/quest_description.c:213
+msgid "the sixth"
+msgstr ""
+
+#: src/quest_description.c:215
+msgid "the seventh"
+msgstr ""
+
+#: src/quest_description.c:217
+msgid "the eighth"
+msgstr ""
+
+#: src/quest_description.c:219
+msgid "the ninth"
+msgstr ""
+
+#: src/quest_description.c:221
+msgid "the tenth and the last"
+msgstr ""
+
+#: src/quest_description.c:222
+#, c-format
+msgid "Found %s book of the ancient %s from the library.  %s famous %s named '%s' must have been buried somewhere in %s."
+msgstr ""
+
+#: src/quest_description.c:237
+msgid "The library is filled with zombies!"
+msgstr ""
+
+#: src/quest_description.c:243
 #, c-format
 msgid "%s %s, the leader of the zombies, promised they would leave if I can find the %s of the ancient %s %s.  I should start from %s."
 msgstr ""
 
-#: src/quest_description.c:225
+#: src/quest_description.c:259
 #, c-format
-msgid "%s %s, the leader of the zombies says the next lead should be somewhere in %s."
+msgid "%s %s, the leader of the zombies, says the next lead should be somewhere in %s."
 msgstr ""
 
 #: src/quest_diary.c:49 src/widget_new_quest_menu.c:248

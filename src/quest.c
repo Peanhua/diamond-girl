@@ -201,10 +201,10 @@ struct questline * questline_new(enum QUEST_TYPE type, enum RELATION_TYPE first_
           qcount = 0;
           switch(type)
             {
-            case QUEST_TYPE_RELATIVE:        qcount = 10; break;
-            case QUEST_TYPE_CHILDHOOD_DREAM: qcount = 20; break;
-            case QUEST_TYPE_ZOMBIES:         qcount =  7; break;
-            case QUEST_TYPE_SIZEOF_:         qcount =  0; break;
+            case QUEST_TYPE_RELATIVE: qcount = 10; break;
+            case QUEST_TYPE_LIBRARY:  qcount = 20; break;
+            case QUEST_TYPE_ZOMBIES:  qcount =  7; break;
+            case QUEST_TYPE_SIZEOF_:  qcount =  0; break;
             }
           assert(qcount > 0);
 
@@ -331,7 +331,7 @@ static struct quest * quest_new(enum QUEST_TYPE type, struct questline * questli
       
       /* Treasure location */
       quest->treasure_cave = strdup(caves[get_rand(3)]);
-      quest->treasure_level = 1 + level;
+      quest->treasure_level = 10 + level * 4 / 3;
 
       /* Action to open and description + other quest type specific stuff */
       struct quest * prevquest;
@@ -380,15 +380,37 @@ static struct quest * quest_new(enum QUEST_TYPE type, struct questline * questli
               quest->description_id = 1 + get_rand(2);
             }
         }
-      else if(type == QUEST_TYPE_CHILDHOOD_DREAM)
+      else if(type == QUEST_TYPE_LIBRARY)
         {
-          quest->action_to_open = QUEST_ACTION_VISIT_LIBRARY;
-          quest->description_id = 0;
+          unsigned int libvisits[10] = { 0, 1, 6, 8, 11, 12, 14, 17, 18, 19 };
+          bool found;
+
+          found = false;
+          for(int i = 0; found == false && i < 10; i++)
+            if(level == libvisits[i])
+              {
+                found = true;
+                quest->action_to_open = QUEST_ACTION_VISIT_LIBRARY;
+                quest->description_id = i;
+              }
+          if(found == false)
+            {
+              if(get_rand(100) < 66)
+                {
+                  quest->action_to_open = QUEST_ACTION_EXAMINE_OBJECT;
+                  quest->description_id = get_rand(3);
+                }
+              else
+                {
+                  quest->action_to_open = QUEST_ACTION_EXAMINE_NOTES;
+                  quest->description_id = 1 + get_rand(2);
+                }
+            }
         }
       else if(type == QUEST_TYPE_ZOMBIES)
         {
           quest->action_to_open = QUEST_ACTION_VISIT_LIBRARY;
-          quest->description_id = 1 + level;
+          quest->description_id = 10 + level;
         }
       else
         assert(0);

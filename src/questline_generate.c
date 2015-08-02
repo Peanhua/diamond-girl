@@ -110,7 +110,7 @@ struct questline * questline_generate(enum QUEST_TYPE type)
             }
         }
     }
-  else if(type == QUEST_TYPE_CHILDHOOD_DREAM && typecount < 1)
+  else if(type == QUEST_TYPE_LIBRARY && typecount < 1)
     {
       if(get_rand(100) < 50)
         reltype = RELATION_TYPE_FEMALE_FRIEND;
@@ -164,7 +164,7 @@ struct questline * questline_generate(enum QUEST_TYPE type)
       questline = questline_new(type, reltype, ap_reltype);
       if(questline != NULL)
         {
-          if(type == QUEST_TYPE_CHILDHOOD_DREAM)
+          if(type == QUEST_TYPE_LIBRARY)
             {
               questline->opening_weekday      = 6;
               questline->opening_monthday_max = 7;

@@ -32,12 +32,10 @@ char const * questline_name(struct questline * questline)
   switch(questline->type)
     {
     case QUEST_TYPE_RELATIVE:
+    case QUEST_TYPE_LIBRARY:
       snprintf(buf, sizeof buf, gettext("%s %s"),
                relation_type_name(questline->ancient_person.relation_to_player),
                questline->ancient_person.name);
-      break;
-    case QUEST_TYPE_CHILDHOOD_DREAM:
-      snprintf(buf, sizeof buf, gettext("Childhood dream"));
       break;
     case QUEST_TYPE_ZOMBIES:
       snprintf(buf, sizeof buf, gettext("Zombie %s %s"),

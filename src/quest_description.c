@@ -180,21 +180,55 @@ char const * quest_description(struct quest * quest)
     case QUEST_ACTION_VISIT_LIBRARY:
       switch(quest->description_id)
         {
-        case 0:
-          if(quest->questline->ancient_person.gender == GENDER_FEMALE)
-            snprintf(buf, sizeof buf, gettext("I have found a book of %s %s from the library.  Her %s must have been buried somewhere in %s.  I decided to pursue my childhood dream of finding it."),
-                     relation_type_name(quest->questline->ancient_person.relation_to_player),
-                     quest->questline->ancient_person.name,
-                     treasure_longname(quest->treasure_object),
-                     cave_displayname(quest->treasure_cave));
-          else
-            snprintf(buf, sizeof buf, gettext("I have found a book of %s %s from the library.  His %s must have been buried somewhere in %s.  I decided to pursue my childhood dream of finding it."),
-                     relation_type_name(quest->questline->ancient_person.relation_to_player),
-                     quest->questline->ancient_person.name,
-                     treasure_longname(quest->treasure_object),
-                     cave_displayname(quest->treasure_cave));
+        case 0: /* Library */
+          snprintf(buf, sizeof buf, gettext("I have found a book of ancient %s named '%s' from the library.  %s legendary %s '%s' must have been buried somewhere in %s."),
+                   relation_type_name(quest->questline->ancient_person.relation_to_player),
+                   quest->questline->ancient_person.name,
+                   quest->questline->ancient_person.gender == GENDER_FEMALE ? gettext("Her") : gettext("His"),
+                   treasure_type_name(quest->treasure_object->type),
+                   quest->treasure_object->name,
+                   cave_displayname(quest->treasure_cave));
           break;
         case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+          {
+            char * nt;
+
+            if(quest->description_id == 1)
+              nt = gettext("the second");
+            else if(quest->description_id == 2)
+              nt = gettext("the third");
+            else if(quest->description_id == 3)
+              nt = gettext("the fourth");
+            else if(quest->description_id == 4)
+              nt = gettext("the fifth");
+            else if(quest->description_id == 5)
+              nt = gettext("the sixth");
+            else if(quest->description_id == 6)
+              nt = gettext("the seventh");
+            else if(quest->description_id == 7)
+              nt = gettext("the eighth");
+            else if(quest->description_id == 8)
+              nt = gettext("the ninth");
+            else /* if(quest->description_id == 9) */
+              nt = gettext("the tenth and the last");
+            snprintf(buf, sizeof buf, gettext("Found %s book of the ancient %s from the library.  %s famous %s named '%s' must have been buried somewhere in %s."),
+                     nt,
+                     relation_type_name(quest->questline->ancient_person.relation_to_player),
+                     quest->questline->ancient_person.gender == GENDER_FEMALE ? gettext("Her") : gettext("His"),
+                     treasure_type_name(quest->treasure_object->type),
+                     quest->treasure_object->name,
+                     cave_displayname(quest->treasure_cave));
+          }
+          break;
+        case 10:
           { /* Zombies initialization quest. They want the item of the last quest. */
             struct quest * last;
 
@@ -216,13 +250,13 @@ char const * quest_description(struct quest * quest)
             *pos = toupper(*pos);
           }
           break;
-        case 7: /* Zombies last quest. */
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6: /* Zombies other quests. */
-          snprintf(buf, sizeof buf, gettext("%s %s, the leader of the zombies says the next lead should be somewhere in %s."),
+        case 16: /* Zombies last quest. */
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+        case 15: /* Zombies other quests. */
+          snprintf(buf, sizeof buf, gettext("%s %s, the leader of the zombies, says the next lead should be somewhere in %s."),
                    relation_type_name(quest->questline->first_questgiver.relation_to_player),
                    quest->questline->first_questgiver.name,
                    cave_displayname(quest->treasure_cave));

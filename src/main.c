@@ -451,7 +451,7 @@ static void on_trait_activated(void * user_data DG_UNUSED, int64_t traits)
         }
       
           
-      ql = questline_generate(QUEST_TYPE_CHILDHOOD_DREAM);
+      ql = questline_generate(QUEST_TYPE_LIBRARY);
       if(ql != NULL)
         {
           globals.questlines[globals.questlines_size] = ql;
