@@ -106,6 +106,7 @@ void widget_new_trait_info_window(trait_t trait, bool enable_controls)
                     {
                       struct widget * b;
 
+                      y += font_height();
                       snprintf(buf, sizeof buf, " %s ", gettext("Edit cave"));
                       b = widget_new_button(window, 0, y, buf);
                       widget_set_on_release(b, on_edit_trait_clicked);

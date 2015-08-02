@@ -199,23 +199,23 @@ void font_render(int x, int y, const char * text, struct gfxbuf * gfxbuf)
 
           gfxbuf->vbuf[vpos++] = x;
           gfxbuf->vbuf[vpos++] = y;
-          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[0] + current_font->texture_offset[0];
-          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[1] - current_font->texture_offset[1];
+          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[0];
+          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[1];
           
-          gfxbuf->vbuf[vpos++] = x + width - 1;
+          gfxbuf->vbuf[vpos++] = x + width;
           gfxbuf->vbuf[vpos++] = y;
-          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[2] - current_font->texture_offset[0];
-          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[1] - current_font->texture_offset[1];
+          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[2];
+          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[1];
           
-          gfxbuf->vbuf[vpos++] = x + width - 1;
+          gfxbuf->vbuf[vpos++] = x + width;
           gfxbuf->vbuf[vpos++] = y + current_font->height;
-          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[2] - current_font->texture_offset[0];
-          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[3] + current_font->texture_offset[1];
+          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[2];
+          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[3];
       
           gfxbuf->vbuf[vpos++] = x;
           gfxbuf->vbuf[vpos++] = y + current_font->height;
-          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[0] + current_font->texture_offset[0];
-          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[3] + current_font->texture_offset[1];
+          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[0];
+          gfxbuf->tbuf[tpos++] = current_font->characters[ch].texture_coordinates[3];
 
           x += width;
         }

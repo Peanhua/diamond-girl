@@ -146,6 +146,7 @@ static int output_entry(struct widget * window, int x, int y, struct diary_entry
 #else
     strftime(buf, sizeof buf, gettext("%A, %e of %B %Y, at %H:%M"), tm);
 #endif
+    buf[0] = toupper(buf[0]);
     tobj = widget_new_text(window, x, y, buf);
     y = widget_y(tobj) + widget_height(tobj) + font_height() / 4;
   }

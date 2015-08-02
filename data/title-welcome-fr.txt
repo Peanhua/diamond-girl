@@ -3,11 +3,11 @@ Bienvenue dans le jeu Lucy the Diamond Girl.
 R}cup}rez les diamants pour activer
 la sortie vers le niveau suivant.
 
-Ne touchez pas les animaux
-radioactifs, ils vous tuerons.
+Ne touchez pas les animaux radioactifs,
+ils vous tuerons.
 
-Les rochers et diamants qui
-tombent, vous tuerons aussi.
+Les rochers et diamants qui tombent,
+vous tuerons aussi.
 
 Commandes :
  * touches de curseur pour bouger
@@ -16,6 +16,5 @@ Commandes :
  * touche escape pour quitter
  * F1 pour l'aide
  * F2 pour la l}gende
- * ALT+ENTER basculer en plein
-   }cran
+ * ALT+ENTER basculer en plein }cran
  * PAUSE pour mettre en pause

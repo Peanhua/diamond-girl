@@ -46,7 +46,6 @@ struct font
   struct fontcharacter * characters;
 #ifdef WITH_OPENGL
   struct gfxbuf *        gfxbuf;
-  float                  texture_offset[2];
 #endif
 };
 

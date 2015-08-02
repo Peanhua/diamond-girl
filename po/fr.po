@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: diamond-girl 1.25b4\n"
 "Report-Msgid-Bugs-To: joniyrjana@gmail.com\n"
-"POT-Creation-Date: 2015-08-02 08:41+0300\n"
+"POT-Creation-Date: 2015-08-02 11:45+0300\n"
 "PO-Revision-Date: 2015-07-19 17:14+0200\n"
 "Last-Translator: Vincent Hardy <vincent.hardy.be@gmail.com>\n"
 "Language-Team: French\n"
@@ -548,7 +548,7 @@ msgstr ""
 #: src/widget_new_highscore_einfo.c:297 src/widget_new_message_window.c:72
 #: src/widget_new_theme_info_window.c:81
 #: src/widget_new_title_partystatus.c:394
-#: src/widget_new_trait_info_window.c:170
+#: src/widget_new_trait_info_window.c:171
 #: src/widget_new_traits_available_window.c:100
 msgid "Close"
 msgstr "Quitter"
@@ -1247,32 +1247,32 @@ msgstr "Vous avez cette propri}t}."
 msgid "Recycle for %lu"
 msgstr "R}utiliser pour %lu"
 
-#: src/widget_new_trait_info_window.c:109
+#: src/widget_new_trait_info_window.c:110
 msgid "Edit cave"
 msgstr ""
 
-#: src/widget_new_trait_info_window.c:125
+#: src/widget_new_trait_info_window.c:126
 msgid "You don't have this trait."
 msgstr "Vous n'avez pas cette propri}t}."
 
-#: src/widget_new_trait_info_window.c:130
+#: src/widget_new_trait_info_window.c:131
 msgid "Buy"
 msgstr "Acheter"
 
-#: src/widget_new_trait_info_window.c:140 src/widget_new_trait_key_button.c:91
+#: src/widget_new_trait_info_window.c:141 src/widget_new_trait_key_button.c:91
 msgid "Cost:"
 msgstr "Co#t:"
 
-#: src/widget_new_trait_info_window.c:145
+#: src/widget_new_trait_info_window.c:146
 msgid "You have:"
 msgstr "Vous avez:"
 
-#: src/widget_new_trait_info_window.c:149
+#: src/widget_new_trait_info_window.c:150
 #, c-format
 msgid " [need %u more]"
 msgstr " (besoin %u de plus)"
 
-#: src/widget_new_trait_info_window.c:160
+#: src/widget_new_trait_info_window.c:161
 #, c-format
 msgid "Level required: %u"
 msgstr "Niveau requis: %u"

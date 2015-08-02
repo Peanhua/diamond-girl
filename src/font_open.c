@@ -85,13 +85,13 @@ struct font * font_open(const char * name)
 
                       fc = &font->characters[c];
 
-                      fc->width = fontdata[c].endx - fontdata[c].x;
+                      fc->width = fontdata[c].endx - fontdata[c].x - 1;
 #ifdef WITH_OPENGL
                       /* Also swap y coordinates for OpenGL */
-                      fc->texture_coordinates[0] = (float) fontdata[c].x / (float) font->image->width;
-                      fc->texture_coordinates[1] = (float) (font->image->height - fontdata[c].y) / (float) font->image->height;          
-                      fc->texture_coordinates[2] = (float) fontdata[c].endx / (float) font->image->width;
-                      fc->texture_coordinates[3] = (float) (font->image->height - fontdata[c].y - font->height - 1) / (float) font->image->height;
+                      fc->texture_coordinates[0] = ((float) fontdata[c].x + 0.5f) / (float) font->image->width;
+                      fc->texture_coordinates[1] = ((float) (font->image->height - fontdata[c].y) - 0.5f) / (float) font->image->height;          
+                      fc->texture_coordinates[2] = ((float) fontdata[c].endx - 0.5f) / (float) font->image->width;
+                      fc->texture_coordinates[3] = ((float) (font->image->height - fontdata[c].y - font->height - 1) + 0.5f) / (float) font->image->height;
 #endif
 #ifdef WITH_NONOPENGL
                       fc->coordinates[0] = fontdata[c].x;
@@ -103,9 +103,6 @@ struct font * font_open(const char * name)
                   if(globals.opengl)
                     {
                       texture_setup_from_image(font->image, true, false, false);
-
-                      font->texture_offset[0] = 0.5f / (float) font->image->width;
-                      font->texture_offset[1] = 0.5f / (float) font->image->height;
 
                       font->gfxbuf = gfxbuf_new(GFXBUF_DYNAMIC_2D, GL_QUADS, GFXBUF_TEXTURE | GFXBUF_BLENDING);
                       assert(font->gfxbuf != NULL);
