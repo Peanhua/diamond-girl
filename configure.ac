@@ -94,6 +94,8 @@ bundled_mtwist=false
 PKG_CHECK_MODULES([mtwist],     [mtwist], [], [bundled_mtwist=true])
 AM_CONDITIONAL([WITH_BUNDLED_MTWIST], [test x$bundled_mtwist = "xtrue"])
 
+# The value here is changed between development versions ("-dev") and releases ("").
+AC_DEFINE([SAVE_DIR_NAME_APPEND], ["-dev"], [String appended to the name of the directory to hold players saved games, high scores, and other progress.])
 
 # Optional support for old (1.23 and earlier) LUA settings file, defaults to false.
 AC_ARG_WITH([lua], [AS_HELP_STRING([--with-lua], [Build with LUA, to support for old (1.23 and earlier) user settings file.])])

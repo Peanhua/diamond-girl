@@ -20,7 +20,7 @@
   Complete license can be found in the LICENSE file.
 */
 
-#include "backtrace.h"
+#include "diamond_girl.h"
 #include "gc.h"
 #include "image.h"
 

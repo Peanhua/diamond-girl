@@ -91,11 +91,9 @@ extern unsigned int round_to_power_of_two(unsigned int n);
 # define DG_UNUSED_WITHOUT_OPENGL
 #endif
 
-/* Debugging */
+/* Backtrace */
 #ifndef NDEBUG
-# define DG_DEBUG do { if(globals.debugging_enabled == true) fprintf(stderr, "%s:%d:%s()\n", __FILE__, __LINE__, __FUNCTION__); } while(0)
-#else
-# define DG_DEBUG
+extern char * get_backtrace(void);
 #endif
 
 #endif

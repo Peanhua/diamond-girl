@@ -22,10 +22,10 @@
 
 #ifdef WITH_OPENGL
 
+#include "diamond_girl.h"
 #include "gfxbuf.h"
 #include "gfx.h"
 #include "gc.h"
-#include "backtrace.h"
 #include "gfx_material.h"
 #include "gfx_shaders.h"
 #include "globals.h"

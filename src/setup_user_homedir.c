@@ -67,7 +67,7 @@ bool setup_user_homedir(void)
   assert(hdname != NULL);
   if(hdname != NULL)
     {
-      snprintf(hdname, hdname_size, "%s/Diamond Girl", tmp);
+      snprintf(hdname, hdname_size, "%s/Diamond Girl%s", tmp, SAVE_DIR_NAME_APPEND);
 
       if(globals.read_only == false)
         mkdir(hdname);
@@ -104,7 +104,7 @@ bool setup_user_homedir(void)
         assert(hdname != NULL);
         if(hdname != NULL)
           {
-            snprintf(hdname, hdname_size, "%s/.diamond_girl", hd);
+            snprintf(hdname, hdname_size, "%s/.diamond_girl%s", hd, SAVE_DIR_NAME_APPEND);
             assert(globals.read_only == false);
             if(globals.read_only == false)
               mkdir(hdname, S_IRWXU);

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: diamond-girl 1.25b\n"
 "Report-Msgid-Bugs-To: joniyrjana@gmail.com\n"
-"POT-Creation-Date: 2015-08-02 21:15+0300\n"
+"POT-Creation-Date: 2015-08-10 22:48+0300\n"
 "PO-Revision-Date: 2015-06-18 19:22+0200\n"
 "Last-Translator: Steve Joni Yrjänä <joniyrjana@gmail.com>\n"
 "Language-Team: Finnish\n"
@@ -226,7 +226,7 @@ msgstr "V|liaika:"
 msgid "Level:"
 msgstr "Taso:"
 
-#: src/game.c:150 src/game.c:232 src/title.c:1245
+#: src/game.c:150 src/game.c:233 src/title.c:1245
 #: src/widget_new_highscore_einfo.c:196 src/widget_new_title_partystatus.c:140
 #, c-format
 msgid "Girls:"
@@ -249,23 +249,23 @@ msgstr "Timantit:"
 msgid "Time:"
 msgstr "Aika:"
 
-#: src/game.c:227
+#: src/game.c:228
 msgid "Girl:"
 msgstr "Tytt}:"
 
-#: src/game.c:1308
+#: src/game.c:1309
 msgid "Game mode: Classic"
 msgstr "Pelitila: klassinen"
 
-#: src/game.c:1311
+#: src/game.c:1312
 msgid "Game mode: Adventure"
 msgstr "Pelitila: seikkailu"
 
-#: src/game.c:1314
+#: src/game.c:1315
 msgid "Game mode: Pyjama Party"
 msgstr "Pelitila: pyjamabileet"
 
-#: src/game.c:1330 src/trait_get_name.c:46
+#: src/game.c:1331 src/trait_get_name.c:46
 msgid "Iron Girl"
 msgstr "Ter|stytt}"
 

@@ -25,7 +25,6 @@
 #include "gfxbuf.h"
 #include "image.h"
 
-#include "backtrace.h"
 struct image * image_free(struct image * image)
 {
   if(image != NULL)

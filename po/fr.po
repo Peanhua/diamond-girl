@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: diamond-girl 1.25b4\n"
 "Report-Msgid-Bugs-To: joniyrjana@gmail.com\n"
-"POT-Creation-Date: 2015-08-02 21:15+0300\n"
+"POT-Creation-Date: 2015-08-10 22:48+0300\n"
 "PO-Revision-Date: 2015-07-19 17:14+0200\n"
 "Last-Translator: Vincent Hardy <vincent.hardy.be@gmail.com>\n"
 "Language-Team: French\n"
@@ -225,7 +225,7 @@ msgstr "Place provisoire:"
 msgid "Level:"
 msgstr "Niveau:"
 
-#: src/game.c:150 src/game.c:232 src/title.c:1245
+#: src/game.c:150 src/game.c:233 src/title.c:1245
 #: src/widget_new_highscore_einfo.c:196 src/widget_new_title_partystatus.c:140
 #, c-format
 msgid "Girls:"
@@ -248,23 +248,23 @@ msgstr "Diamants :"
 msgid "Time:"
 msgstr "Temps :"
 
-#: src/game.c:227
+#: src/game.c:228
 msgid "Girl:"
 msgstr "Fille :"
 
-#: src/game.c:1308
+#: src/game.c:1309
 msgid "Game mode: Classic"
 msgstr "Mode de jeu : Classique"
 
-#: src/game.c:1311
+#: src/game.c:1312
 msgid "Game mode: Adventure"
 msgstr "Mode de jeu : Aventure"
 
-#: src/game.c:1314
+#: src/game.c:1315
 msgid "Game mode: Pyjama Party"
 msgstr "Mode de jeu : Soir}e pyjama"
 
-#: src/game.c:1330 src/trait_get_name.c:46
+#: src/game.c:1331 src/trait_get_name.c:46
 msgid "Iron Girl"
 msgstr "Fille de fer"
 

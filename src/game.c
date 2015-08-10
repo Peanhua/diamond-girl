@@ -160,6 +160,7 @@ struct gamedata * game(struct cave * cave, int level, bool iron_girl_mode, bool 
   pause_widgets     = NULL;
   help_window       = NULL;
 
+  seed_rand(0);
   game_show_text(NULL);
 
   { /* Setup: */

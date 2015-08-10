@@ -22,7 +22,7 @@
 
 #ifndef NDEBUG
 
-#include "backtrace.h"
+#include "diamond_girl.h"
 #include "globals.h"
 #include <assert.h>
 #include <string.h>
