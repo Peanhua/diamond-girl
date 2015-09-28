@@ -1,4 +1,4 @@
-AC_INIT([Lucy the Diamond Girl], [2.0b], [joniyrjana@gmail.com], [diamond-girl], [http://www.netikka.net/joyr/diamond_girl/])
+AC_INIT([Lucy the Diamond Girl], [2.0.1b], [joniyrjana@gmail.com], [diamond-girl], [http://www.netikka.net/joyr/diamond_girl/])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror dist-xz subdir-objects])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AC_CONFIG_SRCDIR([src/main.c])

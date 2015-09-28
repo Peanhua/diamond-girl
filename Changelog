@@ -1,3 +1,30 @@
+Release 2.0 on Sat Sep 12 08:21:47 UTC 2015
+* Changed the name to "Lucy the Diamond Girl" to make it more unique.
+* Added French translation by Vincent Hardy.
+* Re-enabled loading of ogg files, was left out with #if's using the (removed) WITH_COMPRESSED_DATA.
+* Fixed changing language in-game to alter the title screen help texts correctly.
+* Use AC_DEFINE for LIB3DS_V1 stuff, instead of passing -D to the compiler.
+* Either mhash or libcrypto are now mandatory requirement. Re-arranged configure checks a bit to group them nicer. Updated some comments in config.h to be more consistent with each other.
+* Added quests.
+* Moved the random number generator check from the game binary to 'make check'.
+* Nicer looking names from the name generator.
+* Fixed giving end of cave trait too soon.
+* Editor is now only accessible through a trait (you can still edit/create caves and levels using external editors).
+* Eat all input before displaying death or level completion dialog.
+* Save progress after every game instead of only when exiting the program.
+* Switch from lib3ds to assimp.
+* Blender is now required for building.
+* Some other fixes and performance improvements.
+* Added "--read-only" commandline parameter to not to write anything on the disk.
+* Allow user to start/stop recording at any point in game.
+* Show the length of the replay in highscore info window.
+* Show a breakdown of the gained scores at the end of a level.
+* Show some statistics after playtesting a level in the editor.
+* Load XM files with maxchan set to 8 instead of 2 (fixes missing audio on some XM files).
+* Made the font narrower by removing one empty pixel between characters.
+* Reset random seed used for girl chat at the start of the game, should fix girl chat random to be constant in playbacks (not tested).
+* Use different name for the save directory for development version versus official release.
+
 Release 1.25.2 on Mon Jun 22 06:48:53 UTC 2015
 * Language can now be set using the in-game settings dialog and via a commandline argument.
 * Test the random number generator in make check instead in game.

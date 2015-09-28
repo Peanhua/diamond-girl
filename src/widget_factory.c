@@ -539,9 +539,17 @@ static struct widget * process_object(struct widget_factory_data * data, struct 
           this.widget = widget_new_spacer(parent, this.width, this.height);
           break;
         case WTYPE_TEXT:
-          this.widget = widget_new_text(parent, this.x, this.y, gettext(this.title));
-          set_width  = true;
-          set_height = true;
+          {
+            char const * t;
+
+            if(strlen(this.title) > 0)
+              t = gettext(this.title);
+            else
+              t = "";
+            this.widget = widget_new_text(parent, this.x, this.y, t);
+            set_width  = true;
+            set_height = true;
+          }
           break;
         case WTYPE_TITLE_CREDITS:
           this.widget = widget_new_title_credits(parent, this.x, this.y, this.width);
