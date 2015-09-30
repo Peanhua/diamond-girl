@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: diamond-girl 1.25b4\n"
 "Report-Msgid-Bugs-To: joniyrjana@gmail.com\n"
-"POT-Creation-Date: 2015-09-28 09:51+0300\n"
-"PO-Revision-Date: 2015-07-19 17:14+0200\n"
+"POT-Creation-Date: 2015-09-30 09:48+0300\n"
+"PO-Revision-Date: 2015-09-09 19:10+0100\n"
 "Last-Translator: Vincent Hardy <vincent.hardy.be@gmail.com>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.7.6\n"
+"X-Generator: Poedit 1.5.5\n"
 
 #: src/cave_displayname.c:56
 msgid "the Deep Cave"
@@ -32,7 +32,7 @@ msgstr "La terre antique"
 
 #: src/cave_displayname.c:59
 msgid "the Beginners Cave"
-msgstr "La grotte des d}butant"
+msgstr "La grotte des d}butants"
 
 #: src/draw_legend.c:47
 msgid "You, or Lucy the girl."
@@ -88,52 +88,52 @@ msgstr "Un papillon radioactif, { }viter"
 
 #: src/editor.c:707 src/title.c:1489 src/widget_new_highscore_einfo.c:95
 msgid "Cave:"
-msgstr "Grotte:"
+msgstr "Grotte :"
 
 #: src/editor.c:751
 #, c-format
 msgid "Level[+-]: %-3d"
-msgstr "Niveau[+-]: %-3d"
+msgstr "Niveau(+-) : %-3d"
 
 #: src/editor.c:772
 #, c-format
 msgid "[W]idth: %-3d"
-msgstr "Largeur (W): %-3d"
+msgstr "Largeur (W) : %-3d"
 
 #: src/editor.c:778
 #, c-format
 msgid "[H]eight: %-3d"
-msgstr "[H]auteur: %-3d"
+msgstr "(H)auteur : %-3d"
 
 #: src/editor.c:784
 #, c-format
 msgid "[T]ime: %-4d"
-msgstr "[T]iming: %-4d"
+msgstr "(T)iming : %-4d"
 
 #: src/editor.c:815
 #, c-format
 msgid "GameSp[e]ed: %-2d"
-msgstr "Vit[e]sse de jeu: %-2d"
+msgstr "Vit(e)sse de jeu : %-2d"
 
 #: src/editor.c:821
 #, c-format
 msgid "[A]mebaTime: %-4d"
-msgstr "Timing de l'[A]mibe: %-4d"
+msgstr "Timing de l'(A)mibe : %-4d"
 
 #: src/editor.c:827
 #, c-format
 msgid "[D]iamondsNeeded: %-4d"
-msgstr "[D]iamants n}cessaires: %-4d"
+msgstr "(D)iamants n}cessaires : %-4d"
 
 #: src/editor.c:833
 #, c-format
 msgid "Diamond[S]core: %-4d"
-msgstr "[S]core du diamant: %-4d"
+msgstr "(S)core du diamant : %-4d"
 
 #: src/editor.c:839
 #, c-format
 msgid "TimeS[c]ore: %-4d"
-msgstr "Score du temps: %-4d"
+msgstr "Score du temps : %-4d"
 
 #: src/editor.c:1019
 msgid "empty"
@@ -197,7 +197,7 @@ msgstr "mucus"
 #: src/editor.c:1037
 #, c-format
 msgid "Selected[,.]: %s"
-msgstr "S}lectionn}s[,.]: %s"
+msgstr "S}lectionn}s(,.) : %s"
 
 #: src/editor.c:1056
 #, c-format
@@ -206,7 +206,7 @@ msgstr "%senregistrer (v)"
 
 #: src/editor.c:1290
 msgid "[Q]uit"
-msgstr "[Q]uitter"
+msgstr "(Q)uitter"
 
 #: src/editor.c:1291
 msgid "[P]lay"
@@ -214,7 +214,7 @@ msgstr "Jouer (P)"
 
 #: src/editor.c:1292
 msgid "[R]evert Map"
-msgstr "[R]etour"
+msgstr "(R)etour"
 
 #: src/editor.c:1294
 msgid "Intermission:"
@@ -241,28 +241,28 @@ msgstr "Score:"
 #: src/widget_new_title_partystatus.c:347
 #, c-format
 msgid "Diamonds:"
-msgstr "Diamants:"
+msgstr "Diamants :"
 
 #: src/game.c:153
 #, c-format
 msgid "Time:"
-msgstr "Temps:"
+msgstr "Temps :"
 
 #: src/game.c:228
 msgid "Girl:"
-msgstr "Fille:"
+msgstr "Fille :"
 
 #: src/game.c:1309
 msgid "Game mode: Classic"
-msgstr "Mode de jeu: Classique"
+msgstr "Mode de jeu : Classique"
 
 #: src/game.c:1312
 msgid "Game mode: Adventure"
-msgstr "Mode de jeu: Aventure"
+msgstr "Mode de jeu : Aventure"
 
 #: src/game.c:1315
 msgid "Game mode: Pyjama Party"
-msgstr "Mode de jeu: Soir}e pyjama"
+msgstr "Mode de jeu : Soir}e pyjama"
 
 #: src/game.c:1331 src/trait_get_name.c:46
 msgid "Iron Girl"
@@ -275,11 +275,11 @@ msgstr "Lucy est morte."
 #: src/game_player_death.c:195 src/game_player_death.c:204
 #: ui/game_player_death.js:26 ui/game_player_next_level.js:132
 msgid "Diamond score:"
-msgstr "Score diamant:"
+msgstr "Points diamant :"
 
 #: src/game_player_death.c:203
 msgid "    Game Over!"
-msgstr "    Game Over!"
+msgstr ""
 
 #: src/game_player_death.c:215
 msgid "Ouch!"
@@ -300,7 +300,7 @@ msgstr "Niveau termin}!"
 #: src/game_player_next_level.c:247
 #, c-format
 msgid "Found: %s"
-msgstr ""
+msgstr "Trouv}(s) : %s"
 
 #: src/main.c:185
 msgid "_current_locale"
@@ -321,12 +321,12 @@ msgstr ""
 #: src/playback_check.c:53
 #, c-format
 msgid "Checksum error on map %s:%d."
-msgstr "Erreur de checksum sur la carte %s:%d."
+msgstr "Erreur de checksum sur la carte %s : %d."
 
 #: src/quest_action.c:108 src/widget_new_quest_menu.c:261
 #, c-format
 msgid "Notes of %s"
-msgstr ""
+msgstr "Notes de %s"
 
 #: src/quest_action.c:117
 #, c-format
@@ -334,17 +334,21 @@ msgid ""
 "I've gone through the notes of %s again,\n"
 "but found nothing new."
 msgstr ""
+"Je suis repass} par les notes de %s,\n"
+"mais je n'ai rien trouv} de neuf."
 
 #: src/quest_action.c:121
 msgid ""
 "I've gone through the notes again,\n"
 "but found nothing new."
 msgstr ""
+"Je suis repass} par les notes,\n"
+"mais je n'ai rien trouv} de neuf."
 
 #: src/quest_action.c:131
 #, c-format
 msgid "Latest find"
-msgstr ""
+msgstr "Derni~res trouvailles"
 
 #: src/quest_action.c:139
 #, c-format
@@ -353,6 +357,9 @@ msgid ""
 "\n"
 "R.I.P. %s"
 msgstr ""
+"Ca y est, le dernier tr}sor associ} { la %s.\n"
+"\n"
+"R.I.P. %s"
 
 #: src/quest_action.c:146
 #, c-format
@@ -360,34 +367,36 @@ msgid ""
 "I've carefully examined the %s,\n"
 "but didn't find anything special on it."
 msgstr ""
+"J'ai examin} attentivement le %s,\n"
+"mais je n'ai rien trouv} de sp}cial sur lui."
 
 #: src/quest_action.c:150 src/widget_new_quest_menu.c:287
 msgid "Library"
-msgstr ""
+msgstr "Biblioth~que"
 
 #: src/quest_action.c:196
 msgid "The librarian greets you with a smile."
-msgstr ""
+msgstr "Le biblioth}caire vous accueille avec un sourire."
 
 #: src/quest_action.c:198
 msgid "The librarian talks something about zombies."
-msgstr ""
+msgstr "Le biblioth}caire parle de quelque chose { propos des zombies."
 
 #: src/quest_action.c:200
 msgid "The librarian greets you."
-msgstr ""
+msgstr "Le biblioth}caire vous salue."
 
 #: src/quest_action.c:202
 msgid "None of the books seems to be interesting right now."
-msgstr ""
+msgstr "En ce moment, aucun des livres ne semblent [tre int}ressants."
 
 #: src/quest_action.c:207 src/widget_new_quest_menu.c:275
 msgid "Cafe"
-msgstr ""
+msgstr "Caf}"
 
 #: src/quest_action.c:250 src/quest_action.c:313
 msgid "Accept offer"
-msgstr ""
+msgstr "Accepter l'offre"
 
 #: src/quest_action.c:261
 #, c-format
@@ -395,6 +404,8 @@ msgid ""
 "I see %s in the cafe, she offers to fetch the %s %s '%s' for %u.\n"
 "I have %u."
 msgstr ""
+"Je vois %s dans le caf}, elle propose d'aller chercher le %s %s '%s' for %u.\n"
+"J'ai %u."
 
 #: src/quest_action.c:269
 #, c-format
@@ -402,21 +413,23 @@ msgid ""
 "I see %s in the cafe, he offers to fetch the %s %s '%s' for %u.\n"
 "I have %u."
 msgstr ""
+"Je vois %s dans le caf}, il propose d'aller chercher le %s %s '%s' for %u.\n"
+"J'ai %u."
 
 #: src/quest_action.c:288
 #, c-format
 msgid "The bartender says %s was here a moment ago."
-msgstr ""
+msgstr "Le barman dit que %s }tait ici depuis un moment."
 
 #: src/quest_action.c:289
 #, c-format
 msgid "The bartender says %s was here %d hours ago."
-msgstr ""
+msgstr "Le barman dit que %s }tait ici depuis %d heures."
 
 #: src/quest_action.c:291 src/quest_action.c:382
 #, c-format
 msgid "I drink my favorite beverage and read the local newspaper."
-msgstr ""
+msgstr "Je bois ma boisson pr}f}r}e et lis le journal local."
 
 #: src/quest_action.c:324
 #, c-format
@@ -424,6 +437,8 @@ msgid ""
 "%s is in the cafe, she says she could sell the %s %s '%s' for %u.\n"
 "I have %u."
 msgstr ""
+"%s est dans la caf}, elle dit qu'elle pourrait vendre le %s %s '%s' pour %u.\n"
+"J'ai %u."
 
 #: src/quest_action.c:332
 #, c-format
@@ -431,20 +446,22 @@ msgid ""
 "%s is in the cafe, he says she could sell the %s %s '%s' for %u.\n"
 "I have %u."
 msgstr ""
+"%s est dans la caf}, il dit qu'il pourrait vendre le %s %s '%s' pour %u.\n"
+"J'ai %u."
 
 #: src/quest_action.c:362
 msgid "Sell items"
-msgstr ""
+msgstr "Vendre des objets"
 
 #: src/quest_action.c:372
 #, c-format
 msgid "I see %s in the cafe, she offers to buy some items."
-msgstr ""
+msgstr "Je vois %s dans le caf}, elle propose de vendre certains objets."
 
 #: src/quest_action.c:374
 #, c-format
 msgid "I see %s in the cafe, he offers to buy some items."
-msgstr ""
+msgstr "Je vois %s dans le caf}, il propose de vendre certains objets."
 
 #: src/quest_description.c:50
 #, c-format
@@ -452,141 +469,143 @@ msgid ""
 "My %s %s has told me about %s named %s.  According to old legends, %s had %s.\n"
 "I have tracked it to %s."
 msgstr ""
+"Mon %s %s m'a parl} de %s nomm} %s. selon de vieilles l}gendes, %s avait %s.\n"
+"Je l'ai suivi { %s."
 
 #: src/quest_description.c:55
 msgid "she"
-msgstr ""
+msgstr "elle"
 
 #: src/quest_description.c:55
 msgid "he"
-msgstr ""
+msgstr "il"
 
 #: src/quest_description.c:61
 #, c-format
 msgid "I have spent more time studying the notes of %s %s, and found writing of ancient %s.  It seems to be buried in %s."
-msgstr ""
+msgstr "J'ai pass} beaucoups de temps { }tudier les notes de %s %s, et trouv} des }crits d'ancien %s. Il semble [tre enterr} dans %s."
 
 #: src/quest_description.c:68
 #, c-format
 msgid "More thorough study of the notes of %s %s revealed knowledge about %s named '%s'.  The ancient people buried it somewhere in %s."
-msgstr ""
+msgstr "Une }tude plus approfondie des notes de %s %s a r}v}l} des connaissances de %s nomm} '%s'. Les peuples anciens l'ont enterr} quelque part dans %s."
 
 #: src/quest_description.c:83
 #, c-format
 msgid "Closer inspection of the %s %s '%s' revealed writing: %s"
-msgstr ""
+msgstr "Une inspection plus minutieuse du %s %s '%s' a r}v}l} l'}criture : %s"
 
 #: src/quest_description.c:93
 #, c-format
 msgid "Stuck between the frames of the %s %s '%s' is a note: %s"
-msgstr ""
+msgstr "Coinc} dans la carcasse du %s %s '%s', il y a une note : %s"
 
 #: src/quest_description.c:100
 #, c-format
 msgid "Stuck in the nose of the %s %s '%s' is a note: %s"
-msgstr ""
+msgstr "Coinc} dans le nez du %s %s '%s', il y a une note : %s"
 
 #: src/quest_description.c:107
 #, c-format
 msgid "Inside of a false bottom of the %s %s '%s' is a note: %s"
-msgstr ""
+msgstr "a l'int}rieur d'un double-fond du %s %s '%s', il y a une note : %s"
 
 #: src/quest_description.c:114
 #, c-format
 msgid "Inside one of the rings of the %s %s '%s' is a note: %s"
-msgstr ""
+msgstr "A l'int}rieur de l'un des anneaux du %s %s '%s', il y a une note : %s"
 
 #: src/quest_description.c:121
 #, c-format
 msgid "Inside the hollow handle of the %s %s '%s' is a note: %s"
-msgstr ""
+msgstr "A l'int}rieur du creux de la poign}e du %s %s '%s', il y a une note : %s"
 
 #: src/quest_description.c:132
 #, c-format
 msgid "Inside the %s %s '%s' is small writing: %s"
-msgstr ""
+msgstr "A l'int}rieur du %s %s '%s', il y a une petite }criture : %s"
 
 #: src/quest_description.c:166
 #, c-format
 msgid "There is a damaged writing on the %s %s '%s', it reads: %s"
-msgstr ""
+msgstr "Il y a une }criture endommag}e sur le %s %s '%s', &a dit : %s"
 
 #: src/quest_description.c:174
 #, c-format
 msgid "The %s seems to be one of many, perhaps there are more nearby."
-msgstr ""
+msgstr "Le % s semble [tre l'un des nombreux, peut-[tre qu'il y en a plus { proximit}."
 
 #: src/quest_description.c:184
 #, c-format
 msgid "I have found a book of ancient %s named '%s' from the library.  %s legendary %s '%s' must have been buried somewhere in %s."
-msgstr ""
+msgstr "J'ai trouv} un livre d'un antique %s nomm} '%s' dans la biblioth~que. %s l}gendaire %s '%s' doit avoir }t} enterr} quelque part dans %s."
 
 #: src/quest_description.c:187 src/quest_description.c:225
 msgid "Her"
-msgstr ""
+msgstr "son"
 
 #: src/quest_description.c:187 src/quest_description.c:225
 msgid "His"
-msgstr ""
+msgstr "sa"
 
 #: src/quest_description.c:205
 msgid "the second"
-msgstr ""
+msgstr "le second"
 
 #: src/quest_description.c:207
 msgid "the third"
-msgstr ""
+msgstr "la troisi~me"
 
 #: src/quest_description.c:209
 msgid "the fourth"
-msgstr ""
+msgstr "la quatri~me"
 
 #: src/quest_description.c:211
 msgid "the fifth"
-msgstr ""
+msgstr "la cinqui~me"
 
 #: src/quest_description.c:213
 msgid "the sixth"
-msgstr ""
+msgstr "la sixi~me"
 
 #: src/quest_description.c:215
 msgid "the seventh"
-msgstr ""
+msgstr "la septi~me"
 
 #: src/quest_description.c:217
 msgid "the eighth"
-msgstr ""
+msgstr "la huiti~me"
 
 #: src/quest_description.c:219
 msgid "the ninth"
-msgstr ""
+msgstr "la neuvi~me"
 
 #: src/quest_description.c:221
 msgid "the tenth and the last"
-msgstr ""
+msgstr "la dixi~me et derni~re"
 
 #: src/quest_description.c:222
 #, c-format
 msgid "Found %s book of the ancient %s from the library.  %s famous %s named '%s' must have been buried somewhere in %s."
-msgstr ""
+msgstr "Trouv} le livre %s d'un antique %s dans la biblioth~que. %s le c}l~bre %s nomm} '%s' doit avoir }t} enterr} quelque part dans %s."
 
 #: src/quest_description.c:237
 msgid "The library is filled with zombies!"
-msgstr ""
+msgstr "La biblioth~que est remplie de zombies!"
 
 #: src/quest_description.c:243
 #, c-format
 msgid "%s %s, the leader of the zombies, promised they would leave if I can find the %s of the ancient %s %s.  I should start from %s."
-msgstr ""
+msgstr "%s %s, le chef des zombies, a promis qu'il abandonnerait s'il pouvait trouver le %s des antiques %s %s. Je devrais commencer de %s."
 
 #: src/quest_description.c:259
 #, c-format
 msgid "%s %s, the leader of the zombies, says the next lead should be somewhere in %s."
-msgstr ""
+msgstr "%s %s, le chef des zombies, dit que le prochain fil devrait [tre quelque part dans %s."
 
 #: src/quest_diary.c:49 src/widget_new_quest_menu.c:248
 msgid "My Diary"
-msgstr ""
+msgstr "Mon journal"
 
 #: src/quest_diary.c:83 src/quest_treasures.c:122
 #: src/widget_new_highscore_einfo.c:297 src/widget_new_message_window.c:72
@@ -600,143 +619,143 @@ msgstr "Quitter"
 #: src/quest_diary.c:115
 #, c-format
 msgid "Page %u/%u"
-msgstr ""
+msgstr "Page %u/%u"
 
 #: src/quest_diary.c:145
 msgid "%A, %d of %B %Y, at %H:%M"
-msgstr ""
+msgstr "%A, %d de %B %Y, { %H:%M"
 
 #: src/quest_diary.c:147
 msgid "%A, %e of %B %Y, at %H:%M"
-msgstr ""
+msgstr "%A, %e de %B %Y, { %H:%M"
 
 #: src/quest_treasures.c:61 src/widget_new_quest_menu.c:317
 msgid "My collection"
-msgstr ""
+msgstr "Ma collection"
 
 #: src/quest_treasures.c:72 src/widget_new_quest_menu.c:190
 msgid "Questline:"
-msgstr ""
+msgstr "Objet de qu[te :"
 
 #: src/quest_treasures.c:83
 msgid "All"
-msgstr ""
+msgstr "Tous"
 
 #: src/quest_treasures.c:245
 msgid "Sell to"
-msgstr ""
+msgstr "Vendre {"
 
 #: src/quest_treasures.c:247
 #, c-format
 msgid "local market"
-msgstr ""
+msgstr "March} local"
 
 #: src/quest_treasures.c:297
 msgid "Sell"
-msgstr ""
+msgstr "Vendre"
 
 #: src/quest_treasures.c:303
 #, c-format
 msgid "Sell %s for %u?"
-msgstr ""
+msgstr "Vendre %s pour %u"
 
 #: src/quest_treasures.c:310
 #, c-format
 msgid "%s says that she would love to buy the %s, but she is out of money now. I should come back tomorrow."
-msgstr ""
+msgstr "%s dit qu'elle aimerait acheter le %s, mais que maintenant elle n'a plus d'argent. Je devrais revenir demain."
 
 #: src/quest_treasures.c:314
 #, c-format
 msgid "%s says that he would love to buy the %s, but he is out of money now. I should come back tomorrow."
-msgstr ""
+msgstr "%s dit qu'il aimerait acheter le %s, mais que maintenant il n'a plus d'argent. Je devrais revenir demain."
 
 #: src/quest_treasures.c:319
 msgid "Sell item"
-msgstr ""
+msgstr "Vendre un objet"
 
 #: src/relation_type_name.c:34
 msgid "great grandmother"
-msgstr ""
+msgstr "arri~re grand-m~re"
 
 #: src/relation_type_name.c:35
 msgid "great grandfather"
-msgstr ""
+msgstr "arri~re grand-p~re"
 
 #: src/relation_type_name.c:36
 msgid "grandmother"
-msgstr ""
+msgstr "grand-m~re"
 
 #: src/relation_type_name.c:37
 msgid "grandfather"
-msgstr ""
+msgstr "grand-p~re"
 
 #: src/relation_type_name.c:38
 msgid "mother"
-msgstr ""
+msgstr "m~re"
 
 #: src/relation_type_name.c:39
 msgid "father"
-msgstr ""
+msgstr "p~re"
 
 #: src/relation_type_name.c:40
 msgid "sister"
-msgstr ""
+msgstr "soeur"
 
 #: src/relation_type_name.c:41
 msgid "brother"
-msgstr ""
+msgstr "fr~re"
 
 #: src/relation_type_name.c:42
 msgid "aunt"
-msgstr ""
+msgstr "tante"
 
 #: src/relation_type_name.c:43
 msgid "uncle"
-msgstr ""
+msgstr "oncle"
 
 #: src/relation_type_name.c:44
 msgid "cousin"
-msgstr ""
+msgstr "cousin"
 
 #: src/relation_type_name.c:45
 msgid "relative"
-msgstr ""
+msgstr "parent"
 
 #: src/relation_type_name.c:46 src/relation_type_name.c:47
 msgid "friend"
-msgstr ""
+msgstr "ami"
 
 #: src/relation_type_name.c:48
 msgid "queen"
-msgstr ""
+msgstr "reine"
 
 #: src/relation_type_name.c:49
 msgid "king"
-msgstr ""
+msgstr "roi"
 
 #: src/relation_type_name.c:50
 msgid "princess"
-msgstr ""
+msgstr "princesse"
 
 #: src/relation_type_name.c:51
 msgid "prince"
-msgstr ""
+msgstr "prince"
 
 #: src/relation_type_name.c:52
 msgid "knight"
-msgstr ""
+msgstr "chevalier"
 
 #: src/relation_type_name.c:53
 msgid "war hero"
-msgstr ""
+msgstr "h}ros de guerre"
 
 #: src/relation_type_name.c:54
 msgid "priest"
-msgstr ""
+msgstr "pr[tre"
 
 #: src/relation_type_name.c:55
 msgid "shaman"
-msgstr ""
+msgstr "chaman"
 
 #: src/settings.c:99
 msgid "Keyboard"
@@ -831,7 +850,7 @@ msgid ""
 "It is being used for: %s"
 msgstr ""
 "Erreur, la connexion que vous avez demand} est prise.\n"
-"Elle est utilis}e pour: %s "
+"Elle est utilis}e pour : %s "
 
 #: src/settings.c:852 src/widget_new_title_partystatus.c:200
 msgid "Error"
@@ -866,7 +885,7 @@ msgstr "Jouer"
 #: src/title.c:1152
 #, c-format
 msgid "Diamond score from the %s %s:   %u"
-msgstr ""
+msgstr "Score diamant du %s %s : %u"
 
 #: src/title.c:1233
 msgid "A saved game exists"
@@ -888,16 +907,16 @@ msgstr "Annuler"
 
 #: src/title.c:1435
 msgid "Game mode:"
-msgstr "Mode de jeu:"
+msgstr "Mode de jeu :"
 
 #: src/title.c:1570
 msgid "You can only start from every fifth level, and no save game exist."
-msgstr ""
+msgstr "Vous pouvez seulement d}marrer tous les 5 niveaux, et il n'y a pas de sauvegardes possibles."
 
 #: src/title.c:1605
 #, c-format
 msgid "Level: %d / %d"
-msgstr "Niveau: %d / %d"
+msgstr "Niveau : %d / %d"
 
 #: src/title.c:1943
 msgid "To arcade"
@@ -965,116 +984,116 @@ msgstr "Qu[tes"
 
 #: src/trait_get_name.c:49
 msgid "Edit"
-msgstr ""
+msgstr "Editer"
 
 #: src/trait_get_name.c:50
 msgid "Quick Contact"
-msgstr ""
+msgstr "Contact rapide"
 
 #: src/treasure.c:94
 msgid "mirror"
-msgstr ""
+msgstr "miroir"
 
 #: src/treasure.c:95
 msgid "statue"
-msgstr ""
+msgstr "statue"
 
 #: src/treasure.c:96
 msgid "vase"
-msgstr ""
+msgstr "vase"
 
 #: src/treasure.c:98
 msgid "bracelet"
-msgstr ""
+msgstr "bracelet"
 
 #: src/treasure.c:99
 msgid "earring"
-msgstr ""
+msgstr "boucle d'oreille"
 
 #: src/treasure.c:100
 msgid "hand mirror"
-msgstr ""
+msgstr "Miroir { main"
 
 #: src/treasure.c:101
 msgid "necklace"
-msgstr ""
+msgstr "collier"
 
 #: src/treasure.c:102
 msgid "pendant"
-msgstr ""
+msgstr "pendentif"
 
 #: src/treasure.c:103
 msgid "ring"
-msgstr ""
+msgstr "bague"
 
 #: src/treasure.c:119
 msgid "bronze"
-msgstr ""
+msgstr "bronze"
 
 #: src/treasure.c:120
 msgid "copper"
-msgstr ""
+msgstr "cuivre"
 
 #: src/treasure.c:121
 msgid "gold"
-msgstr ""
+msgstr "or"
 
 #: src/treasure.c:122
 msgid "silver"
-msgstr ""
+msgstr "argent"
 
 #: src/treasure.c:139
 msgid "amber"
 msgid_plural "amber"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ambre"
+msgstr[1] "ambres"
 
 #: src/treasure.c:140
 msgid "amethyst"
 msgid_plural "amethysts"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "am}thyste"
+msgstr[1] "am}thystes"
 
 #: src/treasure.c:142
 msgid "emerald"
 msgid_plural "emeralds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "}meraude"
+msgstr[1] "}meraudes"
 
 #: src/treasure.c:143
 msgid "jade"
 msgid_plural "jades"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "jade"
+msgstr[1] "jades"
 
 #: src/treasure.c:144
 msgid "opal"
 msgid_plural "opals"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "opale"
+msgstr[1] "opales"
 
 #: src/treasure.c:145
 msgid "ruby"
 msgid_plural "rubies"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "rubi"
+msgstr[1] "rubis"
 
 #: src/treasure.c:146
 msgid "sapphire"
 msgid_plural "sapphires"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "saphir"
+msgstr[1] "saphirs"
 
 #: src/treasure.c:147
 msgid "turquoise"
 msgid_plural "turquoises"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "turquoise"
+msgstr[1] "turquoises"
 
 #: src/treasure.c:165
 #, c-format
 msgid " embedded with %s"
-msgstr ""
+msgstr " embarqu} avec %s"
 
 #: src/treasure.c:167
 #, c-format
@@ -1084,7 +1103,7 @@ msgstr ""
 #: src/widget_new_highscore_einfo.c:47 src/widget_new_highscore_einfo.c:67
 #: src/widget_new_highscore_einfo.c:116
 msgid "Filename:"
-msgstr "Nom du fichier:"
+msgstr "Nom du fichier :"
 
 #: src/widget_new_highscore_einfo.c:88
 msgid "Played on:"
@@ -1098,7 +1117,7 @@ msgstr "%Y-%m-%d %H:%M"
 
 #: src/widget_new_highscore_einfo.c:102
 msgid "Mode:"
-msgstr "Mode:"
+msgstr "Mode :"
 
 #: src/widget_new_highscore_einfo.c:120 src/widget_new_highscore_einfo.c:176
 #: src/widget_new_highscore_einfo.c:206 src/widget_new_highscore_einfo.c:215
@@ -1107,56 +1126,56 @@ msgstr "N/A"
 
 #: src/widget_new_highscore_einfo.c:134
 msgid "Length:"
-msgstr ""
+msgstr "Longueur:"
 
 #: src/widget_new_highscore_einfo.c:137
 #, c-format
 msgid "1 hours"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 heure"
+msgstr[1] "%d heures"
 
 #: src/widget_new_highscore_einfo.c:139 src/widget_new_highscore_einfo.c:143
 #, c-format
 msgid "1 minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 minute"
+msgstr[1] "%d minutes"
 
 #: src/widget_new_highscore_einfo.c:145 src/widget_new_highscore_einfo.c:148
 #, c-format
 msgid "1 second"
 msgid_plural "%d seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 seconde"
+msgstr[1] "%d secondes"
 
 #: src/widget_new_highscore_einfo.c:162 src/widget_new_highscore_einfo.c:172
 msgid "Start level:"
-msgstr "Niveau de d}part:"
+msgstr "Niveau de d}part :"
 
 #: src/widget_new_highscore_einfo.c:187
 msgid "End level:"
-msgstr "Niveau de fin:"
+msgstr "Niveau de fin :"
 
 #: src/widget_new_highscore_einfo.c:202
 msgid "Deaths:"
-msgstr "Morts:"
+msgstr "Morts :"
 
 #: src/widget_new_highscore_einfo.c:211
 msgid "Completed:"
-msgstr "Termin}:"
+msgstr "Termin} :"
 
 #: src/widget_new_highscore_einfo.c:224
 msgid "Diam.score:"
-msgstr "Diam.score:"
+msgstr "Diam.score :"
 
 #: src/widget_new_highscore_einfo.c:234 src/widget_new_title_partystatus.c:365
 msgid "Traits:"
-msgstr "Propri}t}s:"
+msgstr "Propri}t}s :"
 
 #: src/widget_new_highscore_einfo.c:274
 msgid "Notes:"
-msgstr "Notes:"
+msgstr "Notes :"
 
 #: src/widget_new_highscore_einfo.c:287
 msgid "Replay"
@@ -1165,33 +1184,33 @@ msgstr "Rejouer"
 #: src/widget_new_osd_volume.c:44
 #, c-format
 msgid "Volume: %d%%"
-msgstr "Volume: %d%%"
+msgstr "Volume : %d%%"
 
 #: src/widget_new_quest_menu.c:372
 #, c-format
 msgid "Latest find: %s %s"
-msgstr ""
+msgstr "Dernier trouv} : %s %s"
 
 #: src/widget_new_quest_menu.c:429
 msgid "No questlines available."
-msgstr ""
+msgstr "Pas d'objets de qu[te disponibles."
 
 #: src/widget_new_quest_menu.c:443
 msgid "Quests are not available in classic game mode."
-msgstr ""
+msgstr "Les qu[tes ne sont pas disponibles dans le mode classique."
 
 #: src/widget_new_quest_menu.c:444
 msgid "Quests trait is not active."
-msgstr ""
+msgstr "Le caract~re des qu[tes n'est pas disponible."
 
 #: src/widget_new_quest_menu.c:445
 msgid "Quests are not available in pyjama party game mode."
-msgstr ""
+msgstr "Les qu[tes ne sont pas disponibles dans le mode soir}e pyjama."
 
 #: src/widget_new_theme_info_window.c:38
 #, c-format
 msgid "Special day: %s"
-msgstr ""
+msgstr "Jour sp}cial : %s"
 
 #: src/widget_new_title_highscores.c:98
 #, c-format
@@ -1200,7 +1219,7 @@ msgstr "Meilleurs scores %d -> %d:"
 
 #: src/widget_new_title_highscores.c:105
 msgid "#"
-msgstr ""
+msgstr " "
 
 #: src/widget_new_title_highscores.c:106
 msgid "Score"
@@ -1216,23 +1235,23 @@ msgstr "Jour/heure"
 
 #: src/widget_new_title_partystatus.c:108
 msgid "Caves entered:"
-msgstr "Entr}es de grottes:"
+msgstr "Entr}es de grottes :"
 
 #: src/widget_new_title_partystatus.c:109
 msgid "Levels completed:"
-msgstr "Niveaux termin}s:"
+msgstr "Niveaux termin}s :"
 
 #: src/widget_new_title_partystatus.c:110
 msgid "Diamonds collected:"
-msgstr "Diamants r}cup}r}s:"
+msgstr "Diamants r}cup}r}s :"
 
 #: src/widget_new_title_partystatus.c:112
 msgid "Pyjama party status:"
-msgstr "Statut de la soir}e pyjama:"
+msgstr "Statut de la soir}e pyjama :"
 
 #: src/widget_new_title_partystatus.c:142
 msgid "Cavings:"
-msgstr "Sp}l}ologie:"
+msgstr "Sp}l}ologie :"
 
 #: src/widget_new_title_partystatus.c:146
 msgid "Invite more"
@@ -1272,11 +1291,11 @@ msgstr "Vous avez %lu."
 
 #: src/widget_new_title_partystatus.c:239
 msgid "Invite"
-msgstr "Inviter"
+msgstr " Inviter "
 
 #: src/widget_new_title_partystatus.c:333
 msgid "Name:"
-msgstr "Nom:"
+msgstr "Nom :"
 
 #: src/widget_new_trait_info_window.c:50
 msgid "Trait"
@@ -1293,7 +1312,7 @@ msgstr "R}utiliser pour %lu"
 
 #: src/widget_new_trait_info_window.c:110
 msgid "Edit cave"
-msgstr ""
+msgstr "Editer la grotte"
 
 #: src/widget_new_trait_info_window.c:126
 msgid "You don't have this trait."
@@ -1305,21 +1324,21 @@ msgstr "Acheter"
 
 #: src/widget_new_trait_info_window.c:141 src/widget_new_trait_key_button.c:91
 msgid "Cost:"
-msgstr "Co#t:"
+msgstr "Co#t :"
 
 #: src/widget_new_trait_info_window.c:146
 msgid "You have:"
-msgstr "Vous avez:"
+msgstr "Vous avez :"
 
 #: src/widget_new_trait_info_window.c:150
 #, c-format
 msgid " [need %u more]"
-msgstr " [besoin %u de plus]"
+msgstr " (besoin %u de plus)"
 
 #: src/widget_new_trait_info_window.c:161
 #, c-format
 msgid "Level required: %u"
-msgstr "Niveau requis: %u"
+msgstr "Niveau requis : %u"
 
 #: src/widget_new_trait_key_button.c:71
 msgid "Unlock level"
@@ -1328,12 +1347,12 @@ msgstr "D}bloquer le niveau"
 #: src/widget_new_trait_key_button.c:86
 #, c-format
 msgid "Level: %u"
-msgstr "Niveau: %u"
+msgstr "Niveau : %u"
 
 #: src/widget_new_trait_key_button.c:96
 #, c-format
 msgid "You have: %lu"
-msgstr "Vous avez: %lu"
+msgstr "Vous avez : %lu"
 
 #: src/widget_new_trait_key_button.c:105
 msgid "Unlock this level"
@@ -1349,99 +1368,99 @@ msgstr "Nouvelles propri}t}s disponibles!"
 
 #: ui/game_player_death.js:19
 msgid "You are dead."
-msgstr ""
+msgstr "Vous [tes mort."
 
 #: ui/game_player_death.js:61 ui/game_player_next_level.js:258
 #: ui/game_pyjama_party_ask_next.js:77
 #: ui/game_pyjama_party_level_completed.js:47
 msgid "Save"
-msgstr ""
+msgstr "Enregistrer"
 
 #: ui/game_player_death.js:73 ui/game_player_next_level.js:270
 #: ui/game_pyjama_party_ask_next.js:89
 #: ui/game_pyjama_party_level_completed.js:59 ui/title_common.js:110
 msgid "Quit"
-msgstr ""
+msgstr "Quitter"
 
 #: ui/game_player_next_level.js:53 ui/game_player_next_level.js:156
 msgid "diamonds"
-msgstr ""
+msgstr "diamants"
 
 #: ui/game_player_next_level.js:67
 msgid "time left"
-msgstr ""
+msgstr "temps restant"
 
 #: ui/game_player_next_level.js:81 ui/game_player_next_level.js:170
 msgid "greedy"
-msgstr ""
+msgstr "avide"
 
 #: ui/game_player_next_level.js:95 ui/game_player_next_level.js:184
 msgid "iron girl"
-msgstr ""
+msgstr "ic_ne de la fille"
 
 #: ui/game_player_next_level.js:109 ui/game_player_next_level.js:198
 msgid "total"
-msgstr ""
+msgstr "total"
 
 #: ui/game_player_next_level.js:142
 msgid "alive"
-msgstr ""
+msgstr "en vie"
 
 #: ui/game_pyjama_party_ask_next.js:17
 msgid "Manually control the next girl?"
-msgstr ""
+msgstr "contr_ler manuellement la prochaine fille?"
 
 #: ui/game_pyjama_party_ask_next.js:34
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #: ui/game_pyjama_party_ask_next.js:46
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: ui/game_pyjama_party_ask_next.js:58
 msgid "Party run"
-msgstr ""
+msgstr "Lancer la soir}e"
 
 #: ui/game_pyjama_party_level_completed.js:18
 msgid "The party has passed this level."
-msgstr ""
+msgstr "La soir}e a pass} ce niveau."
 
 #: ui/settings.js:4
 msgid "SETTINGS"
-msgstr ""
+msgstr "PARAMETRES"
 
 #: ui/settings.js:21
 msgid "Options:"
-msgstr ""
+msgstr "Options :"
 
 #: ui/settings.js:29
 msgid "Up"
-msgstr ""
+msgstr "Haut"
 
 #: ui/settings.js:33
 msgid "Sound effects"
-msgstr ""
+msgstr "Bruitage"
 
 #: ui/settings.js:41
 msgid "Left"
-msgstr ""
+msgstr "Gauche"
 
 #: ui/settings.js:45
 msgid "Music"
-msgstr ""
+msgstr "Musique"
 
 #: ui/settings.js:53
 msgid "Right"
-msgstr ""
+msgstr "Droite"
 
 #: ui/settings.js:57
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 #: ui/settings.js:65
 msgid "Down"
-msgstr ""
+msgstr "Bas"
 
 #: ui/settings.js:69
 msgid "OpenGL"
@@ -1449,23 +1468,23 @@ msgstr ""
 
 #: ui/settings.js:77
 msgid "Manipulate"
-msgstr ""
+msgstr "Manipuler"
 
 #: ui/settings.js:81
 msgid "Full screen"
-msgstr ""
+msgstr "Plein }cran"
 
 #: ui/settings.js:89
 msgid "Alt.manip"
-msgstr ""
+msgstr "Alt.manip"
 
 #: ui/settings.js:93
 msgid "Special days"
-msgstr ""
+msgstr "Jours sp}ciaux"
 
 #: ui/settings.js:100
 msgid "  Close  "
-msgstr " Quitter "
+msgstr "  Fermer  "
 
 #: ui/title_common.js:40 ui/title_common.js:72
 msgid "<"
@@ -1477,4 +1496,4 @@ msgstr ""
 
 #: ui/title_common.js:99
 msgid "Settings"
-msgstr ""
+msgstr "Param~tres"
