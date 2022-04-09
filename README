@@ -13,16 +13,16 @@ collecting some number of diamonds, and then moving to the exit.
 * quests in several quest lines
 
 
-More information
-----------------
+Documentation
+-------------
 
-See README.building for building/compiling instructions,
-README.users for notes about using the game,
-README.sfx for notes on how to edit sound effect files,
-README.translations for notes on doing translations,
-LICENSE for the GPLv2+ license,
-Changelog for version history,
-and CREDITS for list of authors and libraries used.
+* [Building/compiling instructions](README.building)
+* [Notes about using the game](README.users)
+* [Notes on how to edit sound effect files](README.sfx)
+* [Notes on doing translations](README.translations)
+* [The GPLv2+ license](LICENSE)
+* [Version history](Changelog)
+* [List of authors and libraries used](CREDITS)
 
 
-http://www.netikka.net/joyr/diamond_girl/
+https://github.com/Peanhua/diamond-girl

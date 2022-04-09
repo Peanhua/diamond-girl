@@ -1,6 +1,6 @@
 /*
   Lucy the Diamond Girl - Game where player collects diamonds.
-  Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
+  Copyright (C) 2005-2022  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by

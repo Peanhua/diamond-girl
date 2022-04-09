@@ -4,7 +4,7 @@
   !define VERSIONMAJOR x
   !define VERSIONMINOR y
   !define VERSIONPATCH z
-  !define HELPURL   "http://www.netikka.net/joyr/diamond_girl/"
+  !define HELPURL   "https://github.com/Peanhua/diamond-girl"
   !define UPDATEURL "${HELPURL}"
   !define ABOUTURL  "${HELPURL}"
   !define INSTALLSIZE 0

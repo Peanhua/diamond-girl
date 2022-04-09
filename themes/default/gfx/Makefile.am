@@ -35,1090 +35,1445 @@ map_cursor.png : map_cursor.xcf
 	$(AM_V_GEN) xcf2png --autocrop $< $$(basename $@ .png) > $@ 2>/dev/null
 	$(AM_V_GEN) if [ -n "@optipng@" ]; then @optipng@ -nc -quiet $@ ; fi
 
-bracelet-bronze.png : tmp.bracelet-bronze.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-bracelet-copper.png : tmp.bracelet-copper.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-bracelet-gold.png : tmp.bracelet-gold.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-bracelet-silver.png : tmp.bracelet-silver.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-earring-bronze.png : tmp.earring-bronze.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-earring-copper.png : tmp.earring-copper.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-earring-gold.png : tmp.earring-gold.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-earring-silver.png : tmp.earring-silver.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-bronze-amber.png : tmp.gemstone_bracelet-bronze-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-bronze-amethyst.png : tmp.gemstone_bracelet-bronze-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-bronze-diamond.png : tmp.gemstone_bracelet-bronze-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-bronze-emerald.png : tmp.gemstone_bracelet-bronze-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-bronze-jade.png : tmp.gemstone_bracelet-bronze-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-bronze-opal.png : tmp.gemstone_bracelet-bronze-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-bronze-ruby.png : tmp.gemstone_bracelet-bronze-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-bronze-sapphire.png : tmp.gemstone_bracelet-bronze-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-bronze-turquoise.png : tmp.gemstone_bracelet-bronze-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-copper-amber.png : tmp.gemstone_bracelet-copper-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-copper-amethyst.png : tmp.gemstone_bracelet-copper-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-copper-diamond.png : tmp.gemstone_bracelet-copper-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-copper-emerald.png : tmp.gemstone_bracelet-copper-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-copper-jade.png : tmp.gemstone_bracelet-copper-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-copper-opal.png : tmp.gemstone_bracelet-copper-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-copper-ruby.png : tmp.gemstone_bracelet-copper-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-copper-sapphire.png : tmp.gemstone_bracelet-copper-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-copper-turquoise.png : tmp.gemstone_bracelet-copper-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-gold-amber.png : tmp.gemstone_bracelet-gold-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-gold-amethyst.png : tmp.gemstone_bracelet-gold-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-gold-diamond.png : tmp.gemstone_bracelet-gold-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-gold-emerald.png : tmp.gemstone_bracelet-gold-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-gold-jade.png : tmp.gemstone_bracelet-gold-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-gold-opal.png : tmp.gemstone_bracelet-gold-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-gold-ruby.png : tmp.gemstone_bracelet-gold-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-gold-sapphire.png : tmp.gemstone_bracelet-gold-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-gold-turquoise.png : tmp.gemstone_bracelet-gold-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-silver-amber.png : tmp.gemstone_bracelet-silver-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-silver-amethyst.png : tmp.gemstone_bracelet-silver-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-silver-diamond.png : tmp.gemstone_bracelet-silver-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-silver-emerald.png : tmp.gemstone_bracelet-silver-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-silver-jade.png : tmp.gemstone_bracelet-silver-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-silver-opal.png : tmp.gemstone_bracelet-silver-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-silver-ruby.png : tmp.gemstone_bracelet-silver-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-silver-sapphire.png : tmp.gemstone_bracelet-silver-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_bracelet-silver-turquoise.png : tmp.gemstone_bracelet-silver-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-bronze-amber.png : tmp.gemstone_earring-bronze-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-bronze-amethyst.png : tmp.gemstone_earring-bronze-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-bronze-diamond.png : tmp.gemstone_earring-bronze-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-bronze-emerald.png : tmp.gemstone_earring-bronze-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-bronze-jade.png : tmp.gemstone_earring-bronze-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-bronze-opal.png : tmp.gemstone_earring-bronze-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-bronze-ruby.png : tmp.gemstone_earring-bronze-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-bronze-sapphire.png : tmp.gemstone_earring-bronze-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-bronze-turquoise.png : tmp.gemstone_earring-bronze-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-copper-amber.png : tmp.gemstone_earring-copper-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-copper-amethyst.png : tmp.gemstone_earring-copper-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-copper-diamond.png : tmp.gemstone_earring-copper-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-copper-emerald.png : tmp.gemstone_earring-copper-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-copper-jade.png : tmp.gemstone_earring-copper-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-copper-opal.png : tmp.gemstone_earring-copper-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-copper-ruby.png : tmp.gemstone_earring-copper-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-copper-sapphire.png : tmp.gemstone_earring-copper-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-copper-turquoise.png : tmp.gemstone_earring-copper-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-gold-amber.png : tmp.gemstone_earring-gold-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-gold-amethyst.png : tmp.gemstone_earring-gold-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-gold-diamond.png : tmp.gemstone_earring-gold-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-gold-emerald.png : tmp.gemstone_earring-gold-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-gold-jade.png : tmp.gemstone_earring-gold-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-gold-opal.png : tmp.gemstone_earring-gold-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-gold-ruby.png : tmp.gemstone_earring-gold-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-gold-sapphire.png : tmp.gemstone_earring-gold-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-gold-turquoise.png : tmp.gemstone_earring-gold-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-silver-amber.png : tmp.gemstone_earring-silver-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-silver-amethyst.png : tmp.gemstone_earring-silver-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-silver-diamond.png : tmp.gemstone_earring-silver-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-silver-emerald.png : tmp.gemstone_earring-silver-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-silver-jade.png : tmp.gemstone_earring-silver-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-silver-opal.png : tmp.gemstone_earring-silver-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-silver-ruby.png : tmp.gemstone_earring-silver-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-silver-sapphire.png : tmp.gemstone_earring-silver-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_earring-silver-turquoise.png : tmp.gemstone_earring-silver-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-bronze-amber.png : tmp.gemstone_hand_mirror-bronze-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-bronze-amethyst.png : tmp.gemstone_hand_mirror-bronze-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-bronze-diamond.png : tmp.gemstone_hand_mirror-bronze-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-bronze-emerald.png : tmp.gemstone_hand_mirror-bronze-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-bronze-jade.png : tmp.gemstone_hand_mirror-bronze-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-bronze-opal.png : tmp.gemstone_hand_mirror-bronze-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-bronze-ruby.png : tmp.gemstone_hand_mirror-bronze-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-bronze-sapphire.png : tmp.gemstone_hand_mirror-bronze-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-bronze-turquoise.png : tmp.gemstone_hand_mirror-bronze-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-copper-amber.png : tmp.gemstone_hand_mirror-copper-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-copper-amethyst.png : tmp.gemstone_hand_mirror-copper-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-copper-diamond.png : tmp.gemstone_hand_mirror-copper-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-copper-emerald.png : tmp.gemstone_hand_mirror-copper-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-copper-jade.png : tmp.gemstone_hand_mirror-copper-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-copper-opal.png : tmp.gemstone_hand_mirror-copper-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-copper-ruby.png : tmp.gemstone_hand_mirror-copper-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-copper-sapphire.png : tmp.gemstone_hand_mirror-copper-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-copper-turquoise.png : tmp.gemstone_hand_mirror-copper-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-gold-amber.png : tmp.gemstone_hand_mirror-gold-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-gold-amethyst.png : tmp.gemstone_hand_mirror-gold-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-gold-diamond.png : tmp.gemstone_hand_mirror-gold-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-gold-emerald.png : tmp.gemstone_hand_mirror-gold-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-gold-jade.png : tmp.gemstone_hand_mirror-gold-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-gold-opal.png : tmp.gemstone_hand_mirror-gold-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-gold-ruby.png : tmp.gemstone_hand_mirror-gold-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-gold-sapphire.png : tmp.gemstone_hand_mirror-gold-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-gold-turquoise.png : tmp.gemstone_hand_mirror-gold-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-silver-amber.png : tmp.gemstone_hand_mirror-silver-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-silver-amethyst.png : tmp.gemstone_hand_mirror-silver-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-silver-diamond.png : tmp.gemstone_hand_mirror-silver-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-silver-emerald.png : tmp.gemstone_hand_mirror-silver-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-silver-jade.png : tmp.gemstone_hand_mirror-silver-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-silver-opal.png : tmp.gemstone_hand_mirror-silver-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-silver-ruby.png : tmp.gemstone_hand_mirror-silver-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-silver-sapphire.png : tmp.gemstone_hand_mirror-silver-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_hand_mirror-silver-turquoise.png : tmp.gemstone_hand_mirror-silver-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-bronze-amber.png : tmp.gemstone_mirror-bronze-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-bronze-amethyst.png : tmp.gemstone_mirror-bronze-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-bronze-diamond.png : tmp.gemstone_mirror-bronze-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-bronze-emerald.png : tmp.gemstone_mirror-bronze-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-bronze-jade.png : tmp.gemstone_mirror-bronze-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-bronze-opal.png : tmp.gemstone_mirror-bronze-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-bronze-ruby.png : tmp.gemstone_mirror-bronze-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-bronze-sapphire.png : tmp.gemstone_mirror-bronze-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-bronze-turquoise.png : tmp.gemstone_mirror-bronze-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-copper-amber.png : tmp.gemstone_mirror-copper-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-copper-amethyst.png : tmp.gemstone_mirror-copper-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-copper-diamond.png : tmp.gemstone_mirror-copper-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-copper-emerald.png : tmp.gemstone_mirror-copper-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-copper-jade.png : tmp.gemstone_mirror-copper-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-copper-opal.png : tmp.gemstone_mirror-copper-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-copper-ruby.png : tmp.gemstone_mirror-copper-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-copper-sapphire.png : tmp.gemstone_mirror-copper-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-copper-turquoise.png : tmp.gemstone_mirror-copper-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-gold-amber.png : tmp.gemstone_mirror-gold-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-gold-amethyst.png : tmp.gemstone_mirror-gold-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-gold-diamond.png : tmp.gemstone_mirror-gold-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-gold-emerald.png : tmp.gemstone_mirror-gold-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-gold-jade.png : tmp.gemstone_mirror-gold-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-gold-opal.png : tmp.gemstone_mirror-gold-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-gold-ruby.png : tmp.gemstone_mirror-gold-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-gold-sapphire.png : tmp.gemstone_mirror-gold-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-gold-turquoise.png : tmp.gemstone_mirror-gold-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-silver-amber.png : tmp.gemstone_mirror-silver-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-silver-amethyst.png : tmp.gemstone_mirror-silver-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-silver-diamond.png : tmp.gemstone_mirror-silver-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-silver-emerald.png : tmp.gemstone_mirror-silver-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-silver-jade.png : tmp.gemstone_mirror-silver-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-silver-opal.png : tmp.gemstone_mirror-silver-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-silver-ruby.png : tmp.gemstone_mirror-silver-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-silver-sapphire.png : tmp.gemstone_mirror-silver-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_mirror-silver-turquoise.png : tmp.gemstone_mirror-silver-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-bronze-amber.png : tmp.gemstone_necklace-bronze-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-bronze-amethyst.png : tmp.gemstone_necklace-bronze-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-bronze-diamond.png : tmp.gemstone_necklace-bronze-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-bronze-emerald.png : tmp.gemstone_necklace-bronze-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-bronze-jade.png : tmp.gemstone_necklace-bronze-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-bronze-opal.png : tmp.gemstone_necklace-bronze-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-bronze-ruby.png : tmp.gemstone_necklace-bronze-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-bronze-sapphire.png : tmp.gemstone_necklace-bronze-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-bronze-turquoise.png : tmp.gemstone_necklace-bronze-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-copper-amber.png : tmp.gemstone_necklace-copper-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-copper-amethyst.png : tmp.gemstone_necklace-copper-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-copper-diamond.png : tmp.gemstone_necklace-copper-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-copper-emerald.png : tmp.gemstone_necklace-copper-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-copper-jade.png : tmp.gemstone_necklace-copper-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-copper-opal.png : tmp.gemstone_necklace-copper-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-copper-ruby.png : tmp.gemstone_necklace-copper-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-copper-sapphire.png : tmp.gemstone_necklace-copper-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-copper-turquoise.png : tmp.gemstone_necklace-copper-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-gold-amber.png : tmp.gemstone_necklace-gold-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-gold-amethyst.png : tmp.gemstone_necklace-gold-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-gold-diamond.png : tmp.gemstone_necklace-gold-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-gold-emerald.png : tmp.gemstone_necklace-gold-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-gold-jade.png : tmp.gemstone_necklace-gold-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-gold-opal.png : tmp.gemstone_necklace-gold-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-gold-ruby.png : tmp.gemstone_necklace-gold-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-gold-sapphire.png : tmp.gemstone_necklace-gold-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-gold-turquoise.png : tmp.gemstone_necklace-gold-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-silver-amber.png : tmp.gemstone_necklace-silver-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-silver-amethyst.png : tmp.gemstone_necklace-silver-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-silver-diamond.png : tmp.gemstone_necklace-silver-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-silver-emerald.png : tmp.gemstone_necklace-silver-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-silver-jade.png : tmp.gemstone_necklace-silver-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-silver-opal.png : tmp.gemstone_necklace-silver-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-silver-ruby.png : tmp.gemstone_necklace-silver-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-silver-sapphire.png : tmp.gemstone_necklace-silver-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_necklace-silver-turquoise.png : tmp.gemstone_necklace-silver-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-bronze-amber.png : tmp.gemstone_pendant-bronze-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-bronze-amethyst.png : tmp.gemstone_pendant-bronze-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-bronze-diamond.png : tmp.gemstone_pendant-bronze-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-bronze-emerald.png : tmp.gemstone_pendant-bronze-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-bronze-jade.png : tmp.gemstone_pendant-bronze-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-bronze-opal.png : tmp.gemstone_pendant-bronze-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-bronze-ruby.png : tmp.gemstone_pendant-bronze-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-bronze-sapphire.png : tmp.gemstone_pendant-bronze-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-bronze-turquoise.png : tmp.gemstone_pendant-bronze-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-copper-amber.png : tmp.gemstone_pendant-copper-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-copper-amethyst.png : tmp.gemstone_pendant-copper-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-copper-diamond.png : tmp.gemstone_pendant-copper-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-copper-emerald.png : tmp.gemstone_pendant-copper-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-copper-jade.png : tmp.gemstone_pendant-copper-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-copper-opal.png : tmp.gemstone_pendant-copper-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-copper-ruby.png : tmp.gemstone_pendant-copper-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-copper-sapphire.png : tmp.gemstone_pendant-copper-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-copper-turquoise.png : tmp.gemstone_pendant-copper-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-gold-amber.png : tmp.gemstone_pendant-gold-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-gold-amethyst.png : tmp.gemstone_pendant-gold-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-gold-diamond.png : tmp.gemstone_pendant-gold-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-gold-emerald.png : tmp.gemstone_pendant-gold-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-gold-jade.png : tmp.gemstone_pendant-gold-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-gold-opal.png : tmp.gemstone_pendant-gold-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-gold-ruby.png : tmp.gemstone_pendant-gold-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-gold-sapphire.png : tmp.gemstone_pendant-gold-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-gold-turquoise.png : tmp.gemstone_pendant-gold-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-silver-amber.png : tmp.gemstone_pendant-silver-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-silver-amethyst.png : tmp.gemstone_pendant-silver-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-silver-diamond.png : tmp.gemstone_pendant-silver-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-silver-emerald.png : tmp.gemstone_pendant-silver-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-silver-jade.png : tmp.gemstone_pendant-silver-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-silver-opal.png : tmp.gemstone_pendant-silver-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-silver-ruby.png : tmp.gemstone_pendant-silver-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-silver-sapphire.png : tmp.gemstone_pendant-silver-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_pendant-silver-turquoise.png : tmp.gemstone_pendant-silver-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-bronze-amber.png : tmp.gemstone_ring-bronze-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-bronze-amethyst.png : tmp.gemstone_ring-bronze-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-bronze-diamond.png : tmp.gemstone_ring-bronze-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-bronze-emerald.png : tmp.gemstone_ring-bronze-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-bronze-jade.png : tmp.gemstone_ring-bronze-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-bronze-opal.png : tmp.gemstone_ring-bronze-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-bronze-ruby.png : tmp.gemstone_ring-bronze-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-bronze-sapphire.png : tmp.gemstone_ring-bronze-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-bronze-turquoise.png : tmp.gemstone_ring-bronze-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-copper-amber.png : tmp.gemstone_ring-copper-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-copper-amethyst.png : tmp.gemstone_ring-copper-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-copper-diamond.png : tmp.gemstone_ring-copper-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-copper-emerald.png : tmp.gemstone_ring-copper-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-copper-jade.png : tmp.gemstone_ring-copper-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-copper-opal.png : tmp.gemstone_ring-copper-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-copper-ruby.png : tmp.gemstone_ring-copper-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-copper-sapphire.png : tmp.gemstone_ring-copper-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-copper-turquoise.png : tmp.gemstone_ring-copper-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-gold-amber.png : tmp.gemstone_ring-gold-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-gold-amethyst.png : tmp.gemstone_ring-gold-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-gold-diamond.png : tmp.gemstone_ring-gold-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-gold-emerald.png : tmp.gemstone_ring-gold-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-gold-jade.png : tmp.gemstone_ring-gold-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-gold-opal.png : tmp.gemstone_ring-gold-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-gold-ruby.png : tmp.gemstone_ring-gold-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-gold-sapphire.png : tmp.gemstone_ring-gold-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-gold-turquoise.png : tmp.gemstone_ring-gold-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-silver-amber.png : tmp.gemstone_ring-silver-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-silver-amethyst.png : tmp.gemstone_ring-silver-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-silver-diamond.png : tmp.gemstone_ring-silver-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-silver-emerald.png : tmp.gemstone_ring-silver-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-silver-jade.png : tmp.gemstone_ring-silver-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-silver-opal.png : tmp.gemstone_ring-silver-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-silver-ruby.png : tmp.gemstone_ring-silver-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-silver-sapphire.png : tmp.gemstone_ring-silver-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_ring-silver-turquoise.png : tmp.gemstone_ring-silver-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-bronze-amber.png : tmp.gemstone_statue-bronze-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-bronze-amethyst.png : tmp.gemstone_statue-bronze-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-bronze-diamond.png : tmp.gemstone_statue-bronze-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-bronze-emerald.png : tmp.gemstone_statue-bronze-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-bronze-jade.png : tmp.gemstone_statue-bronze-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-bronze-opal.png : tmp.gemstone_statue-bronze-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-bronze-ruby.png : tmp.gemstone_statue-bronze-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-bronze-sapphire.png : tmp.gemstone_statue-bronze-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-bronze-turquoise.png : tmp.gemstone_statue-bronze-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-copper-amber.png : tmp.gemstone_statue-copper-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-copper-amethyst.png : tmp.gemstone_statue-copper-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-copper-diamond.png : tmp.gemstone_statue-copper-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-copper-emerald.png : tmp.gemstone_statue-copper-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-copper-jade.png : tmp.gemstone_statue-copper-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-copper-opal.png : tmp.gemstone_statue-copper-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-copper-ruby.png : tmp.gemstone_statue-copper-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-copper-sapphire.png : tmp.gemstone_statue-copper-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-copper-turquoise.png : tmp.gemstone_statue-copper-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-gold-amber.png : tmp.gemstone_statue-gold-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-gold-amethyst.png : tmp.gemstone_statue-gold-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-gold-diamond.png : tmp.gemstone_statue-gold-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-gold-emerald.png : tmp.gemstone_statue-gold-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-gold-jade.png : tmp.gemstone_statue-gold-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-gold-opal.png : tmp.gemstone_statue-gold-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-gold-ruby.png : tmp.gemstone_statue-gold-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-gold-sapphire.png : tmp.gemstone_statue-gold-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-gold-turquoise.png : tmp.gemstone_statue-gold-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-silver-amber.png : tmp.gemstone_statue-silver-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-silver-amethyst.png : tmp.gemstone_statue-silver-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-silver-diamond.png : tmp.gemstone_statue-silver-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-silver-emerald.png : tmp.gemstone_statue-silver-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-silver-jade.png : tmp.gemstone_statue-silver-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-silver-opal.png : tmp.gemstone_statue-silver-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-silver-ruby.png : tmp.gemstone_statue-silver-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-silver-sapphire.png : tmp.gemstone_statue-silver-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_statue-silver-turquoise.png : tmp.gemstone_statue-silver-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-bronze-amber.png : tmp.gemstone_vase-bronze-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-bronze-amethyst.png : tmp.gemstone_vase-bronze-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-bronze-diamond.png : tmp.gemstone_vase-bronze-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-bronze-emerald.png : tmp.gemstone_vase-bronze-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-bronze-jade.png : tmp.gemstone_vase-bronze-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-bronze-opal.png : tmp.gemstone_vase-bronze-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-bronze-ruby.png : tmp.gemstone_vase-bronze-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-bronze-sapphire.png : tmp.gemstone_vase-bronze-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-bronze-turquoise.png : tmp.gemstone_vase-bronze-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-copper-amber.png : tmp.gemstone_vase-copper-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-copper-amethyst.png : tmp.gemstone_vase-copper-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-copper-diamond.png : tmp.gemstone_vase-copper-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-copper-emerald.png : tmp.gemstone_vase-copper-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-copper-jade.png : tmp.gemstone_vase-copper-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-copper-opal.png : tmp.gemstone_vase-copper-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-copper-ruby.png : tmp.gemstone_vase-copper-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-copper-sapphire.png : tmp.gemstone_vase-copper-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-copper-turquoise.png : tmp.gemstone_vase-copper-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-gold-amber.png : tmp.gemstone_vase-gold-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-gold-amethyst.png : tmp.gemstone_vase-gold-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-gold-diamond.png : tmp.gemstone_vase-gold-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-gold-emerald.png : tmp.gemstone_vase-gold-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-gold-jade.png : tmp.gemstone_vase-gold-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-gold-opal.png : tmp.gemstone_vase-gold-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-gold-ruby.png : tmp.gemstone_vase-gold-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-gold-sapphire.png : tmp.gemstone_vase-gold-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-gold-turquoise.png : tmp.gemstone_vase-gold-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-silver-amber.png : tmp.gemstone_vase-silver-amber.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-silver-amethyst.png : tmp.gemstone_vase-silver-amethyst.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-silver-diamond.png : tmp.gemstone_vase-silver-diamond.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-silver-emerald.png : tmp.gemstone_vase-silver-emerald.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-silver-jade.png : tmp.gemstone_vase-silver-jade.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-silver-opal.png : tmp.gemstone_vase-silver-opal.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-silver-ruby.png : tmp.gemstone_vase-silver-ruby.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-silver-sapphire.png : tmp.gemstone_vase-silver-sapphire.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-gemstone_vase-silver-turquoise.png : tmp.gemstone_vase-silver-turquoise.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-hand_mirror-bronze.png : tmp.hand_mirror-bronze.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-hand_mirror-copper.png : tmp.hand_mirror-copper.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-hand_mirror-gold.png : tmp.hand_mirror-gold.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-hand_mirror-silver.png : tmp.hand_mirror-silver.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-mirror-bronze.png : tmp.mirror-bronze.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-mirror-copper.png : tmp.mirror-copper.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-mirror-gold.png : tmp.mirror-gold.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-mirror-silver.png : tmp.mirror-silver.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-necklace-bronze.png : tmp.necklace-bronze.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-necklace-copper.png : tmp.necklace-copper.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-necklace-gold.png : tmp.necklace-gold.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-necklace-silver.png : tmp.necklace-silver.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-pendant-bronze.png : tmp.pendant-bronze.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-pendant-copper.png : tmp.pendant-copper.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-pendant-gold.png : tmp.pendant-gold.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-pendant-silver.png : tmp.pendant-silver.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-ring-bronze.png : tmp.ring-bronze.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-ring-copper.png : tmp.ring-copper.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-ring-gold.png : tmp.ring-gold.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-ring-silver.png : tmp.ring-silver.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-statue-bronze.png : tmp.statue-bronze.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-statue-copper.png : tmp.statue-copper.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-statue-gold.png : tmp.statue-gold.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-statue-silver.png : tmp.statue-silver.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-vase-bronze.png : tmp.vase-bronze.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-vase-copper.png : tmp.vase-copper.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-vase-gold.png : tmp.vase-gold.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-vase-silver.png : tmp.vase-silver.png
-	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out $@ $< ; else cp $< $@ ; fi
-
-tmp.bracelet-bronze.png: treasures.blend
-	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- "*" > /dev/null
-
-tmp.bracelet-copper.png tmp.bracelet-gold.png tmp.bracelet-silver.png tmp.earring-bronze.png tmp.earring-copper.png tmp.earring-gold.png tmp.earring-silver.png tmp.gemstone_bracelet-bronze-amber.png tmp.gemstone_bracelet-bronze-amethyst.png tmp.gemstone_bracelet-bronze-diamond.png tmp.gemstone_bracelet-bronze-emerald.png tmp.gemstone_bracelet-bronze-jade.png tmp.gemstone_bracelet-bronze-opal.png tmp.gemstone_bracelet-bronze-ruby.png tmp.gemstone_bracelet-bronze-sapphire.png tmp.gemstone_bracelet-bronze-turquoise.png tmp.gemstone_bracelet-copper-amber.png tmp.gemstone_bracelet-copper-amethyst.png tmp.gemstone_bracelet-copper-diamond.png tmp.gemstone_bracelet-copper-emerald.png tmp.gemstone_bracelet-copper-jade.png tmp.gemstone_bracelet-copper-opal.png tmp.gemstone_bracelet-copper-ruby.png tmp.gemstone_bracelet-copper-sapphire.png tmp.gemstone_bracelet-copper-turquoise.png tmp.gemstone_bracelet-gold-amber.png tmp.gemstone_bracelet-gold-amethyst.png tmp.gemstone_bracelet-gold-diamond.png tmp.gemstone_bracelet-gold-emerald.png tmp.gemstone_bracelet-gold-jade.png tmp.gemstone_bracelet-gold-opal.png tmp.gemstone_bracelet-gold-ruby.png tmp.gemstone_bracelet-gold-sapphire.png tmp.gemstone_bracelet-gold-turquoise.png tmp.gemstone_bracelet-silver-amber.png tmp.gemstone_bracelet-silver-amethyst.png tmp.gemstone_bracelet-silver-diamond.png tmp.gemstone_bracelet-silver-emerald.png tmp.gemstone_bracelet-silver-jade.png tmp.gemstone_bracelet-silver-opal.png tmp.gemstone_bracelet-silver-ruby.png tmp.gemstone_bracelet-silver-sapphire.png tmp.gemstone_bracelet-silver-turquoise.png tmp.gemstone_earring-bronze-amber.png tmp.gemstone_earring-bronze-amethyst.png tmp.gemstone_earring-bronze-diamond.png tmp.gemstone_earring-bronze-emerald.png tmp.gemstone_earring-bronze-jade.png tmp.gemstone_earring-bronze-opal.png tmp.gemstone_earring-bronze-ruby.png tmp.gemstone_earring-bronze-sapphire.png tmp.gemstone_earring-bronze-turquoise.png tmp.gemstone_earring-copper-amber.png tmp.gemstone_earring-copper-amethyst.png tmp.gemstone_earring-copper-diamond.png tmp.gemstone_earring-copper-emerald.png tmp.gemstone_earring-copper-jade.png tmp.gemstone_earring-copper-opal.png tmp.gemstone_earring-copper-ruby.png tmp.gemstone_earring-copper-sapphire.png tmp.gemstone_earring-copper-turquoise.png tmp.gemstone_earring-gold-amber.png tmp.gemstone_earring-gold-amethyst.png tmp.gemstone_earring-gold-diamond.png tmp.gemstone_earring-gold-emerald.png tmp.gemstone_earring-gold-jade.png tmp.gemstone_earring-gold-opal.png tmp.gemstone_earring-gold-ruby.png tmp.gemstone_earring-gold-sapphire.png tmp.gemstone_earring-gold-turquoise.png tmp.gemstone_earring-silver-amber.png tmp.gemstone_earring-silver-amethyst.png tmp.gemstone_earring-silver-diamond.png tmp.gemstone_earring-silver-emerald.png tmp.gemstone_earring-silver-jade.png tmp.gemstone_earring-silver-opal.png tmp.gemstone_earring-silver-ruby.png tmp.gemstone_earring-silver-sapphire.png tmp.gemstone_earring-silver-turquoise.png tmp.gemstone_hand_mirror-bronze-amber.png tmp.gemstone_hand_mirror-bronze-amethyst.png tmp.gemstone_hand_mirror-bronze-diamond.png tmp.gemstone_hand_mirror-bronze-emerald.png tmp.gemstone_hand_mirror-bronze-jade.png tmp.gemstone_hand_mirror-bronze-opal.png tmp.gemstone_hand_mirror-bronze-ruby.png tmp.gemstone_hand_mirror-bronze-sapphire.png tmp.gemstone_hand_mirror-bronze-turquoise.png tmp.gemstone_hand_mirror-copper-amber.png tmp.gemstone_hand_mirror-copper-amethyst.png tmp.gemstone_hand_mirror-copper-diamond.png tmp.gemstone_hand_mirror-copper-emerald.png tmp.gemstone_hand_mirror-copper-jade.png tmp.gemstone_hand_mirror-copper-opal.png tmp.gemstone_hand_mirror-copper-ruby.png tmp.gemstone_hand_mirror-copper-sapphire.png tmp.gemstone_hand_mirror-copper-turquoise.png tmp.gemstone_hand_mirror-gold-amber.png tmp.gemstone_hand_mirror-gold-amethyst.png tmp.gemstone_hand_mirror-gold-diamond.png tmp.gemstone_hand_mirror-gold-emerald.png tmp.gemstone_hand_mirror-gold-jade.png tmp.gemstone_hand_mirror-gold-opal.png tmp.gemstone_hand_mirror-gold-ruby.png tmp.gemstone_hand_mirror-gold-sapphire.png tmp.gemstone_hand_mirror-gold-turquoise.png tmp.gemstone_hand_mirror-silver-amber.png tmp.gemstone_hand_mirror-silver-amethyst.png tmp.gemstone_hand_mirror-silver-diamond.png tmp.gemstone_hand_mirror-silver-emerald.png tmp.gemstone_hand_mirror-silver-jade.png tmp.gemstone_hand_mirror-silver-opal.png tmp.gemstone_hand_mirror-silver-ruby.png tmp.gemstone_hand_mirror-silver-sapphire.png tmp.gemstone_hand_mirror-silver-turquoise.png tmp.gemstone_mirror-bronze-amber.png tmp.gemstone_mirror-bronze-amethyst.png tmp.gemstone_mirror-bronze-diamond.png tmp.gemstone_mirror-bronze-emerald.png tmp.gemstone_mirror-bronze-jade.png tmp.gemstone_mirror-bronze-opal.png tmp.gemstone_mirror-bronze-ruby.png tmp.gemstone_mirror-bronze-sapphire.png tmp.gemstone_mirror-bronze-turquoise.png tmp.gemstone_mirror-copper-amber.png tmp.gemstone_mirror-copper-amethyst.png tmp.gemstone_mirror-copper-diamond.png tmp.gemstone_mirror-copper-emerald.png tmp.gemstone_mirror-copper-jade.png tmp.gemstone_mirror-copper-opal.png tmp.gemstone_mirror-copper-ruby.png tmp.gemstone_mirror-copper-sapphire.png tmp.gemstone_mirror-copper-turquoise.png tmp.gemstone_mirror-gold-amber.png tmp.gemstone_mirror-gold-amethyst.png tmp.gemstone_mirror-gold-diamond.png tmp.gemstone_mirror-gold-emerald.png tmp.gemstone_mirror-gold-jade.png tmp.gemstone_mirror-gold-opal.png tmp.gemstone_mirror-gold-ruby.png tmp.gemstone_mirror-gold-sapphire.png tmp.gemstone_mirror-gold-turquoise.png tmp.gemstone_mirror-silver-amber.png tmp.gemstone_mirror-silver-amethyst.png tmp.gemstone_mirror-silver-diamond.png tmp.gemstone_mirror-silver-emerald.png tmp.gemstone_mirror-silver-jade.png tmp.gemstone_mirror-silver-opal.png tmp.gemstone_mirror-silver-ruby.png tmp.gemstone_mirror-silver-sapphire.png tmp.gemstone_mirror-silver-turquoise.png tmp.gemstone_necklace-bronze-amber.png tmp.gemstone_necklace-bronze-amethyst.png tmp.gemstone_necklace-bronze-diamond.png tmp.gemstone_necklace-bronze-emerald.png tmp.gemstone_necklace-bronze-jade.png tmp.gemstone_necklace-bronze-opal.png tmp.gemstone_necklace-bronze-ruby.png tmp.gemstone_necklace-bronze-sapphire.png tmp.gemstone_necklace-bronze-turquoise.png tmp.gemstone_necklace-copper-amber.png tmp.gemstone_necklace-copper-amethyst.png tmp.gemstone_necklace-copper-diamond.png tmp.gemstone_necklace-copper-emerald.png tmp.gemstone_necklace-copper-jade.png tmp.gemstone_necklace-copper-opal.png tmp.gemstone_necklace-copper-ruby.png tmp.gemstone_necklace-copper-sapphire.png tmp.gemstone_necklace-copper-turquoise.png tmp.gemstone_necklace-gold-amber.png tmp.gemstone_necklace-gold-amethyst.png tmp.gemstone_necklace-gold-diamond.png tmp.gemstone_necklace-gold-emerald.png tmp.gemstone_necklace-gold-jade.png tmp.gemstone_necklace-gold-opal.png tmp.gemstone_necklace-gold-ruby.png tmp.gemstone_necklace-gold-sapphire.png tmp.gemstone_necklace-gold-turquoise.png tmp.gemstone_necklace-silver-amber.png tmp.gemstone_necklace-silver-amethyst.png tmp.gemstone_necklace-silver-diamond.png tmp.gemstone_necklace-silver-emerald.png tmp.gemstone_necklace-silver-jade.png tmp.gemstone_necklace-silver-opal.png tmp.gemstone_necklace-silver-ruby.png tmp.gemstone_necklace-silver-sapphire.png tmp.gemstone_necklace-silver-turquoise.png tmp.gemstone_pendant-bronze-amber.png tmp.gemstone_pendant-bronze-amethyst.png tmp.gemstone_pendant-bronze-diamond.png tmp.gemstone_pendant-bronze-emerald.png tmp.gemstone_pendant-bronze-jade.png tmp.gemstone_pendant-bronze-opal.png tmp.gemstone_pendant-bronze-ruby.png tmp.gemstone_pendant-bronze-sapphire.png tmp.gemstone_pendant-bronze-turquoise.png tmp.gemstone_pendant-copper-amber.png tmp.gemstone_pendant-copper-amethyst.png tmp.gemstone_pendant-copper-diamond.png tmp.gemstone_pendant-copper-emerald.png tmp.gemstone_pendant-copper-jade.png tmp.gemstone_pendant-copper-opal.png tmp.gemstone_pendant-copper-ruby.png tmp.gemstone_pendant-copper-sapphire.png tmp.gemstone_pendant-copper-turquoise.png tmp.gemstone_pendant-gold-amber.png tmp.gemstone_pendant-gold-amethyst.png tmp.gemstone_pendant-gold-diamond.png tmp.gemstone_pendant-gold-emerald.png tmp.gemstone_pendant-gold-jade.png tmp.gemstone_pendant-gold-opal.png tmp.gemstone_pendant-gold-ruby.png tmp.gemstone_pendant-gold-sapphire.png tmp.gemstone_pendant-gold-turquoise.png tmp.gemstone_pendant-silver-amber.png tmp.gemstone_pendant-silver-amethyst.png tmp.gemstone_pendant-silver-diamond.png tmp.gemstone_pendant-silver-emerald.png tmp.gemstone_pendant-silver-jade.png tmp.gemstone_pendant-silver-opal.png tmp.gemstone_pendant-silver-ruby.png tmp.gemstone_pendant-silver-sapphire.png tmp.gemstone_pendant-silver-turquoise.png tmp.gemstone_ring-bronze-amber.png tmp.gemstone_ring-bronze-amethyst.png tmp.gemstone_ring-bronze-diamond.png tmp.gemstone_ring-bronze-emerald.png tmp.gemstone_ring-bronze-jade.png tmp.gemstone_ring-bronze-opal.png tmp.gemstone_ring-bronze-ruby.png tmp.gemstone_ring-bronze-sapphire.png tmp.gemstone_ring-bronze-turquoise.png tmp.gemstone_ring-copper-amber.png tmp.gemstone_ring-copper-amethyst.png tmp.gemstone_ring-copper-diamond.png tmp.gemstone_ring-copper-emerald.png tmp.gemstone_ring-copper-jade.png tmp.gemstone_ring-copper-opal.png tmp.gemstone_ring-copper-ruby.png tmp.gemstone_ring-copper-sapphire.png tmp.gemstone_ring-copper-turquoise.png tmp.gemstone_ring-gold-amber.png tmp.gemstone_ring-gold-amethyst.png tmp.gemstone_ring-gold-diamond.png tmp.gemstone_ring-gold-emerald.png tmp.gemstone_ring-gold-jade.png tmp.gemstone_ring-gold-opal.png tmp.gemstone_ring-gold-ruby.png tmp.gemstone_ring-gold-sapphire.png tmp.gemstone_ring-gold-turquoise.png tmp.gemstone_ring-silver-amber.png tmp.gemstone_ring-silver-amethyst.png tmp.gemstone_ring-silver-diamond.png tmp.gemstone_ring-silver-emerald.png tmp.gemstone_ring-silver-jade.png tmp.gemstone_ring-silver-opal.png tmp.gemstone_ring-silver-ruby.png tmp.gemstone_ring-silver-sapphire.png tmp.gemstone_ring-silver-turquoise.png tmp.gemstone_statue-bronze-amber.png tmp.gemstone_statue-bronze-amethyst.png tmp.gemstone_statue-bronze-diamond.png tmp.gemstone_statue-bronze-emerald.png tmp.gemstone_statue-bronze-jade.png tmp.gemstone_statue-bronze-opal.png tmp.gemstone_statue-bronze-ruby.png tmp.gemstone_statue-bronze-sapphire.png tmp.gemstone_statue-bronze-turquoise.png tmp.gemstone_statue-copper-amber.png tmp.gemstone_statue-copper-amethyst.png tmp.gemstone_statue-copper-diamond.png tmp.gemstone_statue-copper-emerald.png tmp.gemstone_statue-copper-jade.png tmp.gemstone_statue-copper-opal.png tmp.gemstone_statue-copper-ruby.png tmp.gemstone_statue-copper-sapphire.png tmp.gemstone_statue-copper-turquoise.png tmp.gemstone_statue-gold-amber.png tmp.gemstone_statue-gold-amethyst.png tmp.gemstone_statue-gold-diamond.png tmp.gemstone_statue-gold-emerald.png tmp.gemstone_statue-gold-jade.png tmp.gemstone_statue-gold-opal.png tmp.gemstone_statue-gold-ruby.png tmp.gemstone_statue-gold-sapphire.png tmp.gemstone_statue-gold-turquoise.png tmp.gemstone_statue-silver-amber.png tmp.gemstone_statue-silver-amethyst.png tmp.gemstone_statue-silver-diamond.png tmp.gemstone_statue-silver-emerald.png tmp.gemstone_statue-silver-jade.png tmp.gemstone_statue-silver-opal.png tmp.gemstone_statue-silver-ruby.png tmp.gemstone_statue-silver-sapphire.png tmp.gemstone_statue-silver-turquoise.png tmp.gemstone_vase-bronze-amber.png tmp.gemstone_vase-bronze-amethyst.png tmp.gemstone_vase-bronze-diamond.png tmp.gemstone_vase-bronze-emerald.png tmp.gemstone_vase-bronze-jade.png tmp.gemstone_vase-bronze-opal.png tmp.gemstone_vase-bronze-ruby.png tmp.gemstone_vase-bronze-sapphire.png tmp.gemstone_vase-bronze-turquoise.png tmp.gemstone_vase-copper-amber.png tmp.gemstone_vase-copper-amethyst.png tmp.gemstone_vase-copper-diamond.png tmp.gemstone_vase-copper-emerald.png tmp.gemstone_vase-copper-jade.png tmp.gemstone_vase-copper-opal.png tmp.gemstone_vase-copper-ruby.png tmp.gemstone_vase-copper-sapphire.png tmp.gemstone_vase-copper-turquoise.png tmp.gemstone_vase-gold-amber.png tmp.gemstone_vase-gold-amethyst.png tmp.gemstone_vase-gold-diamond.png tmp.gemstone_vase-gold-emerald.png tmp.gemstone_vase-gold-jade.png tmp.gemstone_vase-gold-opal.png tmp.gemstone_vase-gold-ruby.png tmp.gemstone_vase-gold-sapphire.png tmp.gemstone_vase-gold-turquoise.png tmp.gemstone_vase-silver-amber.png tmp.gemstone_vase-silver-amethyst.png tmp.gemstone_vase-silver-diamond.png tmp.gemstone_vase-silver-emerald.png tmp.gemstone_vase-silver-jade.png tmp.gemstone_vase-silver-opal.png tmp.gemstone_vase-silver-ruby.png tmp.gemstone_vase-silver-sapphire.png tmp.gemstone_vase-silver-turquoise.png tmp.hand_mirror-bronze.png tmp.hand_mirror-copper.png tmp.hand_mirror-gold.png tmp.hand_mirror-silver.png tmp.mirror-bronze.png tmp.mirror-copper.png tmp.mirror-gold.png tmp.mirror-silver.png tmp.necklace-bronze.png tmp.necklace-copper.png tmp.necklace-gold.png tmp.necklace-silver.png tmp.pendant-bronze.png tmp.pendant-copper.png tmp.pendant-gold.png tmp.pendant-silver.png tmp.ring-bronze.png tmp.ring-copper.png tmp.ring-gold.png tmp.ring-silver.png tmp.statue-bronze.png tmp.statue-copper.png tmp.statue-gold.png tmp.statue-silver.png tmp.vase-bronze.png tmp.vase-copper.png tmp.vase-gold.png tmp.vase-silver.png : tmp.bracelet-bronze.png
+bracelet-bronze.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+bracelet-copper.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+bracelet-gold.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+bracelet-silver.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+earring-bronze.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+earring-copper.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+earring-gold.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+earring-silver.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-bronze-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-bronze-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-bronze-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-bronze-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-bronze-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-bronze-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-bronze-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-bronze-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-bronze-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-copper-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-copper-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-copper-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-copper-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-copper-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-copper-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-copper-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-copper-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-copper-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-gold-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-gold-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-gold-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-gold-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-gold-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-gold-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-gold-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-gold-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-gold-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-silver-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-silver-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-silver-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-silver-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-silver-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-silver-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-silver-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-silver-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_bracelet-silver-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-bronze-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-bronze-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-bronze-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-bronze-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-bronze-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-bronze-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-bronze-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-bronze-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-bronze-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-copper-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-copper-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-copper-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-copper-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-copper-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-copper-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-copper-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-copper-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-copper-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-gold-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-gold-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-gold-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-gold-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-gold-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-gold-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-gold-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-gold-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-gold-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-silver-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-silver-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-silver-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-silver-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-silver-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-silver-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-silver-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-silver-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_earring-silver-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-bronze-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-bronze-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-bronze-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-bronze-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-bronze-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-bronze-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-bronze-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-bronze-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-bronze-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-copper-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-copper-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-copper-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-copper-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-copper-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-copper-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-copper-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-copper-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-copper-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-gold-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-gold-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-gold-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-gold-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-gold-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-gold-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-gold-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-gold-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-gold-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-silver-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-silver-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-silver-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-silver-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-silver-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-silver-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-silver-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-silver-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_hand_mirror-silver-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-bronze-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-bronze-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-bronze-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-bronze-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-bronze-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-bronze-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-bronze-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-bronze-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-bronze-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-copper-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-copper-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-copper-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-copper-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-copper-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-copper-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-copper-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-copper-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-copper-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-gold-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-gold-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-gold-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-gold-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-gold-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-gold-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-gold-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-gold-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-gold-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-silver-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-silver-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-silver-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-silver-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-silver-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-silver-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-silver-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-silver-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_mirror-silver-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-bronze-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-bronze-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-bronze-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-bronze-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-bronze-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-bronze-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-bronze-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-bronze-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-bronze-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-copper-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-copper-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-copper-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-copper-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-copper-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-copper-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-copper-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-copper-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-copper-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-gold-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-gold-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-gold-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-gold-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-gold-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-gold-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-gold-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-gold-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-gold-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-silver-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-silver-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-silver-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-silver-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-silver-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-silver-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-silver-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-silver-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_necklace-silver-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-bronze-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-bronze-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-bronze-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-bronze-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-bronze-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-bronze-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-bronze-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-bronze-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-bronze-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-copper-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-copper-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-copper-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-copper-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-copper-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-copper-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-copper-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-copper-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-copper-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-gold-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-gold-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-gold-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-gold-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-gold-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-gold-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-gold-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-gold-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-gold-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-silver-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-silver-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-silver-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-silver-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-silver-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-silver-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-silver-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-silver-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_pendant-silver-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-bronze-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-bronze-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-bronze-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-bronze-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-bronze-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-bronze-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-bronze-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-bronze-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-bronze-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-copper-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-copper-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-copper-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-copper-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-copper-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-copper-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-copper-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-copper-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-copper-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-gold-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-gold-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-gold-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-gold-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-gold-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-gold-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-gold-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-gold-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-gold-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-silver-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-silver-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-silver-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-silver-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-silver-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-silver-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-silver-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-silver-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_ring-silver-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-bronze-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-bronze-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-bronze-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-bronze-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-bronze-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-bronze-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-bronze-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-bronze-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-bronze-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-copper-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-copper-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-copper-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-copper-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-copper-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-copper-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-copper-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-copper-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-copper-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-gold-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-gold-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-gold-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-gold-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-gold-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-gold-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-gold-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-gold-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-gold-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-silver-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-silver-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-silver-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-silver-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-silver-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-silver-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-silver-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-silver-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_statue-silver-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-bronze-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-bronze-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-bronze-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-bronze-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-bronze-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-bronze-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-bronze-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-bronze-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-bronze-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-copper-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-copper-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-copper-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-copper-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-copper-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-copper-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-copper-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-copper-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-copper-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-gold-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-gold-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-gold-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-gold-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-gold-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-gold-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-gold-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-gold-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-gold-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-silver-amber.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-silver-amethyst.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-silver-diamond.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-silver-emerald.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-silver-jade.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-silver-opal.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-silver-ruby.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-silver-sapphire.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+gemstone_vase-silver-turquoise.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+hand_mirror-bronze.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+hand_mirror-copper.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+hand_mirror-gold.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+hand_mirror-silver.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+mirror-bronze.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+mirror-copper.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+mirror-gold.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+mirror-silver.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+necklace-bronze.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+necklace-copper.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+necklace-gold.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+necklace-silver.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+pendant-bronze.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+pendant-copper.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+pendant-gold.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+pendant-silver.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+ring-bronze.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+ring-copper.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+ring-gold.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+ring-silver.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+statue-bronze.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+statue-copper.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+statue-gold.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+statue-silver.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+vase-bronze.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+vase-copper.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+vase-gold.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
+
+vase-silver.png : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-images.py -- $@ > /dev/null
+	if [ -n "@optipng@" ]; then @optipng@ -nc -quiet -out tmp.$@ $@ ; mv tmp.$@ $@ ; fi
 
 bracelet.mtl : bracelet.obj
 

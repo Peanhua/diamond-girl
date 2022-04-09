@@ -1,6 +1,6 @@
 /*
   Lucy the Diamond Girl - Game where player collects diamonds.
-  Copyright (C) 2005-2015  Joni Yrjänä <joniyrjana@gmail.com>
+  Copyright (C) 2005-2022  Joni Yrjänä <joniyrjana@gmail.com>
   
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -190,7 +190,7 @@ static char * read_credits(char const * const filename)
   char * credits;
   char * tmp;
   int    credits_length;
-  char * default_credits = "Lucy the Diamond Girl (C) 2005-2015 Joni Yrjana";
+  char * default_credits = "Lucy the Diamond Girl (C) 2005-2022 Joni Yrjana";
   char fn[strlen(filename) + strlen("-en.txt") + 1];
   bool readok;
   

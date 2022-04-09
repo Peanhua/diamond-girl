@@ -23,10 +23,11 @@ for obj in bpy.data.objects:
 
         if output_filename != None:
             if output_filename == '*' or output_filename == filename + '.obj':
-#                obj.hide = False
+                obj.hide_select = False
+                obj.hide_viewport = False
                 obj.hide_render = False
-#                obj.select = True
-                #bpy.ops.export_scene.autodesk_3ds(filepath=bpy.path.abspath(filename))
+                obj.hide_set(False)
+                obj.select_set(True)
                 bpy.ops.export_scene.obj(filepath=bpy.path.abspath(filename) + '.obj',
                                          check_existing=False,
                                          use_selection=True,
@@ -36,9 +37,11 @@ for obj in bpy.data.objects:
                                          use_triangles=True,
                                          group_by_material=True,
                                          path_mode='RELATIVE')
-#                obj.select = False
-#                obj.hide = True
+                obj.hide_select = True
+                obj.hide_viewport = True
                 obj.hide_render = True
+                obj.hide_set(True)
+                obj.select_set(True)
         else:
             print('Filename: ' + filename)
 

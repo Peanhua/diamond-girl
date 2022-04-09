@@ -1,6 +1,6 @@
 Bienvenue dans le jeu Lucy the Diamond Girl!
 
-(C) 2005-2015 Joni Yrjana
+(C) 2005-2022 Joni Yrjana
 Traduction fran&aise : Vincent Hardy
 
 Ce programme est un logiciel libre; vous pouvez le redistribuer et / ou le
