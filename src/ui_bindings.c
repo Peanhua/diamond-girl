@@ -123,6 +123,7 @@ static struct ui_binding * ui_find_binding_internal(SDL_Event * event, bool * pr
             {
             case SDL_KEYDOWN:
               tmpp = true;
+              /* fallthrough */
             case SDL_KEYUP:
               if(bindings[i]->event.key.keysym.sym == event->key.keysym.sym)
                 { /* Ignore modifiers if the binding does not have modifiers defined. */
@@ -135,6 +136,7 @@ static struct ui_binding * ui_find_binding_internal(SDL_Event * event, bool * pr
               break;
             case SDL_MOUSEBUTTONDOWN:
               tmpp = true;
+              /* fallthrough */
             case SDL_MOUSEBUTTONUP:
               if(event->button.button == bindings[i]->event.button.button)
                 match = true;
@@ -162,6 +164,7 @@ static struct ui_binding * ui_find_binding_internal(SDL_Event * event, bool * pr
               break;
             case SDL_JOYBUTTONDOWN:
               tmpp = true;
+              /* fallthrough */
             case SDL_JOYBUTTONUP:
               if(event->jbutton.which == bindings[i]->event.jbutton.which && event->jbutton.button == bindings[i]->event.jbutton.button)
                 match = true;

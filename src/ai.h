@@ -24,16 +24,13 @@
 #define AI_H_
 
 #include "diamond_girl.h"
-
-#include <stdbool.h>
-#include <stdarg.h>
+#include "map.h"
+#include "game.h"
 
 struct map;
 struct playback;
 struct playback_step;
 
-enum MAP_GLYPH;
-enum GAME_MODE;
 
 struct ai
 {

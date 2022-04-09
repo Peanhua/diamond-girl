@@ -58,7 +58,7 @@ bin_PROGRAMS = diamond-girl
 
 
 treasure_colours.c : @srcdir@/../themes/default/gfx/treasures.blend
-	$(AM_V_GEN) blender -b --disable-autoexec --factory-startup @srcdir@/../themes/default/gfx/treasures.blend --python @srcdir@/../blender-py/extract_materials.py \
+	$(AM_V_GEN) blender -b --disable-autoexec --factory-startup $< --python @srcdir@/../blender-py/extract_materials.py \
 		| awk '/^Material: (mat_|gsmat_)/{ printf("static float %s[] = { %ff, %ff, %ff, 1.0f };\n", toupper($$2), $$4, $$5, $$6); }' \
 		> $@
 

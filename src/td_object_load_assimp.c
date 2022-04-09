@@ -198,7 +198,7 @@ static struct gfxbuf * load_mesh(struct aiScene const * scene, struct aiMesh con
 
               if(aiGetMaterialString(material, AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), &tfn) == AI_SUCCESS)
                 {
-                  char buf[1024];
+                  char buf[strlen("gfx/") + 1024];
 
                   snprintf(buf, sizeof buf, "gfx/%s", tfn.data);
                   rv->texture_image = image_load(get_data_filename(buf), false);

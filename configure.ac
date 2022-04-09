@@ -1,4 +1,5 @@
-AC_INIT([Lucy the Diamond Girl], [2.0.1b], [joniyrjana@gmail.com], [diamond-girl], [http://www.netikka.net/joyr/diamond_girl/])
+AC_INIT([Lucy the Diamond Girl], [2.0.1], [joniyrjana@gmail.com], [diamond-girl], [http://www.netikka.net/joyr/diamond_girl/])
+AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE([foreign -Wall -Werror dist-xz subdir-objects])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AC_CONFIG_SRCDIR([src/main.c])
@@ -40,7 +41,7 @@ AC_PROG_EGREP
 AC_PROG_SED
 AC_CHECK_PROG([xcf2png], [xcf2png], [xcf2png])
 if test "x$ac_cv_prog_xcf2png" == "x" ; then
-  AC_MSG_ERROR(['xcf2png' not found error, install XCFTools.])
+  AC_MSG_ERROR(['xcf2png' not found error, install XCFTools (https://github.com/j-jorge/xcftools or the original http://henning.makholm.net/software).])
 fi
 AC_PROG_CC
 AC_PROG_CC_C99
@@ -51,7 +52,7 @@ ACX_PTHREAD
 
 AC_CHECK_PROG([optipng], [optipng], [optipng])
 if test "x$optipng" == "x" ; then
-  AC_MSG_WARN(['optipng' not found, install optipng for optimized asset files.])
+  AC_MSG_WARN(['optipng' not found, optionally install optipng for optimized asset files.])
 fi
 
 AC_CHECK_PROG([blender], [blender], [blender])

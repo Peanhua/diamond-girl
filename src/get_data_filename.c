@@ -85,7 +85,7 @@ const char * get_data_filename(const char * name)
   /* Get from theme specific directories if applicable. */
   if(!strncmp(name, "gfx/", strlen("gfx/")) || !strncmp(name, "sfx/", strlen("sfx/")) || !strncmp(name, "txt/", strlen("txt/")))
     { /* Check first the current theme directory, if not found, then the 'default' theme directory. */
-      char tmp[sizeof buf];
+      char tmp[sizeof buf + 1024];
       struct theme ** themes;
       bool done;
 

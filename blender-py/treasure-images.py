@@ -21,7 +21,7 @@ for obj in bpy.data.objects:
 
             if mat.name[0:4] == 'mat_':
         
-                obj.hide = False
+#                obj.hide = False
                 obj.hide_render = False
 
                 if obj.get('gemstones') == None:
@@ -53,5 +53,5 @@ for obj in bpy.data.objects:
                             else:
                                 print('Filename: ' + filename)
 
-                obj.hide = True
+#                obj.hide = True
                 obj.hide_render = True

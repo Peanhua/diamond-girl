@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: diamond-girl 1.25b\n"
 "Report-Msgid-Bugs-To: joniyrjana@gmail.com\n"
-"POT-Creation-Date: 2015-09-28 09:51+0300\n"
+"POT-Creation-Date: 2022-04-09 13:57+0300\n"
 "PO-Revision-Date: 2015-06-18 19:22+0200\n"
 "Last-Translator: Steve Joni Yrjänä <joniyrjana@gmail.com>\n"
 "Language-Team: Finnish\n"
@@ -591,8 +591,7 @@ msgstr ""
 
 #: src/quest_diary.c:83 src/quest_treasures.c:122
 #: src/widget_new_highscore_einfo.c:297 src/widget_new_message_window.c:72
-#: src/widget_new_theme_info_window.c:81
-#: src/widget_new_title_partystatus.c:394
+#: src/widget_new_theme_info_window.c:81 src/widget_new_title_partystatus.c:394
 #: src/widget_new_trait_info_window.c:171
 #: src/widget_new_traits_available_window.c:100
 msgid "Close"
@@ -873,8 +872,8 @@ msgstr ""
 msgid "A saved game exists"
 msgstr "Tallennettu peli l}ytyy"
 
-#: src/title.c:1256 ui/game_player_death.js:49
-#: ui/game_player_next_level.js:246 ui/game_pyjama_party_level_completed.js:35
+#: src/title.c:1256 ui/game_player_death.js:49 ui/game_player_next_level.js:246
+#: ui/game_pyjama_party_level_completed.js:35
 msgid "Continue"
 msgstr "Jatka"
 

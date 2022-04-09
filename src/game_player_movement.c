@@ -194,7 +194,7 @@ bool game_player_movement(struct map * map, struct gamedata * gamedata)
               gamedata->treasureanim_pos[1] = (45)      + (1 + map->girl->mob->y - map->map_y) * 24 - map->map_fine_y;
               gamedata->treasureanim_phase  = 0.0;
             }
-          /* no break - fallthru */
+          /* fallthrough */
 	case MAP_EMPTY:
 	case MAP_SAND:
           if(map->fast_forwarding == false)

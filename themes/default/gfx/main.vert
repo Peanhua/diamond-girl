@@ -1,7 +1,4 @@
 #version 110
-attribute vec4 gl_Color;
-varying vec4 gl_FrontColor;
-
 varying vec4 ld_diffuse, ld_ambient, lp_diffuse, lp_ambient, ambientGlobal, ecPos;
 varying vec3 normal, halfVector;
 

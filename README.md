@@ -1,12 +1,3 @@
-# Important notice
-
-The development versions of Lucy the Diamond Girl may break your settings, saved games, highscores, and other progress.
-Thus the development versions, by default, append "-dev" to the name of the directory used for settings etc.
-
-Latest official release can be found from the website: [www.netikka.net/joyr/diamond_girl/](http://www.netikka.net/joyr/diamond_girl/)
-
-
-
 Lucy the Diamond Girl
 =====================
 
