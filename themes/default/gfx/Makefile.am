@@ -1477,44 +1477,93 @@ vase-silver.png : treasures.blend
 
 bracelet.mtl : bracelet.obj
 
+bracelet.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
+
 earring.mtl : earring.obj
+
+earring.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
 
 gemstone_bracelet.mtl : gemstone_bracelet.obj
 
+gemstone_bracelet.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
+
 gemstone_earring.mtl : gemstone_earring.obj
+
+gemstone_earring.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
 
 gemstone_hand_mirror.mtl : gemstone_hand_mirror.obj
 
+gemstone_hand_mirror.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
+
 gemstone_mirror.mtl : gemstone_mirror.obj
+
+gemstone_mirror.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
 
 gemstone_necklace.mtl : gemstone_necklace.obj
 
+gemstone_necklace.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
+
 gemstone_pendant.mtl : gemstone_pendant.obj
+
+gemstone_pendant.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
 
 gemstone_ring.mtl : gemstone_ring.obj
 
+gemstone_ring.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
+
 gemstone_statue.mtl : gemstone_statue.obj
+
+gemstone_statue.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
 
 gemstone_vase.mtl : gemstone_vase.obj
 
+gemstone_vase.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
+
 hand_mirror.mtl : hand_mirror.obj
+
+hand_mirror.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
 
 mirror.mtl : mirror.obj
 
+mirror.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
+
 necklace.mtl : necklace.obj
+
+necklace.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
 
 pendant.mtl : pendant.obj
 
+pendant.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
+
 ring.mtl : ring.obj
+
+ring.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
 
 statue.mtl : statue.obj
 
+statue.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
+
 vase.mtl : vase.obj
 
-bracelet.obj: treasures.blend
-	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- "*" > /dev/null
-
-earring.obj gemstone_bracelet.obj gemstone_earring.obj gemstone_hand_mirror.obj gemstone_mirror.obj gemstone_necklace.obj gemstone_pendant.obj gemstone_ring.obj gemstone_statue.obj gemstone_vase.obj hand_mirror.obj mirror.obj necklace.obj pendant.obj ring.obj statue.obj vase.obj : bracelet.obj
+vase.obj : treasures.blend
+	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/treasure-models.py -- $@ > /dev/null
 
 bookpile.png : bookpile.blend 
 	$(AM_V_GEN) @blender@ -b --disable-autoexec --factory-startup $< --python @srcdir@/../../../blender-py/render.py -- $@ > /dev/null

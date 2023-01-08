@@ -1,4 +1,4 @@
-AC_INIT([Lucy the Diamond Girl], [2.0.1], [joniyrjana@gmail.com], [diamond-girl], [https://github.com/Peanhua/diamond-girl])
+AC_INIT([Lucy the Diamond Girl], [2.0.2], [joniyrjana@gmail.com], [diamond-girl], [https://github.com/Peanhua/diamond-girl])
 AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE([foreign -Wall -Werror dist-xz subdir-objects])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
@@ -44,11 +44,10 @@ if test "x$ac_cv_prog_xcf2png" == "x" ; then
   AC_MSG_ERROR(['xcf2png' not found error, install XCFTools (https://github.com/j-jorge/xcftools or the original http://henning.makholm.net/software).])
 fi
 AC_PROG_CC
-AC_PROG_CC_C99
 AC_PROG_CPP
 AC_PROG_INSTALL
 
-ACX_PTHREAD
+AX_PTHREAD
 
 AC_CHECK_PROG([optipng], [optipng], [optipng])
 if test "x$optipng" == "x" ; then
@@ -80,10 +79,7 @@ PKG_CHECK_MODULES([libpng],     [libpng])
 PKG_CHECK_MODULES([sndfile],    [sndfile])
 PKG_CHECK_MODULES([json],       [json-c >= 0.11], [], [AC_MSG_ERROR(['json-c' not found error])])
 
-PKG_CHECK_MODULES([libmikmod],  [libmikmod], [],
-  [ AM_PATH_LIBMIKMOD([], [],
-    [ AC_MSG_ERROR([unable to find libmikmod])])]
-)
+PKG_CHECK_MODULES([libmikmod],  [libmikmod], [], AC_MSG_ERROR([unable to find libmikmod]))
 AC_MSG_CHECKING([for MikMod_free])
 AC_EGREP_HEADER([MikMod_free], [mikmod.h], [mikmodfree=yes], [mikmodfree=no])
 AS_IF([test x$mikmodfree = "xyes"], [
@@ -145,7 +141,6 @@ AC_SEARCH_LIBS([mhash_init], [mhash], [AC_DEFINE([HAVE_LIBMHASH], [1], [Define t
 AC_CHECK_HEADERS([inttypes.h stdint.h stdlib.h string.h sys/time.h sys/timeb.h unistd.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
-AC_HEADER_STDC
 AC_HEADER_STDBOOL
 AC_TYPE_INT32_T
 AC_TYPE_INT64_T

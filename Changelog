@@ -1,3 +1,12 @@
+Release 2.0.2
+* Eliminated some warnings from 'configure'.
+
+Release 2.0.1 on Sun Apr 10 11:04:29 AM UTC 2022
+* Added the proper French translation file.
+* Fixed crash/garbage on screen after completing a level with non-English languages.
+* Fixed some building issues.
+* Remove libassimp and libstdc++ when uninstalling in Windows.
+
 Release 2.0 on Sat Sep 12 08:21:47 UTC 2015
 * Changed the name to "Lucy the Diamond Girl" to make it more unique.
 * Added French translation by Vincent Hardy.
