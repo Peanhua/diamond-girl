@@ -14,7 +14,7 @@ EXTRA_DIST = config.rpath m4/ChangeLog  \
 	$(apps_DATA) \
 	$(man_MANS)  \
 	diamond-girl-win32.nsi \
-	README.building README.sfx README.translations \
+	README.building README.sfx README.translations README.users \
 	translate.sh \
 	translate-map-fi.sed translate-unmap-fi.sed \
 	translate-map-fr.sed translate-unmap-fr.sed \

@@ -1,0 +1,191 @@
+Lucy the Diamond Girl
+=====================
+
+Table of contents:
+1.  Saved data between versions
+2.  User settings
+2.1.  Manually editing the configuration file
+2.2.  Binding events to commands
+2.2.1.  Commands
+2.3.  Other settings
+
+
+
+1. Saved data between versions
+------------------------------
+
+Newer versions should always be able to read older versions data
+saved under $HOME/.diamond_girl/. It should always be safe to update.
+
+If an older version reads data saved by a newer version, it will most likely
+break. Switching to older version is not safe.
+
+
+Saved data between platforms may not be portable.
+
+
+
+2. User settings
+----------------
+
+Users settings are located in $HOME/.diamond_girl/settings.json
+Other saved data are present in the same directory.
+
+
+
+2.1. Manually editing the configuration file 
+--------------------------------------------
+
+Lucy the Diamond Girl writes its settings during exit, without preserving comments or layout of the original.
+
+Use
+ "WriteSettings": false
+to disable overwriting the file $HOME/.diamond_girl/settings.json during exit.
+
+
+
+2.2. Binding events to commands
+-------------------------------
+
+All the bindings are defined in the "Bindings" -array:
+ "Bindings": [ ]
+
+The following can be used to bind events to commands:
+
+ { "Type": "joystick_axis", "Command": command, "Joystick": joystick#, "Axis": axis#, "Value": value }
+  command   is the command, for example "exit"
+  joystick# is 0..n
+  axis#     is 0..n
+  value     is -32768..32767
+
+ { "Type": "joystick_button", "Command": command, "Joystick": joystick#, "Button": button# }
+  command   is the command, for example "exit"
+  joystick# is 0..n
+  button#   is 0..n
+ 
+ { "Type": "key", "Command": command, "Key": key, "Modifiers", modifiers }
+  command   is the command, for example "exit"
+  key       is the name of the key, for example "RSHIFT", "MINUS", "x"
+  modifiers is a list of modifiers or "none", possible modifiers are:
+               Lctrl, Rctrl, Lshift, Rshift, Lalt, Ralt
+               multiple modifiers can be defined, for example:
+               "Lshift Rshift" means that both shifts must be pressed
+
+
+
+2.2.1. Commands
+---------------
+
+What the command does varies depending on the current state of the game.
+
+If there are user interface elements usable with the mouse,
+then up/down/left/right are used for navigation to select an item,
+and manipulate performs the action for the selected item.
+
+Below is listed roughly the commands and what the commands do.
+
+ Common commands, always available:
+  volume_up
+  volume_down
+  recording_start
+  recording_stop
+
+ In the title screen, the following commands are available:
+  cancel
+  exit
+  pause             - start AI game
+  scroll_down       - scroll highscores up one page
+  scroll_up         - scroll highscores down one page
+  toggle_fullscreen
+
+ During the game, the following commands are available:
+  down              - movement
+  left
+  right
+  up
+  cancel
+  exit
+  manipulate
+  pause
+  show_help
+  show_legend
+  toggle_fullscreen
+
+ When the AI is playing or a playback is played,
+ the following commands are available:
+  cancel
+  exit
+  hilite_target
+  pause
+  save_playback     - see the stdout for the name of the saved file
+  toggle_fullscreen
+  faster            - control the playback speed
+  slower
+
+
+
+2.3. Other settings
+-------------------
+
+Note that boolean and numeric values must be without quotes.
+
+ "GameMode": mode
+   Set the game mode to "mode" ("classic", "adventure", or "pyjama_party").
+
+ "ActiveQuestline": id
+   Set the current active questline to "id". "id" is an internal reference number starting from 0.
+
+ "TitleMidarea": id
+   Set the title screen middlearea to "id" ("arcade", or "quests").
+
+ "IronGirlMode": boolean
+   Toggle on/off Iron Girl mode.
+
+ "CaveSelection": cave
+   Initial cave selection, use the directory name, for example "a".
+
+ "CaveSelectionLevel": integer
+   Initial cave level selection (integer), from 1 to N.
+
+ "OpenGL": boolean
+   Enable/disable OpenGL mode.
+
+ "OpenGL_POT": boolean
+   Choose whether to resize textures to power-of-two sizes or not.
+
+ "OpenGL_compressed_textures": boolean
+   If true, use texture compression if available.
+
+ "ShowFPS": boolean
+   Enable/disable printing FPS to stdout.
+
+ "SFX": boolean
+   Enable/disable sound effects.
+
+ "Music": boolean
+   Enable/disable music.
+
+ "SFX_max_channels": integer
+   Set the number of maximum channels for sound effects.
+
+ "Sound_volume": integer
+   Set the volume of all sounds and music, in range of 0 to 100.
+
+ "MapTilting": boolean
+   Enable/disable map tilting.
+
+ "SmoothClassicMode": boolean
+   Enable/disable smooth movement in classic game mode.
+   In non-smooth mode player and other objects move one block at a time.
+   In smooth mode (and in adventure game mode) the objects move more smoothly
+   between steps.
+
+ "Locale": string
+   Set the localization (language) of the game.
+   If the string is empty, use whatever your system says it is.
+   If the string is non-empty, use that.
+   If the chosen language is not available, falls back to English.
+   Available languages are: English and Finnish.
+   The exact naming of the locales may vary between systems, but usually
+   "en_US" sets English, and "fi_FI" sets Finnish. In *nix systems you can use
+   the command 'locale -a' to find out list of available locales.

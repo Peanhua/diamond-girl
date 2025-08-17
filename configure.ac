@@ -1,4 +1,4 @@
-AC_INIT([Lucy the Diamond Girl], [2.0.2], [joniyrjana@gmail.com], [diamond-girl], [https://github.com/Peanhua/diamond-girl])
+AC_INIT([Lucy the Diamond Girl], [2.0.3], [joniyrjana@gmail.com], [diamond-girl], [https://github.com/Peanhua/diamond-girl])
 AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE([foreign -Wall -Werror dist-xz subdir-objects])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
