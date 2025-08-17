@@ -28,15 +28,15 @@ for obj in bpy.data.objects:
                 obj.hide_render = False
                 obj.hide_set(False)
                 obj.select_set(True)
-                bpy.ops.export_scene.obj(filepath=bpy.path.abspath(filename) + '.obj',
-                                         check_existing=False,
-                                         use_selection=True,
-                                         use_normals=True,
-                                         use_uvs=True,
-                                         use_materials=True,
-                                         use_triangles=True,
-                                         group_by_material=True,
-                                         path_mode='RELATIVE')
+                bpy.ops.wm.obj_export(filepath=bpy.path.abspath(filename) + '.obj',
+                                      check_existing=False,
+                                      export_selected_objects=True,
+                                      export_normals=True,
+                                      export_uv=True,
+                                      export_materials=True,
+                                      export_triangulated_mesh=True,
+                                      export_material_groups=True,
+                                      path_mode='RELATIVE')
                 obj.hide_select = True
                 obj.hide_viewport = True
                 obj.hide_render = True
