@@ -79,7 +79,7 @@ void ai_diamond_hunter(struct ai * ai)
    * We need a cleanup function and call to it in order to free this.
    */
   if(random_state == NULL)
-    random_state = seed_rand_state(get_rand((2^32) - 1));
+    random_state = seed_rand_state(get_rand((1ul<<32) - 1));
 
   assert(random_state != NULL);
 
